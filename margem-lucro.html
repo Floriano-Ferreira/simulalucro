@@ -4,56 +4,73 @@
 <meta charset="UTF-8">
 <title>Calculadora de Margem de Lucro | SimulaLucro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Calcule a margem de lucro do seu negócio e descubra se seus preços são realmente lucrativos.">
 
 <style>
 body{
-  font-family:Arial,sans-serif;
-  background:#f3f6fb;
   margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f6fb;
   color:#1f2937;
+  padding-bottom:80px;
 }
 header{
+  position:sticky;
+  top:0;
   background:#ffffff;
-  padding:16px;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
-}
-header strong{
-  font-size:20px;
+  z-index:1000;
 }
 .container{
   max-width:900px;
   margin:auto;
-  padding:32px 16px;
+  padding:24px 16px;
+}
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+nav a{
+  margin-left:16px;
+  text-decoration:none;
+  color:#2563eb;
+  font-weight:500;
+}
+nav a:hover{
+  text-decoration:underline;
 }
 .card{
   background:#ffffff;
-  padding:32px;
+  padding:24px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
+h1, h2{
+  margin-top:0;
+}
 label{
-  display:block;
-  margin-top:18px;
-  font-weight:bold;
+  font-weight:600;
+  font-size:14px;
 }
 input{
   width:100%;
   padding:12px;
   margin-top:6px;
+  margin-bottom:16px;
   border-radius:10px;
   border:1px solid #d1d5db;
   font-size:15px;
 }
 button{
-  margin-top:24px;
   width:100%;
   padding:14px;
-  background:#2563eb;
-  color:#fff;
   border:none;
   border-radius:12px;
+  background:#2563eb;
+  color:#ffffff;
   font-size:16px;
-  font-weight:bold;
+  font-weight:700;
   cursor:pointer;
 }
 button:hover{
@@ -62,16 +79,34 @@ button:hover{
 .result{
   margin-top:24px;
   padding:20px;
-  background:#ecfeff;
   border-radius:12px;
-  font-size:16px;
+  background:#ecfeff;
   display:none;
 }
 footer{
   text-align:center;
-  margin-top:40px;
+  padding:32px 0;
   color:#6b7280;
   font-size:14px;
+}
+.menu-mobile{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#ffffff;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  font-size:12px;
+}
+.menu-mobile span{
+  display:block;
+  font-size:18px;
+}
+@media(min-width:768px){
+  .menu-mobile{display:none}
 }
 </style>
 </head>
@@ -79,43 +114,87 @@ footer{
 <body>
 
 <header>
-  <div class="container">
+  <div class="container header-inner">
     <strong>💰 SimulaLucro</strong>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="lucro-airbnb.html">Airbnb</a>
+      <a href="ponto-equilibrio.html">Equilíbrio</a>
+      <a href="margem-lucro.html">Margem</a>
+    </nav>
   </div>
 </header>
 
-<div class="container">
+<main class="container">
+
+  <!-- CALCULADORA -->
   <div class="card">
     <h1>💰 Calculadora de Margem de Lucro</h1>
+    <p>Descubra a porcentagem real de lucro do seu produto ou serviço.</p>
 
     <label>Preço de venda (R$)</label>
-    <input id="preco" type="number" placeholder="150">
+    <input type="number" id="preco" placeholder="Ex: 100">
 
     <label>Custo total (R$)</label>
-    <input id="custo" type="number" placeholder="90">
+    <input type="number" id="custo" placeholder="Ex: 60">
 
-    <button onclick="calcular()">Calcular margem</button>
+    <button onclick="calcular()">Calcular margem de lucro</button>
 
     <div id="resultado" class="result"></div>
   </div>
-</div>
+
+  <!-- TEXTO SEO -->
+  <div class="card" style="margin-top:40px">
+    <h2>O que é margem de lucro?</h2>
+    <p>
+      A margem de lucro representa a porcentagem que sobra do valor de venda
+      após descontar todos os custos envolvidos no produto ou serviço.
+      Ela é um dos principais indicadores de saúde financeira de um negócio.
+    </p>
+
+    <h2>Como funciona a calculadora de margem de lucro</h2>
+    <p>
+      Esta calculadora compara o preço de venda com o custo total
+      e calcula automaticamente a margem de lucro percentual,
+      facilitando a análise da rentabilidade.
+    </p>
+
+    <h2>Por que calcular a margem de lucro?</h2>
+    <p>
+      Calcular a margem de lucro ajuda a definir preços corretos,
+      evitar prejuízos, aumentar a competitividade
+      e garantir crescimento sustentável no longo prazo.
+    </p>
+
+    <h2>Para quem esta calculadora é indicada?</h2>
+    <p>
+      Esta ferramenta é ideal para empreendedores,
+      lojistas, prestadores de serviço, freelancers,
+      pequenas empresas e qualquer pessoa que queira
+      melhorar o controle financeiro do seu negócio.
+    </p>
+  </div>
+
+</main>
 
 <footer>
   © 2025 SimulaLucro.app
 </footer>
+
+<div class="menu-mobile">
+  <a href="index.html"><span>🏠</span>Início</a>
+  <a href="lucro-airbnb.html"><span>🏠</span>Airbnb</a>
+  <a href="ponto-equilibrio.html"><span>📊</span>Equilíbrio</a>
+  <a href="margem-lucro.html"><span>💰</span>Margem</a>
+</div>
 
 <script>
 function calcular(){
   var preco = Number(document.getElementById("preco").value);
   var custo = Number(document.getElementById("custo").value);
 
-  if(!preco || !custo){
-    alert("Preencha o preço de venda e o custo.");
-    return;
-  }
-
-  if(custo >= preco){
-    alert("O custo deve ser menor que o preço de venda.");
+  if(!preco || !custo || custo >= preco){
+    alert("Preencha os valores corretamente.");
     return;
   }
 
@@ -125,61 +204,11 @@ function calcular(){
   var box = document.getElementById("resultado");
   box.style.display = "block";
   box.innerHTML =
-    "<h2>📊 Resultado</h2>" +
-    "<p><strong>Lucro por unidade:</strong> R$ " + lucro.toFixed(2) + "</p>" +
-    "<p><strong>Margem de lucro:</strong> " + margem.toFixed(2) + "%</p>" +
-    "<p style='color:#374151'>A margem de lucro indica quanto do valor da venda " +
-    "representa ganho real para o negócio.</p>";
+    "<strong>Resultado:</strong><br>" +
+    "Lucro por venda: <strong>R$ " + lucro.toFixed(2) + "</strong><br>" +
+    "Margem de lucro: <strong>" + margem.toFixed(1) + "%</strong>";
 }
 </script>
 
-  <div class="container">
-  <div class="card" style="margin-top:40px">
-    <h2>O que é margem de lucro?</h2>
-    <p>
-      A margem de lucro representa a porcentagem do valor de venda que
-      efetivamente se transforma em ganho para o negócio.
-      Ela é calculada a partir da diferença entre o preço de venda
-      e o custo total do produto ou serviço.
-    </p>
-
-    <h3>Como usar a calculadora de margem de lucro</h3>
-    <p>
-      Para utilizar esta calculadora, informe o preço de venda
-      e o custo total do produto ou serviço.
-      O resultado mostrará o lucro por unidade e a margem de lucro percentual,
-      facilitando a análise da rentabilidade.
-    </p>
-
-    <h3>Por que calcular a margem de lucro é importante?</h3>
-    <p>
-      Calcular a margem de lucro é fundamental para definir preços corretos,
-      evitar prejuízos e garantir a sustentabilidade do negócio.
-      Muitos empreendedores vendem bastante, mas não lucram,
-      justamente por não conhecerem sua margem real.
-    </p>
-
-    <h3>Quem deve usar esta calculadora?</h3>
-    <p>
-      Esta calculadora é indicada para empreendedores,
-      profissionais autônomos, comerciantes, prestadores de serviço
-      e qualquer pessoa que deseja entender melhor
-      a lucratividade de suas vendas.
-    </p>
-  </div>
-</div>
-
-
-<footer>
-  <p>
-    <a href="index.html">Início</a> ·
-    <a href="sobre.html">Sobre</a> ·
-    <a href="contato.html">Contato</a> ·
-    <a href="privacidade.html">Privacidade</a>
-  </p>
-  © 2025 SimulaLucro.app
-</footer>
-
-  
 </body>
 </html>

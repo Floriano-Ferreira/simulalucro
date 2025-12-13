@@ -85,4 +85,53 @@ footer{
 
 <div class="container">
   <div class="card">
-    <h1>📊 Calculadora de Ponto de Equilíb
+    <h1>📊 Calculadora de Ponto de Equilíbrio</h1>
+
+    <label>Custos fixos mensais (R$)</label>
+    <input id="fixos" type="number" placeholder="5000">
+
+    <label>Preço de venda (R$)</label>
+    <input id="preco" type="number" placeholder="150">
+
+    <label>Custo variável por venda (R$)</label>
+    <input id="variavel" type="number" placeholder="60">
+
+    <button onclick="calcular()">Calcular ponto de equilíbrio</button>
+
+    <div id="resultado" class="result" style="display:none"></div>
+  </div>
+</div>
+
+<footer>
+  © 2025 SimulaLucro.app
+</footer>
+
+<script>
+function calcular(){
+  var fixos = Number(document.getElementById("fixos").value);
+  var preco = Number(document.getElementById("preco").value);
+  var variavel = Number(document.getElementById("variavel").value);
+
+  if(!fixos || !preco){
+    alert("Preencha os custos fixos e o preço de venda.");
+    return;
+  }
+
+  var margem = preco - variavel;
+  if(margem <= 0){
+    alert("O preço deve ser maior que o custo variável.");
+    return;
+  }
+
+  var unidades = fixos / margem;
+
+  var box = document.getElementById("resultado");
+  box.style.display = "block";
+  box.innerHTML =
+    "Você precisa vender <strong>" + Math.ceil(unidades) +
+    "</strong> unidades para atingir o ponto de equilíbrio.";
+}
+</script>
+
+</body>
+</html>

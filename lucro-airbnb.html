@@ -53,4 +53,130 @@ label{
 input{
   width:100%;
   padding:12px;
-  border-ra
+  border-radius:10px;
+  border:1px solid #d1d5db;
+  font-size:15px;
+}
+button{
+  width:100%;
+  margin-top:24px;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{background:#1d4ed8}
+.result{
+  margin-top:24px;
+  padding:20px;
+  border-radius:12px;
+  display:none;
+}
+.result.positive{background:#ecfeff}
+.result.negative{background:#fff1f2}
+.metric{
+  margin-bottom:8px;
+}
+.metric strong{
+  float:right;
+}
+footer{
+  text-align:center;
+  padding:32px 0;
+  color:#6b7280;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">💰 SimulaLucro</div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="card">
+    <h1>🏠 Calculadora de Lucro Airbnb (Completa)</h1>
+
+    <div class="grid">
+      <div>
+        <label>Diária média (R$)</label>
+        <input id="diaria" type="number" placeholder="350">
+      </div>
+      <div>
+        <label>Ocupação média (%)</label>
+        <input id="ocupacao" type="number" placeholder="65">
+      </div>
+      <div>
+        <label>Dias no mês</label>
+        <input id="dias" type="number" value="30">
+      </div>
+      <div>
+        <label>Taxa Airbnb (%)</label>
+        <input id="taxa" type="number" value="15">
+      </div>
+      <div>
+        <label>Limpeza por reserva (R$)</label>
+        <input id="limpeza" type="number" placeholder="150">
+      </div>
+      <div>
+        <label>Reservas por mês</label>
+        <input id="reservas" type="number" placeholder="8">
+      </div>
+      <div>
+        <label>Custos fixos mensais (R$)</label>
+        <input id="custos" type="number" placeholder="1800">
+      </div>
+    </div>
+
+    <button onclick="calcular()">Calcular lucro real</button>
+
+    <div id="resultado" class="result"></div>
+  </div>
+</main>
+
+<footer>© 2025 SimulaLucro.app</footer>
+
+<script>
+function calcular(){
+  const diaria = +diaria.value;
+  const ocupacao = +ocupacao.value / 100;
+  const dias = +dias.value;
+  const taxa = +taxa.value / 100;
+  const limpeza = +limpeza.value * +reservas.value;
+  const custos = +custos.value;
+
+  if(!diaria || !ocupacao){
+    alert("Preencha os campos principais.");
+    return;
+  }
+
+  const faturamento = diaria * dias * ocupacao;
+  const taxaAirbnb = faturamento * taxa;
+  const totalCustos = custos + limpeza + taxaAirbnb;
+  const lucro = faturamento - totalCustos;
+
+  const box = document.getElementById("resultado");
+  box.className = "result " + (lucro >= 0 ? "positive" : "negative");
+  box.style.display = "block";
+
+  box.innerHTML = `
+    <div class="metric">💰 Faturamento bruto <strong>R$ ${faturamento.toFixed(2)}</strong></div>
+    <div class="metric">🏷️ Taxas Airbnb <strong>R$ ${taxaAirbnb.toFixed(2)}</strong></div>
+    <div class="metric">🧹 Limpeza <strong>R$ ${limpeza.toFixed(2)}</strong></div>
+    <div class="metric">📉 Custos fixos <strong>R$ ${custos.toFixed(2)}</strong></div>
+    <hr>
+    <div class="metric"><strong>Lucro líquido mensal: R$ ${lucro.toFixed(2)}</strong></div>
+  `;
+}
+</script>
+
+</body>
+</html>

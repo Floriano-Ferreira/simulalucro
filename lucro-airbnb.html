@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Calculadora de Lucro Airbnb | SimulaLucro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Simule o lucro real do Airbnb considerando ocupação, taxas, limpeza e custos mensais.">
+<meta name="description" content="Simule o lucro real do Airbnb considerando diária, ocupação, taxas, limpeza e custos mensais.">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -14,52 +14,35 @@ body{
   font-family:Inter,Arial,sans-serif;
   background:#f3f6fb;
   color:#1f2937;
+  padding-bottom:80px;
 }
+a{color:#2563eb;text-decoration:none}
+a:hover{text-decoration:underline}
 
-  header a{
-  color:#2563eb;
-  text-decoration:none;
-  font-weight:500;
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#ffffff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
-header a:hover{
-  text-decoration:underline;
-}
-
-
-<header style="position:sticky;top:0;z-index:1000;background:#ffffff">
-  <div class="container" style="display:flex;justify-content:space-between;align-items:center">
-    <strong style="font-size:20px">💰 SimulaLucro</strong>
-
-    <nav style="display:flex;gap:16px;font-size:14px">
-      <a href="index.html">Início</a>
-      <a href="lucro-airbnb.html">Airbnb</a>
-      <a href="ponto-equilibrio.html">Equilíbrio</a>
-      <a href="margem-lucro.html">Margem</a>
-    </nav>
-  </div>
-</header>
-
-
-  
 .container{
   max-width:900px;
   margin:auto;
   padding:24px 16px;
 }
-.logo{
-  font-size:22px;
-  font-weight:700;
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 .card{
-  background:#fff;
+  background:#ffffff;
   border-radius:16px;
   padding:24px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
-h1{
-  margin-top:0;
-  font-size:26px;
-}
+h1{margin-top:0;font-size:26px}
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -97,154 +80,14 @@ button:hover{background:#1d4ed8}
 }
 .result.positive{background:#ecfeff}
 .result.negative{background:#fff1f2}
-.metric{
-  margin-bottom:8px;
-}
-.metric strong{
-  float:right;
-}
+.metric{margin-bottom:8px}
+.metric strong{float:right}
 footer{
   text-align:center;
   padding:32px 0;
   color:#6b7280;
   font-size:14px;
 }
-</style>
-</head>
-
-<body>
-
-<header>
-  <div class="container">
-    <div class="logo">💰 SimulaLucro</div>
-  </div>
-</header>
-
-<main class="container">
-  <div class="card">
-    <h1>🏠 Calculadora de Lucro Airbnb (Completa)</h1>
-
-    <div class="grid">
-      <div>
-        <label>Diária média (R$)</label>
-        <input id="diaria" type="number" placeholder="350">
-      </div>
-      <div>
-        <label>Ocupação média (%)</label>
-        <input id="ocupacao" type="number" placeholder="65">
-      </div>
-      <div>
-        <label>Dias no mês</label>
-        <input id="dias" type="number" value="30">
-      </div>
-      <div>
-        <label>Taxa Airbnb (%)</label>
-        <input id="taxa" type="number" value="15">
-      </div>
-      <div>
-        <label>Limpeza por reserva (R$)</label>
-        <input id="limpeza" type="number" placeholder="150">
-      </div>
-      <div>
-        <label>Reservas por mês</label>
-        <input id="reservas" type="number" placeholder="8">
-      </div>
-      <div>
-        <label>Custos fixos mensais (R$)</label>
-        <input id="custos" type="number" placeholder="1800">
-      </div>
-    </div>
-
-    <button onclick="calcular()">Calcular lucro real</button>
-
-    <div id="resultado" class="result"></div>
-  </div>
-</main>
-
-<footer>© 2025 SimulaLucro.app</footer>
-
-<script>
-function calcular(){
-  const diaria = +diaria.value;
-  const ocupacao = +ocupacao.value / 100;
-  const dias = +dias.value;
-  const taxa = +taxa.value / 100;
-  const limpeza = +limpeza.value * +reservas.value;
-  const custos = +custos.value;
-
-  if(!diaria || !ocupacao){
-    alert("Preencha os campos principais.");
-    return;
-  }
-
-  const faturamento = diaria * dias * ocupacao;
-  const taxaAirbnb = faturamento * taxa;
-  const totalCustos = custos + limpeza + taxaAirbnb;
-  const lucro = faturamento - totalCustos;
-
-  const box = document.getElementById("resultado");
-  box.className = "result " + (lucro >= 0 ? "positive" : "negative");
-  box.style.display = "block";
-
-  box.innerHTML = `
-    <div class="metric">💰 Faturamento bruto <strong>R$ ${faturamento.toFixed(2)}</strong></div>
-    <div class="metric">🏷️ Taxas Airbnb <strong>R$ ${taxaAirbnb.toFixed(2)}</strong></div>
-    <div class="metric">🧹 Limpeza <strong>R$ ${limpeza.toFixed(2)}</strong></div>
-    <div class="metric">📉 Custos fixos <strong>R$ ${custos.toFixed(2)}</strong></div>
-    <hr>
-    <div class="metric"><strong>Lucro líquido mensal: R$ ${lucro.toFixed(2)}</strong></div>
-  `;
-}
-</script>
-
-  <div class="container">
-  <div class="card" style="margin-top:40px">
-    <h2>Como funciona a calculadora de lucro Airbnb</h2>
-    <p>
-      A calculadora de lucro Airbnb ajuda anfitriões e investidores a estimarem
-      quanto podem ganhar mensalmente com aluguel por temporada.
-      Ela considera fatores como valor da diária, taxa de ocupação,
-      custos fixos e despesas variáveis.
-    </p>
-
-    <h3>O que é lucro no Airbnb?</h3>
-    <p>
-      O lucro no Airbnb é o valor que sobra após descontar todos os custos
-      envolvidos na operação do imóvel, como limpeza, manutenção,
-      taxas da plataforma, condomínio, energia e internet.
-      Conhecer esse número é essencial para saber se o aluguel por temporada
-      realmente vale a pena.
-    </p>
-
-    <h3>Por que usar um simulador de lucro Airbnb?</h3>
-    <p>
-      Um simulador de lucro permite testar diferentes cenários antes de investir,
-      ajustar o valor da diária e entender o impacto da ocupação mensal.
-      Isso ajuda a tomar decisões mais seguras, evitar prejuízos
-      e planejar melhor o retorno financeiro do imóvel.
-    </p>
-
-    <h3>Para quem esta calculadora é indicada?</h3>
-    <p>
-      Esta calculadora é ideal para anfitriões iniciantes,
-      proprietários que desejam aumentar a rentabilidade,
-      investidores imobiliários e pessoas que estão avaliando
-      se vale a pena anunciar um imóvel no Airbnb.
-    </p>
-  </div>
-</div>
-
-
-<footer>
-  <p>
-    <a href="index.html">Início</a> ·
-    <a href="sobre.html">Sobre</a> ·
-    <a href="contato.html">Contato</a> ·
-    <a href="privacidade.html">Privacidade</a>
-  </p>
-  © 2025 SimulaLucro.app
-</footer>
-
-  
-</body>
-</html>
+.menu-mobile{
+  position:fixed;
+  bo

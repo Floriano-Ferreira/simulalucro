@@ -4,29 +4,120 @@
 <meta charset="UTF-8">
 <title>Calculadora de Ponto de Equilíbrio | SimulaLucro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Calcule o ponto de equilíbrio do seu negócio e saiba quanto precisa faturar para não ter prejuízo.">
 
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#1f2937;padding-bottom:80px}
-header{position:sticky;top:0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-.container{max-width:900px;margin:auto;padding:24px 16px}
-.card{background:#fff;padding:24px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
-label{display:block;margin-top:16px;font-weight:bold}
-input{width:100%;padding:12px;margin-top:6px;border-radius:10px;border:1px solid #d1d5db}
-button{margin-top:24px;width:100%;padding:14px;border:none;border-radius:12px;background:#2563eb;color:#fff;font-weight:bold}
-.result{margin-top:24px;padding:20px;border-radius:12px;background:#ecfeff;display:none}
-.menu-mobile{position:fixed;bottom:0;left:0;width:100%;background:#fff;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;padding:10px 0;font-size:12px}
-.menu-mobile span{display:block;font-size:18px}
-@media(min-width:768px){.menu-mobile{display:none}}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f3f6fb;
+  color:#1f2937;
+  padding-bottom:80px;
+}
+header{
+  position:sticky;
+  top:0;
+  background:#ffffff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  z-index:1000;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+nav a{
+  margin-left:16px;
+  text-decoration:none;
+  color:#2563eb;
+  font-weight:500;
+}
+.card{
+  background:#ffffff;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+h1{
+  margin-top:0;
+}
+label{
+  font-weight:600;
+  font-size:14px;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  margin-bottom:16px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+  font-size:15px;
+}
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{
+  background:#1d4ed8;
+}
+.result{
+  margin-top:24px;
+  padding:20px;
+  border-radius:12px;
+  background:#ecfeff;
+  display:none;
+}
+footer{
+  text-align:center;
+  padding:32px 0;
+  color:#6b7280;
+  font-size:14px;
+}
+.menu-mobile{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#ffffff;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  font-size:12px;
+}
+.menu-mobile span{
+  display:block;
+  font-size:18px;
+}
+@media(min-width:768px){
+  .menu-mobile{display:none}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="container" style="display:flex;justify-content:space-between">
+  <div class="container header-inner">
     <strong>💰 SimulaLucro</strong>
     <nav>
       <a href="index.html">Início</a>
+      <a href="lucro-airbnb.html">Airbnb</a>
+      <a href="ponto-equilibrio.html">Equilíbrio</a>
+      <a href="margem-lucro.html">Margem</a>
     </nav>
   </div>
 </header>
@@ -34,42 +125,53 @@ button{margin-top:24px;width:100%;padding:14px;border:none;border-radius:12px;ba
 <main class="container">
   <div class="card">
     <h1>📊 Calculadora de Ponto de Equilíbrio</h1>
+    <p>Descubra quanto você precisa faturar para cobrir todos os custos e não ter prejuízo.</p>
 
-    <label>Custos fixos (R$)</label>
-    <input id="fixos" type="number">
+    <label>Custos fixos mensais (R$)</label>
+    <input type="number" id="custos" placeholder="Ex: 5000">
 
-    <label>Preço de venda (R$)</label>
-    <input id="preco" type="number">
+    <label>Preço de venda por unidade (R$)</label>
+    <input type="number" id="preco" placeholder="Ex: 100">
 
-    <label>Custo variável (R$)</label>
-    <input id="variavel" type="number">
+    <label>Custo variável por unidade (R$)</label>
+    <input type="number" id="variavel" placeholder="Ex: 40">
 
-    <button onclick="calcular()">Calcular</button>
+    <button onclick="calcular()">Calcular ponto de equilíbrio</button>
 
     <div id="resultado" class="result"></div>
   </div>
 </main>
 
+<footer>
+  © 2025 SimulaLucro.app
+</footer>
+
 <div class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🏠</span>Airbnb</a>
+  <a href="ponto-equilibrio.html"><span>📊</span>Equilíbrio</a>
   <a href="margem-lucro.html"><span>💰</span>Margem</a>
 </div>
 
 <script>
 function calcular(){
-  var fixos = Number(document.getElementById("fixos").value);
+  var custos = Number(document.getElementById("custos").value);
   var preco = Number(document.getElementById("preco").value);
   var variavel = Number(document.getElementById("variavel").value);
 
-  if(!fixos || !preco){alert("Preencha os campos.");return;}
+  if(!custos || !preco || variavel >= preco){
+    alert("Preencha os valores corretamente.");
+    return;
+  }
 
-  var margem = preco - variavel;
-  var unidades = fixos / margem;
+  var ponto = custos / (preco - variavel);
 
   var box = document.getElementById("resultado");
-  box.style.display="block";
-  box.innerHTML="Você precisa vender <strong>"+Math.ceil(unidades)+"</strong> unidades para empatar.";
+  box.style.display = "block";
+  box.innerHTML =
+    "<strong>Ponto de equilíbrio:</strong><br>" +
+    "Você precisa vender <strong>" + ponto.toFixed(1) +
+    " unidades</strong> para não ter prejuízo.";
 }
 </script>
 

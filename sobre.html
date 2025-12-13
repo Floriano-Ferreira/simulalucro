@@ -2,23 +2,67 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Sobre | SimulaLucro</title>
+<title>Sobre o SimulaLucro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Conheça o SimulaLucro, site de calculadoras financeiras gratuitas.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Conheça o SimulaLucro, uma plataforma de calculadoras financeiras gratuitas para empreendedores e investidores.">
+
 <style>
-body{font-family:Inter,Arial,sans-serif;background:#f3f6fb;margin:0}
-.container{max-width:900px;margin:auto;padding:32px 16px;background:#fff;border-radius:16px}
-h1{margin-top:0}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#1f2937}
+header{position:sticky;top:0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.container{max-width:900px;margin:auto;padding:24px 16px}
+.header-inner{display:flex;justify-content:space-between;align-items:center}
+nav a{margin-left:16px;text-decoration:none;color:#2563eb;font-weight:500}
+.card{background:#fff;padding:24px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
+footer{text-align:center;padding:32px 16px 120px;color:#6b7280}
+footer a{color:#2563eb;text-decoration:none}
+.menu-mobile{position:fixed;bottom:0;left:0;width:100%;background:#fff;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;padding:10px 0;font-size:12px}
+.menu-mobile span{display:block;font-size:18px}
+@media(min-width:768px){.menu-mobile{display:none}}
 </style>
 </head>
+
 <body>
-<div class="container">
-<h1>Sobre o SimulaLucro</h1>
-<p>O <strong>SimulaLucro</strong> é um site de simuladores financeiros gratuitos criado para ajudar pessoas a tomarem decisões melhores sobre negócios, investimentos e renda.</p>
-<p>Nossas calculadoras são simples, práticas e acessíveis, permitindo simulações rápidas e realistas.</p>
-<p>Nosso objetivo é oferecer ferramentas úteis, conteúdo educativo e experiências confiáveis.</p>
-</div>
+
+<header>
+  <div class="container header-inner">
+    <strong>💰 SimulaLucro</strong>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="lucro-airbnb.html">Calculadoras</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="card">
+    <h1>Sobre o SimulaLucro</h1>
+
+    <p>
+      O <strong>SimulaLucro</strong> é uma plataforma online que oferece
+      <strong>calculadoras financeiras gratuitas</strong>
+      para ajudar empreendedores, investidores e profissionais
+      a tomarem decisões mais inteligentes sobre dinheiro.
+    </p>
+
+    <p>
+      Nosso objetivo é simplificar conceitos financeiros como
+      lucro, margem, ponto de equilíbrio e rentabilidade,
+      transformando números complexos em informações claras e práticas.
+    </p>
+
+    <p>
+      Todas as ferramentas do SimulaLucro foram desenvolvidas
+      com foco em usabilidade, precisão e acessibilidade,
+      permitindo simulações rápidas sem necessidade de cadastro.
+    </p>
+
+    <p>
+      O SimulaLucro não realiza consultoria financeira individual.
+      As informações fornecidas têm caráter educativo e informativo.
+    </p>
+  </div>
+</main>
+
 <footer>
   <p>
     <a href="index.html">Início</a> ·
@@ -29,6 +73,12 @@ h1{margin-top:0}
   © 2025 SimulaLucro.app
 </footer>
 
-  
+<div class="menu-mobile">
+  <a href="index.html"><span>🏠</span>Início</a>
+  <a href="lucro-airbnb.html"><span>📊</span>Calcular</a>
+</div>
+
 </body>
 </html>
+
+

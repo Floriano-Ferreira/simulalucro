@@ -12,7 +12,6 @@ body{
   font-family:Arial, sans-serif;
   background:#f3f6fb;
   color:#1f2937;
-  padding-bottom:80px;
 }
 header{
   position:sticky;
@@ -85,9 +84,17 @@ button:hover{
 }
 footer{
   text-align:center;
-  padding:32px 0;
+  padding:32px 16px 120px; /* espaço REAL para o menu mobile */
   color:#6b7280;
   font-size:14px;
+}
+footer a{
+  color:#2563eb;
+  text-decoration:none;
+  font-weight:500;
+}
+footer a:hover{
+  text-decoration:underline;
 }
 .menu-mobile{
   position:fixed;
@@ -100,6 +107,7 @@ footer{
   justify-content:space-around;
   padding:10px 0;
   font-size:12px;
+  z-index:999;
 }
 .menu-mobile span{
   display:block;
@@ -127,7 +135,6 @@ footer{
 
 <main class="container">
 
-  <!-- CALCULADORA -->
   <div class="card">
     <h1>💰 Calculadora de Margem de Lucro</h1>
     <p>Descubra a porcentagem real de lucro do seu produto ou serviço.</p>
@@ -143,35 +150,29 @@ footer{
     <div id="resultado" class="result"></div>
   </div>
 
-  <!-- TEXTO SEO -->
   <div class="card" style="margin-top:40px">
     <h2>O que é margem de lucro?</h2>
     <p>
       A margem de lucro representa a porcentagem que sobra do valor de venda
       após descontar todos os custos envolvidos no produto ou serviço.
-      Ela é um dos principais indicadores de saúde financeira de um negócio.
     </p>
 
     <h2>Como funciona a calculadora de margem de lucro</h2>
     <p>
       Esta calculadora compara o preço de venda com o custo total
-      e calcula automaticamente a margem de lucro percentual,
-      facilitando a análise da rentabilidade.
+      e calcula automaticamente a margem de lucro percentual.
     </p>
 
     <h2>Por que calcular a margem de lucro?</h2>
     <p>
       Calcular a margem de lucro ajuda a definir preços corretos,
-      evitar prejuízos, aumentar a competitividade
-      e garantir crescimento sustentável no longo prazo.
+      evitar prejuízos e garantir crescimento sustentável.
     </p>
 
     <h2>Para quem esta calculadora é indicada?</h2>
     <p>
-      Esta ferramenta é ideal para empreendedores,
-      lojistas, prestadores de serviço, freelancers,
-      pequenas empresas e qualquer pessoa que queira
-      melhorar o controle financeiro do seu negócio.
+      Ideal para empreendedores, freelancers,
+      pequenas empresas e prestadores de serviço.
     </p>
   </div>
 
@@ -186,7 +187,6 @@ footer{
   </p>
   © 2025 SimulaLucro.app
 </footer>
-
 
 <div class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>

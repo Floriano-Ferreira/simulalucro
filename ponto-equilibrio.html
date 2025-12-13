@@ -128,8 +128,13 @@ function calcular(){
   var box = document.getElementById("resultado");
   box.style.display = "block";
   box.innerHTML =
-    "Você precisa vender <strong>" + Math.ceil(unidades) +
-    "</strong> unidades para atingir o ponto de equilíbrio.";
+    "<h2>📊 Resultado da Simulação</h2>" +
+  "<p><strong>Ponto de equilíbrio:</strong></p>" +
+  "<p style='font-size:22px;margin:10px 0;'>" +
+  "Você precisa vender <strong>" + Math.ceil(unidades) + "</strong> unidades" +
+  "</p>" +
+  "<p style='color:#374151;'>Isso significa que, a partir desse volume de vendas, " +
+  "seu negócio começa a cobrir todos os custos e não operar no prejuízo.</p>";
 }
 </script>
 

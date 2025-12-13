@@ -2,14 +2,14 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>SimulaLucro | Calculadoras Financeiras</title>
+<title>SimulaLucro | Calculadoras Financeiras Gratuitas</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadoras financeiras gratuitas para empreendedores e investidores.">
+<meta name="description" content="Calculadoras financeiras gratuitas para calcular lucro, ponto de equilíbrio e margem de lucro.">
 
 <style>
 body{
   margin:0;
-  font-family:Arial,sans-serif;
+  font-family:Arial, sans-serif;
   background:#f3f6fb;
   color:#1f2937;
   padding-bottom:80px;
@@ -19,9 +19,10 @@ header{
   top:0;
   background:#ffffff;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
+  z-index:1000;
 }
 .container{
-  max-width:900px;
+  max-width:1000px;
   margin:auto;
   padding:24px 16px;
 }
@@ -29,6 +30,18 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
+}
+nav a{
+  margin-left:16px;
+  text-decoration:none;
+  color:#2563eb;
+  font-weight:500;
+}
+nav a:hover{
+  text-decoration:underline;
+}
+h1{
+  margin-top:0;
 }
 .grid{
   display:grid;
@@ -40,14 +53,18 @@ header{
   padding:24px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
+  transition:transform .2s;
+}
+.card:hover{
+  transform:translateY(-4px);
 }
 .card h3{
   margin-top:0;
 }
-.card:hover{
-  transform:translateY(-2px);
+.card p{
+  margin-bottom:0;
 }
-a{
+a.card{
   text-decoration:none;
   color:inherit;
 }
@@ -84,8 +101,47 @@ footer{
 <header>
   <div class="container header-inner">
     <strong>💰 SimulaLucro</strong>
-    <nav style="display:flex;gap:16px;font-size:14px">
+    <nav>
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
       <a href="ponto-equilibrio.html">Equilíbrio</a>
-      <a href="
+      <a href="margem-lucro.html">Margem</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Calculadoras Financeiras Gratuitas</h1>
+  <p>Use ferramentas simples para tomar decisões financeiras mais inteligentes.</p>
+
+  <div class="grid">
+    <a href="lucro-airbnb.html" class="card">
+      <h3>🏠 Lucro Airbnb</h3>
+      <p>Calcule o lucro real do aluguel por temporada.</p>
+    </a>
+
+    <a href="ponto-equilibrio.html" class="card">
+      <h3>📊 Ponto de Equilíbrio</h3>
+      <p>Descubra quanto precisa faturar para não ter prejuízo.</p>
+    </a>
+
+    <a href="margem-lucro.html" class="card">
+      <h3>💰 Margem de Lucro</h3>
+      <p>Saiba se sua margem está saudável.</p>
+    </a>
+  </div>
+</main>
+
+<footer>
+  © 2025 SimulaLucro.app
+</footer>
+
+<div class="menu-mobile">
+  <a href="index.html"><span>🏠</span>Início</a>
+  <a href="lucro-airbnb.html"><span>🏠</span>Airbnb</a>
+  <a href="ponto-equilibrio.html"><span>📊</span>Equilíbrio</a>
+  <a href="margem-lucro.html"><span>💰</span>Margem</a>
+</div>
+
+</body>
+</html>

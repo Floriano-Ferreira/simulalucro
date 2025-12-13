@@ -1,35 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Ponto de Equilíbrio | SimulaLucro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:#f3f6fb;
+  color:#1f2937;
+}
+header{
+  position:sticky;
+  top:0;
+  background:#ffffff;
+  padding:14px 0;
+  box-shadow:0 4px 12px rgba(0,0,0,.06);
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
+.logo{
+  font-size:22px;
+  font-weight:700;
+}
+.card{
+  background:#ffffff;
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+h1{
+  margin-top:0;
+  font-size:26px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;
+}
+label{
+  font-weight:600;
+  font-size:14px;
+}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+  font-size:15px;
+}
+button{
+  width:100%;
+  margin-top:24px;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:#ffffff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{
+  background:#1d4ed8;
+}
+.result{
+  margin-top:24px;
+  padding:20px;
+  border-radius:12px;
+  display:none;
+  background:#ecfeff;
+}
+.metric{
+  margin-bottom:8px;
+}
+.metric strong{
+  float:right;
+}
+footer{
+  text-align:center;
+  padding:32px 0;
+  color:#6b7280;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">💰 SimulaLucro</div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="card">
+    <h1>📊 Calculadora de Ponto de Equilíbrio</h1>
+
+    <div class="grid">
+      <div>
+        <label>Custos fixos mensais (R$)</label>
+        <input id="custosFixos" type="number" placeholder="5000">
+      </div>
+      <div>
+        <label>Preço médio de venda (R$)</label>
+        <input id="preco" type="number" placeholder="150">
+      </div>
+      <div>
+        <label>Custo variável por venda (R$)</label>
+        <input id="custoVariavel" type="number" placeholder="60">
+      </div>
+    </div>
+
+    <button onclick="calcular()">Calcular ponto de equilíbrio</button>
+
+    <div id="resultado" class="result"></div>
+  </div>
+</main>
+
+<footer>
+  © 2025 SimulaLucro.app
+</footer>
+
 <script>
-function calcular(){
+function calcular() {
   const custosFixos = Number(document.getElementById("custosFixos").value);
   const preco = Number(document.getElementById("preco").value);
   const custoVariavel = Number(document.getElementById("custoVariavel").value);
 
-  if(!custosFixos || !preco){
+  if (!custosFixos || !preco) {
     alert("Preencha os custos fixos e o preço de venda.");
     return;
   }
 
   const margemContribuicao = preco - custoVariavel;
 
-  if(margemContribuicao <= 0){
+  if (margemContribuicao <= 0) {
     alert("O preço precisa ser maior que o custo variável.");
     return;
   }
 
-  const pontoEquilibrioUnidades = custosFixos / margemContribuicao;
-  const pontoEquilibrioFaturamento = pontoEquilibrioUnidades * preco;
+  const unidades = custosFixos / margemContribuicao;
+  const faturamento = unidades * preco;
 
   const box = document.getElementById("resultado");
   box.style.display = "block";
-  box.className = "result positive";
-
   box.innerHTML = `
-    <div class="metric">📦 Unidades para equilíbrio
-      <strong>${pontoEquilibrioUnidades.toFixed(0)}</strong>
-    </div>
-    <div class="metric">💰 Faturamento necessário
-      <strong>R$ ${pontoEquilibrioFaturamento.toFixed(2)}</strong>
-    </div>
+    <div class="metric">📦 Unidades necessárias <strong>${unidades.toFixed(0)}</strong></div>
+    <div class="metric">💰 Faturamento mensal <strong>R$ ${faturamento.toFixed(2)}</strong></div>
   `;
 }
 </script>
+
+</body>
+</html>

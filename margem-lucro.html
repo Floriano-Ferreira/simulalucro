@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Margem de Lucro | SimulaLucro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  font-family:Arial,sans-serif;
+  background:#f3f6fb;
+  margin:0;
+  color:#1f2937;
+}
+header{
+  background:#ffffff;
+  padding:16px;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+header strong{
+  font-size:20px;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:32px 16px;
+}
+.card{
+  background:#ffffff;
+  padding:32px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+label{
+  display:block;
+  margin-top:18px;
+  font-weight:bold;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+  font-size:15px;
+}
+button{
+  margin-top:24px;
+  width:100%;
+  padding:14px;
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{
+  background:#1d4ed8;
+}
+.result{
+  margin-top:24px;
+  padding:20px;
+  background:#ecfeff;
+  border-radius:12px;
+  font-size:16px;
+  display:none;
+}
+footer{
+  text-align:center;
+  margin-top:40px;
+  color:#6b7280;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <strong>💰 SimulaLucro</strong>
+  </div>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h1>💰 Calculadora de Margem de Lucro</h1>
+
+    <label>Preço de venda (R$)</label>
+    <input id="preco" type="number" placeholder="150">
+
+    <label>Custo total (R$)</label>
+    <input id="custo" type="number" placeholder="90">
+
+    <button onclick="calcular()">Calcular margem</button>
+
+    <div id="resultado" class="result"></div>
+  </div>
+</div>
+
+<footer>
+  © 2025 SimulaLucro.app
+</footer>
+
+<script>
+function calcular(){
+  var preco = Number(document.getElementById("preco").value);
+  var custo = Number(document.getElementById("custo").value);
+
+  if(!preco || !custo){
+    alert("Preencha o preço de venda e o custo.");
+    return;
+  }
+
+  if(custo >= preco){
+    alert("O custo deve ser menor que o preço de venda.");
+    return;
+  }
+
+  var lucro = preco - custo;
+  var margem = (lucro / preco) * 100;
+
+  var box = document.getElementById("resultado");
+  box.style.display = "block";
+  box.innerHTML =
+    "<h2>📊 Resultado</h2>" +
+    "<p><strong>Lucro por unidade:</strong> R$ " + lucro.toFixed(2) + "</p>" +
+    "<p><strong>Margem de lucro:</strong> " + margem.toFixed(2) + "%</p>" +
+    "<p style='color:#374151'>A margem de lucro indica quanto do valor da venda " +
+    "representa ganho real para o negócio.</p>";
+}
+</script>
+
+</body>
+</html>

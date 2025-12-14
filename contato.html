@@ -4,20 +4,88 @@
 <meta charset="UTF-8">
 <title>Contato | SimulaLucro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Entre em contato com o SimulaLucro para dúvidas, sugestões ou parcerias.">
+<meta name="description" content="Entre em contato com o SimulaLucro para dúvidas, sugestões, correções ou parcerias.">
 
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#1f2937}
-header{position:sticky;top:0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-.container{max-width:900px;margin:auto;padding:24px 16px}
-.header-inner{display:flex;justify-content:space-between;align-items:center}
-nav a{margin-left:16px;text-decoration:none;color:#2563eb;font-weight:500}
-.card{background:#fff;padding:24px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
-footer{text-align:center;padding:32px 16px 120px;color:#6b7280}
-footer a{color:#2563eb;text-decoration:none}
-.menu-mobile{position:fixed;bottom:0;left:0;width:100%;background:#fff;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;padding:10px 0;font-size:12px}
-.menu-mobile span{display:block;font-size:18px}
-@media(min-width:768px){.menu-mobile{display:none}}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f6fb;
+  color:#1f2937;
+  padding-bottom:80px;
+}
+header{
+  position:sticky;
+  top:0;
+  background:#ffffff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  z-index:1000;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+nav a{
+  margin-left:16px;
+  text-decoration:none;
+  color:#2563eb;
+  font-weight:500;
+}
+nav a:hover{
+  text-decoration:underline;
+}
+.card{
+  background:#ffffff;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+h1{
+  margin-top:0;
+}
+ul{
+  padding-left:20px;
+}
+footer{
+  text-align:center;
+  padding:32px 16px;
+  color:#6b7280;
+  font-size:14px;
+}
+footer a{
+  color:#2563eb;
+  text-decoration:none;
+  font-weight:500;
+}
+footer a:hover{
+  text-decoration:underline;
+}
+.menu-mobile{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#ffffff;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  font-size:12px;
+  z-index:999;
+}
+.menu-mobile span{
+  display:block;
+  font-size:18px;
+}
+@media(min-width:768px){
+  .menu-mobile{display:none}
+}
 </style>
 </head>
 
@@ -28,7 +96,8 @@ footer a{color:#2563eb;text-decoration:none}
     <strong>💰 SimulaLucro</strong>
     <nav>
       <a href="index.html">Início</a>
-      <a href="lucro-airbnb.html">Calculadoras</a>
+      <a href="index.html">Calculadoras</a>
+      <a href="sobre.html">Sobre</a>
     </nav>
   </div>
 </header>
@@ -38,16 +107,41 @@ footer a{color:#2563eb;text-decoration:none}
     <h1>Contato</h1>
 
     <p>
-      Se você tiver dúvidas, sugestões, feedbacks ou interesse em parcerias,
-      entre em contato conosco pelo e-mail abaixo:
+      O <strong>SimulaLucro</strong> é um projeto independente voltado à
+      educação financeira por meio de calculadoras gratuitas.
+      Esta página existe para garantir transparência e um canal
+      de comunicação com os usuários do site.
     </p>
+
+    <p>
+      Você pode entrar em contato conosco para:
+    </p>
+
+    <ul>
+      <li>Dúvidas sobre o funcionamento das calculadoras</li>
+      <li>Sugestões de melhorias</li>
+      <li>Correções de conteúdo</li>
+      <li>Propostas de parceria</li>
+    </ul>
 
     <p>
       📧 <strong>contato@simulalucro.app</strong>
     </p>
 
     <p>
-      Respondemos normalmente em até 48 horas úteis.
+      As mensagens são respondidas, sempre que possível,
+      em até <strong>48 horas úteis</strong>.
+    </p>
+
+    <p>
+      O SimulaLucro não oferece consultoria financeira individual.
+      As informações disponibilizadas no site possuem caráter
+      educativo e informativo.
+    </p>
+
+    <p>
+      As mensagens enviadas por este canal seguem a
+      <a href="privacidade.html">Política de Privacidade</a> do site.
     </p>
   </div>
 </main>
@@ -64,7 +158,9 @@ footer a{color:#2563eb;text-decoration:none}
 
 <div class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
-  <a href="lucro-airbnb.html"><span>📊</span>Calcular</a>
+  <a href="lucro-airbnb.html"><span>🏡</span>Airbnb</a>
+  <a href="ponto-equilibrio.html"><span>📊</span>Equilíbrio</a>
+  <a href="margem-lucro.html"><span>💰</span>Margem</a>
 </div>
 
 </body>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Juros Compostos | SimulaLucro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Simule juros compostos e descubra quanto seu dinheiro pode render ao investir mensalmente. Calculadora gratuita e simples.">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f8fafc;
+  color:#1f2937;
+  padding-bottom:80px;
+}
+header{
+  position:sticky;
+  top:0;
+  background:#ffffff;
+  box-shadow:0 2px 10px rgba(0,0,0,.06);
+  z-index:1000;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+nav a{
+  margin-left:16px;
+  text-decoration:none;
+  color:#1e40af;
+  font-weight:600;
+}
+nav a:hover{
+  text-decoration:underline;
+}
+.card{
+  background:#ffffff;
+  padding:24px;
+  border-radius:16px;
+  border:1px solid #e5e7eb;
+  box-shadow:0 8px 22px rgba(0,0,0,.05);
+}
+h1,h2,h3{margin-top:0}
+label{
+  font-weight:600;
+  font-size:14px;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  margin-bottom:16px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+  font-size:15px;
+}
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#1e40af;
+  color:#ffffff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{background:#1d4ed8}
+.result{
+  margin-top:24px;
+  padding:20px;
+  border-radius:12px;
+  background:#ecfeff;
+  display:none;
+}
+ul{padding-left:20px}
+footer{
+  text-align:center;
+  padding:32px 16px;
+  color:#6b7280;
+  font-size:14px;
+}
+footer a{
+  color:#1e40af;
+  font-weight:500;
+  text-decoration:none;
+}
+.menu-mobile{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#ffffff;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  font-size:12px;
+}
+.menu-mobile span{display:block;font-size:18px}
+@media(min-width:768px){.menu-mobile{display:none}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-inner">
+    <strong>💰 SimulaLucro</strong>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="index.html">Calculadoras</a>
+      <a href="sobre.html">Sobre</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- CALCULADORA -->
+  <div class="card">
+    <h1>📈 Calculadora de Juros Compostos</h1>
+    <p>Descubra quanto seu dinheiro pode render ao investir com juros compostos ao longo do tempo.</p>
+
+    <label>Valor inicial (R$)</label>
+    <input type="number" id="inicial" placeholder="Ex: 1000">
+
+    <label>Aporte mensal (R$)</label>
+    <input type="number" id="aporte" placeholder="Ex: 500">
+
+    <label>Taxa de juros mensal (%)</label>
+    <input type="number" id="taxa" placeholder="Ex: 1">
+
+    <label>Período (meses)</label>
+    <input type="number" id="meses" placeholder="Ex: 120">
+
+    <button onclick="calcular()">Calcular rendimento</button>
+
+    <div id="resultado" class="result"></div>
+  </div>
+
+  <!-- SEO + EDUCAÇÃO -->
+  <div class="card" style="margin-top:40px">
+    <h2>O que são juros compostos?</h2>
+    <p>
+      Juros compostos são os juros calculados sobre o valor inicial
+      somado aos juros acumulados ao longo do tempo.
+      Esse efeito faz com que o dinheiro cresça de forma exponencial,
+      sendo um dos principais aliados de quem investe no longo prazo.
+    </p>
+
+    <h3>Por que usar uma calculadora de juros compostos?</h3>
+    <p>
+      Simular juros compostos ajuda a entender o impacto do tempo,
+      da taxa de juros e dos aportes mensais no crescimento do patrimônio.
+      Essa simulação é essencial para planejamento financeiro,
+      investimentos e construção de renda futura.
+    </p>
+
+    <h3>Quem deve usar esta calculadora?</h3>
+    <ul>
+      <li>Investidores iniciantes</li>
+      <li>Pessoas que desejam começar a investir mensalmente</li>
+      <li>Quem quer planejar renda passiva</li>
+      <li>Quem pensa em aposentadoria financeira</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <p>
+    <a href="index.html">Início</a> ·
+    <a href="sobre.html">Sobre</a> ·
+    <a href="contato.html">Contato</a> ·
+    <a href="privacidade.html">Privacidade</a>
+  </p>
+  © 2025 SimulaLucro.app
+</footer>
+
+<div class="menu-mobile">
+  <a href="index.html"><span>🏠</span>Início</a>
+  <a href="juros-compostos.html"><span>📈</span>Juros</a>
+  <a href="lucro-airbnb.html"><span>🏡</span>Airbnb</a>
+  <a href="margem-lucro.html"><span>💰</span>Margem</a>
+</div>
+
+<script>
+function calcular(){
+  var inicial = Number(document.getElementById("inicial").value);
+  var aporte = Number(document.getElementById("aporte").value);
+  var taxa = Number(document.getElementById("taxa").value) / 100;
+  var meses = Number(document.getElementById("meses").value);
+
+  if(!meses || taxa <= 0){
+    alert("Preencha os valores corretamente.");
+    return;
+  }
+
+  var montante = inicial;
+  var investido = inicial;
+
+  for(var i=1;i<=meses;i++){
+    montante = (montante + aporte) * (1 + taxa);
+    investido += aporte;
+  }
+
+  var lucro = montante - investido;
+
+  var box = document.getElementById("resultado");
+  box.style.display = "block";
+  box.innerHTML =
+    "<strong>Resultado da simulação:</strong><br><br>" +
+    "Total investido: <strong>R$ " + investido.toFixed(2) + "</strong><br>" +
+    "Valor final: <strong>R$ " + montante.toFixed(2) + "</strong><br>" +
+    "Rendimento em juros: <strong>R$ " + lucro.toFixed(2) + "</strong>";
+}
+</script>
+
+</body>
+</html>

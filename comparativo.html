@@ -1,1 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Airbnb vs Aluguel Tradicional | SimulaLucro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Compare Airbnb vs aluguel tradicional e descubra qual gera mais lucro mensal e anual para seu imóvel. Simulador gratuito.">
 
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f3f6fb;
+  color:#1f2937;
+  padding-bottom:120px;
+}
+header{
+  position:sticky;
+  top:0;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  z-index:1000;
+}
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:24px 16px;
+}
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+nav a{
+  margin-left:14px;
+  text-decoration:none;
+  color:#2563eb;
+  font-weight:500;
+}
+nav a:hover{text-decoration:underline}
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+h1,h2,h3{margin-top:0}
+label{
+  font-weight:600;
+  font-size:14px;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  margin-bottom:14px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+}
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{background:#1d4ed8}
+.result{
+  margin-top:24px;
+  padding:20px;
+  border-radius:12px;
+  background:#ecfeff;
+  display:none;
+}
+.win{
+  margin-top:12px;
+  font-size:18px;
+  font-weight:700;
+}
+footer{
+  background:#fff;
+  border-top:1px solid #e5e7eb;
+  padding:16px;
+  text-align:center;
+  font-size:13px;
+}
+.footer-links{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.footer-more{
+  cursor:pointer;
+  font-weight:600;
+  color:#2563eb;
+}
+.footer-extra{
+  display:none;
+  margin-top:8px;
+}
+.footer-extra a{
+  margin:4px 8px;
+  display:inline-block;
+}
+.menu-mobile{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  font-size:12px;
+}
+.menu-mobile span{display:block;font-size:18px}
+@media(max-width:800px){
+  .grid{grid-template-columns:1fr}
+}
+@media(min-width:768px){
+  .menu-mobile{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-inner">
+    <strong>💰 SimulaLucro</strong>
+    <nav>
+      <a href="index.html">🏠 Início</a>
+      <a href="lucro-airbnb.html">🛏️ Airbnb</a>
+      <a href="comparativo.html">📊 Comparativo</a>
+      <a href="margem-lucro.html">💰 Margem</a>
+      <a href="juros-compostos.html">📈 Juros</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+<div class="card">
+  <h1>📊 Airbnb vs Aluguel Tradicional</h1>
+  <p>Compare qual modelo gera mais lucro mensal e anual para seu imóvel.</p>
+
+  <div class="grid">
+
+    <!-- AIRBNB -->
+    <div>
+      <h3>🛏️ Airbnb</h3>
+
+      <label>Valor da diária (R$)</label>
+      <input id="diaria" placeholder="Ex: 350">
+
+      <label>Dias reservados no mês</label>
+      <input id="dias" placeholder="Ex: 18">
+
+      <label>Taxa Airbnb (%)</label>
+      <input id="taxaAirbnb" placeholder="Ex: 15">
+
+      <label>Limpeza por reserva (R$)</label>
+      <input id="limpeza" placeholder="Ex: 150">
+
+      <label>Número de reservas</label>
+      <input id="reservas" placeholder="Ex: 8">
+
+      <label>Condomínio mensal (R$)</label>
+      <input id="condominioAirbnb" placeholder="Ex: 400">
+
+      <label>IPTU mensal (R$)</label>
+      <input id="iptuAirbnb" placeholder="Ex: 120">
+
+      <label>Manutenção média mensal (R$)</label>
+      <input id="manutencaoAirbnb" placeholder="Ex: 200">
+    </div>
+
+    <!-- ALUGUEL -->
+    <div>
+      <h3>🏠 Aluguel Tradicional</h3>
+
+      <label>Aluguel mensal (R$)</label>
+      <input id="aluguel" placeholder="Ex: 2200">
+
+      <label>Taxa imobiliária (%)</label>
+      <input id="taxaImobiliaria" placeholder="Ex: 10">
+
+      <label>Condomínio mensal (R$)</label>
+      <input id="condominioAluguel" placeholder="Ex: 400">
+
+      <label>IPTU mensal (R$)</label>
+      <input id="iptuAluguel" placeholder="Ex: 120">
+
+      <label>Manutenção média mensal (R$)</label>
+      <input id="manutencaoAluguel" placeholder="Ex: 150">
+    </div>
+
+  </div>
+
+  <button onclick="calcular()">Comparar rentabilidade</button>
+
+  <div id="resultado" class="result"></div>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">🏠 Início</a>
+    <a href="lucro-airbnb.html">🛏️ Airbnb</a>
+    <a href="comparativo.html">📊 Comparativo</a>
+    <span class="footer-more" onclick="toggleFooter()">＋ Mais</span>
+  </div>
+
+  <div id="footerExtra" class="footer-extra">
+    <a href="ponto-equilibrio.html">⚖️ Equilíbrio</a>
+    <a href="margem-lucro.html">💰 Margem</a>
+    <a href="preco-servico.html">💼 Serviço</a>
+    <a href="juros-compostos.html">📈 Juros</a>
+    <a href="sobre.html">ℹ️ Sobre</a>
+    <a href="contato.html">✉️ Contato</a>
+    <a href="privacidade.html">🔒 Privacidade</a>
+  </div>
+
+  <div style="margin-top:10px">© 2025 SimulaLucro</div>
+</footer>
+
+<div class="menu-mobile">
+  <a href="index.html"><span>🏠</span>Início</a>
+  <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
+  <a href="comparativo.html"><span>📊</span>Comparar</a>
+  <a href="juros-compostos.html"><span>📈</span>Juros</a>
+</div>
+
+<script>
+function toggleFooter(){
+  var el = document.getElementById("footerExtra");
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+
+function calcular(){
+  // Airbnb
+  var faturamentoAirbnb = diaria.value * dias.value;
+  var taxaA = faturamentoAirbnb * (taxaAirbnb.value/100);
+  var limpezaTotal = limpeza.value * reservas.value;
+  var custosAirbnb =
+    taxaA +
+    limpezaTotal +
+    Number(condominioAirbnb.value) +
+    Number(iptuAirbnb.value) +
+    Number(manutencaoAirbnb.value);
+
+  var lucroAirbnb = faturamentoAirbnb - custosAirbnb;
+
+  // Aluguel
+  var taxaI = aluguel.value * (taxaImobiliaria.value/100);
+  var custosAluguel =
+    taxaI +
+    Number(condominioAluguel.value) +
+    Number(iptuAluguel.value) +
+    Number(manutencaoAluguel.value);
+
+  var lucroAluguel = aluguel.value - custosAluguel;
+
+  var box = document.getElementById("resultado");
+  box.style.display="block";
+  box.innerHTML =
+    "🛏️ <strong>Lucro Airbnb:</strong> R$ "+lucroAirbnb.toFixed(2)+"<br>" +
+    "🏠 <strong>Lucro Aluguel:</strong> R$ "+lucroAluguel.toFixed(2)+"<br><hr>" +
+    "<strong>Diferença mensal:</strong> R$ "+(lucroAirbnb-lucroAluguel).toFixed(2)+"<br>" +
+    "<strong>Diferença anual:</strong> R$ "+((lucroAirbnb-lucroAluguel)*12).toFixed(2)+"<br>" +
+    "<div class='win'>🏆 Mais vantajoso: "+(lucroAirbnb>lucroAluguel?"Airbnb":"Aluguel Tradicional")+"</div>";
+}
+</script>
+
+</body>
+</html>

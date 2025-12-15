@@ -12,7 +12,11 @@ body{
   font-family:Arial, sans-serif;
   background:#f3f6fb;
   color:#1f2937;
+  padding-bottom:80px;
 }
+a{color:#2563eb;text-decoration:none}
+a:hover{text-decoration:underline}
+
 header{
   position:sticky;
   top:0;
@@ -32,22 +36,31 @@ header{
 }
 nav a{
   margin-left:16px;
-  text-decoration:none;
-  color:#2563eb;
   font-weight:500;
+  position:relative;
 }
-nav a:hover{
-  text-decoration:underline;
+nav a.active{
+  font-weight:700;
 }
+nav a.active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-6px;
+  height:2px;
+  background:#2563eb;
+  border-radius:2px;
+}
+
 .card{
   background:#ffffff;
   padding:24px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
-h1, h2{
-  margin-top:0;
-}
+h1,h2{margin-top:0}
+
 label{
   font-weight:600;
   font-size:14px;
@@ -72,9 +85,8 @@ button{
   font-weight:700;
   cursor:pointer;
 }
-button:hover{
-  background:#1d4ed8;
-}
+button:hover{background:#1d4ed8}
+
 .result{
   margin-top:24px;
   padding:20px;
@@ -82,20 +94,18 @@ button:hover{
   background:#ecfeff;
   display:none;
 }
+
 footer{
   text-align:center;
-  padding:32px 16px 120px; /* espaço REAL para o menu mobile */
+  padding:32px 16px 120px;
   color:#6b7280;
   font-size:14px;
 }
 footer a{
   color:#2563eb;
-  text-decoration:none;
   font-weight:500;
 }
-footer a:hover{
-  text-decoration:underline;
-}
+
 .menu-mobile{
   position:fixed;
   bottom:0;
@@ -109,10 +119,9 @@ footer a:hover{
   font-size:12px;
   z-index:999;
 }
-.menu-mobile span{
-  display:block;
-  font-size:18px;
-}
+.menu-mobile a{text-align:center}
+.menu-mobile span{display:block;font-size:18px}
+
 @media(min-width:768px){
   .menu-mobile{display:none}
 }
@@ -128,15 +137,16 @@ footer a:hover{
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
       <a href="ponto-equilibrio.html">Equilíbrio</a>
-      <a href="margem-lucro.html">Margem</a>
-      <a href="preco-servico.html">Preço de Serviço</a>
-      <a href="juros-compostos.html">Juros Compostos</a>
+      <a href="margem-lucro.html" class="active">Margem</a>
+      <a href="preco-servico.html">Serviço</a>
+      <a href="juros-compostos.html">Juros</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
+  <!-- CALCULADORA -->
   <div class="card">
     <h1>💰 Calculadora de Margem de Lucro</h1>
     <p>Descubra a porcentagem real de lucro do seu produto ou serviço.</p>
@@ -152,29 +162,27 @@ footer a:hover{
     <div id="resultado" class="result"></div>
   </div>
 
+  <!-- TEXTO SEO -->
   <div class="card" style="margin-top:40px">
     <h2>O que é margem de lucro?</h2>
     <p>
       A margem de lucro representa a porcentagem que sobra do valor de venda
       após descontar todos os custos envolvidos no produto ou serviço.
-    </p>
-
-    <h2>Como funciona a calculadora de margem de lucro</h2>
-    <p>
-      Esta calculadora compara o preço de venda com o custo total
-      e calcula automaticamente a margem de lucro percentual.
+      É um dos indicadores financeiros mais importantes de um negócio.
     </p>
 
     <h2>Por que calcular a margem de lucro?</h2>
     <p>
       Calcular a margem de lucro ajuda a definir preços corretos,
-      evitar prejuízos e garantir crescimento sustentável.
+      identificar prejuízos ocultos e garantir crescimento sustentável.
+      Muitos negócios quebram por vender muito, mas com margem errada.
     </p>
 
-    <h2>Para quem esta calculadora é indicada?</h2>
+    <h2>Quem deve usar esta calculadora?</h2>
     <p>
-      Ideal para empreendedores, freelancers,
-      pequenas empresas e prestadores de serviço.
+      Esta ferramenta é ideal para empreendedores, freelancers,
+      prestadores de serviço, lojistas e pequenas empresas
+      que desejam tomar decisões financeiras mais seguras.
     </p>
   </div>
 
@@ -192,8 +200,8 @@ footer a:hover{
 
 <div class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
-  <a href="lucro-airbnb.html"><span>🏠</span>Airbnb</a>
-  <a href="ponto-equilibrio.html"><span>📊</span>Equilíbrio</a>
+  <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
+  <a href="ponto-equilibrio.html"><span>⚖️</span>Equilíbrio</a>
   <a href="margem-lucro.html"><span>💰</span>Margem</a>
 </div>
 
@@ -202,7 +210,7 @@ function calcular(){
   var preco = Number(document.getElementById("preco").value);
   var custo = Number(document.getElementById("custo").value);
 
-  if(!preco || !custo || custo >= preco){
+  if(preco <= 0 || custo <= 0 || custo >= preco){
     alert("Preencha os valores corretamente.");
     return;
   }
@@ -213,7 +221,7 @@ function calcular(){
   var box = document.getElementById("resultado");
   box.style.display = "block";
   box.innerHTML =
-    "<strong>Resultado:</strong><br>" +
+    "<strong>Resultado:</strong><br><br>" +
     "Lucro por venda: <strong>R$ " + lucro.toFixed(2) + "</strong><br>" +
     "Margem de lucro: <strong>" + margem.toFixed(1) + "%</strong>";
 }

@@ -121,7 +121,7 @@ footer a{
     <strong>💰 SimulaLucro</strong>
     <nav>
       <a href="index.html">Início</a>
-      <a href="lucro-airbnb.html">Airbnb</a>
+      <a href="lucro-airbnb.html">🛏️ Airbnb</a>
       <a href="ponto-equilibrio.html">Equilíbrio</a>
       <a href="margem-lucro.html">Margem</a>
       <a href="preco-servico.html">Serviço</a>
@@ -134,7 +134,7 @@ footer a{
 
   <!-- CALCULADORA -->
   <div class="card">
-    <h1>🏠 Calculadora de Lucro Airbnb (Prática)</h1>
+    <h1>🛏️ Calculadora de Lucro Airbnb (Prática)</h1>
     <p>Simule rapidamente o lucro mensal do seu imóvel no Airbnb.</p>
 
     <label>Valor da diária (R$)</label>
@@ -164,16 +164,16 @@ footer a{
   <div class="card" style="margin-top:40px">
     <h2>Como calcular o lucro no Airbnb?</h2>
     <p>
-      O lucro no Airbnb é calculado subtraindo do faturamento total
-      todos os custos envolvidos na operação do imóvel,
-      como taxas da plataforma, limpeza e despesas fixas.
+      O lucro no Airbnb é o valor que sobra após descontar todas as despesas
+      do faturamento mensal, como taxas da plataforma, limpeza
+      e custos fixos do imóvel.
     </p>
 
-    <h2>Por que usar dias reservados em vez de ocupação?</h2>
+    <h2>Por que usar dias reservados?</h2>
     <p>
-      Trabalhar com dias reservados torna a simulação mais prática
-      e próxima da realidade do anfitrião,
-      facilitando o planejamento financeiro mensal.
+      Trabalhar com dias reservados torna o cálculo mais simples,
+      prático e próximo da realidade do anfitrião,
+      facilitando o planejamento financeiro.
     </p>
   </div>
 
@@ -186,7 +186,7 @@ footer a{
     <a href="contato.html">Contato</a> ·
     <a href="privacidade.html">Privacidade</a>
   </p>
-  © 2025 SimulaLucro.app
+  © 2025 SimulaLucro
 </footer>
 
 <div class="menu-mobile">
@@ -206,8 +206,9 @@ function calcular(){
   var custos   = Number(document.getElementById("custos").value);
 
   if(
-    diaria <= 0 || dias <= 0 || taxa < 0 ||
-    limpeza < 0 || reservas < 0 || custos < 0
+    diaria <= 0 || dias <= 0 ||
+    taxa < 0 || limpeza < 0 ||
+    reservas < 0 || custos < 0
   ){
     alert("Preencha todos os campos corretamente.");
     return;

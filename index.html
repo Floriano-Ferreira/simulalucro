@@ -12,10 +12,8 @@ body{
   font-family:Arial,sans-serif;
   background:#f3f6fb;
   color:#1f2937;
-  padding-bottom:120px;
+  padding-bottom:90px;
 }
-
-/* ===== HEADER DESKTOP ===== */
 header{
   position:sticky;
   top:0;
@@ -44,8 +42,6 @@ nav a.active{
   font-weight:700;
   color:#1d4ed8;
 }
-
-/* ===== HERO ===== */
 .hero{
   padding:40px 0 24px;
 }
@@ -57,8 +53,6 @@ nav a.active{
   font-size:17px;
   max-width:760px;
 }
-
-/* ===== CARDS ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -78,36 +72,22 @@ nav a.active{
   text-decoration:none;
 }
 .card a:hover{text-decoration:underline}
-
-/* ===== FOOTER ===== */
 footer{
   background:#fff;
   border-top:1px solid #e5e7eb;
-  padding:16px;
+  padding:24px 16px;
   text-align:center;
   font-size:13px;
+  color:#6b7280;
 }
-.footer-links{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  flex-wrap:wrap;
-}
-.footer-more{
-  cursor:pointer;
-  font-weight:600;
+footer a{
   color:#2563eb;
+  text-decoration:none;
+  font-weight:500;
 }
-.footer-extra{
-  display:none;
-  margin-top:8px;
-}
-.footer-extra a{
-  margin:4px 8px;
-  display:inline-block;
-}
+footer a:hover{text-decoration:underline}
 
-/* ===== MENU MOBILE ===== */
+/* MENU MOBILE ÚNICO */
 .menu-mobile{
   position:fixed;
   bottom:0;
@@ -146,6 +126,7 @@ footer{
       <a href="margem-lucro.html">💰 Margem</a>
       <a href="preco-servico.html">🧾 Serviço</a>
       <a href="juros-compostos.html">📈 Juros</a>
+      <a href="contato.html">✉️ Contato</a>
     </nav>
   </div>
 </header>
@@ -216,24 +197,17 @@ footer{
 </main>
 
 <footer>
-  <div class="footer-links">
-    <a href="index.html">🏠 Início</a>
-    <a href="lucro-airbnb.html">🛏️ Airbnb</a>
-    <a href="comparativo.html">⚖️ Comparativo</a>
-    <span class="footer-more" onclick="toggleFooter()">＋ Mais</span>
-  </div>
-
-  <div id="footerExtra" class="footer-extra">
-    <a href="ponto-equilibrio.html">📊 Equilíbrio</a>
-    <a href="margem-lucro.html">💰 Margem</a>
-    <a href="preco-servico.html">🧾 Serviço</a>
-    <a href="juros-compostos.html">📈 Juros</a>
-    <a href="sobre.html">ℹ️ Sobre</a>
-    <a href="contato.html">✉️ Contato</a>
-    <a href="privacidade.html">🔒 Privacidade</a>
-  </div>
-
-  <div style="margin-top:10px">© 2025 SimulaLucro</div>
+  <p>
+    <a href="index.html">Início</a> ·
+    <a href="lucro-airbnb.html">Lucro Airbnb</a> ·
+    <a href="comparativo.html">Comparativo</a> ·
+    <a href="ponto-equilibrio.html">Ponto de Equilíbrio</a> ·
+    <a href="margem-lucro.html">Margem</a> ·
+    <a href="preco-servico.html">Serviço</a> ·
+    <a href="juros-compostos.html">Juros</a> ·
+    <a href="contato.html">Contato</a>
+  </p>
+  © 2025 SimulaLucro
 </footer>
 
 <nav class="menu-mobile">
@@ -243,13 +217,6 @@ footer{
   <a href="margem-lucro.html"><span>💰</span>Margem</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
 </nav>
-
-<script>
-function toggleFooter(){
-  var el=document.getElementById("footerExtra");
-  el.style.display=el.style.display==="block"?"none":"block";
-}
-</script>
 
 </body>
 </html>

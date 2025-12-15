@@ -32,8 +32,10 @@ header{
   align-items:center;
   flex-wrap:wrap;
 }
+
+/* MENU DESKTOP */
 .menu-desktop a{
-  margin-left:12px;
+  margin-left:10px;
   padding:6px 10px;
   border-radius:8px;
   text-decoration:none;
@@ -44,6 +46,12 @@ header{
 .menu-desktop a:hover{
   background:#eef2ff;
 }
+.menu-desktop a.active{
+  background:#2563eb;
+  color:#ffffff;
+}
+
+/* HERO */
 .hero{
   padding:40px 0 24px;
 }
@@ -55,6 +63,8 @@ header{
   font-size:17px;
   max-width:760px;
 }
+
+/* CARDS */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -67,20 +77,14 @@ header{
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
-.card h3{
-  margin-top:0;
-}
+.card h3{margin-top:0}
 .card a{
   text-decoration:none;
   color:#2563eb;
   font-weight:600;
 }
-.card a:hover{
-  text-decoration:underline;
-}
-ul{
-  padding-left:20px;
-}
+
+/* FOOTER */
 footer{
   text-align:center;
   padding:32px 16px;
@@ -92,9 +96,8 @@ footer a{
   text-decoration:none;
   font-weight:500;
 }
-footer a:hover{
-  text-decoration:underline;
-}
+
+/* MENU MOBILE */
 .menu-mobile{
   position:fixed;
   bottom:0;
@@ -102,16 +105,50 @@ footer a:hover{
   width:100%;
   background:#ffffff;
   border-top:1px solid #e5e7eb;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 0;
-  font-size:12px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  padding:8px 0;
+  font-size:11px;
   z-index:999;
+}
+.menu-mobile a{
+  text-align:center;
+  text-decoration:none;
+  color:#2563eb;
 }
 .menu-mobile span{
   display:block;
   font-size:18px;
 }
+.menu-mobile a.active{
+  color:#1d4ed8;
+  font-weight:bold;
+}
+
+/* MENU MAIS */
+.more-menu{
+  display:none;
+  position:fixed;
+  bottom:70px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#ffffff;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  border-radius:12px;
+  padding:12px;
+  z-index:1001;
+}
+.more-menu a{
+  display:block;
+  padding:10px;
+  text-decoration:none;
+  color:#2563eb;
+  font-weight:500;
+}
+.more-menu a:hover{
+  background:#eef2ff;
+}
+
 @media(min-width:768px){
   .menu-mobile{display:none}
 }
@@ -124,11 +161,11 @@ footer a:hover{
   <div class="container header-inner">
     <strong>💰 SimulaLucro</strong>
     <nav class="menu-desktop">
-      <a href="index.html">🏠 Início</a>
+      <a href="index.html" class="active">🏠 Início</a>
       <a href="lucro-airbnb.html">🛏️ Airbnb</a>
       <a href="ponto-equilibrio.html">⚖️ Equilíbrio</a>
       <a href="margem-lucro.html">💹 Margem</a>
-      <a href="preco-servico.html">🧾 Preço</a>
+      <a href="preco-servico.html">🧾 Serviço</a>
       <a href="juros-compostos.html">📈 Juros</a>
     </nav>
   </div>
@@ -136,81 +173,17 @@ footer a:hover{
 
 <main class="container">
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Calculadoras Financeiras Gratuitas</h1>
-    <p>
-      O <strong>SimulaLucro</strong> é uma plataforma online com
-      calculadoras financeiras gratuitas para ajudar empreendedores,
-      profissionais e investidores a tomarem decisões mais conscientes
-      sobre lucro, custos, preços e rentabilidade.
-    </p>
-  </section>
-
-  <!-- CARDS DAS CALCULADORAS -->
-  <section class="grid">
-
-    <div class="card">
-      <h3>🛏️ Lucro Airbnb</h3>
-      <p>Simule o lucro mensal de um imóvel no Airbnb considerando ocupação, taxas e custos.</p>
-      <a href="lucro-airbnb.html">Calcular agora →</a>
-    </div>
-
-    <div class="card">
-      <h3>⚖️ Ponto de Equilíbrio</h3>
-      <p>Descubra quanto precisa faturar para cobrir seus custos e não ter prejuízo.</p>
-      <a href="ponto-equilibrio.html">Calcular agora →</a>
-    </div>
-
-    <div class="card">
-      <h3>💹 Margem de Lucro</h3>
-      <p>Calcule a margem de lucro real de produtos ou serviços.</p>
-      <a href="margem-lucro.html">Calcular agora →</a>
-    </div>
-
-    <div class="card">
-      <h3>🧾 Preço de Serviço</h3>
-      <p>Defina o preço ideal de um serviço com base em custos, horas e lucro desejado.</p>
-      <a href="preco-servico.html">Calcular agora →</a>
-    </div>
-
-    <div class="card">
-      <h3>📈 Juros Compostos</h3>
-      <p>Simule investimentos e veja como o dinheiro cresce com juros compostos ao longo do tempo.</p>
-      <a href="juros-compostos.html">Calcular agora →</a>
-    </div>
-
-  </section>
-
-  <!-- BLOCO SEO -->
-  <section class="card" style="margin-top:40px">
-    <h2>O que é o SimulaLucro?</h2>
-    <p>
-      O <strong>SimulaLucro</strong> é um projeto independente que disponibiliza
-      calculadoras financeiras online para facilitar o entendimento
-      de indicadores importantes como lucro, margem, ponto de equilíbrio
-      e crescimento financeiro.
-    </p>
-  </section>
-
-</main>
-
-<footer>
+<section class="hero">
+  <h1>Calculadoras Financeiras Gratuitas</h1>
   <p>
-    <a href="index.html">Início</a> ·
-    <a href="sobre.html">Sobre</a> ·
-    <a href="contato.html">Contato</a> ·
-    <a href="privacidade.html">Privacidade</a>
+    O <strong>SimulaLucro</strong> oferece calculadoras financeiras gratuitas
+    para ajudar empreendedores, profissionais e investidores a tomar
+    decisões mais inteligentes sobre lucro, custos e investimentos.
   </p>
-  © 2025 SimulaLucro.app
-</footer>
+</section>
 
-<div class="menu-mobile">
-  <a href="index.html"><span>🏠</span>Início</a>
-  <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
-  <a href="ponto-equilibrio.html"><span>⚖️</span>Equilíbrio</a>
-  <a href="juros-compostos.html"><span>📈</span>Juros</a>
-</div>
+<section class="grid">
 
-</body>
-</html>
+  <div class="card">
+    <h3>🛏️ Lucro Airbnb</h3>
+    <p>Simule o lucro mensal de um imóvel no Air

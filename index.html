@@ -186,4 +186,70 @@ footer a{
 
   <div class="card">
     <h3>🛏️ Lucro Airbnb</h3>
-    <p>Simule o lucro mensal de um imóvel no Air
+    <p>Simule o lucro mensal de um imóvel no Airbnb.</p>
+    <a href="lucro-airbnb.html">Calcular →</a>
+  </div>
+
+  <div class="card">
+    <h3>⚖️ Ponto de Equilíbrio</h3>
+    <p>Descubra quanto precisa faturar para não ter prejuízo.</p>
+    <a href="ponto-equilibrio.html">Calcular →</a>
+  </div>
+
+  <div class="card">
+    <h3>💹 Margem de Lucro</h3>
+    <p>Calcule a margem de lucro real.</p>
+    <a href="margem-lucro.html">Calcular →</a>
+  </div>
+
+  <div class="card">
+    <h3>🧾 Preço de Serviço</h3>
+    <p>Defina o preço ideal para seus serviços.</p>
+    <a href="preco-servico.html">Calcular →</a>
+  </div>
+
+  <div class="card">
+    <h3>📈 Juros Compostos</h3>
+    <p>Simule investimentos e crescimento do capital.</p>
+    <a href="juros-compostos.html">Calcular →</a>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <p>
+    <a href="index.html">Início</a> ·
+    <a href="sobre.html">Sobre</a> ·
+    <a href="contato.html">Contato</a> ·
+    <a href="privacidade.html">Privacidade</a>
+  </p>
+  © 2025 SimulaLucro.app
+</footer>
+
+<!-- MENU MOBILE -->
+<div class="menu-mobile">
+  <a href="index.html" class="active"><span>🏠</span>Início</a>
+  <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
+  <a href="ponto-equilibrio.html"><span>⚖️</span>Equilíbrio</a>
+  <a href="juros-compostos.html"><span>📈</span>Juros</a>
+  <a href="#" onclick="toggleMore()"><span>⋯</span>Mais</a>
+</div>
+
+<div class="more-menu" id="moreMenu">
+  <a href="margem-lucro.html">💹 Margem</a>
+  <a href="preco-servico.html">🧾 Serviço</a>
+  <a href="sobre.html">ℹ️ Sobre</a>
+  <a href="contato.html">✉️ Contato</a>
+</div>
+
+<script>
+function toggleMore(){
+  const menu = document.getElementById("moreMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>

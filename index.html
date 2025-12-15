@@ -32,26 +32,21 @@ header{
   align-items:center;
   flex-wrap:wrap;
 }
-
-/* MENU DESKTOP */
 .menu-desktop a{
-  margin-left:10px;
+  margin-left:8px;
   padding:6px 10px;
   border-radius:8px;
   text-decoration:none;
   color:#2563eb;
   font-weight:500;
-  white-space:nowrap;
+}
+.menu-desktop a.active{
+  background:#2563eb;
+  color:#fff;
 }
 .menu-desktop a:hover{
   background:#eef2ff;
 }
-.menu-desktop a.active{
-  background:#2563eb;
-  color:#ffffff;
-}
-
-/* HERO */
 .hero{
   padding:40px 0 24px;
 }
@@ -63,8 +58,6 @@ header{
   font-size:17px;
   max-width:760px;
 }
-
-/* CARDS */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -83,8 +76,6 @@ header{
   color:#2563eb;
   font-weight:600;
 }
-
-/* FOOTER */
 footer{
   text-align:center;
   padding:32px 16px;
@@ -94,10 +85,7 @@ footer{
 footer a{
   color:#2563eb;
   text-decoration:none;
-  font-weight:500;
 }
-
-/* MENU MOBILE */
 .menu-mobile{
   position:fixed;
   bottom:0;
@@ -109,46 +97,19 @@ footer a{
   grid-template-columns:repeat(5,1fr);
   padding:8px 0;
   font-size:11px;
-  z-index:999;
 }
 .menu-mobile a{
   text-align:center;
   text-decoration:none;
   color:#2563eb;
 }
+.menu-mobile a.active{
+  font-weight:bold;
+}
 .menu-mobile span{
   display:block;
   font-size:18px;
 }
-.menu-mobile a.active{
-  color:#1d4ed8;
-  font-weight:bold;
-}
-
-/* MENU MAIS */
-.more-menu{
-  display:none;
-  position:fixed;
-  bottom:70px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#ffffff;
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
-  border-radius:12px;
-  padding:12px;
-  z-index:1001;
-}
-.more-menu a{
-  display:block;
-  padding:10px;
-  text-decoration:none;
-  color:#2563eb;
-  font-weight:500;
-}
-.more-menu a:hover{
-  background:#eef2ff;
-}
-
 @media(min-width:768px){
   .menu-mobile{display:none}
 }
@@ -176,9 +137,9 @@ footer a{
 <section class="hero">
   <h1>Calculadoras Financeiras Gratuitas</h1>
   <p>
-    O <strong>SimulaLucro</strong> oferece calculadoras financeiras gratuitas
-    para ajudar empreendedores, profissionais e investidores a tomar
-    decisões mais inteligentes sobre lucro, custos e investimentos.
+    O <strong>SimulaLucro</strong> oferece ferramentas gratuitas para ajudar
+    empreendedores, profissionais e investidores a tomar decisões financeiras
+    mais inteligentes.
   </p>
 </section>
 
@@ -228,28 +189,13 @@ footer a{
   © 2025 SimulaLucro.app
 </footer>
 
-<!-- MENU MOBILE -->
 <div class="menu-mobile">
   <a href="index.html" class="active"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
   <a href="ponto-equilibrio.html"><span>⚖️</span>Equilíbrio</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
-  <a href="#" onclick="toggleMore()"><span>⋯</span>Mais</a>
+  <a href="preco-servico.html"><span>🧾</span>Serviço</a>
 </div>
-
-<div class="more-menu" id="moreMenu">
-  <a href="margem-lucro.html">💹 Margem</a>
-  <a href="preco-servico.html">🧾 Serviço</a>
-  <a href="sobre.html">ℹ️ Sobre</a>
-  <a href="contato.html">✉️ Contato</a>
-</div>
-
-<script>
-function toggleMore(){
-  const menu = document.getElementById("moreMenu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-</script>
 
 </body>
 </html>

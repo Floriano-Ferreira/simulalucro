@@ -9,16 +9,16 @@
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:#f8fafc;
+  font-family:Arial,sans-serif;
+  background:#f3f6fb;
   color:#1f2937;
-  padding-bottom:80px;
+  padding-bottom:90px;
 }
 header{
   position:sticky;
   top:0;
-  background:#ffffff;
-  box-shadow:0 2px 10px rgba(0,0,0,.06);
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
   z-index:1000;
 }
 .container{
@@ -30,35 +30,25 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
 }
 nav a{
-  margin-left:16px;
+  margin-left:14px;
   text-decoration:none;
-  color:#1e40af;
+  color:#2563eb;
   font-weight:500;
-  position:relative;
 }
 nav a.active{
   font-weight:700;
-}
-nav a.active::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:-6px;
-  height:2px;
-  background:#1e40af;
-  border-radius:2px;
+  color:#1d4ed8;
 }
 nav a:hover{text-decoration:underline}
 
 .card{
-  background:#ffffff;
+  background:#fff;
   padding:24px;
   border-radius:16px;
-  border:1px solid #e5e7eb;
-  box-shadow:0 8px 22px rgba(0,0,0,.05);
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 h1,h2,h3{margin-top:0}
 label{
@@ -71,7 +61,7 @@ input{
   margin-top:6px;
   margin-bottom:16px;
   border-radius:10px;
-  border:1px solid #e5e7eb;
+  border:1px solid #d1d5db;
   font-size:15px;
 }
 button{
@@ -79,8 +69,8 @@ button{
   padding:14px;
   border:none;
   border-radius:12px;
-  background:#1e40af;
-  color:#ffffff;
+  background:#2563eb;
+  color:#fff;
   font-size:16px;
   font-weight:700;
   cursor:pointer;
@@ -96,31 +86,43 @@ button:hover{background:#1d4ed8}
 ul{padding-left:20px}
 
 footer{
+  background:#fff;
+  border-top:1px solid #e5e7eb;
+  padding:24px 16px;
   text-align:center;
-  padding:32px 16px;
+  font-size:13px;
   color:#6b7280;
-  font-size:14px;
 }
 footer a{
-  color:#1e40af;
-  font-weight:500;
+  color:#2563eb;
   text-decoration:none;
+  font-weight:500;
 }
+footer a:hover{text-decoration:underline}
 
+/* MENU MOBILE ÚNICO */
 .menu-mobile{
   position:fixed;
   bottom:0;
   left:0;
   width:100%;
-  background:#ffffff;
+  background:#fff;
   border-top:1px solid #e5e7eb;
   display:flex;
   justify-content:space-around;
   padding:10px 0;
   font-size:12px;
 }
+.menu-mobile a{
+  text-align:center;
+  text-decoration:none;
+  color:#1f2937;
+}
 .menu-mobile span{display:block;font-size:18px}
-@media(min-width:768px){.menu-mobile{display:none}}
+
+@media(min-width:768px){
+  .menu-mobile{display:none}
+}
 </style>
 </head>
 
@@ -130,19 +132,20 @@ footer a{
   <div class="container header-inner">
     <strong>💰 SimulaLucro</strong>
     <nav>
-      <a href="index.html">Início</a>
-      <a href="lucro-airbnb.html">Airbnb</a>
-      <a href="ponto-equilibrio.html">Equilíbrio</a>
-      <a href="margem-lucro.html">Margem</a>
-      <a href="preco-servico.html">Serviço</a>
-      <a href="juros-compostos.html" class="active">Juros</a>
+      <a href="index.html">🏠 Início</a>
+      <a href="lucro-airbnb.html">🛏️ Airbnb</a>
+      <a href="comparativo.html">⚖️ Comparativo</a>
+      <a href="ponto-equilibrio.html">📊 Equilíbrio</a>
+      <a href="margem-lucro.html">💰 Margem</a>
+      <a href="preco-servico.html">🧾 Serviço</a>
+      <a href="juros-compostos.html" class="active">📈 Juros</a>
+      <a href="contato.html">✉️ Contato</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
-  <!-- CALCULADORA -->
   <div class="card">
     <h1>📈 Calculadora de Juros Compostos</h1>
     <p>Descubra quanto seu dinheiro pode render ao investir com juros compostos ao longo do tempo.</p>
@@ -164,20 +167,11 @@ footer a{
     <div id="resultado" class="result"></div>
   </div>
 
-  <!-- SEO + EDUCAÇÃO -->
   <div class="card" style="margin-top:40px">
     <h2>O que são juros compostos?</h2>
     <p>
-      Juros compostos são os juros calculados sobre o valor inicial
-      somado aos juros acumulados ao longo do tempo.
-      Esse efeito faz com que o dinheiro cresça de forma exponencial,
-      sendo um dos principais aliados de quem investe no longo prazo.
-    </p>
-
-    <h3>Por que usar uma calculadora de juros compostos?</h3>
-    <p>
-      Simular juros compostos ajuda a entender o impacto do tempo,
-      da taxa de juros e dos aportes mensais no crescimento do patrimônio.
+      Juros compostos são os juros calculados sobre o valor inicial somado aos juros acumulados.
+      Esse efeito faz com que o dinheiro cresça de forma exponencial ao longo do tempo.
     </p>
 
     <h3>Quem deve usar esta calculadora?</h3>
@@ -194,20 +188,24 @@ footer a{
 <footer>
   <p>
     <a href="index.html">Início</a> ·
-    <a href="sobre.html">Sobre</a> ·
-    <a href="contato.html">Contato</a> ·
-    <a href="privacidade.html">Privacidade</a>
+    <a href="lucro-airbnb.html">Airbnb</a> ·
+    <a href="comparativo.html">Comparativo</a> ·
+    <a href="ponto-equilibrio.html">Equilíbrio</a> ·
+    <a href="margem-lucro.html">Margem</a> ·
+    <a href="preco-servico.html">Serviço</a> ·
+    <a href="juros-compostos.html">Juros</a> ·
+    <a href="contato.html">Contato</a>
   </p>
-  © 2025 SimulaLucro.app
+  © 2025 SimulaLucro
 </footer>
 
-<div class="menu-mobile">
+<nav class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
-  <a href="lucro-airbnb.html"><span>🏡</span>Airbnb</a>
-  <a href="ponto-equilibrio.html"><span>⚖️</span>Equilíbrio</a>
+  <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
+  <a href="comparativo.html"><span>⚖️</span>Comparar</a>
+  <a href="margem-lucro.html"><span>💰</span>Margem</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
-  <a href="preco-servico.html"><span>🧾</span>Serviço</a>
-</div>
+</nav>
 
 <script>
 function calcular(){
@@ -224,7 +222,7 @@ function calcular(){
   var montante = inicial;
   var investido = inicial;
 
-  for(var i = 1; i <= meses; i++){
+  for(var i=1;i<=meses;i++){
     montante = (montante + aporte) * (1 + taxa);
     investido += aporte;
   }
@@ -232,14 +230,34 @@ function calcular(){
   var lucro = montante - investido;
 
   var box = document.getElementById("resultado");
-  box.style.display = "block";
+  box.style.display="block";
   box.innerHTML =
-    "<strong>Resultado da simulação:</strong><br><br>" +
-    "Total investido: <strong>R$ " + investido.toFixed(2) + "</strong><br>" +
-    "Valor final: <strong>R$ " + montante.toFixed(2) + "</strong><br>" +
-    "Rendimento em juros: <strong>R$ " + lucro.toFixed(2) + "</strong>";
+    "<strong>Total investido:</strong> R$ "+investido.toFixed(2)+"<br>" +
+    "<strong>Valor final:</strong> R$ "+montante.toFixed(2)+"<br>" +
+    "<strong>Rendimento em juros:</strong> R$ "+lucro.toFixed(2);
 }
 </script>
 
 </body>
 </html>
+🔒 Regra mantida
+A partir de agora:
+
+✔ Todas as páginas devem repetir exatamente este header / footer / menu-mobile
+
+✔ Nunca mais duplicar links no rodapé
+
+✔ Nunca misturar estilos diferentes de menu
+
+Próximo passo sugerido
+Se quiser, o próximo arquivo ideal para revisar é:
+➡ lucro-airbnb.html (simplificação do cálculo + UX + RPM alto)
+
+Quando quiser, é só mandar.
+
+
+
+
+
+
+

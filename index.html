@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>SimulaLucro | Calculadoras Financeiras Gratuitas</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadoras financeiras gratuitas para calcular lucro, margem de lucro, ponto de equilíbrio, faturamento e rentabilidade.">
+<meta name="description" content="Calculadoras financeiras gratuitas para calcular lucro, margem de lucro, ponto de equilíbrio, preço de serviços e juros compostos.">
 
 <style>
 body{
@@ -12,7 +12,7 @@ body{
   font-family:Arial, sans-serif;
   background:#f3f6fb;
   color:#1f2937;
-  padding-bottom:80px;
+  padding-bottom:90px;
 }
 header{
   position:sticky;
@@ -24,21 +24,25 @@ header{
 .container{
   max-width:1100px;
   margin:auto;
-  padding:24px 16px;
+  padding:20px 16px;
 }
 .header-inner{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
 }
-nav a{
-  margin-left:16px;
+.menu-desktop a{
+  margin-left:12px;
+  padding:6px 10px;
+  border-radius:8px;
   text-decoration:none;
   color:#2563eb;
   font-weight:500;
+  white-space:nowrap;
 }
-nav a:hover{
-  text-decoration:underline;
+.menu-desktop a:hover{
+  background:#eef2ff;
 }
 .hero{
   padding:40px 0 24px;
@@ -119,11 +123,13 @@ footer a:hover{
 <header>
   <div class="container header-inner">
     <strong>💰 SimulaLucro</strong>
-    <nav>
-      <a href="index.html">Início</a>
-      <a href="lucro-airbnb.html">Calculadoras</a>
-      <a href="sobre.html">Sobre</a>
-      <a href="contato.html">Contato</a>
+    <nav class="menu-desktop">
+      <a href="index.html">🏠 Início</a>
+      <a href="lucro-airbnb.html">🛏️ Airbnb</a>
+      <a href="ponto-equilibrio.html">⚖️ Equilíbrio</a>
+      <a href="margem-lucro.html">💹 Margem</a>
+      <a href="preco-servico.html">🧾 Preço</a>
+      <a href="juros-compostos.html">📈 Juros</a>
     </nav>
   </div>
 </header>
@@ -145,19 +151,19 @@ footer a:hover{
   <section class="grid">
 
     <div class="card">
-      <h3>🏡 Lucro Airbnb</h3>
+      <h3>🛏️ Lucro Airbnb</h3>
       <p>Simule o lucro mensal de um imóvel no Airbnb considerando ocupação, taxas e custos.</p>
       <a href="lucro-airbnb.html">Calcular agora →</a>
     </div>
 
     <div class="card">
-      <h3>📊 Ponto de Equilíbrio</h3>
+      <h3>⚖️ Ponto de Equilíbrio</h3>
       <p>Descubra quanto precisa faturar para cobrir seus custos e não ter prejuízo.</p>
       <a href="ponto-equilibrio.html">Calcular agora →</a>
     </div>
 
     <div class="card">
-      <h3>💰 Margem de Lucro</h3>
+      <h3>💹 Margem de Lucro</h3>
       <p>Calcule a margem de lucro real de produtos ou serviços.</p>
       <a href="margem-lucro.html">Calcular agora →</a>
     </div>
@@ -168,53 +174,23 @@ footer a:hover{
       <a href="preco-servico.html">Calcular agora →</a>
     </div>
 
+    <div class="card">
+      <h3>📈 Juros Compostos</h3>
+      <p>Simule investimentos e veja como o dinheiro cresce com juros compostos ao longo do tempo.</p>
+      <a href="juros-compostos.html">Calcular agora →</a>
+    </div>
+
   </section>
 
-  <!-- BLOCO INSTITUCIONAL / SEO -->
+  <!-- BLOCO SEO -->
   <section class="card" style="margin-top:40px">
-
     <h2>O que é o SimulaLucro?</h2>
-
     <p>
-      O <strong>SimulaLucro</strong> é um projeto independente
-      que disponibiliza calculadoras financeiras online
-      para facilitar o entendimento de indicadores importantes
-      como lucro, margem, ponto de equilíbrio e faturamento.
+      O <strong>SimulaLucro</strong> é um projeto independente que disponibiliza
+      calculadoras financeiras online para facilitar o entendimento
+      de indicadores importantes como lucro, margem, ponto de equilíbrio
+      e crescimento financeiro.
     </p>
-
-    <p>
-      Através de simulações simples e rápidas,
-      qualquer pessoa pode testar cenários financeiros
-      antes de tomar decisões, evitando erros comuns
-      relacionados a preços, custos e rentabilidade.
-    </p>
-
-    <h3>Para quem o SimulaLucro é indicado?</h3>
-
-    <ul>
-      <li>Empreendedores e pequenos empresários</li>
-      <li>Prestadores de serviço e freelancers</li>
-      <li>Anfitriões de Airbnb e aluguel por temporada</li>
-      <li>Pessoas que desejam organizar melhor suas finanças</li>
-      <li>Investidores iniciantes</li>
-    </ul>
-
-    <h3>Por que usar nossas calculadoras financeiras?</h3>
-
-    <p>
-      Todas as ferramentas do SimulaLucro foram desenvolvidas
-      com foco em clareza, precisão e facilidade de uso.
-      Não exigimos cadastro, login ou fornecimento de dados pessoais.
-      Os valores inseridos são utilizados apenas para realizar
-      os cálculos no momento da simulação.
-    </p>
-
-    <p>
-      O SimulaLucro não realiza consultoria financeira individual.
-      As informações disponibilizadas possuem caráter educativo
-      e não substituem a análise de um profissional qualificado.
-    </p>
-
   </section>
 
 </main>
@@ -231,9 +207,9 @@ footer a:hover{
 
 <div class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
-  <a href="lucro-airbnb.html"><span>🏡</span>Airbnb</a>
-  <a href="ponto-equilibrio.html"><span>📊</span>Equilíbrio</a>
-  <a href="margem-lucro.html"><span>💰</span>Margem</a>
+  <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
+  <a href="ponto-equilibrio.html"><span>⚖️</span>Equilíbrio</a>
+  <a href="juros-compostos.html"><span>📈</span>Juros</a>
 </div>
 
 </body>

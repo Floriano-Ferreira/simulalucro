@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <title>SimulaLucro | Calculadoras Financeiras Gratuitas</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadoras financeiras gratuitas para calcular lucro,margem de lucro, ponto de equilíbrio, preços, juros compostos e comparações financeiras.">
+<meta name="description" content="Calculadoras financeiras gratuitas para calcular lucro, margem de lucro, ponto de equilíbrio, preços, investimentos e comparativos Airbnb.">
 
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#f3f6fb;
   color:#1f2937;
-  padding-bottom:90px;
+  padding-bottom:80px;
 }
 
-/* HEADER */
-header{
+/* ===== HEADER DESKTOP ===== */
+.header-desktop{
   position:sticky;
   top:0;
   background:#ffffff;
@@ -26,7 +26,7 @@ header{
 .container{
   max-width:1100px;
   margin:auto;
-  padding:20px 16px;
+  padding:24px 16px;
 }
 .header-inner{
   display:flex;
@@ -34,18 +34,22 @@ header{
   align-items:center;
 }
 nav a{
-  margin-left:14px;
+  margin-left:16px;
   text-decoration:none;
   color:#2563eb;
   font-weight:500;
 }
-nav a:hover{ text-decoration:underline }
 nav a.active{
   font-weight:700;
   color:#1d4ed8;
 }
 
-/* HERO */
+/* Esconde header no mobile */
+@media(max-width:767px){
+  .header-desktop{display:none}
+}
+
+/* ===== HERO ===== */
 .hero{
   padding:40px 0 24px;
 }
@@ -58,7 +62,7 @@ nav a.active{
   max-width:760px;
 }
 
-/* GRID */
+/* ===== CARDS ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -73,16 +77,16 @@ nav a.active{
 }
 .card h3{margin-top:0}
 .card a{
-  text-decoration:none;
   color:#2563eb;
   font-weight:600;
+  text-decoration:none;
 }
 .card a:hover{text-decoration:underline}
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer{
   text-align:center;
-  padding:40px 16px 120px;
+  padding:32px 16px;
   color:#6b7280;
   font-size:14px;
 }
@@ -93,7 +97,7 @@ footer a{
 }
 footer a:hover{text-decoration:underline}
 
-/* MENU MOBILE */
+/* ===== MENU MOBILE ===== */
 .menu-mobile{
   position:fixed;
   bottom:0;
@@ -107,10 +111,17 @@ footer a:hover{text-decoration:underline}
   font-size:12px;
   z-index:999;
 }
+.menu-mobile a{
+  text-align:center;
+  text-decoration:none;
+  color:#1f2937;
+}
 .menu-mobile span{
   display:block;
   font-size:18px;
 }
+
+/* Esconde menu mobile no desktop */
 @media(min-width:768px){
   .menu-mobile{display:none}
 }
@@ -119,91 +130,96 @@ footer a:hover{text-decoration:underline}
 
 <body>
 
-<header>
+<!-- ===== HEADER DESKTOP ===== -->
+<header class="header-desktop">
   <div class="container header-inner">
     <strong>💰 SimulaLucro</strong>
     <nav>
-      <a href="index.html" class="active">Início</a>
-      <a href="lucro-airbnb.html">Airbnb</a>
-      <a href="comparativo-airbnb-aluguel.html">Comparativo</a>
-      <a href="ponto-equilibrio.html">Equilíbrio</a>
-      <a href="margem-lucro.html">Margem</a>
-      <a href="preco-servico.html">Serviço</a>
-      <a href="juros-compostos.html">Juros</a>
+      <a href="index.html" class="active">🏠 Início</a>
+      <a href="lucro-airbnb.html">🛏️ Airbnb</a>
+      <a href="comparativo.html">⚖️ Comparativo</a>
+      <a href="ponto-equilibrio.html">📊 Equilíbrio</a>
+      <a href="margem-lucro.html">💰 Margem</a>
+      <a href="preco-servico.html">🧾 Serviço</a>
+      <a href="juros-compostos.html">📈 Juros</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
-<section class="hero">
-  <h1>Calculadoras Financeiras Gratuitas</h1>
-  <p>
-    O <strong>SimulaLucro</strong> é uma plataforma gratuita de simuladores
-    financeiros para ajudar você a tomar decisões mais inteligentes
-    sobre preços, investimentos, lucro e rentabilidade.
-  </p>
-</section>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Calculadoras Financeiras Gratuitas</h1>
+    <p>
+      O <strong>SimulaLucro</strong> é uma plataforma gratuita de simuladores financeiros
+      para ajudar você a tomar decisões mais inteligentes sobre preços,
+      investimentos, lucro e rentabilidade.
+    </p>
+  </section>
 
-<section class="grid">
+  <!-- CARDS -->
+  <section class="grid">
 
-  <div class="card">
-    <h3>🛏️ Lucro Airbnb</h3>
-    <p>Calcule o lucro real do Airbnb considerando diária, reservas, taxas e custos.</p>
-    <a href="lucro-airbnb.html">Calcular agora →</a>
-  </div>
+    <div class="card">
+      <h3>🛏️ Lucro Airbnb</h3>
+      <p>Calcule o lucro real do Airbnb considerando diária, reservas, taxas e custos.</p>
+      <a href="lucro-airbnb.html">Calcular agora →</a>
+    </div>
 
-  <div class="card">
-    <h3>⚖️ Airbnb vs Aluguel</h3>
-    <p>Compare Airbnb com aluguel tradicional e descubra o que rende mais.</p>
-    <a href="comparativo-airbnb-aluguel.html">Comparar agora →</a>
-  </div>
+    <div class="card">
+      <h3>⚖️ Comparativo Airbnb x Aluguel</h3>
+      <p>Compare se vale mais a pena Airbnb ou aluguel tradicional.</p>
+      <a href="comparativo.html">Comparar agora →</a>
+    </div>
 
-  <div class="card">
-    <h3>📊 Ponto de Equilíbrio</h3>
-    <p>Descubra quanto precisa faturar para não ter prejuízo.</p>
-    <a href="ponto-equilibrio.html">Calcular agora →</a>
-  </div>
+    <div class="card">
+      <h3>📊 Ponto de Equilíbrio</h3>
+      <p>Descubra quanto precisa faturar para não ter prejuízo.</p>
+      <a href="ponto-equilibrio.html">Calcular agora →</a>
+    </div>
 
-  <div class="card">
-    <h3>💰 Margem de Lucro</h3>
-    <p>Calcule a margem real de lucro de produtos e serviços.</p>
-    <a href="margem-lucro.html">Calcular agora →</a>
-  </div>
+    <div class="card">
+      <h3>💰 Margem de Lucro</h3>
+      <p>Calcule a margem real dos seus produtos ou serviços.</p>
+      <a href="margem-lucro.html">Calcular agora →</a>
+    </div>
 
-  <div class="card">
-    <h3>🧾 Preço de Serviço</h3>
-    <p>Descubra quanto cobrar por hora ou projeto de forma profissional.</p>
-    <a href="preco-servico.html">Calcular agora →</a>
-  </div>
+    <div class="card">
+      <h3>🧾 Preço de Serviço</h3>
+      <p>Descubra quanto cobrar pelo seu serviço de forma profissional.</p>
+      <a href="preco-servico.html">Calcular agora →</a>
+    </div>
 
-  <div class="card">
-    <h3>📈 Juros Compostos</h3>
-    <p>Simule investimentos e veja o poder dos juros no longo prazo.</p>
-    <a href="juros-compostos.html">Calcular agora →</a>
-  </div>
+    <div class="card">
+      <h3>📈 Juros Compostos</h3>
+      <p>Simule o crescimento de investimentos ao longo do tempo.</p>
+      <a href="juros-compostos.html">Calcular agora →</a>
+    </div>
 
-</section>
+  </section>
 
-<section class="card" style="margin-top:40px">
-  <h2>Por que usar o SimulaLucro?</h2>
-  <p>
-    Todas as calculadoras foram desenvolvidas para serem simples,
-    rápidas e práticas, sem cadastro e sem coleta de dados pessoais.
-  </p>
-  <p>
-    As simulações ajudam você a evitar prejuízos,
-    melhorar preços e tomar decisões financeiras mais seguras.
-  </p>
-</section>
+  <!-- BLOCO INSTITUCIONAL -->
+  <section class="card" style="margin-top:40px">
+    <h2>Por que usar o SimulaLucro?</h2>
+    <p>
+      Todas as calculadoras foram desenvolvidas para serem simples,
+      rápidas e práticas, sem cadastro e sem coleta de dados pessoais.
+    </p>
+    <p>
+      As simulações ajudam você a evitar prejuízos,
+      melhorar preços e tomar decisões financeiras mais seguras.
+    </p>
+  </section>
 
 </main>
 
+<!-- FOOTER COMPLETO -->
 <footer>
   <p>
     <a href="index.html">Início</a> ·
     <a href="lucro-airbnb.html">Lucro Airbnb</a> ·
-    <a href="comparativo-airbnb-aluguel.html">Comparativo</a> ·
+    <a href="comparativo.html">Comparativo</a> ·
     <a href="ponto-equilibrio.html">Ponto de Equilíbrio</a> ·
     <a href="margem-lucro.html">Margem</a> ·
     <a href="preco-servico.html">Serviço</a> ·
@@ -215,13 +231,14 @@ footer a:hover{text-decoration:underline}
   © 2025 SimulaLucro
 </footer>
 
-<div class="menu-mobile">
+<!-- MENU MOBILE ÚNICO -->
+<nav class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
-  <a href="comparativo-airbnb-aluguel.html"><span>⚖️</span>Comparar</a>
+  <a href="comparativo.html"><span>⚖️</span>Comparar</a>
   <a href="margem-lucro.html"><span>💰</span>Margem</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
-</div>
+</nav>
 
 </body>
 </html>

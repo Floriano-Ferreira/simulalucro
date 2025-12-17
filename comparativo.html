@@ -8,8 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Compare Airbnb vs aluguel tradicional e descubra qual gera mais lucro mensal e anual para seu imóvel. Simulador gratuito.">
 <link rel="canonical" href="https://simulalucro.com.br/comparativo.html">
-
-<!-- SEO BÁSICO -->
 <meta name="robots" content="index, follow">
 
 <style>
@@ -17,18 +15,18 @@
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial,sans-serif;
+  font-family:Arial, sans-serif;
   background:#f3f6fb;
   color:#1f2937;
   padding-bottom:90px;
 }
-a{text-decoration:none;color:#2563eb}
+a{color:#2563eb;text-decoration:none}
 
 /* ===== HEADER ===== */
 .header{
   position:sticky;
   top:0;
-  background:#fff;
+  background:#ffffff;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
   z-index:1000;
 }
@@ -44,6 +42,8 @@ a{text-decoration:none;color:#2563eb}
   font-weight:700;
   color:#111827;
 }
+
+/* ===== MENU ===== */
 .menu-btn{
   display:none;
   font-size:22px;
@@ -52,11 +52,10 @@ a{text-decoration:none;color:#2563eb}
   cursor:pointer;
 }
 
-/* ===== MENU ===== */
 .menu{
   max-width:1100px;
   margin:auto;
-  padding:0 16px 10px;
+  padding:0 16px 12px;
   display:flex;
   gap:14px;
   flex-wrap:wrap;
@@ -70,8 +69,10 @@ a{text-decoration:none;color:#2563eb}
   .menu{
     display:none;
     flex-direction:column;
-    gap:10px;
-    padding-bottom:16px;
+    gap:12px;
+    padding:12px 16px;
+    border-top:1px solid #e5e7eb;
+    background:#fff;
   }
   .menu.open{display:flex}
 }
@@ -80,13 +81,13 @@ a{text-decoration:none;color:#2563eb}
 .container{
   max-width:1100px;
   margin:auto;
-  padding:20px 16px;
+  padding:24px 16px;
 }
 
 /* ===== CARD ===== */
 .card{
-  background:#fff;
-  padding:22px;
+  background:#ffffff;
+  padding:24px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
@@ -143,17 +144,6 @@ button:hover{background:#1d4ed8}
   font-weight:700;
 }
 
-/* ===== BLOCO AD (SEGURO) ===== */
-.ad-box{
-  margin:32px 0;
-  padding:20px;
-  background:#ffffff;
-  border:1px dashed #e5e7eb;
-  text-align:center;
-  font-size:14px;
-  color:#6b7280;
-}
-
 /* ===== FOOTER ===== */
 .footer{
   background:#ffffff;
@@ -163,7 +153,7 @@ button:hover{background:#1d4ed8}
   font-size:13px;
   color:#6b7280;
 }
-.footer a{color:#2563eb;margin:0 6px}
+.footer a{margin:0 6px}
 
 /* ===== MENU MOBILE FIXO ===== */
 .menu-mobile{
@@ -171,7 +161,7 @@ button:hover{background:#1d4ed8}
   bottom:0;
   left:0;
   width:100%;
-  background:#fff;
+  background:#ffffff;
   border-top:1px solid #e5e7eb;
   display:flex;
   justify-content:space-around;
@@ -194,11 +184,10 @@ button:hover{background:#1d4ed8}
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <button class="menu-btn" onclick="toggleMenu()" aria-label="Abrir menu">☰</button>
   </div>
 
   <nav id="menu" class="menu">
@@ -215,72 +204,42 @@ button:hover{background:#1d4ed8}
 
 <main class="container">
 
-<!-- BLOCO AD SUPERIOR -->
-<div class="ad-box">
-  Espaço reservado para anúncio (AdSense – topo)
-</div>
+<!-- AdSense: inserir aqui após aprovação (topo) -->
 
 <div class="card">
-<h1>⚖️ Airbnb vs Aluguel Tradicional</h1>
-<p>Compare qual modelo gera mais lucro mensal e anual para seu imóvel.</p>
+  <h1>⚖️ Airbnb vs Aluguel Tradicional</h1>
+  <p>Compare qual modelo gera mais lucro mensal e anual para seu imóvel.</p>
 
-<div class="grid">
+  <div class="grid">
 
-<div>
-<h3>🛏️ Airbnb</h3>
-<label>Valor da diária (R$)</label>
-<input id="diaria" placeholder="Ex: 350">
+    <div>
+      <h3>🛏️ Airbnb</h3>
+      <label>Valor da diária (R$)</label><input id="diaria">
+      <label>Dias reservados no mês</label><input id="dias">
+      <label>Taxa Airbnb (%)</label><input id="taxaAirbnb">
+      <label>Limpeza por reserva (R$)</label><input id="limpeza">
+      <label>Número de reservas</label><input id="reservas">
+      <label>Condomínio mensal (R$)</label><input id="condominioAirbnb">
+      <label>IPTU mensal (R$)</label><input id="iptuAirbnb">
+      <label>Manutenção mensal (R$)</label><input id="manutencaoAirbnb">
+    </div>
 
-<label>Dias reservados no mês</label>
-<input id="dias" placeholder="Ex: 18">
+    <div>
+      <h3>🏠 Aluguel Tradicional</h3>
+      <label>Aluguel mensal (R$)</label><input id="aluguel">
+      <label>Taxa imobiliária (%)</label><input id="taxaImobiliaria">
+      <label>Condomínio mensal (R$)</label><input id="condominioAluguel">
+      <label>IPTU mensal (R$)</label><input id="iptuAluguel">
+      <label>Manutenção mensal (R$)</label><input id="manutencaoAluguel">
+    </div>
 
-<label>Taxa Airbnb (%)</label>
-<input id="taxaAirbnb" placeholder="Ex: 15">
+  </div>
 
-<label>Limpeza por reserva (R$)</label>
-<input id="limpeza" placeholder="Ex: 150">
-
-<label>Número de reservas</label>
-<input id="reservas" placeholder="Ex: 8">
-
-<label>Condomínio mensal (R$)</label>
-<input id="condominioAirbnb" placeholder="Ex: 400">
-
-<label>IPTU mensal (R$)</label>
-<input id="iptuAirbnb" placeholder="Ex: 120">
-
-<label>Manutenção mensal (R$)</label>
-<input id="manutencaoAirbnb" placeholder="Ex: 200">
+  <button onclick="calcular()">Comparar rentabilidade</button>
+  <div id="resultado" class="result"></div>
 </div>
 
-<div>
-<h3>🏠 Aluguel Tradicional</h3>
-<label>Aluguel mensal (R$)</label>
-<input id="aluguel" placeholder="Ex: 2200">
-
-<label>Taxa imobiliária (%)</label>
-<input id="taxaImobiliaria" placeholder="Ex: 10">
-
-<label>Condomínio mensal (R$)</label>
-<input id="condominioAluguel" placeholder="Ex: 400">
-
-<label>IPTU mensal (R$)</label>
-<input id="iptuAluguel" placeholder="Ex: 120">
-
-<label>Manutenção mensal (R$)</label>
-<input id="manutencaoAluguel" placeholder="Ex: 150">
-</div>
-
-</div>
-
-<button onclick="calcular()">Comparar rentabilidade</button>
-<div id="resultado" class="result"></div>
-</div>
-
-<!-- BLOCO AD INFERIOR -->
-<div class="ad-box">
-  Espaço reservado para anúncio (AdSense – conteúdo)
-</div>
+<!-- AdSense: inserir aqui após aprovação (meio/conteúdo) -->
 
 </main>
 
@@ -317,11 +276,12 @@ function calcular(){
 
   resultado.style.display="block";
   resultado.innerHTML=`
-  🛏️ <strong>Lucro Airbnb:</strong> R$ ${lucroA.toFixed(2)}<br>
-  🏠 <strong>Lucro Aluguel:</strong> R$ ${lucroL.toFixed(2)}<hr>
-  <strong>Diferença mensal:</strong> R$ ${(lucroA-lucroL).toFixed(2)}<br>
-  <strong>Diferença anual:</strong> R$ ${((lucroA-lucroL)*12).toFixed(2)}<br>
-  <div class="win">🏆 ${lucroA>lucroL?"Airbnb":"Aluguel Tradicional"}</div>`;
+    🛏️ <strong>Lucro Airbnb:</strong> R$ ${lucroA.toFixed(2)}<br>
+    🏠 <strong>Lucro Aluguel:</strong> R$ ${lucroL.toFixed(2)}<hr>
+    <strong>Diferença mensal:</strong> R$ ${(lucroA-lucroL).toFixed(2)}<br>
+    <strong>Diferença anual:</strong> R$ ${((lucroA-lucroL)*12).toFixed(2)}<br>
+    <div class="win">🏆 ${lucroA>lucroL?"Airbnb":"Aluguel Tradicional"}</div>
+  `;
 }
 </script>
 

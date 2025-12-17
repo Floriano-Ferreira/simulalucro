@@ -2,59 +2,86 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+
 <title>Calculadora de Preço de Serviço | SimulaLucro</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule quanto cobrar pelo seu serviço considerando custos, horas trabalhadas e margem de lucro ideal. Calculadora gratuita.">
+<meta name="description" content="Calcule quanto cobrar pelo seu serviço considerando custos, horas vendáveis e margem de lucro ideal. Calculadora gratuita.">
+<link rel="canonical" href="https://simulalucro.com.br/preco-servico.html">
+<meta name="robots" content="index, follow">
 
 <style>
+/* ===== RESET ===== */
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial,sans-serif;
+  font-family:Arial, sans-serif;
   background:#f3f6fb;
   color:#1f2937;
   padding-bottom:90px;
 }
-header{
+a{color:#2563eb;text-decoration:none}
+
+/* ===== HEADER ===== */
+.header{
   position:sticky;
   top:0;
-  background:#fff;
+  background:#ffffff;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
   z-index:1000;
 }
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:24px 16px;
-}
 .header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
 }
-nav a{
-  margin-left:14px;
-  text-decoration:none;
-  color:#2563eb;
+.logo{
+  font-weight:700;
+  color:#111827;
+}
+
+/* ===== MENU TOPO (SEMPRE VISÍVEL) ===== */
+.menu{
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  padding-top:10px;
+}
+.menu a{
+  font-size:14px;
   font-weight:500;
 }
-nav a.active{
+.menu a.active{
   font-weight:700;
-  color:#1d4ed8;
+  text-decoration:underline;
 }
-nav a:hover{text-decoration:underline}
 
+/* ===== CONTAINER ===== */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
+
+/* ===== CARD ===== */
 .card{
-  background:#fff;
+  background:#ffffff;
   padding:24px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
-h1,h2{margin-top:0}
+.card h1,
+.card h2{margin-top:0}
 
+/* ===== FORM ===== */
 label{
-  font-weight:600;
   font-size:14px;
+  font-weight:600;
 }
 input{
   width:100%;
@@ -78,36 +105,36 @@ button{
 }
 button:hover{background:#1d4ed8}
 
+/* ===== RESULT ===== */
 .result{
+  display:none;
   margin-top:24px;
   padding:20px;
-  border-radius:12px;
   background:#ecfeff;
-  display:none;
+  border-radius:12px;
 }
 
-footer{
-  background:#fff;
+/* ===== FOOTER ===== */
+.footer{
+  background:#ffffff;
   border-top:1px solid #e5e7eb;
   padding:24px 16px;
   text-align:center;
   font-size:13px;
   color:#6b7280;
 }
-footer a{
-  color:#2563eb;
-  text-decoration:none;
+.footer a{
+  margin:0 6px;
   font-weight:500;
 }
-footer a:hover{text-decoration:underline}
 
-/* MENU MOBILE ÚNICO */
+/* ===== MENU MOBILE FIXO ===== */
 .menu-mobile{
   position:fixed;
   bottom:0;
   left:0;
   width:100%;
-  background:#fff;
+  background:#ffffff;
   border-top:1px solid #e5e7eb;
   display:flex;
   justify-content:space-around;
@@ -116,11 +143,12 @@ footer a:hover{text-decoration:underline}
 }
 .menu-mobile a{
   text-align:center;
-  text-decoration:none;
   color:#1f2937;
 }
-.menu-mobile span{display:block;font-size:18px}
-
+.menu-mobile span{
+  display:block;
+  font-size:18px;
+}
 @media(min-width:768px){
   .menu-mobile{display:none}
 }
@@ -129,19 +157,19 @@ footer a:hover{text-decoration:underline}
 
 <body>
 
-<header>
-  <div class="container header-inner">
-    <strong>💰 SimulaLucro</strong>
-    <nav>
-      <a href="index.html">🏠 Início</a>
-      <a href="lucro-airbnb.html">🛏️ Airbnb</a>
-      <a href="comparativo.html">⚖️ Comparativo</a>
-      <a href="ponto-equilibrio.html">📊 Equilíbrio</a>
-      <a href="margem-lucro.html">💰 Margem</a>
-      <a href="preco-servico.html" class="active">🧾 Serviço</a>
-      <a href="juros-compostos.html">📈 Juros</a>
-      <a href="contato.html">✉️ Contato</a>
-      <a href="politica-privacidade.html">Privacidade</a>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">💰 SimulaLucro</a>
+
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="lucro-airbnb.html">Airbnb</a>
+      <a href="comparativo.html">Comparativo</a>
+      <a href="ponto-equilibrio.html">Equilíbrio</a>
+      <a href="margem-lucro.html">Margem</a>
+      <a href="preco-servico.html" class="active">Serviço</a>
+      <a href="juros-compostos.html">Juros</a>
+      <a href="contato.html">Contato</a>
     </nav>
   </div>
 </header>
@@ -157,7 +185,7 @@ footer a:hover{text-decoration:underline}
     <input type="number" id="custos" placeholder="Ex: 3000">
 
     <label>Horas vendáveis no mês</label>
-    <input type="number" id="horasVendaveis" placeholder="Ex: 120">
+    <input type="number" id="horas" placeholder="Ex: 120">
 
     <label>Margem de lucro desejada (%)</label>
     <input type="number" id="margem" placeholder="Ex: 30">
@@ -167,22 +195,22 @@ footer a:hover{text-decoration:underline}
     <div id="resultado" class="result"></div>
   </div>
 
-  <!-- SEO -->
+  <!-- CONTEÚDO SEO -->
   <div class="card" style="margin-top:40px">
     <h2>Como calcular o preço de um serviço?</h2>
     <p>
       Para precificar corretamente um serviço,
-      é fundamental considerar todos os custos mensais,
+      é essencial considerar todos os custos,
       as horas realmente vendáveis
       e a margem de lucro desejada.
     </p>
 
-    <h2>Por que usar esta calculadora?</h2>
+    <h2>Por que calcular o preço corretamente?</h2>
     <p>
-      Muitos profissionais cobram menos do que deveriam
+      Muitos profissionais trabalham muito e lucram pouco
       por não conhecerem seus números.
-      Esta ferramenta ajuda a evitar prejuízos
-      e profissionalizar a precificação.
+      Uma precificação correta garante sustentabilidade
+      e crescimento financeiro.
     </p>
 
     <h2>Para quem esta calculadora é indicada?</h2>
@@ -194,18 +222,12 @@ footer a:hover{text-decoration:underline}
 
 </main>
 
-<footer>
-  <p>
-    <a href="index.html">Início</a> ·
-    <a href="lucro-airbnb.html">Airbnb</a> ·
-    <a href="comparativo.html">Comparativo</a> ·
-    <a href="ponto-equilibrio.html">Equilíbrio</a> ·
-    <a href="margem-lucro.html">Margem</a> ·
-    <a href="preco-servico.html">Serviço</a> ·
-    <a href="juros-compostos.html">Juros</a> ·
-    <a href="contato.html">Contato</a>
-  </p>
-  © 2025 SimulaLucro
+<footer class="footer">
+  <a href="index.html">Início</a> ·
+  <a href="sobre.html">Sobre</a> ·
+  <a href="contato.html">Contato</a> ·
+  <a href="politica-privacidade.html">Privacidade</a>
+  <p>© 2025 SimulaLucro</p>
 </footer>
 
 <nav class="menu-mobile">
@@ -218,24 +240,25 @@ footer a:hover{text-decoration:underline}
 
 <script>
 function calcular(){
-  var custos = Number(document.getElementById("custos").value);
-  var horasVendaveis = Number(document.getElementById("horasVendaveis").value);
-  var margem = Number(document.getElementById("margem").value) / 100;
+  const custos = Number(document.getElementById("custos").value);
+  const horas = Number(document.getElementById("horas").value);
+  const margem = Number(document.getElementById("margem").value) / 100;
 
-  if(custos <= 0 || horasVendaveis <= 0 || margem < 0 || margem >= 1){
-    alert("Preencha os valores corretamente.");
+  if(custos <= 0 || horas <= 0 || margem < 0 || margem >= 1){
+    alert("Informe valores válidos.");
     return;
   }
 
-  var custoHora = custos / horasVendaveis;
-  var precoHora = custoHora / (1 - margem);
+  const custoHora = custos / horas;
+  const precoHora = custoHora / (1 - margem);
 
-  var box = document.getElementById("resultado");
-  box.style.display="block";
-  box.innerHTML =
-    "<strong>Resultado:</strong><br><br>" +
-    "Custo por hora: <strong>R$ " + custoHora.toFixed(2) + "</strong><br>" +
-    "Preço ideal por hora: <strong>R$ " + precoHora.toFixed(2) + "</strong>";
+  const box = document.getElementById("resultado");
+  box.style.display = "block";
+  box.innerHTML = `
+    <strong>Resultado:</strong><br><br>
+    Custo por hora: <strong>R$ ${custoHora.toFixed(2)}</strong><br>
+    Preço ideal por hora: <strong>R$ ${precoHora.toFixed(2)}</strong>
+  `;
 }
 </script>
 

@@ -2,40 +2,145 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+
 <title>Sobre o SimulaLucro | Calculadoras Financeiras Gratuitas</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Conheça o SimulaLucro, uma plataforma de calculadoras financeiras gratuitas para empreendedores, investidores e profissionais.">
+<link rel="canonical" href="https://simulalucro.com.br/sobre.html">
+<meta name="robots" content="index, follow">
 
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#1f2937;padding-bottom:80px}
-header{position:sticky;top:0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08);z-index:1000}
-.container{max-width:900px;margin:auto;padding:24px 16px}
-.header-inner{display:flex;justify-content:space-between;align-items:center}
-nav a{margin-left:16px;text-decoration:none;color:#2563eb;font-weight:500}
-nav a:hover{text-decoration:underline}
-.card{background:#fff;padding:24px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
-footer{text-align:center;padding:32px 16px;color:#6b7280;font-size:14px}
-footer a{color:#2563eb;text-decoration:none}
-.menu-mobile{position:fixed;bottom:0;left:0;width:100%;background:#fff;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;padding:10px 0;font-size:12px}
-.menu-mobile span{display:block;font-size:18px}
-@media(min-width:768px){.menu-mobile{display:none}}
+/* ===== RESET ===== */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f6fb;
+  color:#1f2937;
+  padding-bottom:90px;
+}
+a{color:#2563eb;text-decoration:none}
+
+/* ===== HEADER ===== */
+.header{
+  position:sticky;
+  top:0;
+  background:#ffffff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  z-index:1000;
+}
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.logo{
+  font-weight:700;
+  color:#111827;
+}
+
+/* ===== MENU TOPO ===== */
+.menu{
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  padding-top:10px;
+}
+.menu a{
+  font-size:14px;
+  font-weight:500;
+}
+.menu a.active{
+  font-weight:700;
+  text-decoration:underline;
+}
+
+/* ===== CONTAINER ===== */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
+
+/* ===== CARD ===== */
+.card{
+  background:#ffffff;
+  padding:28px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.card h1,
+.card h2{margin-top:0}
+
+/* ===== FOOTER ===== */
+.footer{
+  background:#ffffff;
+  border-top:1px solid #e5e7eb;
+  padding:24px 16px;
+  text-align:center;
+  font-size:13px;
+  color:#6b7280;
+}
+.footer a{
+  margin:0 6px;
+  font-weight:500;
+}
+
+/* ===== MENU MOBILE ===== */
+.menu-mobile{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#ffffff;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  font-size:12px;
+}
+.menu-mobile a{
+  text-align:center;
+  color:#1f2937;
+}
+.menu-mobile span{
+  display:block;
+  font-size:18px;
+}
+@media(min-width:768px){
+  .menu-mobile{display:none}
+}
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="container header-inner">
-    <strong>💰 SimulaLucro</strong>
-    <nav>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">💰 SimulaLucro</a>
+
+    <nav class="menu">
       <a href="index.html">Início</a>
-      <a href="index.html">Calculadoras</a>
+      <a href="lucro-airbnb.html">Airbnb</a>
+      <a href="comparativo.html">Comparativo</a>
+      <a href="ponto-equilibrio.html">Equilíbrio</a>
+      <a href="margem-lucro.html">Margem</a>
+      <a href="preco-servico.html">Serviço</a>
+      <a href="juros-compostos.html">Juros</a>
       <a href="contato.html">Contato</a>
+      <a href="sobre.html" class="active">Sobre</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
+
   <div class="card">
     <h1>Sobre o SimulaLucro</h1>
 
@@ -48,44 +153,48 @@ footer a{color:#2563eb;text-decoration:none}
 
     <p>
       Nosso objetivo é simplificar conceitos financeiros como
-      lucro, margem, ponto de equilíbrio e rentabilidade,
-      transformando números complexos em informações claras e práticas.
+      <strong>lucro, margem de lucro, ponto de equilíbrio,
+      rentabilidade e precificação</strong>,
+      transformando números complexos em informações claras,
+      práticas e acessíveis.
     </p>
 
     <p>
       Todas as ferramentas do SimulaLucro foram desenvolvidas
-      com foco em usabilidade, precisão e acessibilidade,
-      permitindo simulações rápidas sem necessidade de cadastro.
+      com foco em usabilidade, precisão e rapidez,
+      permitindo simulações diretas,
+      sem necessidade de cadastro ou coleta de dados pessoais.
     </p>
 
     <p>
       O SimulaLucro é um projeto independente,
-      criado com finalidade educativa e informativa,
-      sem vínculo com instituições financeiras.
+      com finalidade educativa e informativa,
+      sem vínculo com bancos, corretoras
+      ou instituições financeiras.
     </p>
 
     <p>
-      O site não realiza consultoria financeira individual.
-      As informações fornecidas não substituem a análise
-      de um profissional qualificado.
+      As informações disponibilizadas no site
+      não constituem consultoria financeira individual
+      e não substituem a análise de um profissional qualificado.
     </p>
   </div>
+
 </main>
 
-<footer>
-  <p>
-    <a href="index.html">Início</a> ·
-    <a href="sobre.html">Sobre</a> ·
-    <a href="contato.html">Contato</a> ·
-   <a href="politica-privacidade.html">Privacidade</a>
-  </p>
-  © 2025 SimulaLucro.app
+<footer class="footer">
+  <a href="index.html">Início</a> ·
+  <a href="sobre.html">Sobre</a> ·
+  <a href="contato.html">Contato</a> ·
+  <a href="politica-privacidade.html">Privacidade</a>
+  <p>© 2025 SimulaLucro</p>
 </footer>
 
-<div class="menu-mobile">
+<nav class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
-  <a href="lucro-airbnb.html"><span>📊</span>Calcular</a>
-</div>
+  <a href="lucro-airbnb.html"><span>🛏️</span>Calcular</a>
+  <a href="juros-compostos.html"><span>📈</span>Juros</a>
+</nav>
 
 </body>
 </html>

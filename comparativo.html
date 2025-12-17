@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+
 <title>Airbnb vs Aluguel Tradicional | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,24 +10,18 @@
 <link rel="canonical" href="https://simulalucro.com.br/comparativo.html">
 
 <style>
-/* BASE */
+/* ===== RESET ===== */
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#f3f6fb;
   color:#1f2937;
   padding-bottom:90px;
 }
+a{text-decoration:none;color:#2563eb}
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:24px 16px;
-}
-
-h1,h2,h3{margin-top:0}
-
-/* HEADER */
+/* ===== HEADER ===== */
 .header{
   position:sticky;
   top:0;
@@ -35,36 +30,59 @@ h1,h2,h3{margin-top:0}
   z-index:1000;
 }
 .header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:16px;
 }
 .logo{
   font-weight:700;
-  text-decoration:none;
-  color:#111;
+  color:#111827;
 }
 .menu-btn{
+  display:none;
+  font-size:22px;
   background:none;
   border:none;
-  font-size:22px;
-  display:none;
+  cursor:pointer;
 }
+
+/* ===== MENU DESKTOP ===== */
 .menu{
+  max-width:1100px;
+  margin:auto;
+  padding:0 16px 10px;
   display:flex;
   gap:14px;
-  padding:0 16px 16px;
-  flex-wrap:wrap;
 }
 .menu a{
-  text-decoration:none;
-  color:#2563eb;
   font-weight:500;
 }
-.menu a.active{font-weight:700}
+.menu a.active{
+  font-weight:700;
+}
 
-/* CARD */
+/* ===== MOBILE MENU ===== */
+@media(max-width:768px){
+  .menu-btn{display:block}
+  .menu{
+    display:none;
+    flex-direction:column;
+    padding-bottom:16px;
+  }
+  .menu.open{display:flex}
+}
+
+/* ===== CONTAINER ===== */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:24px 16px;
+}
+
+/* ===== CARD ===== */
 .card{
   background:#fff;
   padding:24px;
@@ -72,40 +90,31 @@ h1,h2,h3{margin-top:0}
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
-/* GRID */
+/* ===== GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:24px;
-  margin-top:24px;
+}
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
 }
 
-.form-column h3{
-  margin-bottom:12px;
-}
-
-/* FORM */
-.form-group{
-  margin-bottom:14px;
-}
+/* ===== FORM ===== */
 label{
   font-size:14px;
   font-weight:600;
-  display:block;
-  margin-bottom:6px;
 }
 input{
   width:100%;
   padding:12px;
+  margin-top:6px;
+  margin-bottom:14px;
   border-radius:10px;
   border:1px solid #d1d5db;
-  font-size:15px;
 }
-
-/* BOTÃO */
 button{
   width:100%;
-  margin-top:20px;
   padding:16px;
   border:none;
   border-radius:12px;
@@ -117,7 +126,7 @@ button{
 }
 button:hover{background:#1d4ed8}
 
-/* RESULTADO */
+/* ===== RESULT ===== */
 .result{
   display:none;
   margin-top:24px;
@@ -126,23 +135,21 @@ button:hover{background:#1d4ed8}
   border-radius:12px;
 }
 .win{
-  margin-top:10px;
+  margin-top:12px;
+  font-size:18px;
   font-weight:700;
 }
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 .footer{
   text-align:center;
   padding:32px 16px;
   font-size:13px;
   color:#6b7280;
 }
-.footer a{
-  color:#2563eb;
-  text-decoration:none;
-}
+.footer a{color:#2563eb}
 
-/* MENU MOBILE */
+/* ===== MENU MOBILE FIXO ===== */
 .menu-mobile{
   position:fixed;
   bottom:0;
@@ -156,32 +163,28 @@ button:hover{background:#1d4ed8}
   font-size:12px;
 }
 .menu-mobile a{
-  text-decoration:none;
-  color:#1f2937;
   text-align:center;
+  color:#1f2937;
 }
 .menu-mobile span{
   display:block;
   font-size:18px;
 }
-
-/* RESPONSIVO */
-@media(max-width:900px){
-  .grid{grid-template-columns:1fr}
-  .menu{display:none}
-  .menu-btn{display:block}
-  .menu.open{display:flex}
+@media(min-width:769px){
+  .menu-mobile{display:none}
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
   </div>
+
   <nav id="menu" class="menu">
     <a href="index.html">Início</a>
     <a href="lucro-airbnb.html">Airbnb</a>
@@ -190,44 +193,67 @@ button:hover{background:#1d4ed8}
     <a href="margem-lucro.html">Margem</a>
     <a href="preco-servico.html">Serviço</a>
     <a href="juros-compostos.html">Juros</a>
+    <a href="contato.html">Contato</a>
   </nav>
 </header>
 
 <main class="container">
 
 <div class="card">
-  <h1>⚖️ Airbnb vs Aluguel Tradicional</h1>
-  <p>Compare qual modelo gera mais lucro mensal e anual para seu imóvel.</p>
+<h1>⚖️ Airbnb vs Aluguel Tradicional</h1>
+<p>Compare qual modelo gera mais lucro mensal e anual para seu imóvel.</p>
 
-  <div class="grid">
+<div class="grid">
 
-    <div class="form-column">
-      <h3>🛏️ Airbnb</h3>
+<div>
+<h3>🛏️ Airbnb</h3>
+<label>Valor da diária (R$)</label>
+<input id="diaria" placeholder="Ex: 350">
 
-      <div class="form-group"><label>Valor da diária (R$)</label><input id="diaria"></div>
-      <div class="form-group"><label>Dias reservados</label><input id="dias"></div>
-      <div class="form-group"><label>Taxa Airbnb (%)</label><input id="taxaAirbnb"></div>
-      <div class="form-group"><label>Limpeza por reserva (R$)</label><input id="limpeza"></div>
-      <div class="form-group"><label>Número de reservas</label><input id="reservas"></div>
-      <div class="form-group"><label>Condomínio (R$)</label><input id="condominioAirbnb"></div>
-      <div class="form-group"><label>IPTU (R$)</label><input id="iptuAirbnb"></div>
-      <div class="form-group"><label>Manutenção (R$)</label><input id="manutencaoAirbnb"></div>
-    </div>
+<label>Dias reservados no mês</label>
+<input id="dias" placeholder="Ex: 18">
 
-    <div class="form-column">
-      <h3>🏠 Aluguel Tradicional</h3>
+<label>Taxa Airbnb (%)</label>
+<input id="taxaAirbnb" placeholder="Ex: 15">
 
-      <div class="form-group"><label>Aluguel mensal (R$)</label><input id="aluguel"></div>
-      <div class="form-group"><label>Taxa imobiliária (%)</label><input id="taxaImobiliaria"></div>
-      <div class="form-group"><label>Condomínio (R$)</label><input id="condominioAluguel"></div>
-      <div class="form-group"><label>IPTU (R$)</label><input id="iptuAluguel"></div>
-      <div class="form-group"><label>Manutenção (R$)</label><input id="manutencaoAluguel"></div>
-    </div>
+<label>Limpeza por reserva (R$)</label>
+<input id="limpeza" placeholder="Ex: 150">
 
-  </div>
+<label>Número de reservas</label>
+<input id="reservas" placeholder="Ex: 8">
 
-  <button onclick="calcular()">Comparar rentabilidade</button>
-  <div id="resultado" class="result"></div>
+<label>Condomínio mensal (R$)</label>
+<input id="condominioAirbnb" placeholder="Ex: 400">
+
+<label>IPTU mensal (R$)</label>
+<input id="iptuAirbnb" placeholder="Ex: 120">
+
+<label>Manutenção mensal (R$)</label>
+<input id="manutencaoAirbnb" placeholder="Ex: 200">
+</div>
+
+<div>
+<h3>🏠 Aluguel Tradicional</h3>
+<label>Aluguel mensal (R$)</label>
+<input id="aluguel" placeholder="Ex: 2200">
+
+<label>Taxa imobiliária (%)</label>
+<input id="taxaImobiliaria" placeholder="Ex: 10">
+
+<label>Condomínio mensal (R$)</label>
+<input id="condominioAluguel" placeholder="Ex: 400">
+
+<label>IPTU mensal (R$)</label>
+<input id="iptuAluguel" placeholder="Ex: 120">
+
+<label>Manutenção mensal (R$)</label>
+<input id="manutencaoAluguel" placeholder="Ex: 150">
+</div>
+
+</div>
+
+<button onclick="calcular()">Comparar rentabilidade</button>
+<div id="resultado" class="result"></div>
 </div>
 
 </main>
@@ -249,19 +275,28 @@ button:hover{background:#1d4ed8}
 
 <script>
 function n(v){return Number(v)||0}
+function toggleMenu(){
+  document.getElementById("menu").classList.toggle("open");
+}
 function calcular(){
-  const fa=n(diaria.value)*n(dias.value);
-  const la=fa*(n(taxaAirbnb.value)/100);
-  const ca=la+n(limpeza.value)*n(reservas.value)+n(condominioAirbnb.value)+n(iptuAirbnb.value)+n(manutencaoAirbnb.value);
-  const lair=fa-ca;
+  const fat = n(diaria.value)*n(dias.value);
+  const taxaA = fat*(n(taxaAirbnb.value)/100);
+  const limpezaT = n(limpeza.value)*n(reservas.value);
+  const custoA = taxaA+limpezaT+n(condominioAirbnb.value)+n(iptuAirbnb.value)+n(manutencaoAirbnb.value);
+  const lucroA = fat-custoA;
 
-  const ci=n(aluguel.value)*(n(taxaImobiliaria.value)/100)+n(condominioAluguel.value)+n(iptuAluguel.value)+n(manutencaoAluguel.value);
-  const lalg=n(aluguel.value)-ci;
+  const taxaI = n(aluguel.value)*(n(taxaImobiliaria.value)/100);
+  const custoL = taxaI+n(condominioAluguel.value)+n(iptuAluguel.value)+n(manutencaoAluguel.value);
+  const lucroL = n(aluguel.value)-custoL;
 
   resultado.style.display="block";
-  resultado.innerHTML=`🛏️ Airbnb: R$ ${lair.toFixed(2)}<br>🏠 Aluguel: R$ ${lalg.toFixed(2)}<hr><strong>Vantajoso:</strong> ${lair>lalg?"Airbnb":"Aluguel"}`;
+  resultado.innerHTML=`
+  🛏️ Lucro Airbnb: R$ ${lucroA.toFixed(2)}<br>
+  🏠 Lucro Aluguel: R$ ${lucroL.toFixed(2)}<hr>
+  Diferença mensal: R$ ${(lucroA-lucroL).toFixed(2)}<br>
+  Diferença anual: R$ ${((lucroA-lucroL)*12).toFixed(2)}<br>
+  <div class="win">🏆 ${lucroA>lucroL?"Airbnb":"Aluguel Tradicional"}</div>`;
 }
-function toggleMenu(){menu.classList.toggle("open")}
 </script>
 
 </body>

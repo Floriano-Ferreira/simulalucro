@@ -2,71 +2,95 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+
 <title>Política de Privacidade | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Política de Privacidade do SimulaLucro. Saiba como coletamos, usamos e protegemos as informações dos usuários.">
-
-<!-- SEO básico -->
 <link rel="canonical" href="https://simulalucro.com.br/politica-privacidade.html">
+<meta name="robots" content="index, follow">
 
 <style>
+/* ===== RESET ===== */
+*{box-sizing:border-box}
 body{
   margin:0;
   font-family:Arial, sans-serif;
   background:#f3f6fb;
   color:#1f2937;
-  padding-bottom:80px;
+  padding-bottom:90px;
 }
-header{
+a{color:#2563eb;text-decoration:none}
+
+/* ===== HEADER ===== */
+.header{
   position:sticky;
   top:0;
   background:#ffffff;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
   z-index:1000;
 }
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.logo{
+  font-weight:600;
+  font-size:15px;
+  color:#111827;
+}
+
+/* ===== MENU TOPO ===== */
+.menu{
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  padding-top:10px;
+}
+.menu a{
+  font-size:14px;
+  font-weight:500;
+}
+.menu a.active{
+  color:#1d4ed8;
+  text-decoration:underline;
+}
+
+/* ===== CONTAINER ===== */
 .container{
   max-width:900px;
   margin:auto;
   padding:24px 16px;
 }
-.header-inner{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-nav a{
-  margin-left:16px;
-  text-decoration:none;
-  color:#2563eb;
-  font-weight:500;
-}
-nav a:hover{text-decoration:underline}
 
+/* ===== CARD ===== */
 .card{
   background:#ffffff;
   padding:24px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
+.card h1{margin-top:0}
+.card h2{margin-top:24px}
 
-h1,h2{
-  margin-top:0;
-}
-
-footer{
+/* ===== FOOTER ===== */
+.footer{
+  background:#ffffff;
+  border-top:1px solid #e5e7eb;
   text-align:center;
-  padding:32px 16px;
+  padding:28px 16px;
+  font-size:13px;
   color:#6b7280;
-  font-size:14px;
 }
-footer a{
-  color:#2563eb;
-  text-decoration:none;
-  font-weight:500;
-}
-footer a:hover{text-decoration:underline}
+.footer a{margin:0 6px}
 
+/* ===== MENU MOBILE ===== */
 .menu-mobile{
   position:fixed;
   bottom:0;
@@ -79,9 +103,15 @@ footer a:hover{text-decoration:underline}
   padding:10px 0;
   font-size:12px;
 }
-.menu-mobile span{display:block;font-size:18px}
-
-@media(min-width:768px){
+.menu-mobile a{
+  text-align:center;
+  color:#1f2937;
+}
+.menu-mobile span{
+  display:block;
+  font-size:18px;
+}
+@media(min-width:769px){
   .menu-mobile{display:none}
 }
 </style>
@@ -89,58 +119,65 @@ footer a:hover{text-decoration:underline}
 
 <body>
 
-<header>
-  <div class="container header-inner">
-    <strong>💰 SimulaLucro</strong>
-    <nav>
+<!-- HEADER PADRÃO -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">💰 SimulaLucro</a>
+
+    <nav class="menu">
       <a href="index.html">Início</a>
-      <a href="sobre.html">Sobre</a>
+      <a href="lucro-airbnb.html">Airbnb</a>
+      <a href="comparativo.html">Comparativo</a>
+      <a href="ponto-equilibrio.html">Equilíbrio</a>
+      <a href="margem-lucro.html">Margem</a>
+      <a href="preco-servico.html">Serviço</a>
+      <a href="juros-compostos.html">Juros</a>
       <a href="contato.html">Contato</a>
+      <a href="politica-privacidade.html" class="active">Privacidade</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
-  <div class="card">
 
+  <div class="card">
     <h1>Política de Privacidade</h1>
 
     <p>
-      A sua privacidade é importante para nós.  
-      Esta Política de Privacidade descreve como o <strong>SimulaLucro</strong>
-      coleta, usa e protege as informações dos usuários.
+      A sua privacidade é importante para nós.
+      Esta Política de Privacidade descreve como o
+      <strong>SimulaLucro</strong> coleta, utiliza e protege
+      as informações dos usuários.
     </p>
 
     <h2>1. Informações coletadas</h2>
     <p>
       O SimulaLucro não exige cadastro para uso das calculadoras.
-      As informações inseridas nas ferramentas permanecem no próprio navegador do usuário
-      e não são armazenadas em nossos servidores.
+      As informações inseridas permanecem no próprio navegador
+      do usuário e não são armazenadas em nossos servidores.
     </p>
 
-    <p>
-      Podemos coletar informações de forma automática, como:
-    </p>
+    <p>Podemos coletar informações automáticas como:</p>
     <ul>
       <li>Tipo de navegador</li>
       <li>Páginas acessadas</li>
-      <li>Tempo de permanência no site</li>
-      <li>Endereço IP (de forma anonimizada)</li>
+      <li>Tempo de permanência</li>
+      <li>Endereço IP anonimizado</li>
     </ul>
 
     <h2>2. Uso de cookies</h2>
     <p>
-      O SimulaLucro utiliza cookies para melhorar a experiência do usuário
-      e para exibição de anúncios através de parceiros como o Google AdSense.
+      Utilizamos cookies para melhorar a experiência do usuário
+      e para exibição de anúncios por parceiros como o Google AdSense.
     </p>
 
     <p>
-      O Google pode usar cookies, como o cookie DART,
-      para exibir anúncios com base nas visitas do usuário a este e a outros sites.
+      O Google pode utilizar cookies (ex: DART) para exibir anúncios
+      com base nas visitas do usuário a este e a outros sites.
     </p>
 
     <p>
-      Você pode desativar a personalização de anúncios acessando:
+      Você pode gerenciar anúncios personalizados em:
       <br>
       <a href="https://adssettings.google.com" target="_blank" rel="noopener">
         https://adssettings.google.com
@@ -149,58 +186,54 @@ footer a:hover{text-decoration:underline}
 
     <h2>3. Publicidade</h2>
     <p>
-      Utilizamos serviços de publicidade de terceiros,
-      incluindo o Google AdSense, que podem coletar dados
-      para exibição de anúncios relevantes.
+      O SimulaLucro pode exibir anúncios de terceiros,
+      que podem coletar dados conforme suas próprias políticas.
     </p>
 
     <h2>4. Links externos</h2>
     <p>
-      O SimulaLucro pode conter links para sites externos.
       Não nos responsabilizamos pelas práticas de privacidade
-      desses sites.
+      de sites externos linkados em nosso conteúdo.
     </p>
 
-    <h2>5. Segurança das informações</h2>
+    <h2>5. Segurança</h2>
     <p>
-      Adotamos medidas técnicas e organizacionais
-      para proteger as informações dos usuários.
-      No entanto, nenhum método de transmissão na internet
-      é 100% seguro.
+      Adotamos medidas razoáveis de segurança,
+      porém nenhum sistema é 100% seguro.
     </p>
 
     <h2>6. Consentimento</h2>
     <p>
-      Ao utilizar o SimulaLucro, você concorda com esta Política de Privacidade.
+      Ao utilizar o site, você concorda com esta Política de Privacidade.
     </p>
 
-    <h2>7. Alterações nesta política</h2>
+    <h2>7. Atualizações</h2>
     <p>
-      Esta política pode ser atualizada periodicamente,
-      sem aviso prévio.
+      Esta política pode ser atualizada sem aviso prévio.
     </p>
 
     <p>
       Última atualização: <strong>2025</strong>
     </p>
-
   </div>
+
 </main>
 
-<footer>
-  <p>
-    <a href="index.html">Início</a> ·
-    <a href="sobre.html">Sobre</a> ·
-    <a href="contato.html">Contato</a> ·
-    <a href="politica-privacidade.html">Privacidade</a>
-  </p>
-  © 2025 SimulaLucro
+<footer class="footer">
+  <a href="index.html">Início</a> ·
+  <a href="sobre.html">Sobre</a> ·
+  <a href="contato.html">Contato</a> ·
+  <a href="politica-privacidade.html">Privacidade</a>
+  <p>© 2025 SimulaLucro</p>
 </footer>
 
-<div class="menu-mobile">
+<nav class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
-</div>
+  <a href="comparativo.html"><span>⚖️</span>Comparar</a>
+  <a href="margem-lucro.html"><span>💰</span>Margem</a>
+  <a href="juros-compostos.html"><span>📈</span>Juros</a>
+</nav>
 
 </body>
 </html>

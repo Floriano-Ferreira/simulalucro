@@ -2,11 +2,17 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+
 <title>Contato | SimulaLucro</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Entre em contato com o SimulaLucro para dúvidas, sugestões, correções ou parcerias.">
+<link rel="canonical" href="https://simulalucro.com.br/contato.html">
+<meta name="robots" content="index, follow">
 
 <style>
+/* ===== RESET ===== */
+*{box-sizing:border-box}
 body{
   margin:0;
   font-family:Arial, sans-serif;
@@ -14,164 +20,49 @@ body{
   color:#1f2937;
   padding-bottom:90px;
 }
-header{
+a{color:#2563eb;text-decoration:none}
+
+/* ===== HEADER ===== */
+.header{
   position:sticky;
   top:0;
   background:#ffffff;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
   z-index:1000;
 }
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:24px 16px;
-}
 .header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
 }
-nav a{
-  margin-left:14px;
-  text-decoration:none;
-  color:#2563eb;
-  font-weight:500;
+.logo{
+  font-weight:700;
+  color:#111827;
 }
-nav a:hover{text-decoration:underline}
 
-.card{
-  background:#ffffff;
-  padding:24px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-h1{margin-top:0}
-ul{padding-left:20px}
-
-footer{
-  text-align:center;
-  padding:32px 16px;
-  color:#6b7280;
-  font-size:14px;
-}
-footer a{
-  color:#2563eb;
-  text-decoration:none;
-  font-weight:500;
-}
-footer a:hover{text-decoration:underline}
-
-/* MENU MOBILE ÚNICO */
-.menu-mobile{
-  position:fixed;
-  bottom:0;
-  left:0;
+/* ===== MENU TOPO ===== */
+.menu{
   width:100%;
-  background:#ffffff;
-  border-top:1px solid #e5e7eb;
   display:flex;
-  justify-content:space-around;
-  padding:10px 0;
-  font-size:12px;
-  z-index:999;
+  flex-wrap:wrap;
+  gap:14px;
+  padding-top:10px;
 }
-.menu-mobile a{
-  text-align:center;
-  text-decoration:none;
-  color:#1f2937;
+.menu a{
+  font-size:14px;
+  font-weight:500;
 }
-.menu-mobile span{
-  display:block;
-  font-size:18px;
+.menu a.active{
+  font-weight:700;
+  text-decoration:underline;
 }
-@media(min-width:768px){
-  .menu-mobile{display:none}
-}
-</style>
-</head>
 
-<body>
-
-<header>
-  <div class="container header-inner">
-    <strong>💰 SimulaLucro</strong>
-    <nav>
-      <a href="index.html">🏠 Início</a>
-      <a href="lucro-airbnb.html">🛏️ Airbnb</a>
-      <a href="comparativo.html">⚖️ Comparativo</a>
-      <a href="ponto-equilibrio.html">📊 Equilíbrio</a>
-      <a href="margem-lucro.html">💰 Margem</a>
-      <a href="preco-servico.html">🧾 Serviço</a>
-      <a href="juros-compostos.html">📈 Juros</a>
-      <a href="contato.html">✉️ Contato</a>
-    </nav>
-  </div>
-</header>
-
-<main class="container">
-  <div class="card">
-    <h1>✉️ Contato</h1>
-
-    <p>
-      O <strong>SimulaLucro</strong> é um projeto independente voltado à
-      educação financeira por meio de calculadoras gratuitas.
-      Esta página existe para garantir transparência e um canal
-      direto de comunicação com os usuários do site.
-    </p>
-
-    <p>Você pode entrar em contato conosco para:</p>
-
-    <ul>
-      <li>Dúvidas sobre o funcionamento das calculadoras</li>
-      <li>Sugestões de melhorias</li>
-      <li>Correções de conteúdo</li>
-      <li>Parcerias e oportunidades comerciais</li>
-    </ul>
-
-    <p>
-      📧 <strong>contato@simulalucro.app</strong>
-    </p>
-
-    <p>
-      As mensagens são respondidas, sempre que possível,
-      em até <strong>48 horas úteis</strong>.
-    </p>
-
-    <p>
-      O SimulaLucro não oferece consultoria financeira individual.
-      Todo o conteúdo do site possui caráter educativo e informativo.
-    </p>
-
-    <p>
-      As mensagens enviadas seguem a
-      <a href="politica-privacidade.html">Política de Privacidade</a>.
-    </p>
-  </div>
-</main>
-
-<footer>
-  <p>
-    <a href="index.html">Início</a> ·
-    <a href="lucro-airbnb.html">Lucro Airbnb</a> ·
-    <a href="comparativo.html">Comparativo</a> ·
-    <a href="ponto-equilibrio.html">Ponto de Equilíbrio</a> ·
-    <a href="margem-lucro.html">Margem</a> ·
-    <a href="preco-servico.html">Serviço</a> ·
-    <a href="juros-compostos.html">Juros</a> ·
-    <a href="contato.html">Contato</a> ·
-    <a href="politica-privacidade.html">Privacidade</a>
-  </p>
-  © 2025 SimulaLucro
-</footer>
-
-<!-- MENU MOBILE ÚNICO -->
-<nav class="menu-mobile">
-  <a href="index.html"><span>🏠</span>Início</a>
-  <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
-  <a href="comparativo.html"><span>⚖️</span>Comparar</a>
-  <a href="margem-lucro.html"><span>💰</span>Margem</a>
-  <a href="juros-compostos.html"><span>📈</span>Juros</a>
-</nav>
-
-</body>
-</html>
+/* ===== CONTAINER ===== */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:

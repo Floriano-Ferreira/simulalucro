@@ -37,44 +37,28 @@ a{color:#2563eb;text-decoration:none}
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
 }
 .logo{
   font-weight:700;
   color:#111827;
 }
 
-/* ===== MENU ===== */
-.menu-btn{
-  display:none;
-  font-size:22px;
-  background:none;
-  border:none;
-  cursor:pointer;
-}
-
+/* ===== MENU TOPO (SEMPRE VISÍVEL) ===== */
 .menu{
-  max-width:1100px;
-  margin:auto;
-  padding:0 16px 12px;
+  width:100%;
   display:flex;
-  gap:14px;
   flex-wrap:wrap;
+  gap:14px;
+  padding-top:10px;
 }
-.menu a{font-weight:500}
-.menu a.active{font-weight:700}
-
-/* ===== MOBILE MENU ===== */
-@media(max-width:768px){
-  .menu-btn{display:block}
-  .menu{
-    display:none;
-    flex-direction:column;
-    gap:12px;
-    padding:12px 16px;
-    border-top:1px solid #e5e7eb;
-    background:#fff;
-  }
-  .menu.open{display:flex}
+.menu a{
+  font-weight:500;
+  font-size:14px;
+}
+.menu a.active{
+  font-weight:700;
+  text-decoration:underline;
 }
 
 /* ===== CONTAINER ===== */
@@ -126,7 +110,6 @@ button{
   font-size:16px;
   font-weight:700;
   cursor:pointer;
-  margin-top:10px;
 }
 button:hover{background:#1d4ed8}
 
@@ -187,24 +170,23 @@ button:hover{background:#1d4ed8}
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
-    <button class="menu-btn" onclick="toggleMenu()" aria-label="Abrir menu">☰</button>
-  </div>
 
-  <nav id="menu" class="menu">
-    <a href="index.html">Início</a>
-    <a href="lucro-airbnb.html">Airbnb</a>
-    <a href="comparativo.html" class="active">Comparativo</a>
-    <a href="ponto-equilibrio.html">Equilíbrio</a>
-    <a href="margem-lucro.html">Margem</a>
-    <a href="preco-servico.html">Serviço</a>
-    <a href="juros-compostos.html">Juros</a>
-    <a href="contato.html">Contato</a>
-  </nav>
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="lucro-airbnb.html">Airbnb</a>
+      <a href="comparativo.html" class="active">Comparativo</a>
+      <a href="ponto-equilibrio.html">Equilíbrio</a>
+      <a href="margem-lucro.html">Margem</a>
+      <a href="preco-servico.html">Serviço</a>
+      <a href="juros-compostos.html">Juros</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+  </div>
 </header>
 
 <main class="container">
 
-<!-- AdSense: inserir aqui após aprovação (topo) -->
+<!-- AdSense será inserido AQUI após aprovação -->
 
 <div class="card">
   <h1>⚖️ Airbnb vs Aluguel Tradicional</h1>
@@ -239,8 +221,6 @@ button:hover{background:#1d4ed8}
   <div id="resultado" class="result"></div>
 </div>
 
-<!-- AdSense: inserir aqui após aprovação (meio/conteúdo) -->
-
 </main>
 
 <footer class="footer">
@@ -260,9 +240,6 @@ button:hover{background:#1d4ed8}
 
 <script>
 function n(v){return Number(v)||0}
-function toggleMenu(){
-  document.getElementById("menu").classList.toggle("open");
-}
 function calcular(){
   const fat=n(diaria.value)*n(dias.value);
   const taxaA=fat*(n(taxaAirbnb.value)/100);

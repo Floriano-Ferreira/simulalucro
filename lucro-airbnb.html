@@ -40,7 +40,8 @@ a{color:#2563eb;text-decoration:none}
   flex-wrap:wrap;
 }
 .logo{
-  font-weight:700;
+  font-weight:600;        /* PADRÃO */
+  font-size:15px;         /* PADRÃO */
   color:#111827;
 }
 
@@ -52,9 +53,12 @@ a{color:#2563eb;text-decoration:none}
   flex-wrap:wrap;
   gap:14px;
 }
-.menu a{font-weight:500}
+.menu a{
+  font-size:14px;         /* PADRÃO */
+  font-weight:500;
+}
 .menu a.active{
-  font-weight:700;
+  color:#1d4ed8;
   text-decoration:underline;
 }
 
@@ -170,7 +174,6 @@ button:hover{background:#1d4ed8}
 
 <main class="container">
 
-  <!-- CALCULADORA -->
   <div class="card">
     <h1>🛏️ Calculadora de Lucro Airbnb</h1>
     <p>Simule de forma simples o lucro mensal real do seu imóvel no Airbnb.</p>
@@ -199,7 +202,6 @@ button:hover{background:#1d4ed8}
   <p>© 2025 SimulaLucro</p>
 </footer>
 
-<!-- MENU MOBILE PADRÃO -->
 <nav class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>

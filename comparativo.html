@@ -9,6 +9,9 @@
 <meta name="description" content="Compare Airbnb vs aluguel tradicional e descubra qual gera mais lucro mensal e anual para seu imóvel. Simulador gratuito.">
 <link rel="canonical" href="https://simulalucro.com.br/comparativo.html">
 
+<!-- SEO BÁSICO -->
+<meta name="robots" content="index, follow">
+
 <style>
 /* ===== RESET ===== */
 *{box-sizing:border-box}
@@ -49,20 +52,17 @@ a{text-decoration:none;color:#2563eb}
   cursor:pointer;
 }
 
-/* ===== MENU DESKTOP ===== */
+/* ===== MENU ===== */
 .menu{
   max-width:1100px;
   margin:auto;
   padding:0 16px 10px;
   display:flex;
   gap:14px;
+  flex-wrap:wrap;
 }
-.menu a{
-  font-weight:500;
-}
-.menu a.active{
-  font-weight:700;
-}
+.menu a{font-weight:500}
+.menu a.active{font-weight:700}
 
 /* ===== MOBILE MENU ===== */
 @media(max-width:768px){
@@ -70,6 +70,7 @@ a{text-decoration:none;color:#2563eb}
   .menu{
     display:none;
     flex-direction:column;
+    gap:10px;
     padding-bottom:16px;
   }
   .menu.open{display:flex}
@@ -79,16 +80,17 @@ a{text-decoration:none;color:#2563eb}
 .container{
   max-width:1100px;
   margin:auto;
-  padding:24px 16px;
+  padding:20px 16px;
 }
 
 /* ===== CARD ===== */
 .card{
   background:#fff;
-  padding:24px;
+  padding:22px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
+.card h1{margin-top:0}
 
 /* ===== GRID ===== */
 .grid{
@@ -123,6 +125,7 @@ button{
   font-size:16px;
   font-weight:700;
   cursor:pointer;
+  margin-top:10px;
 }
 button:hover{background:#1d4ed8}
 
@@ -140,14 +143,27 @@ button:hover{background:#1d4ed8}
   font-weight:700;
 }
 
+/* ===== BLOCO AD (SEGURO) ===== */
+.ad-box{
+  margin:32px 0;
+  padding:20px;
+  background:#ffffff;
+  border:1px dashed #e5e7eb;
+  text-align:center;
+  font-size:14px;
+  color:#6b7280;
+}
+
 /* ===== FOOTER ===== */
 .footer{
+  background:#ffffff;
+  border-top:1px solid #e5e7eb;
   text-align:center;
-  padding:32px 16px;
+  padding:28px 16px;
   font-size:13px;
   color:#6b7280;
 }
-.footer a{color:#2563eb}
+.footer a{color:#2563eb;margin:0 6px}
 
 /* ===== MENU MOBILE FIXO ===== */
 .menu-mobile{
@@ -198,6 +214,11 @@ button:hover{background:#1d4ed8}
 </header>
 
 <main class="container">
+
+<!-- BLOCO AD SUPERIOR -->
+<div class="ad-box">
+  Espaço reservado para anúncio (AdSense – topo)
+</div>
 
 <div class="card">
 <h1>⚖️ Airbnb vs Aluguel Tradicional</h1>
@@ -256,6 +277,11 @@ button:hover{background:#1d4ed8}
 <div id="resultado" class="result"></div>
 </div>
 
+<!-- BLOCO AD INFERIOR -->
+<div class="ad-box">
+  Espaço reservado para anúncio (AdSense – conteúdo)
+</div>
+
 </main>
 
 <footer class="footer">
@@ -279,22 +305,22 @@ function toggleMenu(){
   document.getElementById("menu").classList.toggle("open");
 }
 function calcular(){
-  const fat = n(diaria.value)*n(dias.value);
-  const taxaA = fat*(n(taxaAirbnb.value)/100);
-  const limpezaT = n(limpeza.value)*n(reservas.value);
-  const custoA = taxaA+limpezaT+n(condominioAirbnb.value)+n(iptuAirbnb.value)+n(manutencaoAirbnb.value);
-  const lucroA = fat-custoA;
+  const fat=n(diaria.value)*n(dias.value);
+  const taxaA=fat*(n(taxaAirbnb.value)/100);
+  const limpezaT=n(limpeza.value)*n(reservas.value);
+  const custoA=taxaA+limpezaT+n(condominioAirbnb.value)+n(iptuAirbnb.value)+n(manutencaoAirbnb.value);
+  const lucroA=fat-custoA;
 
-  const taxaI = n(aluguel.value)*(n(taxaImobiliaria.value)/100);
-  const custoL = taxaI+n(condominioAluguel.value)+n(iptuAluguel.value)+n(manutencaoAluguel.value);
-  const lucroL = n(aluguel.value)-custoL;
+  const taxaI=n(aluguel.value)*(n(taxaImobiliaria.value)/100);
+  const custoL=taxaI+n(condominioAluguel.value)+n(iptuAluguel.value)+n(manutencaoAluguel.value);
+  const lucroL=n(aluguel.value)-custoL;
 
   resultado.style.display="block";
   resultado.innerHTML=`
-  🛏️ Lucro Airbnb: R$ ${lucroA.toFixed(2)}<br>
-  🏠 Lucro Aluguel: R$ ${lucroL.toFixed(2)}<hr>
-  Diferença mensal: R$ ${(lucroA-lucroL).toFixed(2)}<br>
-  Diferença anual: R$ ${((lucroA-lucroL)*12).toFixed(2)}<br>
+  🛏️ <strong>Lucro Airbnb:</strong> R$ ${lucroA.toFixed(2)}<br>
+  🏠 <strong>Lucro Aluguel:</strong> R$ ${lucroL.toFixed(2)}<hr>
+  <strong>Diferença mensal:</strong> R$ ${(lucroA-lucroL).toFixed(2)}<br>
+  <strong>Diferença anual:</strong> R$ ${((lucroA-lucroL)*12).toFixed(2)}<br>
   <div class="win">🏆 ${lucroA>lucroL?"Airbnb":"Aluguel Tradicional"}</div>`;
 }
 </script>

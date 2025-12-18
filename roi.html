@@ -2,11 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-
-<title>Calculadora de ROI – Retorno sobre Investimento | SimulaLucro</title>
+<title>Calculadora de ROI | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o ROI (Retorno sobre Investimento) e descubra se um investimento, negócio ou projeto realmente vale a pena. Simulador gratuito.">
+<meta name="description" content="Calcule o ROI (Retorno sobre Investimento) e descubra quanto seu investimento gerou de retorno em relação ao custo. Simulador gratuito.">
 <link rel="canonical" href="https://simulalucro.com.br/roi.html">
 <meta name="robots" content="index, follow">
 
@@ -44,18 +43,15 @@ a{color:#2563eb;text-decoration:none}
   color:#111827;
 }
 
-/* MENU TOPO */
+/* ===== MENU ===== */
 .menu{
   width:100%;
+  margin-top:10px;
   display:flex;
   flex-wrap:wrap;
   gap:14px;
-  padding-top:10px;
 }
-.menu a{
-  font-size:14px;
-  font-weight:500;
-}
+.menu a{font-weight:500}
 .menu a.active{
   font-weight:700;
   text-decoration:underline;
@@ -157,13 +153,11 @@ button:hover{background:#1d4ed8}
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
-
     <nav class="menu">
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
       <a href="comparativo.html">Comparativo</a>
       <a href="roi.html" class="active">ROI</a>
-      <a href="margem-lucro.html">Margem</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="contato.html">Contato</a>
     </nav>
@@ -174,45 +168,39 @@ button:hover{background:#1d4ed8}
 
   <!-- CALCULADORA -->
   <div class="card">
-    <h1>📊 Calculadora de Retorno sobre Investimento (ROI)</h1>
-    <p>Descubra se um investimento, projeto ou negócio realmente compensa.</p>
+    <h1>📊 Calculadora de ROI (Retorno sobre Investimento)</h1>
+    <p>Descubra quanto seu investimento retornou em relação ao valor investido.</p>
 
     <label>Valor investido (R$)</label>
-    <input id="investimento" placeholder="Ex: 10.000">
+    <input id="investimento" placeholder="Ex: 40000">
 
     <label>Retorno total obtido (R$)</label>
-    <input id="retorno" placeholder="Ex: 13.500">
+    <input id="retorno" placeholder="Ex: 100000">
 
     <button onclick="calcular()">Calcular ROI</button>
 
     <div id="resultado" class="result"></div>
-
-    <p style="font-size:12px;color:#6b7280;margin-top:16px">
-      ⚠️ Esta calculadora é apenas uma simulação e não constitui recomendação financeira.
-    </p>
   </div>
 
-  <!-- CONTEÚDO SEO -->
+  <!-- CONTEÚDO EDUCATIVO -->
   <div class="card" style="margin-top:40px">
-    <h2>O que é ROI?</h2>
+    <h2>Interpretação do resultado do ROI</h2>
     <p>
-      ROI (Return on Investment) significa Retorno sobre Investimento.
-      Ele indica, em percentual, quanto você ganhou ou perdeu em relação
-      ao valor investido.
+      Em aplicações financeiras simples, o custo considerado costuma ser o
+      <strong>capital inicialmente investido</strong>.
+      Já em outros tipos de investimento, podem ser incluídos
+      <strong>custos operacionais, taxas ou despesas adicionais</strong>.
     </p>
 
-    <h2>Como interpretar o ROI?</h2>
-    <ul>
-      <li>ROI positivo → investimento lucrativo</li>
-      <li>ROI zero → empate (sem lucro ou prejuízo)</li>
-      <li>ROI negativo → prejuízo</li>
-    </ul>
-
-    <h2>Quando usar o ROI?</h2>
     <p>
-      O ROI é usado para comparar investimentos,
-      analisar projetos, campanhas de marketing,
-      negócios próprios e oportunidades financeiras.
+      O ROI indica quantas vezes o valor investido foi recuperado.
+      Por exemplo, um ROI de <strong>1,5 (150%)</strong> significa que o retorno
+      foi uma vez e meia o valor aplicado.
+    </p>
+
+    <p>
+      Este cálculo tem finalidade <strong>educativa e comparativa</strong>,
+      auxiliando na análise de resultados passados.
     </p>
   </div>
 
@@ -226,36 +214,36 @@ button:hover{background:#1d4ed8}
   <p>© 2025 SimulaLucro</p>
 </footer>
 
-<!-- MENU MOBILE -->
 <nav class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
-  <a href="comparativo.html"><span>⚖️</span>Comparar</a>
   <a href="roi.html"><span>📊</span>ROI</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
 </nav>
 
 <script>
-function n(v){return Number(v)||0}
+function n(v){ return Number(v) || 0 }
 
 function calcular(){
   const investimento = n(document.getElementById("investimento").value);
   const retorno = n(document.getElementById("retorno").value);
 
-  if(investimento <= 0){
-    alert("Informe um valor investido válido.");
+  if(investimento <= 0 || retorno <= 0){
+    alert("Preencha os valores corretamente.");
     return;
   }
 
-  const lucro = retorno - investimento;
-  const roi = (lucro / investimento) * 100;
+  const roi = (retorno - investimento) / investimento;
+  const percentual = roi * 100;
 
   const box = document.getElementById("resultado");
   box.style.display = "block";
   box.innerHTML = `
     <strong>Resultado:</strong><br><br>
-    💰 Lucro / Prejuízo: <strong>R$ ${lucro.toFixed(2)}</strong><br>
-    📈 ROI: <strong>${roi.toFixed(2)}%</strong>
+    Valor investido: <strong>R$ ${investimento.toFixed(2)}</strong><br>
+    Retorno obtido: <strong>R$ ${retorno.toFixed(2)}</strong><hr>
+    <strong>ROI:</strong> ${roi.toFixed(2)}<br>
+    <strong>Retorno percentual:</strong> ${percentual.toFixed(1)}%
   `;
 }
 </script>

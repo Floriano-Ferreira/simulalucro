@@ -5,12 +5,11 @@
 <title>Calculadora de ROI | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o ROI (Retorno sobre Investimento) e descubra quanto seu investimento gerou de retorno em relação ao custo. Simulador gratuito.">
+<meta name="description" content="Calcule o ROI (Retorno sobre Investimento) e descubra quanto você ganhou ou perdeu em relação ao valor investido. Simulador gratuito.">
 <link rel="canonical" href="https://simulalucro.com.br/roi.html">
 <meta name="robots" content="index, follow">
 
 <style>
-/* ===== RESET ===== */
 *{box-sizing:border-box}
 body{
   margin:0;
@@ -21,7 +20,7 @@ body{
 }
 a{color:#2563eb;text-decoration:none}
 
-/* ===== HEADER ===== */
+/* HEADER */
 .header{
   position:sticky;
   top:0;
@@ -38,12 +37,9 @@ a{color:#2563eb;text-decoration:none}
   align-items:center;
   flex-wrap:wrap;
 }
-.logo{
-  font-weight:700;
-  color:#111827;
-}
+.logo{font-weight:700;color:#111827}
 
-/* ===== MENU ===== */
+/* MENU */
 .menu{
   width:100%;
   margin-top:10px;
@@ -52,19 +48,16 @@ a{color:#2563eb;text-decoration:none}
   gap:14px;
 }
 .menu a{font-weight:500}
-.menu a.active{
-  font-weight:700;
-  text-decoration:underline;
-}
+.menu a.active{font-weight:700;text-decoration:underline}
 
-/* ===== CONTAINER ===== */
+/* CONTAINER */
 .container{
   max-width:900px;
   margin:auto;
   padding:24px 16px;
 }
 
-/* ===== CARD ===== */
+/* CARD */
 .card{
   background:#ffffff;
   padding:24px;
@@ -73,11 +66,8 @@ a{color:#2563eb;text-decoration:none}
 }
 .card h1{margin-top:0}
 
-/* ===== FORM ===== */
-label{
-  font-size:14px;
-  font-weight:600;
-}
+/* FORM */
+label{font-size:14px;font-weight:600}
 input{
   width:100%;
   padding:12px;
@@ -99,7 +89,7 @@ button{
 }
 button:hover{background:#1d4ed8}
 
-/* ===== RESULT ===== */
+/* RESULT */
 .result{
   display:none;
   margin-top:24px;
@@ -109,7 +99,7 @@ button:hover{background:#1d4ed8}
   font-size:15px;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 .footer{
   background:#ffffff;
   border-top:1px solid #e5e7eb;
@@ -120,7 +110,7 @@ button:hover{background:#1d4ed8}
 }
 .footer a{margin:0 6px}
 
-/* ===== MENU MOBILE ===== */
+/* MENU MOBILE */
 .menu-mobile{
   position:fixed;
   bottom:0;
@@ -133,23 +123,14 @@ button:hover{background:#1d4ed8}
   padding:10px 0;
   font-size:12px;
 }
-.menu-mobile a{
-  text-align:center;
-  color:#1f2937;
-}
-.menu-mobile span{
-  display:block;
-  font-size:18px;
-}
-@media(min-width:769px){
-  .menu-mobile{display:none}
-}
+.menu-mobile a{text-align:center;color:#1f2937}
+.menu-mobile span{display:block;font-size:18px}
+@media(min-width:769px){.menu-mobile{display:none}}
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
@@ -169,7 +150,7 @@ button:hover{background:#1d4ed8}
   <!-- CALCULADORA -->
   <div class="card">
     <h1>📊 Calculadora de ROI (Retorno sobre Investimento)</h1>
-    <p>Descubra quanto seu investimento retornou em relação ao valor investido.</p>
+    <p>Calcule quanto você ganhou ou perdeu em relação ao valor investido.</p>
 
     <label>Valor investido (R$)</label>
     <input id="investimento" placeholder="Ex: 40000">
@@ -182,24 +163,47 @@ button:hover{background:#1d4ed8}
     <div id="resultado" class="result"></div>
   </div>
 
-  <!-- CONTEÚDO EDUCATIVO -->
+  <!-- CONTEÚDO EDUCATIVO ATUALIZADO -->
   <div class="card" style="margin-top:40px">
-    <h2>Interpretação do resultado do ROI</h2>
+    <h2>O que é ROI?</h2>
     <p>
-      Em aplicações financeiras simples, o custo considerado costuma ser o
+      ROI (<strong>Return on Investment</strong>) significa
+      <strong>Retorno sobre Investimento</strong>.
+      Ele indica, em percentual, quanto você ganhou ou perdeu
+      em relação ao valor investido.
+    </p>
+
+    <p>
+      O ROI é amplamente utilizado para comparar investimentos,
+      analisar projetos, campanhas de marketing,
+      negócios próprios e oportunidades financeiras.
+    </p>
+
+    <h2>Como interpretar o ROI?</h2>
+    <ul>
+      <li><strong>ROI positivo</strong> → investimento lucrativo</li>
+      <li><strong>ROI zero</strong> → empate (sem lucro ou prejuízo)</li>
+      <li><strong>ROI negativo</strong> → prejuízo</li>
+    </ul>
+
+    <p>
+      Por exemplo, um ROI de <strong>1,5 (150%)</strong>
+      significa que o retorno foi uma vez e meia
+      o valor aplicado.
+    </p>
+
+    <p>
+      Em aplicações financeiras simples,
+      o custo considerado costuma ser o
       <strong>capital inicialmente investido</strong>.
-      Já em outros tipos de investimento, podem ser incluídos
-      <strong>custos operacionais, taxas ou despesas adicionais</strong>.
+      Já em outros tipos de investimento,
+      podem ser incluídos custos operacionais,
+      taxas ou despesas adicionais.
     </p>
 
     <p>
-      O ROI indica quantas vezes o valor investido foi recuperado.
-      Por exemplo, um ROI de <strong>1,5 (150%)</strong> significa que o retorno
-      foi uma vez e meia o valor aplicado.
-    </p>
-
-    <p>
-      Este cálculo tem finalidade <strong>educativa e comparativa</strong>,
+      Este cálculo tem finalidade
+      <strong>educativa e comparativa</strong>,
       auxiliando na análise de resultados passados.
     </p>
   </div>

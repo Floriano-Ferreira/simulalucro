@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Contato | SimulaLucro</title>
+<title>Calculadora de ROI – Retorno sobre Investimento | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Entre em contato com o SimulaLucro para dúvidas, sugestões, correções ou parcerias.">
-<link rel="canonical" href="https://simulalucro.com.br/contato.html">
+<meta name="description" content="Calcule o ROI (Retorno sobre Investimento) e descubra se um investimento, negócio ou projeto realmente vale a pena. Simulador gratuito.">
+<link rel="canonical" href="https://simulalucro.com.br/roi.html">
 <meta name="robots" content="index, follow">
 
 <style>
@@ -40,12 +40,11 @@ a{color:#2563eb;text-decoration:none}
   flex-wrap:wrap;
 }
 .logo{
-  font-weight:600;
-  font-size:15px;
+  font-weight:700;
   color:#111827;
 }
 
-/* ===== MENU TOPO ===== */
+/* MENU TOPO */
 .menu{
   width:100%;
   display:flex;
@@ -58,7 +57,7 @@ a{color:#2563eb;text-decoration:none}
   font-weight:500;
 }
 .menu a.active{
-  color:#1d4ed8;
+  font-weight:700;
   text-decoration:underline;
 }
 
@@ -77,6 +76,42 @@ a{color:#2563eb;text-decoration:none}
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 .card h1{margin-top:0}
+
+/* ===== FORM ===== */
+label{
+  font-size:14px;
+  font-weight:600;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  margin-bottom:14px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+}
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:#ffffff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{background:#1d4ed8}
+
+/* ===== RESULT ===== */
+.result{
+  display:none;
+  margin-top:24px;
+  padding:20px;
+  background:#ecfeff;
+  border-radius:12px;
+  font-size:15px;
+}
 
 /* ===== FOOTER ===== */
 .footer{
@@ -118,7 +153,7 @@ a{color:#2563eb;text-decoration:none}
 
 <body>
 
-<!-- HEADER PADRÃO -->
+<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
@@ -127,51 +162,57 @@ a{color:#2563eb;text-decoration:none}
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
       <a href="comparativo.html">Comparativo</a>
-      <a href="ponto-equilibrio.html">Equilíbrio</a>
+      <a href="roi.html" class="active">ROI</a>
       <a href="margem-lucro.html">Margem</a>
-      <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
-      <a href="contato.html" class="active">Contato</a>
+      <a href="contato.html">Contato</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
+  <!-- CALCULADORA -->
   <div class="card">
-    <h1>✉️ Contato</h1>
+    <h1>📊 Calculadora de Retorno sobre Investimento (ROI)</h1>
+    <p>Descubra se um investimento, projeto ou negócio realmente compensa.</p>
 
+    <label>Valor investido (R$)</label>
+    <input id="investimento" placeholder="Ex: 10.000">
+
+    <label>Retorno total obtido (R$)</label>
+    <input id="retorno" placeholder="Ex: 13.500">
+
+    <button onclick="calcular()">Calcular ROI</button>
+
+    <div id="resultado" class="result"></div>
+
+    <p style="font-size:12px;color:#6b7280;margin-top:16px">
+      ⚠️ Esta calculadora é apenas uma simulação e não constitui recomendação financeira.
+    </p>
+  </div>
+
+  <!-- CONTEÚDO SEO -->
+  <div class="card" style="margin-top:40px">
+    <h2>O que é ROI?</h2>
     <p>
-      O <strong>SimulaLucro</strong> é um projeto independente voltado à
-      educação financeira por meio de calculadoras gratuitas.
+      ROI (Return on Investment) significa Retorno sobre Investimento.
+      Ele indica, em percentual, quanto você ganhou ou perdeu em relação
+      ao valor investido.
     </p>
 
-    <p>Você pode entrar em contato para:</p>
-
+    <h2>Como interpretar o ROI?</h2>
     <ul>
-      <li>Dúvidas sobre as calculadoras</li>
-      <li>Sugestões de melhorias</li>
-      <li>Correções de conteúdo</li>
-      <li>Parcerias e oportunidades comerciais</li>
+      <li>ROI positivo → investimento lucrativo</li>
+      <li>ROI zero → empate (sem lucro ou prejuízo)</li>
+      <li>ROI negativo → prejuízo</li>
     </ul>
 
+    <h2>Quando usar o ROI?</h2>
     <p>
-      📧 <strong>contato@simulalucro.app</strong>
-    </p>
-
-    <p>
-      As mensagens são respondidas, sempre que possível,
-      em até <strong>48 horas úteis</strong>.
-    </p>
-
-    <p>
-      O SimulaLucro não oferece consultoria financeira individual.
-      Todo o conteúdo do site possui caráter educativo.
-    </p>
-
-    <p>
-      Ao entrar em contato, você concorda com nossa
-      <a href="politica-privacidade.html">Política de Privacidade</a>.
+      O ROI é usado para comparar investimentos,
+      analisar projetos, campanhas de marketing,
+      negócios próprios e oportunidades financeiras.
     </p>
   </div>
 
@@ -185,13 +226,39 @@ a{color:#2563eb;text-decoration:none}
   <p>© 2025 SimulaLucro</p>
 </footer>
 
+<!-- MENU MOBILE -->
 <nav class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
   <a href="comparativo.html"><span>⚖️</span>Comparar</a>
-  <a href="margem-lucro.html"><span>💰</span>Margem</a>
+  <a href="roi.html"><span>📊</span>ROI</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
 </nav>
+
+<script>
+function n(v){return Number(v)||0}
+
+function calcular(){
+  const investimento = n(document.getElementById("investimento").value);
+  const retorno = n(document.getElementById("retorno").value);
+
+  if(investimento <= 0){
+    alert("Informe um valor investido válido.");
+    return;
+  }
+
+  const lucro = retorno - investimento;
+  const roi = (lucro / investimento) * 100;
+
+  const box = document.getElementById("resultado");
+  box.style.display = "block";
+  box.innerHTML = `
+    <strong>Resultado:</strong><br><br>
+    💰 Lucro / Prejuízo: <strong>R$ ${lucro.toFixed(2)}</strong><br>
+    📈 ROI: <strong>${roi.toFixed(2)}%</strong>
+  `;
+}
+</script>
 
 </body>
 </html>

@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Airbnb vs Aluguel Tradicional | SimulaLucro</title>
+<title>Calculadora de Lucro Airbnb | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Compare Airbnb e aluguel tradicional e descubra qual opção gera mais lucro mensal e anual para seu imóvel. Calculadora gratuita.">
-<link rel="canonical" href="https://simulalucro.com.br/comparativo.html">
+<meta name="description" content="Calcule o lucro real do Airbnb considerando diária, dias reservados, taxas, limpeza e custos fixos mensais. Simulador gratuito.">
+<link rel="canonical" href="https://simulalucro.com.br/lucro-airbnb.html">
 <meta name="robots" content="index, follow">
 
 <style>
@@ -22,7 +22,7 @@ body{
 }
 a{color:#2563eb;text-decoration:none}
 
-/* ===== HEADER PADRÃO ===== */
+/* ===== HEADER ===== */
 .header{
   position:sticky;
   top:0;
@@ -78,16 +78,6 @@ a{color:#2563eb;text-decoration:none}
 }
 .card h1{margin-top:0}
 
-/* ===== GRID ===== */
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-}
-@media(max-width:900px){
-  .grid{grid-template-columns:1fr}
-}
-
 /* ===== FORM ===== */
 label{
   font-size:14px;
@@ -114,7 +104,7 @@ button{
 }
 button:hover{background:#1d4ed8}
 
-/* ===== RESULTADO ===== */
+/* ===== RESULT ===== */
 .result{
   display:none;
   margin-top:24px;
@@ -122,11 +112,6 @@ button:hover{background:#1d4ed8}
   background:#ecfeff;
   border-radius:12px;
   font-size:15px;
-}
-.win{
-  margin-top:12px;
-  font-size:17px;
-  font-weight:700;
 }
 
 /* ===== FOOTER ===== */
@@ -176,8 +161,8 @@ button:hover{background:#1d4ed8}
 
     <nav class="menu">
       <a href="index.html">Início</a>
-      <a href="lucro-airbnb.html">Airbnb</a>
-      <a href="comparativo.html" class="active">Comparativo</a>
+      <a href="lucro-airbnb.html" class="active">Airbnb</a>
+      <a href="comparativo.html">Comparativo</a>
       <a href="ponto-equilibrio.html">Equilíbrio</a>
       <a href="margem-lucro.html">Margem</a>
       <a href="preco-servico.html">Serviço</a>
@@ -189,55 +174,56 @@ button:hover{background:#1d4ed8}
 
 <main class="container">
 
+  <!-- CALCULADORA -->
   <div class="card">
-    <h1>⚖️ Airbnb vs Aluguel Tradicional</h1>
-    <p>Compare qual modelo gera mais lucro mensal e anual para seu imóvel.</p>
+    <h1>🛏️ Calculadora de Lucro Airbnb</h1>
+    <p>Simule o lucro mensal real do seu imóvel no Airbnb de forma simples e prática.</p>
 
-    <div class="grid">
+    <label>Valor da diária (R$)</label>
+    <input id="diaria" placeholder="Ex: 350">
 
-      <div>
-        <h3>🛏️ Airbnb</h3>
+    <label>Dias reservados no mês</label>
+    <input id="dias" placeholder="Ex: 18">
 
-        <label>Valor da diária (R$)</label>
-        <input id="diaria">
+    <label>Taxa do Airbnb (%)</label>
+    <input id="taxa" placeholder="Ex: 15">
 
-        <label>Dias reservados no mês</label>
-        <input id="dias">
+    <label>Custo de limpeza por reserva (R$)</label>
+    <input id="limpeza" placeholder="Ex: 150">
 
-        <label>Taxa Airbnb (%)</label>
-        <input id="taxaAirbnb">
+    <label>Número de reservas no mês</label>
+    <input id="reservas" placeholder="Ex: 6">
 
-        <label>Limpeza por reserva (R$)</label>
-        <input id="limpeza">
+    <label>Custos fixos mensais (R$)</label>
+    <input id="custos" placeholder="Ex: 1800">
 
-        <label>Número de reservas</label>
-        <input id="reservas">
-
-        <label>Custos fixos mensais (R$)</label>
-        <input id="custosAirbnb">
-      </div>
-
-      <div>
-        <h3>🏠 Aluguel Tradicional</h3>
-
-        <label>Aluguel mensal (R$)</label>
-        <input id="aluguel">
-
-        <label>Taxa imobiliária (%)</label>
-        <input id="taxaImobiliaria">
-
-        <label>Custos mensais (R$)</label>
-        <input id="custosAluguel">
-      </div>
-
-    </div>
-
-    <button onclick="calcular()">Comparar rentabilidade</button>
+    <button onclick="calcular()">Calcular lucro</button>
 
     <div id="resultado" class="result"></div>
 
     <p style="margin-top:16px;font-size:13px;color:#6b7280">
       Esta calculadora é apenas uma simulação e não constitui recomendação financeira.
+    </p>
+  </div>
+
+  <!-- CONTEÚDO SEO -->
+  <div class="card" style="margin-top:40px">
+    <h2>Como calcular o lucro no Airbnb?</h2>
+    <p>
+      O lucro no Airbnb é o valor que sobra após descontar
+      as taxas da plataforma, os custos de limpeza
+      e as despesas fixas mensais do imóvel.
+    </p>
+
+    <p>
+      Trabalhar com <strong>dias reservados</strong> torna o cálculo
+      mais realista do que considerar ocupação total do mês.
+    </p>
+
+    <h2>Para quem esta calculadora é indicada?</h2>
+    <p>
+      Ideal para anfitriões de Airbnb, investidores em imóveis por temporada
+      e pessoas que desejam comparar rentabilidade imobiliária.
     </p>
   </div>
 
@@ -262,21 +248,32 @@ button:hover{background:#1d4ed8}
 function n(v){return Number(v)||0}
 
 function calcular(){
-  const fatA = n(diaria.value) * n(dias.value);
-  const taxaA = fatA * (n(taxaAirbnb.value)/100);
-  const limpezaT = n(limpeza.value) * n(reservas.value);
-  const lucroA = fatA - (taxaA + limpezaT + n(custosAirbnb.value));
+  const diaria = n(document.getElementById("diaria").value);
+  const dias = n(document.getElementById("dias").value);
+  const taxa = n(document.getElementById("taxa").value) / 100;
+  const limpeza = n(document.getElementById("limpeza").value);
+  const reservas = n(document.getElementById("reservas").value);
+  const custos = n(document.getElementById("custos").value);
 
-  const taxaI = n(aluguel.value) * (n(taxaImobiliaria.value)/100);
-  const lucroL = n(aluguel.value) - (taxaI + n(custosAluguel.value));
+  if(diaria<=0 || dias<=0){
+    alert("Informe corretamente os valores da diária e dos dias reservados.");
+    return;
+  }
+
+  const faturamento = diaria * dias;
+  const taxaAirbnb = faturamento * taxa;
+  const custoLimpeza = limpeza * reservas;
+  const custosTotais = taxaAirbnb + custoLimpeza + custos;
+  const lucro = faturamento - custosTotais;
 
   resultado.style.display="block";
   resultado.innerHTML = `
-    🛏️ <strong>Lucro Airbnb:</strong> R$ ${lucroA.toFixed(2)}<br>
-    🏠 <strong>Lucro Aluguel:</strong> R$ ${lucroL.toFixed(2)}<hr>
-    <strong>Diferença mensal:</strong> R$ ${(lucroA-lucroL).toFixed(2)}<br>
-    <strong>Diferença anual:</strong> R$ ${((lucroA-lucroL)*12).toFixed(2)}<br>
-    <div class="win">🏆 Mais vantajoso: ${lucroA>lucroL?"Airbnb":"Aluguel Tradicional"}</div>
+    <strong>Resultado mensal:</strong><br><br>
+    💰 Faturamento bruto: <strong>R$ ${faturamento.toFixed(2)}</strong><br>
+    🏷️ Taxas Airbnb: <strong>R$ ${taxaAirbnb.toFixed(2)}</strong><br>
+    🧹 Limpeza: <strong>R$ ${custoLimpeza.toFixed(2)}</strong><br>
+    📉 Custos fixos: <strong>R$ ${custos.toFixed(2)}</strong><hr>
+    📊 <strong>Lucro líquido: R$ ${lucro.toFixed(2)}</strong>
   `;
 }
 </script>

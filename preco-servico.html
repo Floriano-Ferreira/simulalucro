@@ -6,7 +6,7 @@
 <title>Calculadora de Preço de Serviço | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o preço ideal do seu serviço considerando custos, horas trabalhadas e margem de lucro desejada. Calculadora gratuita.">
+<meta name="description" content="Calcule o preço ideal do seu serviço considerando custos, horas vendáveis e margem de lucro desejada. Simulador gratuito e educativo.">
 <link rel="canonical" href="https://simulalucro.com.br/preco-servico.html">
 <meta name="robots" content="index, follow">
 
@@ -22,7 +22,7 @@ body{
 }
 a{color:#2563eb;text-decoration:none}
 
-/* ===== HEADER PADRÃO ===== */
+/* ===== HEADER ===== */
 .header{
   position:sticky;
   top:0;
@@ -45,7 +45,7 @@ a{color:#2563eb;text-decoration:none}
   color:#111827;
 }
 
-/* MENU SUPERIOR */
+/* ===== MENU SUPERIOR ===== */
 .menu{
   width:100%;
   display:flex;
@@ -104,7 +104,7 @@ button{
 }
 button:hover{background:#1d4ed8}
 
-/* ===== RESULTADO ===== */
+/* ===== RESULT ===== */
 .result{
   display:none;
   margin-top:24px;
@@ -188,7 +188,7 @@ button:hover{background:#1d4ed8}
     <label>Margem de lucro desejada (%)</label>
     <input id="margem" placeholder="Ex: 30">
 
-    <button onclick="calcular()">Calcular preço do serviço</button>
+    <button onclick="calcular()">Calcular preço ideal</button>
 
     <div id="resultado" class="result"></div>
 
@@ -197,19 +197,25 @@ button:hover{background:#1d4ed8}
     </p>
   </div>
 
-  <!-- CONTEÚDO SEO -->
+  <!-- CONTEÚDO EDUCATIVO -->
   <div class="card" style="margin-top:40px">
-    <h2>Como definir o preço de um serviço?</h2>
+    <h2>Como calcular o preço de um serviço?</h2>
     <p>
-      Para precificar corretamente um serviço, é essencial considerar
-      todos os custos mensais, as horas efetivamente vendáveis
+      Para precificar corretamente um serviço, é fundamental considerar
+      todos os custos mensais, as horas realmente vendáveis
       e a margem de lucro desejada.
     </p>
 
-    <h2>Quem deve usar esta calculadora?</h2>
+    <h2>Por que muitos profissionais cobram errado?</h2>
     <p>
-      Ideal para freelancers, autônomos, prestadores de serviço,
-      consultores e pequenos negócios.
+      Muitos ignoram custos fixos, impostos e tempo não faturável.
+      Isso gera preços baixos, sobrecarga de trabalho e pouco lucro.
+    </p>
+
+    <h2>Para quem esta calculadora é indicada?</h2>
+    <p>
+      Ideal para freelancers, autônomos, MEIs,
+      consultores e prestadores de serviço em geral.
     </p>
   </div>
 
@@ -246,10 +252,10 @@ function calcular(){
   const custoHora = custos / horas;
   const precoHora = custoHora / (1 - margem);
 
-  resultado.style.display = "block";
+  resultado.style.display="block";
   resultado.innerHTML = `
     <strong>Resultado:</strong><br><br>
-    🧮 Custo por hora: <strong>R$ ${custoHora.toFixed(2)}</strong><br>
+    ⏱️ Custo por hora: <strong>R$ ${custoHora.toFixed(2)}</strong><br>
     💼 Preço ideal por hora: <strong>R$ ${precoHora.toFixed(2)}</strong>
   `;
 }

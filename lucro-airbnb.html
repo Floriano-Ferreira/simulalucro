@@ -2,11 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-
 <title>Calculadora de Lucro Airbnb | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o lucro real do Airbnb considerando diária, dias reservados, taxas, limpeza e custos fixos mensais. Simulador gratuito.">
+<meta name="description" content="Calcule o lucro real do Airbnb considerando diária, ocupação e custos mensais. Simulador gratuito e online.">
 <link rel="canonical" href="https://simulalucro.com.br/lucro-airbnb.html">
 <meta name="robots" content="index, follow">
 
@@ -20,7 +19,7 @@ body{
   color:#1f2937;
   padding-bottom:90px;
 }
-a{color:#2563eb;text-decoration:none}
+a{text-decoration:none;color:#2563eb}
 
 /* ===== HEADER ===== */
 .header{
@@ -35,23 +34,22 @@ a{color:#2563eb;text-decoration:none}
   margin:auto;
   padding:14px 16px;
   display:flex;
+  flex-wrap:wrap;
   justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
 }
 .logo{
-  font-size:16px;
   font-weight:700;
   color:#111827;
 }
 
-/* MENU SUPERIOR */
+/* ===== MENU TOPO ===== */
 .menu{
   width:100%;
+  margin-top:10px;
   display:flex;
   flex-wrap:wrap;
   gap:14px;
-  padding-top:10px;
 }
 .menu a{
   font-size:14px;
@@ -66,7 +64,7 @@ a{color:#2563eb;text-decoration:none}
 .container{
   max-width:900px;
   margin:auto;
-  padding:24px 16px;
+  padding:32px 16px;
 }
 
 /* ===== CARD ===== */
@@ -168,6 +166,7 @@ button:hover{background:#1d4ed8}
       <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="roi.html">ROI</a>
+      <a href="fluxo-caixa.html">Fluxo de Caixa</a>
     </nav>
   </div>
 </header>
@@ -177,7 +176,7 @@ button:hover{background:#1d4ed8}
   <!-- CALCULADORA -->
   <div class="card">
     <h1>🛏️ Calculadora de Lucro Airbnb</h1>
-    <p>Simule o lucro mensal real do seu imóvel no Airbnb de forma simples e prática.</p>
+    <p>Simule o lucro mensal real do seu imóvel no Airbnb de forma simples.</p>
 
     <label>Valor da diária (R$)</label>
     <input id="diaria" placeholder="Ex: 350">
@@ -185,94 +184,63 @@ button:hover{background:#1d4ed8}
     <label>Dias reservados no mês</label>
     <input id="dias" placeholder="Ex: 18">
 
-    <label>Taxa do Airbnb (%)</label>
-    <input id="taxa" placeholder="Ex: 15">
-
-    <label>Custo de limpeza por reserva (R$)</label>
-    <input id="limpeza" placeholder="Ex: 150">
-
-    <label>Número de reservas no mês</label>
-    <input id="reservas" placeholder="Ex: 6">
-
-    <label>Custos fixos mensais (R$)</label>
+    <label>Custos mensais totais (R$)</label>
     <input id="custos" placeholder="Ex: 1800">
 
     <button onclick="calcular()">Calcular lucro</button>
 
     <div id="resultado" class="result"></div>
-
-    <p style="margin-top:16px;font-size:13px;color:#6b7280">
-      Esta calculadora é apenas uma simulação e não constitui recomendação financeira.
-    </p>
   </div>
 
-  <!-- CONTEÚDO SEO -->
+  <!-- SEO / EDUCATIVO -->
   <div class="card" style="margin-top:40px">
-    <h2>Como calcular o lucro no Airbnb?</h2>
+    <h2>Como funciona o cálculo do lucro no Airbnb?</h2>
     <p>
-      O lucro no Airbnb é o valor que sobra após descontar
-      as taxas da plataforma, os custos de limpeza
-      e as despesas fixas mensais do imóvel.
+      O lucro no Airbnb é calculado subtraindo todos os custos mensais
+      do faturamento bruto gerado pelas diárias.
     </p>
-
     <p>
-      Trabalhar com <strong>dias reservados</strong> torna o cálculo
-      mais realista do que considerar ocupação total do mês.
+      <strong>Fórmula:</strong><br>
+      Lucro = (Valor da diária × Dias reservados) − Custos mensais
     </p>
-
-    <h2>Para quem esta calculadora é indicada?</h2>
     <p>
-      Ideal para anfitriões de Airbnb, investidores em imóveis por temporada
-      e pessoas que desejam comparar rentabilidade imobiliária.
+      Esta calculadora tem finalidade educativa e comparativa,
+      não constituindo recomendação financeira.
     </p>
   </div>
 
 </main>
 
 <footer class="footer">
+  <a href="index.html">Início</a> ·
   <a href="sobre.html">Sobre</a> ·
   <a href="contato.html">Contato</a> ·
   <a href="politica-privacidade.html">Privacidade</a>
   <p>© 2025 SimulaLucro</p>
 </footer>
 
+<!-- MENU MOBILE -->
 <nav class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
   <a href="comparativo.html"><span>⚖️</span>Comparar</a>
-  <a href="margem-lucro.html"><span>💰</span>Margem</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
+  <a href="roi.html"><span>📉</span>ROI</a>
 </nav>
 
 <script>
 function n(v){return Number(v)||0}
 
 function calcular(){
-  const diaria = n(document.getElementById("diaria").value);
-  const dias = n(document.getElementById("dias").value);
-  const taxa = n(document.getElementById("taxa").value) / 100;
-  const limpeza = n(document.getElementById("limpeza").value);
-  const reservas = n(document.getElementById("reservas").value);
-  const custos = n(document.getElementById("custos").value);
-
-  if(diaria<=0 || dias<=0){
-    alert("Informe corretamente os valores da diária e dos dias reservados.");
-    return;
-  }
-
-  const faturamento = diaria * dias;
-  const taxaAirbnb = faturamento * taxa;
-  const custoLimpeza = limpeza * reservas;
-  const custosTotais = taxaAirbnb + custoLimpeza + custos;
+  const faturamento = n(diaria.value) * n(dias.value);
+  const custosTotais = n(custos.value);
   const lucro = faturamento - custosTotais;
 
-  resultado.style.display="block";
+  resultado.style.display = "block";
   resultado.innerHTML = `
     <strong>Resultado mensal:</strong><br><br>
     💰 Faturamento bruto: <strong>R$ ${faturamento.toFixed(2)}</strong><br>
-    🏷️ Taxas Airbnb: <strong>R$ ${taxaAirbnb.toFixed(2)}</strong><br>
-    🧹 Limpeza: <strong>R$ ${custoLimpeza.toFixed(2)}</strong><br>
-    📉 Custos fixos: <strong>R$ ${custos.toFixed(2)}</strong><hr>
+    📉 Custos mensais: <strong>R$ ${custosTotais.toFixed(2)}</strong><hr>
     📊 <strong>Lucro líquido: R$ ${lucro.toFixed(2)}</strong>
   `;
 }

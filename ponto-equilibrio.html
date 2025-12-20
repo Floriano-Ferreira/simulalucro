@@ -6,7 +6,7 @@
 <title>Calculadora de Ponto de Equilíbrio | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o ponto de equilíbrio do seu negócio e descubra quanto precisa faturar para não ter prejuízo. Calculadora gratuita.">
+<meta name="description" content="Calcule o ponto de equilíbrio do seu negócio e descubra quanto precisa faturar para não ter prejuízo. Simulador gratuito e educativo.">
 <link rel="canonical" href="https://simulalucro.com.br/ponto-equilibrio.html">
 <meta name="robots" content="index, follow">
 
@@ -22,7 +22,7 @@ body{
 }
 a{color:#2563eb;text-decoration:none}
 
-/* ===== HEADER PADRÃO ===== */
+/* ===== HEADER ===== */
 .header{
   position:sticky;
   top:0;
@@ -104,7 +104,7 @@ button{
 }
 button:hover{background:#1d4ed8}
 
-/* ===== RESULTADO ===== */
+/* ===== RESULT ===== */
 .result{
   display:none;
   margin-top:24px;
@@ -201,14 +201,23 @@ button:hover{background:#1d4ed8}
   <div class="card" style="margin-top:40px">
     <h2>O que é ponto de equilíbrio?</h2>
     <p>
-      O ponto de equilíbrio representa o volume mínimo de vendas necessário
-      para cobrir todos os custos do negócio, sem gerar lucro nem prejuízo.
+      O ponto de equilíbrio é o nível mínimo de vendas necessário
+      para cobrir todos os custos do negócio,
+      sem gerar lucro nem prejuízo.
     </p>
 
-    <h2>Por que calcular o ponto de equilíbrio?</h2>
+    <h2>Como interpretar o resultado?</h2>
     <p>
-      Esse indicador ajuda a definir metas realistas,
-      ajustar preços, reduzir custos e avaliar a viabilidade do negócio.
+      Se suas vendas estiverem abaixo do ponto de equilíbrio,
+      o negócio opera no prejuízo.
+      Acima dele, começa a gerar lucro.
+    </p>
+
+    <h2>Para quem esta calculadora é indicada?</h2>
+    <p>
+      Indicada para empreendedores, autônomos,
+      prestadores de serviço e pequenas empresas
+      que desejam entender a viabilidade financeira do negócio.
     </p>
   </div>
 
@@ -225,7 +234,7 @@ button:hover{background:#1d4ed8}
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
   <a href="comparativo.html"><span>⚖️</span>Comparar</a>
-  <a href="margem-lucro.html"><span>💰</span>Margem</a>
+  <a href="ponto-equilibrio.html"><span>📊</span>Equilíbrio</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
 </nav>
 
@@ -233,22 +242,23 @@ button:hover{background:#1d4ed8}
 function n(v){return Number(v)||0}
 
 function calcular(){
-  const custos = n(custos.value);
-  const preco = n(preco.value);
-  const variavel = n(variavel.value);
+  const custos = n(document.getElementById("custos").value);
+  const preco = n(document.getElementById("preco").value);
+  const variavel = n(document.getElementById("variavel").value);
 
-  if(preco <= variavel){
-    alert("O preço deve ser maior que o custo variável.");
+  if(custos<=0 || preco<=0 || variavel<0 || variavel>=preco){
+    alert("Preencha os valores corretamente.");
     return;
   }
 
   const ponto = custos / (preco - variavel);
 
-  resultado.style.display = "block";
+  resultado.style.display="block";
   resultado.innerHTML = `
     <strong>Ponto de equilíbrio:</strong><br><br>
-    Você precisa vender <strong>${ponto.toFixed(1)} unidades</strong>
-    por mês para não ter prejuízo.
+    Você precisa vender aproximadamente
+    <strong>${ponto.toFixed(1)} unidades</strong>
+    para cobrir todos os custos.
   `;
 }
 </script>

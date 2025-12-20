@@ -40,12 +40,12 @@ a{color:#2563eb;text-decoration:none}
   flex-wrap:wrap;
 }
 .logo{
-  font-weight:600;
-  font-size:15px;
+  font-size:16px;
+  font-weight:700;
   color:#111827;
 }
 
-/* ===== MENU TOPO ===== */
+/* ===== MENU SUPERIOR ===== */
 .menu{
   width:100%;
   display:flex;
@@ -56,10 +56,6 @@ a{color:#2563eb;text-decoration:none}
 .menu a{
   font-size:14px;
   font-weight:500;
-}
-.menu a.active{
-  color:#1d4ed8;
-  text-decoration:underline;
 }
 
 /* ===== CONTAINER ===== */
@@ -77,6 +73,7 @@ a{color:#2563eb;text-decoration:none}
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 .card h1{margin-top:0}
+.card ul{padding-left:20px}
 
 /* ===== FOOTER ===== */
 .footer{
@@ -118,7 +115,7 @@ a{color:#2563eb;text-decoration:none}
 
 <body>
 
-<!-- HEADER PADRÃO -->
+<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
@@ -131,9 +128,7 @@ a{color:#2563eb;text-decoration:none}
       <a href="margem-lucro.html">Margem</a>
       <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
-      <a href="contato.html" class="active">Contato</a>
-       <a href="politica-privacidade.html">Privacidade</a>
-         <a href="sobre.html" >Sobre</a>
+      <a href="roi.html">ROI</a>
     </nav>
   </div>
 </header>
@@ -146,18 +141,20 @@ a{color:#2563eb;text-decoration:none}
     <p>
       O <strong>SimulaLucro</strong> é um projeto independente voltado à
       educação financeira por meio de calculadoras gratuitas.
+      Esta página existe para garantir transparência
+      e um canal direto de comunicação com os usuários.
     </p>
 
     <p>Você pode entrar em contato para:</p>
 
     <ul>
-      <li>Dúvidas sobre as calculadoras</li>
+      <li>Dúvidas sobre o funcionamento das calculadoras</li>
       <li>Sugestões de melhorias</li>
       <li>Correções de conteúdo</li>
       <li>Parcerias e oportunidades comerciais</li>
     </ul>
 
-    <p>
+    <p style="margin-top:20px">
       📧 <strong>contato.simulalucro@gmail.com</strong>
     </p>
 
@@ -166,13 +163,13 @@ a{color:#2563eb;text-decoration:none}
       em até <strong>48 horas úteis</strong>.
     </p>
 
-    <p>
+    <p style="font-size:14px;color:#6b7280">
       O SimulaLucro não oferece consultoria financeira individual.
-      Todo o conteúdo do site possui caráter educativo.
+      Todas as informações possuem caráter educativo e informativo.
     </p>
 
-    <p>
-      Ao entrar em contato, você concorda com nossa
+    <p style="font-size:14px">
+      O envio de mensagens está sujeito à
       <a href="politica-privacidade.html">Política de Privacidade</a>.
     </p>
   </div>
@@ -180,7 +177,6 @@ a{color:#2563eb;text-decoration:none}
 </main>
 
 <footer class="footer">
-  <a href="index.html">Início</a> ·
   <a href="sobre.html">Sobre</a> ·
   <a href="contato.html">Contato</a> ·
   <a href="politica-privacidade.html">Privacidade</a>
@@ -191,8 +187,7 @@ a{color:#2563eb;text-decoration:none}
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
   <a href="comparativo.html"><span>⚖️</span>Comparar</a>
-  <a href="margem-lucro.html"><span>💰</span>Margem</a>
-  <a href="juros-compostos.html"><span>📈</span>Juros</a>
+  <a href="roi.html"><span>📊</span>ROI</a>
 </nav>
 
 </body>

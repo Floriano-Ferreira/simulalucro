@@ -2,49 +2,163 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+
 <title>Calculadora de Lucro Airbnb | SimulaLucro</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o lucro real do Airbnb considerando diária, ocupação e custos mensais.">
+<meta name="description" content="Calcule o lucro real do Airbnb considerando diária, dias reservados, taxas, limpeza e custos fixos mensais. Simulador gratuito.">
 <link rel="canonical" href="https://simulalucro.com.br/lucro-airbnb.html">
 <meta name="robots" content="index, follow">
 
 <style>
+/* ===== RESET ===== */
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#1f2937;padding-bottom:90px}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f6fb;
+  color:#1f2937;
+  padding-bottom:90px;
+}
 a{color:#2563eb;text-decoration:none}
 
-/* HEADER */
-.header{position:sticky;top:0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08);z-index:1000}
-.header-inner{max-width:1100px;margin:auto;padding:14px 16px;display:flex;flex-direction:column}
-.logo{font-weight:700;color:#111827}
-.menu{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}
-.menu a.active{font-weight:700;text-decoration:underline}
+/* ===== HEADER ===== */
+.header{
+  position:sticky;
+  top:0;
+  background:#ffffff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  z-index:1000;
+}
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.logo{
+  font-size:16px;
+  font-weight:700;
+  color:#111827;
+}
 
-/* CONTAINER */
-.container{max-width:900px;margin:auto;padding:32px 16px}
+/* MENU SUPERIOR */
+.menu{
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  padding-top:10px;
+}
+.menu a{
+  font-size:14px;
+  font-weight:500;
+}
+.menu a.active{
+  font-weight:700;
+  text-decoration:underline;
+}
 
-/* CARD */
-.card{background:#fff;padding:24px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
-label{font-weight:600;font-size:14px}
-input{width:100%;padding:12px;margin:6px 0 14px;border-radius:10px;border:1px solid #d1d5db}
-button{width:100%;padding:16px;border:none;border-radius:12px;background:#2563eb;color:#fff;font-weight:700;cursor:pointer}
-.result{display:none;margin-top:20px;padding:20px;background:#ecfeff;border-radius:12px}
+/* ===== CONTAINER ===== */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
 
-/* FOOTER */
-.footer{text-align:center;padding:28px 16px;font-size:13px;color:#6b7280;background:#fff;border-top:1px solid #e5e7eb}
+/* ===== CARD ===== */
+.card{
+  background:#ffffff;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.card h1{margin-top:0}
 
-/* MOBILE */
-.menu-mobile{position:fixed;bottom:0;left:0;width:100%;background:#fff;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;padding:10px 0;font-size:12px}
-.menu-mobile span{display:block;font-size:18px}
-@media(min-width:769px){.menu-mobile{display:none}}
+/* ===== FORM ===== */
+label{
+  font-size:14px;
+  font-weight:600;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  margin-bottom:14px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+}
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:#ffffff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{background:#1d4ed8}
+
+/* ===== RESULT ===== */
+.result{
+  display:none;
+  margin-top:24px;
+  padding:20px;
+  background:#ecfeff;
+  border-radius:12px;
+  font-size:15px;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  background:#ffffff;
+  border-top:1px solid #e5e7eb;
+  text-align:center;
+  padding:28px 16px;
+  font-size:13px;
+  color:#6b7280;
+}
+.footer a{margin:0 6px}
+
+/* ===== MENU MOBILE ===== */
+.menu-mobile{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#ffffff;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  font-size:12px;
+}
+.menu-mobile a{
+  text-align:center;
+  color:#1f2937;
+}
+.menu-mobile span{
+  display:block;
+  font-size:18px;
+}
+@media(min-width:769px){
+  .menu-mobile{display:none}
+}
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
+
     <nav class="menu">
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html" class="active">Airbnb</a>
@@ -59,26 +173,60 @@ button{width:100%;padding:16px;border:none;border-radius:12px;background:#2563eb
 </header>
 
 <main class="container">
+
+  <!-- CALCULADORA -->
   <div class="card">
     <h1>🛏️ Calculadora de Lucro Airbnb</h1>
-    <p>Descubra o lucro mensal estimado do seu imóvel no Airbnb.</p>
+    <p>Simule o lucro mensal real do seu imóvel no Airbnb de forma simples e prática.</p>
 
     <label>Valor da diária (R$)</label>
-    <input id="diaria">
+    <input id="diaria" placeholder="Ex: 350">
 
     <label>Dias reservados no mês</label>
-    <input id="dias">
+    <input id="dias" placeholder="Ex: 18">
 
-    <label>Custos mensais totais (R$)</label>
-    <input id="custos">
+    <label>Taxa do Airbnb (%)</label>
+    <input id="taxa" placeholder="Ex: 15">
+
+    <label>Custo de limpeza por reserva (R$)</label>
+    <input id="limpeza" placeholder="Ex: 150">
+
+    <label>Número de reservas no mês</label>
+    <input id="reservas" placeholder="Ex: 6">
+
+    <label>Custos fixos mensais (R$)</label>
+    <input id="custos" placeholder="Ex: 1800">
 
     <button onclick="calcular()">Calcular lucro</button>
+
     <div id="resultado" class="result"></div>
 
-    <p style="margin-top:16px;font-size:13px">
+    <p style="margin-top:16px;font-size:13px;color:#6b7280">
       Esta calculadora é apenas uma simulação e não constitui recomendação financeira.
     </p>
   </div>
+
+  <!-- CONTEÚDO SEO -->
+  <div class="card" style="margin-top:40px">
+    <h2>Como calcular o lucro no Airbnb?</h2>
+    <p>
+      O lucro no Airbnb é o valor que sobra após descontar
+      as taxas da plataforma, os custos de limpeza
+      e as despesas fixas mensais do imóvel.
+    </p>
+
+    <p>
+      Trabalhar com <strong>dias reservados</strong> torna o cálculo
+      mais realista do que considerar ocupação total do mês.
+    </p>
+
+    <h2>Para quem esta calculadora é indicada?</h2>
+    <p>
+      Ideal para anfitriões de Airbnb, investidores em imóveis por temporada
+      e pessoas que desejam comparar rentabilidade imobiliária.
+    </p>
+  </div>
+
 </main>
 
 <footer class="footer">
@@ -92,17 +240,41 @@ button{width:100%;padding:16px;border:none;border-radius:12px;background:#2563eb
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
   <a href="comparativo.html"><span>⚖️</span>Comparar</a>
+  <a href="margem-lucro.html"><span>💰</span>Margem</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
 </nav>
 
 <script>
+function n(v){return Number(v)||0}
+
 function calcular(){
-  const d=Number(diaria.value)||0;
-  const di=Number(dias.value)||0;
-  const c=Number(custos.value)||0;
-  const lucro=(d*di)-c;
+  const diaria = n(document.getElementById("diaria").value);
+  const dias = n(document.getElementById("dias").value);
+  const taxa = n(document.getElementById("taxa").value) / 100;
+  const limpeza = n(document.getElementById("limpeza").value);
+  const reservas = n(document.getElementById("reservas").value);
+  const custos = n(document.getElementById("custos").value);
+
+  if(diaria<=0 || dias<=0){
+    alert("Informe corretamente os valores da diária e dos dias reservados.");
+    return;
+  }
+
+  const faturamento = diaria * dias;
+  const taxaAirbnb = faturamento * taxa;
+  const custoLimpeza = limpeza * reservas;
+  const custosTotais = taxaAirbnb + custoLimpeza + custos;
+  const lucro = faturamento - custosTotais;
+
   resultado.style.display="block";
-  resultado.innerHTML=`Lucro mensal estimado: <strong>R$ ${lucro.toFixed(2)}</strong>`;
+  resultado.innerHTML = `
+    <strong>Resultado mensal:</strong><br><br>
+    💰 Faturamento bruto: <strong>R$ ${faturamento.toFixed(2)}</strong><br>
+    🏷️ Taxas Airbnb: <strong>R$ ${taxaAirbnb.toFixed(2)}</strong><br>
+    🧹 Limpeza: <strong>R$ ${custoLimpeza.toFixed(2)}</strong><br>
+    📉 Custos fixos: <strong>R$ ${custos.toFixed(2)}</strong><hr>
+    📊 <strong>Lucro líquido: R$ ${lucro.toFixed(2)}</strong>
+  `;
 }
 </script>
 

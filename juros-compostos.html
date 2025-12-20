@@ -6,7 +6,7 @@
 <title>Calculadora de Juros Compostos | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Simule juros compostos e descubra quanto seu dinheiro pode render ao longo do tempo com aportes mensais. Calculadora gratuita.">
+<meta name="description" content="Simule juros compostos e descubra quanto seu dinheiro pode render com aportes mensais ao longo do tempo. Calculadora gratuita e educativa.">
 <link rel="canonical" href="https://simulalucro.com.br/juros-compostos.html">
 <meta name="robots" content="index, follow">
 
@@ -22,7 +22,7 @@ body{
 }
 a{color:#2563eb;text-decoration:none}
 
-/* ===== HEADER PADRÃO ===== */
+/* ===== HEADER ===== */
 .header{
   position:sticky;
   top:0;
@@ -45,7 +45,7 @@ a{color:#2563eb;text-decoration:none}
   color:#111827;
 }
 
-/* MENU SUPERIOR */
+/* ===== MENU SUPERIOR ===== */
 .menu{
   width:100%;
   display:flex;
@@ -104,7 +104,7 @@ button{
 }
 button:hover{background:#1d4ed8}
 
-/* ===== RESULTADO ===== */
+/* ===== RESULT ===== */
 .result{
   display:none;
   margin-top:24px;
@@ -177,7 +177,7 @@ button:hover{background:#1d4ed8}
   <!-- CALCULADORA -->
   <div class="card">
     <h1>📈 Calculadora de Juros Compostos</h1>
-    <p>Descubra quanto seu dinheiro pode render ao longo do tempo com aportes mensais.</p>
+    <p>Simule o crescimento do seu dinheiro ao longo do tempo com juros compostos.</p>
 
     <label>Valor inicial (R$)</label>
     <input id="inicial" placeholder="Ex: 1000">
@@ -200,7 +200,7 @@ button:hover{background:#1d4ed8}
     </p>
   </div>
 
-  <!-- CONTEÚDO SEO -->
+  <!-- CONTEÚDO EDUCATIVO -->
   <div class="card" style="margin-top:40px">
     <h2>O que são juros compostos?</h2>
     <p>
@@ -209,10 +209,18 @@ button:hover{background:#1d4ed8}
       Esse efeito é conhecido como “juros sobre juros”.
     </p>
 
+    <h2>Por que os juros compostos são poderosos?</h2>
+    <p>
+      Quanto maior o tempo e a constância dos aportes,
+      maior tende a ser o crescimento do patrimônio,
+      mesmo com taxas aparentemente pequenas.
+    </p>
+
     <h2>Para quem esta calculadora é indicada?</h2>
     <p>
-      Ideal para investidores iniciantes, pessoas que fazem aportes mensais,
-      planejamento de longo prazo e construção de patrimônio.
+      Ideal para investidores iniciantes,
+      pessoas que fazem aportes mensais,
+      planejamento de longo prazo e aposentadoria.
     </p>
   </div>
 
@@ -229,7 +237,7 @@ button:hover{background:#1d4ed8}
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
   <a href="comparativo.html"><span>⚖️</span>Comparar</a>
-  <a href="margem-lucro.html"><span>💰</span>Margem</a>
+  <a href="preco-servico.html"><span>🧾</span>Serviço</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
 </nav>
 
@@ -239,11 +247,11 @@ function n(v){return Number(v)||0}
 function calcular(){
   const inicial = n(document.getElementById("inicial").value);
   const aporte = n(document.getElementById("aporte").value);
-  const taxa = n(document.getElementById("taxa").value)/100;
+  const taxa = n(document.getElementById("taxa").value) / 100;
   const meses = n(document.getElementById("meses").value);
 
   if(taxa<=0 || meses<=0){
-    alert("Preencha taxa e período corretamente.");
+    alert("Preencha a taxa e o período corretamente.");
     return;
   }
 
@@ -260,9 +268,9 @@ function calcular(){
   resultado.style.display="block";
   resultado.innerHTML = `
     <strong>Resultado:</strong><br><br>
-    💼 Total investido: <strong>R$ ${investido.toFixed(2)}</strong><br>
+    💰 Total investido: <strong>R$ ${investido.toFixed(2)}</strong><br>
     📈 Valor final: <strong>R$ ${montante.toFixed(2)}</strong><br>
-    💰 Juros acumulados: <strong>R$ ${lucro.toFixed(2)}</strong>
+    🟢 Juros acumulados: <strong>R$ ${lucro.toFixed(2)}</strong>
   `;
 }
 </script>

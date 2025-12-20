@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Calculadora de ROI | Retorno sobre Investimento | SimulaLucro</title>
+<title>Calculadora de Juros Compostos | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o ROI (Retorno sobre Investimento) e descubra se um investimento, projeto ou negócio foi lucrativo. Calculadora gratuita e educativa.">
-<link rel="canonical" href="https://simulalucro.com.br/roi.html">
+<meta name="description" content="Simule juros compostos e descubra quanto seu dinheiro pode render ao longo do tempo. Calculadora gratuita e educativa.">
+<link rel="canonical" href="https://simulalucro.com.br/juros-compostos.html">
 <meta name="robots" content="index, follow">
 
 <style>
@@ -166,8 +166,8 @@ button:hover{background:#1d4ed8}
       <a href="ponto-equilibrio.html">Equilíbrio</a>
       <a href="margem-lucro.html">Margem</a>
       <a href="preco-servico.html">Serviço</a>
-      <a href="juros-compostos.html">Juros</a>
-      <a href="roi.html" class="active">ROI</a>
+      <a href="juros-compostos.html" class="active">Juros</a>
+      <a href="roi.html">ROI</a>
     </nav>
   </div>
 </header>
@@ -176,16 +176,22 @@ button:hover{background:#1d4ed8}
 
   <!-- CALCULADORA -->
   <div class="card">
-    <h1>📊 Calculadora de ROI</h1>
-    <p>Calcule o Retorno sobre Investimento e descubra se um investimento foi lucrativo.</p>
+    <h1>📈 Calculadora de Juros Compostos</h1>
+    <p>Simule o crescimento do seu dinheiro ao longo do tempo com juros compostos.</p>
 
-    <label>Valor investido (R$)</label>
-    <input id="investido" placeholder="Ex: 40000">
+    <label>Valor inicial (R$)</label>
+    <input id="inicial" placeholder="Ex: 1000">
 
-    <label>Valor final ou retorno (R$)</label>
-    <input id="retorno" placeholder="Ex: 100000">
+    <label>Aporte mensal (R$)</label>
+    <input id="aporte" placeholder="Ex: 500">
 
-    <button onclick="calcular()">Calcular ROI</button>
+    <label>Taxa de juros mensal (%)</label>
+    <input id="taxa" placeholder="Ex: 1">
+
+    <label>Período (meses)</label>
+    <input id="meses" placeholder="Ex: 120">
+
+    <button onclick="calcular()">Calcular rendimento</button>
 
     <div id="resultado" class="result"></div>
 
@@ -196,41 +202,16 @@ button:hover{background:#1d4ed8}
 
   <!-- CONTEÚDO EDUCATIVO -->
   <div class="card" style="margin-top:40px">
-    <h2>O que é ROI?</h2>
+    <h2>O que são juros compostos?</h2>
     <p>
-      ROI (<strong>Return on Investment</strong>) significa Retorno sobre Investimento.
-      Ele indica, em percentual, quanto você ganhou ou perdeu em relação ao valor investido.
+      Juros compostos são juros calculados sobre o valor inicial
+      somado aos juros acumulados ao longo do tempo.
+      Esse efeito faz o capital crescer de forma exponencial.
     </p>
 
     <p>
-      É amplamente utilizado para comparar investimentos,
-      analisar projetos, campanhas de marketing,
-      negócios próprios e oportunidades financeiras.
-    </p>
-
-    <h2>Como interpretar o ROI?</h2>
-    <ul>
-      <li><strong>ROI positivo</strong> → investimento lucrativo</li>
-      <li><strong>ROI zero</strong> → empate (sem lucro ou prejuízo)</li>
-      <li><strong>ROI negativo</strong> → prejuízo</li>
-    </ul>
-
-    <p>
-      Por exemplo, um ROI de <strong>1,5 (150%)</strong>
-      significa que o retorno foi uma vez e meia o valor aplicado.
-    </p>
-
-    <p>
-      Em aplicações financeiras simples,
-      o custo considerado costuma ser o capital inicialmente investido.
-      Já em outros tipos de investimento,
-      podem ser incluídos custos operacionais,
-      taxas ou despesas adicionais.
-    </p>
-
-    <p>
-      Este cálculo tem finalidade educativa e comparativa,
-      auxiliando na análise de resultados passados.
+      Quanto maior o prazo e a disciplina de aportes,
+      maior tende a ser o impacto dos juros compostos no resultado final.
     </p>
   </div>
 
@@ -255,24 +236,32 @@ button:hover{background:#1d4ed8}
 function n(v){return Number(v)||0}
 
 function calcular(){
-  const investido = n(document.getElementById("investido").value);
-  const retorno = n(document.getElementById("retorno").value);
+  const inicial = n(inicial.value);
+  const aporte = n(aporte.value);
+  const taxa = n(taxa.value) / 100;
+  const meses = n(meses.value);
 
-  if(investido<=0){
-    alert("Informe um valor investido válido.");
+  if(taxa <= 0 || meses <= 0){
+    alert("Informe uma taxa de juros e período válidos.");
     return;
   }
 
-  const lucro = retorno - investido;
-  const roi = lucro / investido;
+  let montante = inicial;
+  let investido = inicial;
+
+  for(let i=1;i<=meses;i++){
+    montante = (montante + aporte) * (1 + taxa);
+    investido += aporte;
+  }
+
+  const rendimento = montante - investido;
 
   resultado.style.display="block";
   resultado.innerHTML = `
-    <strong>Resultado:</strong><br><br>
-    💰 Valor investido: <strong>R$ ${investido.toFixed(2)}</strong><br>
-    📈 Valor final: <strong>R$ ${retorno.toFixed(2)}</strong><br>
-    🟢 Lucro / Prejuízo: <strong>R$ ${lucro.toFixed(2)}</strong><hr>
-    📊 <strong>ROI: ${(roi*100).toFixed(1)}%</strong>
+    <strong>Resultado da simulação:</strong><br><br>
+    💵 Total investido: <strong>R$ ${investido.toFixed(2)}</strong><br>
+    📈 Valor final: <strong>R$ ${montante.toFixed(2)}</strong><br>
+    💰 Juros ganhos: <strong>R$ ${rendimento.toFixed(2)}</strong>
   `;
 }
 </script>

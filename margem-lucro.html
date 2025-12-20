@@ -6,7 +6,7 @@
 <title>Calculadora de Margem de Lucro | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule a margem de lucro do seu produto ou serviço e descubra se seus preços são realmente lucrativos. Calculadora gratuita.">
+<meta name="description" content="Calcule a margem de lucro do seu produto ou serviço e descubra se seus preços são realmente lucrativos. Simulador gratuito e educativo.">
 <link rel="canonical" href="https://simulalucro.com.br/margem-lucro.html">
 <meta name="robots" content="index, follow">
 
@@ -22,7 +22,7 @@ body{
 }
 a{color:#2563eb;text-decoration:none}
 
-/* ===== HEADER PADRÃO ===== */
+/* ===== HEADER ===== */
 .header{
   position:sticky;
   top:0;
@@ -45,7 +45,7 @@ a{color:#2563eb;text-decoration:none}
   color:#111827;
 }
 
-/* MENU SUPERIOR */
+/* ===== MENU SUPERIOR ===== */
 .menu{
   width:100%;
   display:flex;
@@ -104,7 +104,7 @@ button{
 }
 button:hover{background:#1d4ed8}
 
-/* ===== RESULTADO ===== */
+/* ===== RESULT ===== */
 .result{
   display:none;
   margin-top:24px;
@@ -194,18 +194,26 @@ button:hover{background:#1d4ed8}
     </p>
   </div>
 
-  <!-- CONTEÚDO SEO -->
+  <!-- CONTEÚDO EDUCATIVO -->
   <div class="card" style="margin-top:40px">
     <h2>O que é margem de lucro?</h2>
     <p>
-      A margem de lucro indica qual porcentagem do valor de venda
-      representa lucro após descontar todos os custos envolvidos.
+      A margem de lucro representa a porcentagem do valor de venda
+      que efetivamente se transforma em lucro após descontar todos os custos.
     </p>
 
-    <h2>Por que calcular a margem de lucro?</h2>
+    <h2>Como interpretar o resultado?</h2>
     <p>
-      Esse indicador ajuda a definir preços corretos,
-      evitar prejuízos ocultos e garantir sustentabilidade financeira.
+      Margens maiores indicam maior eficiência financeira.
+      Margens muito baixas podem indicar preços mal definidos
+      ou custos excessivos.
+    </p>
+
+    <h2>Para quem esta calculadora é indicada?</h2>
+    <p>
+      Ideal para empreendedores, freelancers,
+      prestadores de serviço, lojistas
+      e pequenas empresas.
     </p>
   </div>
 
@@ -230,18 +238,18 @@ button:hover{background:#1d4ed8}
 function n(v){return Number(v)||0}
 
 function calcular(){
-  const preco = n(preco.value);
-  const custo = n(custo.value);
+  const preco = n(document.getElementById("preco").value);
+  const custo = n(document.getElementById("custo").value);
 
-  if(preco <= 0 || custo <= 0 || custo >= preco){
-    alert("Informe valores válidos. O custo deve ser menor que o preço.");
+  if(preco<=0 || custo<=0 || custo>=preco){
+    alert("Preencha os valores corretamente.");
     return;
   }
 
   const lucro = preco - custo;
   const margem = (lucro / preco) * 100;
 
-  resultado.style.display = "block";
+  resultado.style.display="block";
   resultado.innerHTML = `
     <strong>Resultado:</strong><br><br>
     💵 Lucro por venda: <strong>R$ ${lucro.toFixed(2)}</strong><br>

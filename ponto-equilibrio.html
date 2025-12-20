@@ -2,29 +2,31 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Airbnb vs Aluguel Tradicional | SimulaLucro</title>
+
+<title>Calculadora de Ponto de Equilíbrio | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Compare Airbnb e aluguel tradicional e descubra qual opção gera mais lucro mensal e anual.">
-<link rel="canonical" href="https://simulalucro.com.br/comparativo.html">
+<meta name="description" content="Calcule o ponto de equilíbrio do seu negócio e descubra quanto precisa faturar para não ter prejuízo. Calculadora gratuita.">
+<link rel="canonical" href="https://simulalucro.com.br/ponto-equilibrio.html">
 <meta name="robots" content="index, follow">
 
 <style>
+/* ===== RESET ===== */
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial,sans-serif;
+  font-family:Arial, sans-serif;
   background:#f3f6fb;
   color:#1f2937;
   padding-bottom:90px;
 }
 a{color:#2563eb;text-decoration:none}
 
-/* HEADER */
+/* ===== HEADER PADRÃO ===== */
 .header{
   position:sticky;
   top:0;
-  background:#fff;
+  background:#ffffff;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
   z-index:1000;
 }
@@ -33,45 +35,59 @@ a{color:#2563eb;text-decoration:none}
   margin:auto;
   padding:14px 16px;
   display:flex;
-  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
 }
-.logo{font-weight:700;color:#111827}
+.logo{
+  font-size:16px;
+  font-weight:700;
+  color:#111827;
+}
+
+/* MENU SUPERIOR */
 .menu{
+  width:100%;
   display:flex;
   flex-wrap:wrap;
   gap:14px;
-  margin-top:10px;
+  padding-top:10px;
 }
-.menu a.active{font-weight:700;text-decoration:underline}
+.menu a{
+  font-size:14px;
+  font-weight:500;
+}
+.menu a.active{
+  font-weight:700;
+  text-decoration:underline;
+}
 
-/* CONTAINER */
+/* ===== CONTAINER ===== */
 .container{
-  max-width:1000px;
+  max-width:900px;
   margin:auto;
-  padding:32px 16px;
+  padding:24px 16px;
 }
 
-/* CARD */
+/* ===== CARD ===== */
 .card{
-  background:#fff;
+  background:#ffffff;
   padding:24px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-}
-@media(max-width:900px){
-  .grid{grid-template-columns:1fr}
-}
+.card h1{margin-top:0}
 
-label{font-weight:600;font-size:14px}
+/* ===== FORM ===== */
+label{
+  font-size:14px;
+  font-weight:600;
+}
 input{
   width:100%;
   padding:12px;
-  margin:6px 0 14px;
+  margin-top:6px;
+  margin-bottom:14px;
   border-radius:10px;
   border:1px solid #d1d5db;
 }
@@ -81,57 +97,73 @@ button{
   border:none;
   border-radius:12px;
   background:#2563eb;
-  color:#fff;
+  color:#ffffff;
+  font-size:16px;
   font-weight:700;
   cursor:pointer;
 }
+button:hover{background:#1d4ed8}
 
+/* ===== RESULTADO ===== */
 .result{
   display:none;
   margin-top:24px;
   padding:20px;
   background:#ecfeff;
   border-radius:12px;
+  font-size:15px;
 }
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 .footer{
-  background:#fff;
+  background:#ffffff;
   border-top:1px solid #e5e7eb;
   text-align:center;
   padding:28px 16px;
   font-size:13px;
   color:#6b7280;
 }
+.footer a{margin:0 6px}
 
-/* MOBILE */
+/* ===== MENU MOBILE ===== */
 .menu-mobile{
   position:fixed;
   bottom:0;
   left:0;
   width:100%;
-  background:#fff;
+  background:#ffffff;
   border-top:1px solid #e5e7eb;
   display:flex;
   justify-content:space-around;
   padding:10px 0;
   font-size:12px;
 }
-.menu-mobile span{display:block;font-size:18px}
-@media(min-width:769px){.menu-mobile{display:none}}
+.menu-mobile a{
+  text-align:center;
+  color:#1f2937;
+}
+.menu-mobile span{
+  display:block;
+  font-size:18px;
+}
+@media(min-width:769px){
+  .menu-mobile{display:none}
+}
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
+
     <nav class="menu">
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
-      <a href="comparativo.html" class="active">Comparativo</a>
-      <a href="ponto-equilibrio.html">Equilíbrio</a>
+      <a href="comparativo.html">Comparativo</a>
+      <a href="ponto-equilibrio.html" class="active">Equilíbrio</a>
       <a href="margem-lucro.html">Margem</a>
       <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
@@ -142,33 +174,43 @@ button{
 
 <main class="container">
 
-<div class="card">
-  <h1>⚖️ Airbnb x Aluguel Tradicional</h1>
-  <p>Compare os dois modelos e veja qual gera mais lucro para seu imóvel.</p>
+  <!-- CALCULADORA -->
+  <div class="card">
+    <h1>📊 Calculadora de Ponto de Equilíbrio</h1>
+    <p>Descubra quanto você precisa faturar para cobrir todos os custos e não ter prejuízo.</p>
 
-  <div class="grid">
+    <label>Custos fixos mensais (R$)</label>
+    <input id="custos" placeholder="Ex: 5000">
 
-    <div>
-      <h3>🛏️ Airbnb</h3>
-      <label>Lucro mensal Airbnb (R$)</label>
-      <input id="lucroAirbnb" placeholder="Ex: 3200">
-    </div>
+    <label>Preço de venda por unidade (R$)</label>
+    <input id="preco" placeholder="Ex: 100">
 
-    <div>
-      <h3>🏠 Aluguel Tradicional</h3>
-      <label>Lucro mensal Aluguel (R$)</label>
-      <input id="lucroAluguel" placeholder="Ex: 2200">
-    </div>
+    <label>Custo variável por unidade (R$)</label>
+    <input id="variavel" placeholder="Ex: 40">
 
+    <button onclick="calcular()">Calcular ponto de equilíbrio</button>
+
+    <div id="resultado" class="result"></div>
+
+    <p style="margin-top:16px;font-size:13px;color:#6b7280">
+      Esta calculadora é apenas uma simulação e não constitui recomendação financeira.
+    </p>
   </div>
 
-  <button onclick="comparar()">Comparar rentabilidade</button>
-  <div id="resultado" class="result"></div>
+  <!-- CONTEÚDO SEO -->
+  <div class="card" style="margin-top:40px">
+    <h2>O que é ponto de equilíbrio?</h2>
+    <p>
+      O ponto de equilíbrio representa o volume mínimo de vendas necessário
+      para cobrir todos os custos do negócio, sem gerar lucro nem prejuízo.
+    </p>
 
-  <p style="margin-top:16px;font-size:13px">
-    Esta calculadora é apenas uma simulação e não constitui recomendação financeira.
-  </p>
-</div>
+    <h2>Por que calcular o ponto de equilíbrio?</h2>
+    <p>
+      Esse indicador ajuda a definir metas realistas,
+      ajustar preços, reduzir custos e avaliar a viabilidade do negócio.
+    </p>
+  </div>
 
 </main>
 
@@ -183,22 +225,30 @@ button{
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
   <a href="comparativo.html"><span>⚖️</span>Comparar</a>
+  <a href="margem-lucro.html"><span>💰</span>Margem</a>
   <a href="juros-compostos.html"><span>📈</span>Juros</a>
 </nav>
 
 <script>
-function comparar(){
-  const a = Number(lucroAirbnb.value)||0;
-  const l = Number(lucroAluguel.value)||0;
-  const dif = a - l;
+function n(v){return Number(v)||0}
 
-  resultado.style.display="block";
+function calcular(){
+  const custos = n(custos.value);
+  const preco = n(preco.value);
+  const variavel = n(variavel.value);
+
+  if(preco <= variavel){
+    alert("O preço deve ser maior que o custo variável.");
+    return;
+  }
+
+  const ponto = custos / (preco - variavel);
+
+  resultado.style.display = "block";
   resultado.innerHTML = `
-    🛏️ Airbnb: <strong>R$ ${a.toFixed(2)}</strong><br>
-    🏠 Aluguel: <strong>R$ ${l.toFixed(2)}</strong><hr>
-    Diferença mensal: <strong>R$ ${dif.toFixed(2)}</strong><br>
-    Diferença anual: <strong>R$ ${(dif*12).toFixed(2)}</strong><br><br>
-    🏆 <strong>Mais vantajoso:</strong> ${a>l?"Airbnb":"Aluguel Tradicional"}
+    <strong>Ponto de equilíbrio:</strong><br><br>
+    Você precisa vender <strong>${ponto.toFixed(1)} unidades</strong>
+    por mês para não ter prejuízo.
   `;
 }
 </script>

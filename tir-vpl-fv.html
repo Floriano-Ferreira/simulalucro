@@ -5,7 +5,7 @@
 <title>TIR, VPL e Montante (FV) | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule TIR, VPL e Montante (FV) a partir de fluxos de caixa por período. Simulador financeiro gratuito.">
+<meta name="description" content="Calcule TIR (XIRR), VPL e Montante com fluxos de caixa por data real. Simulador financeiro gratuito.">
 <link rel="canonical" href="https://simulalucro.com.br/tir-vpl-fv.html">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -21,60 +21,49 @@ body{
 }
 a{text-decoration:none;color:#2563eb}
 
-/* ===== HEADER ===== */
+/* HEADER */
 .header{
   position:sticky;
   top:0;
   background:#fff;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
-  z-index:1000;
 }
 .header-inner{
   max-width:1100px;
   margin:auto;
   padding:14px 16px;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
 }
 .menu{
-  width:100%;
-  margin-top:10px;
   display:flex;
   flex-wrap:wrap;
   gap:14px;
+  font-size:14px;
 }
-.menu a{font-size:14px}
-.menu a.active{font-weight:700;text-decoration:underline}
 
-/* ===== CONTAINER ===== */
+/* CONTAINER */
 .container{
   max-width:900px;
   margin:auto;
   padding:24px 16px;
 }
-
-/* ===== CARD ===== */
 .card{
   background:#fff;
   padding:24px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
-h1{margin-top:0}
 
-/* ===== FLUXO ===== */
+/* FLUXO */
 .flow-header,
 .flow-row{
   display:grid;
-  grid-template-columns:90px 1fr 72px 32px;
+  grid-template-columns:110px 1fr 70px 32px;
   gap:6px;
   align-items:center;
 }
 .flow-header{
-  font-size:13px;
   font-weight:700;
-  margin-bottom:6px;
+  font-size:13px;
 }
 .flow-row input,
 .flow-row select{
@@ -82,25 +71,20 @@ h1{margin-top:0}
   font-size:13px;
   border-radius:8px;
   border:1px solid #d1d5db;
-  min-width:0;
+}
+.flow-row input[type="date"]{
+  width:110px;
 }
 .flow-row button{
   border:none;
   background:#2563eb;
   color:#fff;
   border-radius:8px;
+  height:32px;
   cursor:pointer;
-  height:34px;
 }
 
-@media(max-width:480px){
-  .flow-header,
-  .flow-row{
-    grid-template-columns:80px 1fr 64px 28px;
-  }
-}
-
-/* ===== BOTÕES ===== */
+/* BOTÕES */
 button.main{
   width:100%;
   padding:14px;
@@ -114,7 +98,7 @@ button.main{
   cursor:pointer;
 }
 
-/* ===== RESULTADOS ===== */
+/* RESULTADO */
 .result{
   margin-top:24px;
   padding:20px;
@@ -122,31 +106,13 @@ button.main{
   border-radius:12px;
 }
 
-/* ===== FOOTER ===== */
-.footer{
-  background:#fff;
-  border-top:1px solid #e5e7eb;
-  text-align:center;
-  padding:28px 16px;
-  font-size:13px;
-  color:#6b7280;
+/* MOBILE */
+@media(max-width:480px){
+  .flow-header,
+  .flow-row{
+    grid-template-columns:95px 1fr 64px 28px;
+  }
 }
-
-/* ===== MOBILE MENU ===== */
-.menu-mobile{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#fff;
-  border-top:1px solid #e5e7eb;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 0;
-  font-size:12px;
-}
-.menu-mobile span{display:block;font-size:18px}
-@media(min-width:769px){.menu-mobile{display:none}}
 </style>
 </head>
 
@@ -157,13 +123,8 @@ button.main{
     <strong>💰 SimulaLucro</strong>
     <nav class="menu">
       <a href="index.html">Início</a>
-      <a href="lucro-airbnb.html">Airbnb</a>
-      <a href="comparativo.html">Comparativo</a>
-      <a href="ponto-equilibrio.html">Equilíbrio</a>
-      <a href="margem-lucro.html">Margem</a>
-      <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
-      <a href="tir-vpl-fv.html" class="active">TIR / VPL</a>
+      <a href="tir-vpl-fv.html"><strong>TIR / VPL</strong></a>
     </nav>
   </div>
 </header>
@@ -172,9 +133,6 @@ button.main{
 <div class="card">
 
 <h1>📊 TIR, VPL e Montante (FV)</h1>
-<p>Calcule a viabilidade de investimentos a partir de fluxos de caixa por período.</p>
-
-<h3>Fluxo de Caixa</h3>
 
 <div class="flow-header">
   <div>Data</div>
@@ -189,7 +147,7 @@ button.main{
 
 <h3 style="margin-top:24px">Taxa de desconto</h3>
 <div style="display:flex;gap:8px">
-  <input id="rate" placeholder="Ex: 1" style="flex:1">
+  <input id="rate" placeholder="Ex: 1">
   <select id="rateType">
     <option value="percent">%</option>
     <option value="decimal">Decimal</option>
@@ -205,25 +163,16 @@ button.main{
 </div>
 </main>
 
-<footer class="footer">
-  © 2025 SimulaLucro
-</footer>
-
-<nav class="menu-mobile">
-  <a href="index.html"><span>🏠</span>Início</a>
-  <a href="tir-vpl-fv.html"><span>📊</span>TIR</a>
-</nav>
-
 <script>
-let flows = document.getElementById("flows");
+let flows=document.getElementById("flows");
 let chart;
 
 function addRow(){
-  let row = document.createElement("div");
+  let row=document.createElement("div");
   row.className="flow-row";
   row.innerHTML=`
     <input type="date">
-    <input type="number" value="0">
+    <input type="number" placeholder="Ex: 1000">
     <select>
       <option value="out">Saída</option>
       <option value="in">Entrada</option>
@@ -237,59 +186,70 @@ addRow(); addRow();
 
 function calcular(){
   let rows=[...flows.children];
-  let cash=[];
-  let labels=[];
-  let acc=[];
-  let sum=0;
+  let dates=[], values=[];
 
-  rows.forEach((r,i)=>{
-    let val=Number(r.children[1].value)||0;
-    if(r.children[2].value==="out") val*=-1;
-    cash.push(val);
-    sum+=val;
-    acc.push(sum);
-    labels.push("Período "+i);
+  rows.forEach(r=>{
+    let d=r.children[0].value;
+    let v=Number(r.children[1].value);
+    if(!d || isNaN(v)) return;
+    if(r.children[2].value==="out") v*=-1;
+    dates.push(new Date(d));
+    values.push(v);
   });
+
+  if(values.length<2){
+    alert("Informe pelo menos dois fluxos.");
+    return;
+  }
 
   let rate=Number(rate.value)||0;
   if(rateType.value==="percent") rate/=100;
 
-  let vpl=cash.reduce((a,v,i)=>a+v/Math.pow(1+rate,i),0);
-  let fv=cash.reduce((a,v)=>a+v,0);
-  let tir=calcIRR(cash)*100;
+  let vpl=xnpv(rate,values,dates);
+  let tir=xirr(values,dates)*100;
+  let fv=values.reduce((a,b)=>a+b,0);
 
   resultado.style.display="block";
   resultado.innerHTML=`
     <strong>Resultados:</strong><br><br>
     📉 VPL: <strong>R$ ${vpl.toFixed(2)}</strong><br>
-    💰 Montante (FV): <strong>R$ ${fv.toFixed(2)}</strong><br>
-    📈 TIR: <strong>${tir.toFixed(2)}%</strong>
+    💰 Montante: <strong>R$ ${fv.toFixed(2)}</strong><br>
+    📈 TIR (XIRR): <strong>${tir.toFixed(2)}%</strong>
   `;
 
-  drawChart(labels,cash,acc);
+  drawChart(dates,values);
 }
 
-function calcIRR(cash){
+/* ===== FINANCE ===== */
+function xnpv(rate,values,dates){
+  let t0=dates[0];
+  return values.reduce((a,v,i)=>{
+    let diff=(dates[i]-t0)/86400000;
+    return a+v/Math.pow(1+rate,diff/365);
+  },0);
+}
+
+function xirr(values,dates){
   let rate=0.1;
   for(let i=0;i<100;i++){
-    let npv=0, dnpv=0;
-    cash.forEach((v,t)=>{
-      npv+=v/Math.pow(1+rate,t);
-      dnpv+=-t*v/Math.pow(1+rate,t+1);
-    });
-    rate=rate-npv/dnpv;
+    let f=xnpv(rate,values,dates);
+    let d=(xnpv(rate+0.0001,values,dates)-f)/0.0001;
+    rate-=f/d;
   }
   return rate;
 }
 
-function drawChart(labels,cash,acc){
+/* ===== CHART ===== */
+function drawChart(dates,values){
+  let acc=[],sum=0;
+  values.forEach(v=>{sum+=v;acc.push(sum);});
   if(chart) chart.destroy();
   chart=new Chart(document.getElementById("chart"),{
     type:"line",
     data:{
-      labels,
+      labels:dates.map(d=>d.toLocaleDateString()),
       datasets:[
-        {label:"Fluxo de Caixa",data:cash,borderColor:"#2563eb"},
+        {label:"Fluxo",data:values,borderColor:"#2563eb"},
         {label:"Acumulado",data:acc,borderColor:"#16a34a"}
       ]
     }

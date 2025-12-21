@@ -2,160 +2,252 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>TIR, VPL e Montante (FV) | SimulaLucro</title>
+<title>TIR, VPL, Payback e Montante | SimulaLucro</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta name="description" content="Calculadora completa de TIR, VPL, Payback simples e descontado, Montante (FV) e PMT com data zero obrigatória.">
 
 <style>
-body{margin:0;font-family:Arial;background:#f3f6fb;color:#1f2937;padding-bottom:80px}
-.container{max-width:900px;margin:auto;padding:24px 16px}
-.card{background:#fff;padding:24px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
-.flow-header,.flow-row{
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f6fb;
+  color:#1f2937;
+}
+.header{
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.header a{color:#2563eb;text-decoration:none;font-weight:500}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+h1,h2,h3{margin-top:0}
+
+.grid-head,.grid-row{
   display:grid;
-  grid-template-columns:95px 1fr 70px 28px;
-  gap:6px;align-items:center
+  grid-template-columns:90px 1fr 120px 40px;
+  gap:8px;
+  align-items:center;
 }
-.flow-header{font-weight:bold;font-size:13px}
-.flow-row input,.flow-row select{
-  padding:6px;border-radius:8px;border:1px solid #ccc;font-size:13px
+.grid-head{
+  font-weight:700;
+  font-size:14px;
+  margin-bottom:8px;
 }
-button{padding:12px;border:none;border-radius:10px;background:#2563eb;color:#fff;font-weight:bold;cursor:pointer}
-.result{margin-top:20px;padding:16px;background:#ecfeff;border-radius:12px}
+.grid-row input,.grid-row select{
+  padding:8px;
+  border-radius:8px;
+  border:1px solid #d1d5db;
+}
+.btn{
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:700;
+  cursor:pointer;
+}
+.btn.gray{background:#374151}
+.btn.small{padding:6px 10px}
+.result{
+  background:#ecfeff;
+  padding:16px;
+  border-radius:12px;
+  margin-top:20px;
+}
+.note{
+  font-size:14px;
+  color:#374151;
+}
+@media(max-width:600px){
+  .grid-head,.grid-row{
+    grid-template-columns:70px 1fr 90px 36px;
+  }
+}
 </style>
 </head>
 
 <body>
-<div class="container">
+
+<header class="header">
+  <div class="header-inner">
+    <strong>💰 SimulaLucro</strong>
+    <a href="index.html">Início</a>
+    <a href="juros-compostos.html">Juros</a>
+    <a href="tir-vpl-fv.html"><strong>TIR / VPL</strong></a>
+  </div>
+</header>
+
+<main class="container">
+
 <div class="card">
+<h1>📊 TIR, VPL, Payback e Montante (FV)</h1>
+<p>Analise investimentos com <strong>data zero obrigatória</strong>, fluxo de caixa validado e métricas financeiras completas.</p>
 
-<h1>📊 TIR, VPL e Montante (FV)</h1>
-<p>Calcule a viabilidade de investimentos com base em fluxo de caixa.</p>
+<h2>Fluxo de Caixa</h2>
 
-<div class="flow-header">
-  <div>Data</div>
+<div class="grid-head">
+  <div>Período</div>
   <div>Valor (R$)</div>
   <div>Tipo</div>
   <div></div>
 </div>
 
-<div id="flows"></div>
+<div id="rows"></div>
 
-<button onclick="addRow()">+ Adicionar linha</button>
+<button class="btn gray" onclick="addRow()">+ Adicionar período</button>
 
-<h3 style="margin-top:20px">Taxa de desconto (% ao ano)</h3>
-<input id="discountRate" placeholder="Ex: 10">
+<hr style="margin:24px 0">
 
-<button style="margin-top:20px" onclick="calcular()">Calcular</button>
+<label><strong>Taxa de desconto (% ao período)</strong></label><br>
+<input id="rate" placeholder="Ex: 10" style="max-width:200px">
 
-<div id="resultado" class="result" style="display:none"></div>
+<br><br>
+<button class="btn" onclick="calculate()">Calcular</button>
 
-<canvas id="chart" style="margin-top:30px"></canvas>
+<div id="output" class="result" style="display:none"></div>
 
 </div>
+
+<div class="card" style="margin-top:32px">
+<h2>📘 Explicação das Métricas</h2>
+
+<h3>VPL (Valor Presente Líquido)</h3>
+<p>Indica quanto valor o investimento gera hoje. VPL &gt; 0 → investimento viável.</p>
+
+<h3>TIR (Taxa Interna de Retorno)</h3>
+<p>Taxa que zera o VPL. Só existe se houver <strong>investimento inicial negativo</strong> e retornos positivos.</p>
+
+<h3>Payback Simples</h3>
+<p>Tempo necessário para recuperar o capital investido, sem considerar juros.</p>
+
+<h3>Payback Descontado</h3>
+<p>Considera o valor do dinheiro no tempo (mais realista).</p>
+
+<h3>FV (Montante)</h3>
+<p>Valor final acumulado do fluxo.</p>
+
+<h3>PMT</h3>
+<p>Pagamento periódico equivalente do investimento.</p>
+
+<h3>Exemplo</h3>
+<p>
+Período 0: -800<br>
+Períodos seguintes: +500, +200, -200, +700, +200<br>
+Taxa: 10%
+</p>
+
+<p class="note">
+⚠️ Esta calculadora tem finalidade educativa e comparativa. Não constitui recomendação financeira.
+</p>
 </div>
+
+</main>
 
 <script>
-const flows=document.getElementById("flows");
-let chart;
+let rows = document.getElementById("rows");
 
-/* ADD LINE */
-function addRow(){
-  const r=document.createElement("div");
-  r.className="flow-row";
+function addRow(p=0,v="",t="Saída"){
+  let r = document.createElement("div");
+  r.className="grid-row";
   r.innerHTML=`
-    <input type="date">
-    <input type="number" placeholder="Ex: 1000">
-    <select>
-      <option value="out">Saída</option>
-      <option value="in">Entrada</option>
+    <input type="number" value="${p}" class="p">
+    <input type="number" value="${v}" class="v">
+    <select class="t">
+      <option ${t==="Saída"?"selected":""}>Saída</option>
+      <option ${t==="Entrada"?"selected":""}>Entrada</option>
     </select>
-    <button onclick="this.parentElement.remove()">×</button>
+    <button class="btn small" onclick="this.parentElement.remove()">×</button>
   `;
-  flows.appendChild(r);
-}
-addRow(); addRow();
-
-/* MAIN */
-function calcular(){
-  let rows=[...flows.children];
-  let data=[];
-
-  rows.forEach(r=>{
-    const d=r.children[0].value;
-    let v=parseFloat(r.children[1].value);
-    if(!d || isNaN(v)) return;
-    if(r.children[2].value==="out") v*=-1;
-    data.push({date:new Date(d),value:v});
-  });
-
-  if(data.length<2){
-    alert("Informe pelo menos dois fluxos de caixa.");
-    return;
-  }
-
-  data.sort((a,b)=>a.date-b.date);
-
-  const values=data.map(d=>d.value);
-  const dates=data.map(d=>d.date);
-
-  const rateInput=document.getElementById("discountRate").value;
-  const discountRate=parseFloat(rateInput)/100;
-  if(isNaN(discountRate)){
-    alert("Informe a taxa de desconto.");
-    return;
-  }
-
-  const vpl=xnpv(discountRate,values,dates);
-  const tir=xirr(values,dates);
-  const montante=values.reduce((a,b)=>a+b,0);
-
-  document.getElementById("resultado").style.display="block";
-  document.getElementById("resultado").innerHTML=`
-    <strong>Resultados:</strong><br><br>
-    VPL: <strong>R$ ${vpl.toFixed(2)}</strong><br>
-    Montante: <strong>R$ ${montante.toFixed(2)}</strong><br>
-    TIR: <strong>${(tir*100).toFixed(2)}%</strong>
-  `;
-
-  drawChart(dates,values);
+  rows.appendChild(r);
 }
 
-/* FINANCE */
-function xnpv(rate,values,dates){
-  const t0=dates[0];
-  return values.reduce((acc,v,i)=>{
-    const days=(dates[i]-t0)/86400000;
-    return acc+v/Math.pow(1+rate,days/365);
-  },0);
+addRow(0,"","Saída");
+
+function npv(rate,flows){
+  return flows.reduce((a,f,i)=>a+f/Math.pow(1+rate,i),0);
 }
 
-function xirr(values,dates){
-  let low=-0.99, high=10, mid;
+function irr(flows){
+  if(!flows.some(f=>f<0)||!flows.some(f=>f>0)) return null;
+  let low=-0.99,high=1;
   for(let i=0;i<100;i++){
-    mid=(low+high)/2;
-    const npv=xnpv(mid,values,dates);
-    if(npv>0) low=mid;
-    else high=mid;
+    let mid=(low+high)/2;
+    let v=npv(mid,flows);
+    if(Math.abs(v)<1e-6) return mid;
+    v>0?low=mid:high=mid;
   }
-  return mid;
+  return (low+high)/2;
 }
 
-/* CHART */
-function drawChart(dates,values){
-  let acc=[],sum=0;
-  values.forEach(v=>{sum+=v;acc.push(sum)});
-  if(chart) chart.destroy();
-  chart=new Chart(document.getElementById("chart"),{
-    type:"line",
-    data:{
-      labels:dates.map(d=>d.toLocaleDateString()),
-      datasets:[
-        {label:"Fluxo",data:values,borderColor:"#2563eb"},
-        {label:"Acumulado",data:acc,borderColor:"#16a34a"}
-      ]
-    }
+function calculate(){
+  let rate = Number(rateInput.value)/100;
+  let flows=[];
+  let periods=[...document.querySelectorAll(".p")].map(e=>+e.value);
+  let values=[...document.querySelectorAll(".v")].map(e=>+e.value);
+  let types=[...document.querySelectorAll(".t")].map(e=>e.value);
+
+  if(periods[0]!==0){
+    alert("O período 0 é obrigatório.");
+    return;
+  }
+
+  for(let i=0;i<values.length;i++){
+    flows.push(types[i]==="Saída"?-values[i]:values[i]);
+  }
+
+  let vpl = npv(rate,flows);
+  let tir = irr(flows);
+  let fv = flows.reduce((a,f)=>a+f,0);
+
+  let acc=0, payback=null, paybackD=null;
+  flows.forEach((f,i)=>{
+    acc+=f;
+    if(acc>=0 && payback===null) payback=i;
   });
+
+  acc=0;
+  flows.forEach((f,i)=>{
+    acc+=f/Math.pow(1+rate,i);
+    if(acc>=0 && paybackD===null) paybackD=i;
+  });
+
+  let pmt = (vpl*rate)/(1-Math.pow(1+rate,-flows.length));
+
+  output.style.display="block";
+  output.innerHTML=`
+    <strong>Resultados:</strong><br><br>
+    VPL: R$ ${vpl.toFixed(2)}<br>
+    TIR: ${tir===null?"Não aplicável":(tir*100).toFixed(2)+"%"}<br>
+    Montante (FV): R$ ${fv.toFixed(2)}<br>
+    Payback simples: ${payback??"Não recupera"}<br>
+    Payback descontado: ${paybackD??"Não recupera"}<br>
+    PMT: R$ ${pmt.toFixed(2)}
+  `;
 }
+
+const rateInput=document.getElementById("rate");
 </script>
+
 </body>
 </html>

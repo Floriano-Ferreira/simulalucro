@@ -21,7 +21,7 @@ body{
 }
 a{text-decoration:none;color:#2563eb}
 
-/* HEADER */
+/* ===== HEADER ===== */
 .header{
   position:sticky;
   top:0;
@@ -33,93 +33,88 @@ a{text-decoration:none;color:#2563eb}
   max-width:1100px;
   margin:auto;
   padding:14px 16px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
 }
 .menu{
+  width:100%;
+  margin-top:10px;
   display:flex;
-  gap:14px;
   flex-wrap:wrap;
-  font-size:14px;
+  gap:14px;
 }
-.menu a{font-weight:500}
+.menu a{font-size:14px}
 .menu a.active{font-weight:700;text-decoration:underline}
 
-/* CONTAINER */
+/* ===== CONTAINER ===== */
 .container{
-  max-width:1100px;
+  max-width:900px;
   margin:auto;
   padding:24px 16px;
 }
 
-/* CARD */
+/* ===== CARD ===== */
 .card{
   background:#fff;
   padding:24px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
+h1{margin-top:0}
 
-/* FLUXO DE CAIXA */
+/* ===== FLUXO ===== */
 .flow-header,
 .flow-row{
   display:grid;
-  grid-template-columns:110px 1fr 80px 34px;
+  grid-template-columns:90px 1fr 72px 32px;
   gap:6px;
   align-items:center;
 }
-
 .flow-header{
-  font-size:12px;
+  font-size:13px;
   font-weight:700;
-  color:#374151;
   margin-bottom:6px;
 }
-
-.flow-row{
-  margin-bottom:6px;
-}
-
 .flow-row input,
 .flow-row select{
   padding:6px;
   font-size:13px;
   border-radius:8px;
   border:1px solid #d1d5db;
-  height:34px;
+  min-width:0;
 }
-
-.flow-row input[type="date"]{
-  padding:4px 6px;
-}
-
-.flow-row select{
-  padding:4px;
-}
-
 .flow-row button{
-  background:#ef4444;
-  color:#fff;
   border:none;
-  border-radius:8px;
-  height:34px;
-  cursor:pointer;
-  font-size:14px;
-}
-
-/* BOTÕES */
-.btn{
-  margin-top:12px;
-  padding:14px;
-  border:none;
-  border-radius:12px;
   background:#2563eb;
   color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+  height:34px;
+}
+
+@media(max-width:480px){
+  .flow-header,
+  .flow-row{
+    grid-template-columns:80px 1fr 64px 28px;
+  }
+}
+
+/* ===== BOTÕES ===== */
+button.main{
+  width:100%;
+  padding:14px;
+  margin-top:20px;
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
   font-weight:700;
   cursor:pointer;
-  width:100%;
 }
-.btn.secondary{background:#374151}
 
-/* RESULTADO */
+/* ===== RESULTADOS ===== */
 .result{
   margin-top:24px;
   padding:20px;
@@ -127,10 +122,31 @@ a{text-decoration:none;color:#2563eb}
   border-radius:12px;
 }
 
-/* GRÁFICO */
-.chart-box{
-  margin-top:32px;
+/* ===== FOOTER ===== */
+.footer{
+  background:#fff;
+  border-top:1px solid #e5e7eb;
+  text-align:center;
+  padding:28px 16px;
+  font-size:13px;
+  color:#6b7280;
 }
+
+/* ===== MOBILE MENU ===== */
+.menu-mobile{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  font-size:12px;
+}
+.menu-mobile span{display:block;font-size:18px}
+@media(min-width:769px){.menu-mobile{display:none}}
 </style>
 </head>
 
@@ -138,6 +154,7 @@ a{text-decoration:none;color:#2563eb}
 
 <header class="header">
   <div class="header-inner">
+    <strong>💰 SimulaLucro</strong>
     <nav class="menu">
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
@@ -152,122 +169,132 @@ a{text-decoration:none;color:#2563eb}
 </header>
 
 <main class="container">
-
 <div class="card">
-  <h1>📊 TIR, VPL e Montante (FV)</h1>
-  <p>Calcule a viabilidade de investimentos a partir de fluxos de caixa por período informado.</p>
 
-  <h3>Fluxo de Caixa</h3>
+<h1>📊 TIR, VPL e Montante (FV)</h1>
+<p>Calcule a viabilidade de investimentos a partir de fluxos de caixa por período.</p>
 
-  <!-- CABEÇALHO ALINHADO -->
-  <div class="flow-header">
-    <span>Data</span>
-    <span>Valor (R$)</span>
-    <span>Tipo</span>
-    <span></span>
-  </div>
+<h3>Fluxo de Caixa</h3>
 
-  <div id="flows"></div>
-
-  <button class="btn secondary" onclick="addFluxo()">➕ Adicionar linha</button>
-
-  <h3 style="margin-top:24px">Taxa de desconto</h3>
-  <input id="taxa" type="number" placeholder="Ex: 1">
-  <select id="tipoTaxa">
-    <option value="percent">Percentual (%)</option>
-    <option value="decimal">Decimal</option>
-  </select>
-
-  <button class="btn" onclick="calcular()">Calcular</button>
-
-  <div id="resultado" class="result" style="display:none"></div>
-
-  <div class="chart-box">
-    <canvas id="grafico"></canvas>
-  </div>
+<div class="flow-header">
+  <div>Data</div>
+  <div>Valor (R$)</div>
+  <div>Tipo</div>
+  <div></div>
 </div>
 
+<div id="flows"></div>
+
+<button onclick="addRow()">+ Adicionar linha</button>
+
+<h3 style="margin-top:24px">Taxa de desconto</h3>
+<div style="display:flex;gap:8px">
+  <input id="rate" placeholder="Ex: 1" style="flex:1">
+  <select id="rateType">
+    <option value="percent">%</option>
+    <option value="decimal">Decimal</option>
+  </select>
+</div>
+
+<button class="main" onclick="calcular()">Calcular</button>
+
+<div id="resultado" class="result" style="display:none"></div>
+
+<canvas id="chart" style="margin-top:30px"></canvas>
+
+</div>
 </main>
 
+<footer class="footer">
+  © 2025 SimulaLucro
+</footer>
+
+<nav class="menu-mobile">
+  <a href="index.html"><span>🏠</span>Início</a>
+  <a href="tir-vpl-fv.html"><span>📊</span>TIR</a>
+</nav>
+
 <script>
-let fluxos=[];
+let flows = document.getElementById("flows");
 let chart;
 
-function addFluxo(){
-  fluxos.push({data:"",valor:0,tipo:"saida"});
-  render();
+function addRow(){
+  let row = document.createElement("div");
+  row.className="flow-row";
+  row.innerHTML=`
+    <input type="date">
+    <input type="number" value="0">
+    <select>
+      <option value="out">Saída</option>
+      <option value="in">Entrada</option>
+    </select>
+    <button onclick="this.parentElement.remove()">×</button>
+  `;
+  flows.appendChild(row);
 }
 
-function removeFluxo(i){
-  fluxos.splice(i,1);
-  render();
-}
-
-function render(){
-  let html="";
-  fluxos.forEach((f,i)=>{
-    html+=`
-      <div class="flow-row">
-        <input type="date" value="${f.data}" onchange="fluxos[${i}].data=this.value">
-        <input type="number" value="${f.valor}" onchange="fluxos[${i}].valor=this.value">
-        <select onchange="fluxos[${i}].tipo=this.value">
-          <option value="saida" ${f.tipo==="saida"?"selected":""}>Saída</option>
-          <option value="entrada" ${f.tipo==="entrada"?"selected":""}>Entrada</option>
-        </select>
-        <button onclick="removeFluxo(${i})">✖</button>
-      </div>
-    `;
-  });
-  document.getElementById("flows").innerHTML=html;
-}
+addRow(); addRow();
 
 function calcular(){
-  let taxa=Number(document.getElementById("taxa").value);
-  if(document.getElementById("tipoTaxa").value==="percent") taxa/=100;
-
-  if(fluxos.length<2){
-    alert("Informe ao menos dois fluxos de caixa.");
-    return;
-  }
-
-  let vpl=0;
+  let rows=[...flows.children];
+  let cash=[];
   let labels=[];
-  let valores=[];
+  let acc=[];
+  let sum=0;
 
-  fluxos.forEach((f,i)=>{
-    let v=(f.tipo==="entrada"?1:-1)*Number(f.valor);
-    vpl+=v/Math.pow(1+taxa,i);
-    labels.push(f.data || "P"+i);
-    valores.push(v);
+  rows.forEach((r,i)=>{
+    let val=Number(r.children[1].value)||0;
+    if(r.children[2].value==="out") val*=-1;
+    cash.push(val);
+    sum+=val;
+    acc.push(sum);
+    labels.push("Período "+i);
   });
 
-  let fv=0;
-  fluxos.forEach((f,i)=>{
-    let v=(f.tipo==="entrada"?1:-1)*Number(f.valor);
-    fv+=v*Math.pow(1+taxa,(fluxos.length-1-i));
-  });
+  let rate=Number(rate.value)||0;
+  if(rateType.value==="percent") rate/=100;
 
-  document.getElementById("resultado").style.display="block";
-  document.getElementById("resultado").innerHTML=`
-    📉 <strong>VPL:</strong> R$ ${vpl.toFixed(2)}<br>
-    💰 <strong>Montante (FV):</strong> R$ ${fv.toFixed(2)}
+  let vpl=cash.reduce((a,v,i)=>a+v/Math.pow(1+rate,i),0);
+  let fv=cash.reduce((a,v)=>a+v,0);
+  let tir=calcIRR(cash)*100;
+
+  resultado.style.display="block";
+  resultado.innerHTML=`
+    <strong>Resultados:</strong><br><br>
+    📉 VPL: <strong>R$ ${vpl.toFixed(2)}</strong><br>
+    💰 Montante (FV): <strong>R$ ${fv.toFixed(2)}</strong><br>
+    📈 TIR: <strong>${tir.toFixed(2)}%</strong>
   `;
 
+  drawChart(labels,cash,acc);
+}
+
+function calcIRR(cash){
+  let rate=0.1;
+  for(let i=0;i<100;i++){
+    let npv=0, dnpv=0;
+    cash.forEach((v,t)=>{
+      npv+=v/Math.pow(1+rate,t);
+      dnpv+=-t*v/Math.pow(1+rate,t+1);
+    });
+    rate=rate-npv/dnpv;
+  }
+  return rate;
+}
+
+function drawChart(labels,cash,acc){
   if(chart) chart.destroy();
-  chart=new Chart(document.getElementById("grafico"),{
-    type:"bar",
+  chart=new Chart(document.getElementById("chart"),{
+    type:"line",
     data:{
       labels,
-      datasets:[{
-        label:"Fluxo de Caixa",
-        data:valores,
-        backgroundColor:valores.map(v=>v>=0?"#22c55e":"#ef4444")
-      }]
+      datasets:[
+        {label:"Fluxo de Caixa",data:cash,borderColor:"#2563eb"},
+        {label:"Acumulado",data:acc,borderColor:"#16a34a"}
+      ]
     }
   });
 }
-
-addFluxo();
 </script>
 
 </body>

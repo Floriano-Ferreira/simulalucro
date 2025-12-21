@@ -7,14 +7,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-body{
-  margin:0;font-family:Arial;background:#f3f6fb;color:#1f2937;padding-bottom:90px
-}
+body{margin:0;font-family:Arial;background:#f3f6fb;color:#1f2937;padding-bottom:80px}
 .container{max-width:900px;margin:auto;padding:24px 16px}
 .card{background:#fff;padding:24px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
 .flow-header,.flow-row{
   display:grid;
-  grid-template-columns:100px 1fr 70px 30px;
+  grid-template-columns:95px 1fr 70px 28px;
   gap:6px;align-items:center
 }
 .flow-header{font-weight:bold;font-size:13px}
@@ -31,17 +29,21 @@ button{padding:12px;border:none;border-radius:10px;background:#2563eb;color:#fff
 <div class="card">
 
 <h1>📊 TIR, VPL e Montante (FV)</h1>
+<p>Calcule a viabilidade de investimentos com base em fluxo de caixa.</p>
 
 <div class="flow-header">
-  <div>Data</div><div>Valor (R$)</div><div>Tipo</div><div></div>
+  <div>Data</div>
+  <div>Valor (R$)</div>
+  <div>Tipo</div>
+  <div></div>
 </div>
 
 <div id="flows"></div>
 
 <button onclick="addRow()">+ Adicionar linha</button>
 
-<h3 style="margin-top:20px">Taxa de desconto (% a.a.)</h3>
-<input id="rate" placeholder="Ex: 10">
+<h3 style="margin-top:20px">Taxa de desconto (% ao ano)</h3>
+<input id="discountRate" placeholder="Ex: 10">
 
 <button style="margin-top:20px" onclick="calcular()">Calcular</button>
 
@@ -56,6 +58,7 @@ button{padding:12px;border:none;border-radius:10px;background:#2563eb;color:#fff
 const flows=document.getElementById("flows");
 let chart;
 
+/* ADD LINE */
 function addRow(){
   const r=document.createElement("div");
   r.className="flow-row";
@@ -72,46 +75,46 @@ function addRow(){
 }
 addRow(); addRow();
 
+/* MAIN */
 function calcular(){
-  const rows=[...flows.children];
-  let dates=[], values=[];
-  let hasIn=false, hasOut=false;
+  let rows=[...flows.children];
+  let data=[];
 
   rows.forEach(r=>{
     const d=r.children[0].value;
-    let v=Number(r.children[1].value);
+    let v=parseFloat(r.children[1].value);
     if(!d || isNaN(v)) return;
-    if(r.children[2].value==="out"){ v*=-1; hasOut=true; }
-    else hasIn=true;
-    dates.push(new Date(d));
-    values.push(v);
+    if(r.children[2].value==="out") v*=-1;
+    data.push({date:new Date(d),value:v});
   });
 
-  if(values.length<2){
-    alert("Informe pelo menos dois fluxos.");
-    return;
-  }
-  if(!hasIn || !hasOut){
-    alert("É necessário ao menos uma entrada e uma saída.");
+  if(data.length<2){
+    alert("Informe pelo menos dois fluxos de caixa.");
     return;
   }
 
-  const rate=Number(rate.value)/100;
-  if(isNaN(rate)){
+  data.sort((a,b)=>a.date-b.date);
+
+  const values=data.map(d=>d.value);
+  const dates=data.map(d=>d.date);
+
+  const rateInput=document.getElementById("discountRate").value;
+  const discountRate=parseFloat(rateInput)/100;
+  if(isNaN(discountRate)){
     alert("Informe a taxa de desconto.");
     return;
   }
 
-  const vpl=xnpv(rate,values,dates);
-  const tir=xirr(values,dates)*100;
+  const vpl=xnpv(discountRate,values,dates);
+  const tir=xirr(values,dates);
   const montante=values.reduce((a,b)=>a+b,0);
 
-  resultado.style.display="block";
-  resultado.innerHTML=`
+  document.getElementById("resultado").style.display="block";
+  document.getElementById("resultado").innerHTML=`
     <strong>Resultados:</strong><br><br>
     VPL: <strong>R$ ${vpl.toFixed(2)}</strong><br>
     Montante: <strong>R$ ${montante.toFixed(2)}</strong><br>
-    TIR (XIRR): <strong>${tir.toFixed(2)}%</strong>
+    TIR: <strong>${(tir*100).toFixed(2)}%</strong>
   `;
 
   drawChart(dates,values);
@@ -120,19 +123,18 @@ function calcular(){
 /* FINANCE */
 function xnpv(rate,values,dates){
   const t0=dates[0];
-  return values.reduce((a,v,i)=>{
-    const diff=(dates[i]-t0)/86400000;
-    return a+v/Math.pow(1+rate,diff/365);
+  return values.reduce((acc,v,i)=>{
+    const days=(dates[i]-t0)/86400000;
+    return acc+v/Math.pow(1+rate,days/365);
   },0);
 }
 
-/* XIRR robusto (bissecção) */
 function xirr(values,dates){
   let low=-0.99, high=10, mid;
   for(let i=0;i<100;i++){
     mid=(low+high)/2;
-    let val=xnpv(mid,values,dates);
-    if(val>0) low=mid;
+    const npv=xnpv(mid,values,dates);
+    if(npv>0) low=mid;
     else high=mid;
   }
   return mid;

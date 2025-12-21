@@ -5,9 +5,10 @@
 <title>TIR, VPL e Montante (FV) | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule TIR, VPL e Montante (FV) a partir de fluxos de caixa. Calculadora financeira gratuita por período informado.">
+<meta name="description" content="Calcule TIR, VPL e Montante (FV) a partir de fluxos de caixa por data. Simulador financeiro gratuito do SimulaLucro.">
 <link rel="canonical" href="https://simulalucro.com.br/tir-vpl-fv.html">
-<meta name="robots" content="index, follow">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 *{box-sizing:border-box}
@@ -18,7 +19,7 @@ body{
   color:#1f2937;
   padding-bottom:90px;
 }
-a{color:#2563eb;text-decoration:none}
+a{text-decoration:none;color:#2563eb}
 
 /* HEADER */
 .header{
@@ -32,27 +33,19 @@ a{color:#2563eb;text-decoration:none}
   max-width:1100px;
   margin:auto;
   padding:14px 16px;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
-  align-items:center;
 }
-.logo{font-weight:700;color:#111827}
-
-/* MENU */
 .menu{
-  width:100%;
   display:flex;
-  flex-wrap:wrap;
   gap:14px;
-  margin-top:10px;
+  flex-wrap:wrap;
+  font-size:14px;
 }
-.menu a{font-size:14px;font-weight:500}
+.menu a{font-weight:500}
 .menu a.active{font-weight:700;text-decoration:underline}
 
 /* CONTAINER */
 .container{
-  max-width:900px;
+  max-width:1100px;
   margin:auto;
   padding:24px 16px;
 }
@@ -64,39 +57,44 @@ a{color:#2563eb;text-decoration:none}
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
-.card h1{margin-top:0}
 
-/* FORM */
-label{font-weight:600;font-size:14px}
-input{
-  width:100%;
+/* FLUXO */
+.flow-header, .flow-row{
+  display:grid;
+  grid-template-columns:1.2fr 1fr 1fr 40px;
+  gap:8px;
+}
+.flow-header{
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+.flow-row input, .flow-row select{
   padding:10px;
-  margin:6px 0 14px;
   border-radius:8px;
   border:1px solid #d1d5db;
 }
-button{
-  padding:12px 16px;
+.flow-row button{
+  background:#ef4444;
+  color:#fff;
   border:none;
-  border-radius:10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* BUTTONS */
+.btn{
+  margin-top:12px;
+  padding:14px;
+  border:none;
+  border-radius:12px;
   background:#2563eb;
   color:#fff;
   font-weight:700;
   cursor:pointer;
+  width:100%;
 }
-button:hover{background:#1d4ed8}
-
-.flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.small{font-size:13px;color:#6b7280}
-
-/* FLUXO */
-.flow-row{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr auto;
-  gap:8px;
-  margin-bottom:8px;
-}
-.flow-row select{padding:10px;border-radius:8px}
+.btn.secondary{background:#374151}
 
 /* RESULT */
 .result{
@@ -104,35 +102,12 @@ button:hover{background:#1d4ed8}
   padding:20px;
   background:#ecfeff;
   border-radius:12px;
-  display:none;
 }
 
-/* FOOTER */
-.footer{
-  background:#fff;
-  border-top:1px solid #e5e7eb;
-  text-align:center;
-  padding:28px 16px;
-  font-size:13px;
-  color:#6b7280;
+/* CHART */
+.chart-box{
+  margin-top:32px;
 }
-.footer a{margin:0 6px}
-
-/* MENU MOBILE */
-.menu-mobile{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#fff;
-  border-top:1px solid #e5e7eb;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 0;
-  font-size:12px;
-}
-.menu-mobile span{display:block;font-size:18px}
-@media(min-width:769px){.menu-mobile{display:none}}
 </style>
 </head>
 
@@ -140,8 +115,7 @@ button:hover{background:#1d4ed8}
 
 <header class="header">
   <div class="header-inner">
-    <a href="index.html" class="logo">💰 SimulaLucro</a>
-    <nav class="menu">
+    <div class="menu">
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
       <a href="comparativo.html">Comparativo</a>
@@ -150,7 +124,7 @@ button:hover{background:#1d4ed8}
       <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="tir-vpl-fv.html" class="active">TIR / VPL</a>
-    </nav>
+    </div>
   </div>
 </header>
 
@@ -158,64 +132,45 @@ button:hover{background:#1d4ed8}
 
 <div class="card">
   <h1>📊 TIR, VPL e Montante (FV)</h1>
-  <p>Calcule a viabilidade de investimentos a partir de fluxos de caixa por período informado.</p>
+  <p>Analise investimentos com base em fluxos de caixa por data.</p>
 
   <h3>Fluxo de Caixa</h3>
-  <div id="fluxos"></div>
 
-  <button onclick="addFluxo()">➕ Adicionar linha</button>
-
-  <hr>
-
-  <label>Taxa de juros por período</label>
-  <div class="flex">
-    <input id="taxa" placeholder="Ex: 10">
-    <select id="tipoTaxa">
-      <option value="percent">%</option>
-      <option value="decimal">Decimal</option>
-    </select>
+  <div class="flow-header">
+    <span>Data do fluxo</span>
+    <span>Valor (R$)</span>
+    <span>Tipo</span>
+    <span></span>
   </div>
-  <div class="small">A taxa deve corresponder ao mesmo período dos fluxos.</div>
 
-  <br>
-  <button onclick="calcular()">Calcular</button>
+  <div id="flows"></div>
 
-  <div id="resultado" class="result"></div>
-</div>
+  <button class="btn secondary" onclick="addFluxo()">➕ Adicionar linha</button>
 
-<div class="card" style="margin-top:40px">
-  <h2>O que é ROI, TIR e VPL?</h2>
-  <p>
-    <strong>TIR (Taxa Interna de Retorno)</strong> indica a rentabilidade do investimento.
-    <br><strong>VPL (Valor Presente Líquido)</strong> mostra se o investimento cria valor.
-    <br><strong>FV (Montante)</strong> representa o valor final acumulado.
-  </p>
-  <p class="small">
-    Esta calculadora é apenas uma simulação e não constitui recomendação financeira.
-  </p>
+  <h3 style="margin-top:24px">Taxa de desconto</h3>
+  <input id="taxa" type="number" placeholder="Ex: 1">
+  <select id="tipoTaxa">
+    <option value="percent">Percentual (%)</option>
+    <option value="decimal">Decimal</option>
+  </select>
+
+  <button class="btn" onclick="calcular()">Calcular</button>
+
+  <div id="resultado" class="result" style="display:none"></div>
+
+  <div class="chart-box">
+    <canvas id="grafico"></canvas>
+  </div>
 </div>
 
 </main>
 
-<footer class="footer">
-  <a href="index.html">Início</a> ·
-  <a href="sobre.html">Sobre</a> ·
-  <a href="contato.html">Contato</a> ·
-  <a href="politica-privacidade.html">Privacidade</a>
-  <p>© 2025 SimulaLucro</p>
-</footer>
-
-<nav class="menu-mobile">
-  <a href="index.html"><span>🏠</span>Início</a>
-  <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
-  <a href="tir-vpl-fv.html"><span>📊</span>TIR/VPL</a>
-</nav>
-
 <script>
-let fluxos = [];
+let fluxos=[];
+let chart;
 
 function addFluxo(){
-  fluxos.push({periodo: fluxos.length, valor:0, tipo:"saida"});
+  fluxos.push({data:"",valor:0,tipo:"saida"});
   render();
 }
 
@@ -225,54 +180,73 @@ function removeFluxo(i){
 }
 
 function render(){
-  const div = document.getElementById("fluxos");
-  div.innerHTML = "";
+  let html="";
   fluxos.forEach((f,i)=>{
-    div.innerHTML += `
+    html+=`
       <div class="flow-row">
-        <input value="${f.periodo}" onchange="fluxos[${i}].periodo=this.value">
-        <input value="${f.valor}" onchange="fluxos[${i}].valor=this.value">
+        <input type="date" onchange="fluxos[${i}].data=this.value">
+        <input type="number" onchange="fluxos[${i}].valor=this.value">
         <select onchange="fluxos[${i}].tipo=this.value">
-          <option value="entrada"${f.tipo=="entrada"?" selected":""}>Entrada</option>
-          <option value="saida"${f.tipo=="saida"?" selected":""}>Saída</option>
+          <option value="saida">Saída</option>
+          <option value="entrada">Entrada</option>
         </select>
         <button onclick="removeFluxo(${i})">✖</button>
       </div>
     `;
   });
+  document.getElementById("flows").innerHTML=html;
 }
 
 function calcular(){
-  let taxa = Number(document.getElementById("taxa").value);
+  let taxa=Number(document.getElementById("taxa").value);
   if(document.getElementById("tipoTaxa").value==="percent") taxa/=100;
 
-  let cashflows = fluxos.map(f=> f.tipo==="entrada"?Number(f.valor):-Number(f.valor));
+  let dados=fluxos.filter(f=>f.data && f.valor!=0);
+  dados.sort((a,b)=>new Date(a.data)-new Date(b.data));
 
-  // VPL
-  let vpl = cashflows.reduce((acc,v,i)=>acc+v/Math.pow(1+taxa,i),0);
+  let base=new Date(dados[0].data);
+  let labels=[];
+  let valores=[];
 
-  // FV
-  let fv = cashflows.reduce((acc,v,i)=>acc+v*Math.pow(1+taxa,(cashflows.length-1-i)),0);
+  let vpl=0;
+  let maxMes=0;
 
-  // TIR (aproximação)
-  let tir = taxa;
-  for(let k=0;k<1000;k++){
-    let f=0,df=0;
-    cashflows.forEach((v,i)=>{
-      f+=v/Math.pow(1+tir,i);
-      df+=-i*v/Math.pow(1+tir,i+1);
-    });
-    tir = tir - f/df;
-  }
+  dados.forEach(f=>{
+    let d=new Date(f.data);
+    let meses=(d.getFullYear()-base.getFullYear())*12+(d.getMonth()-base.getMonth());
+    let v=(f.tipo==="entrada"?1:-1)*Number(f.valor);
+    labels.push(f.data);
+    valores.push(v);
+    vpl+=v/Math.pow(1+taxa,meses);
+    maxMes=Math.max(maxMes,meses);
+  });
 
-  const r = document.getElementById("resultado");
-  r.style.display="block";
-  r.innerHTML = `
-    <strong>Resultados:</strong><br><br>
-    📉 VPL: <strong>R$ ${vpl.toFixed(2)}</strong><br>
-    📈 TIR: <strong>${(tir*100).toFixed(2)}%</strong><br>
-    💰 Montante (FV): <strong>R$ ${fv.toFixed(2)}</strong>
+  let fv=0;
+  dados.forEach(f=>{
+    let d=new Date(f.data);
+    let meses=(d.getFullYear()-base.getFullYear())*12+(d.getMonth()-base.getMonth());
+    let v=(f.tipo==="entrada"?1:-1)*Number(f.valor);
+    fv+=v*Math.pow(1+taxa,(maxMes-meses));
+  });
+
+  document.getElementById("resultado").style.display="block";
+  document.getElementById("resultado").innerHTML=`
+    📉 <strong>VPL:</strong> R$ ${vpl.toFixed(2)}<br>
+    💰 <strong>Montante (FV):</strong> R$ ${fv.toFixed(2)}
   `;
+
+  if(chart) chart.destroy();
+  chart=new Chart(document.getElementById("grafico"),{
+    type:"bar",
+    data:{
+      labels,
+      datasets:[{
+        label:"Fluxo de Caixa",
+        data:valores,
+        backgroundColor:valores.map(v=>v>=0?"#22c55e":"#ef4444")
+      }]
+    }
+  });
 }
 
 addFluxo();

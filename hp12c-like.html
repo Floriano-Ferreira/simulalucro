@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>TIR, VPL, Payback e Montante (HP12c-like) | SimulaLucro</title>
+<title>TIR, VPL, Payback e Montante | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadora financeira HP12c-like online. Calcule TIR, VPL, Payback simples e descontado, FV e PMT com fluxo de caixa por período.">
+<meta name="description" content="Calculadora financeira completa: TIR, VPL, Payback simples e descontado, FV e PMT com fluxo de caixa por período.">
 
 <style>
 body{
@@ -30,50 +30,34 @@ header{
   box-shadow:0 10px 25px rgba(0,0,0,.08);
   margin-bottom:32px;
 }
-h1,h2{margin-top:0}
 .flow-header,.flow-row{
   display:grid;
-  grid-template-columns:130px 120px 110px 40px;
+  grid-template-columns:120px 110px 100px 36px;
   gap:8px;
   align-items:center;
 }
-.flow-header{
-  font-weight:700;
-  margin-bottom:8px;
-}
+.flow-header{font-weight:700}
 .flow-row{margin-bottom:8px}
 input,select,button{
   padding:8px;
   border-radius:8px;
   border:1px solid #d1d5db;
-  font-size:14px;
 }
 button{
-  cursor:pointer;
   background:#2563eb;
   color:#fff;
-  border:none;
   font-weight:700;
+  cursor:pointer;
 }
 button:hover{background:#1d4ed8}
-.remove{
-  background:#ef4444;
-}
-.add{
-  margin-top:12px;
-}
+.remove{background:#ef4444}
 .result{
   background:#ecfeff;
   padding:20px;
   border-radius:12px;
   margin-top:24px;
 }
-canvas{margin-top:24px}
-@media(max-width:600px){
-  .flow-header,.flow-row{
-    grid-template-columns:110px 100px 90px 36px;
-  }
-}
+canvas{margin-top:24px;width:100%}
 </style>
 </head>
 
@@ -88,10 +72,8 @@ canvas{margin-top:24px}
 <div class="container">
 
 <div class="card">
-<h1>📊 TIR, VPL, Payback e Montante (HP12c-like)</h1>
-<p>Calculadora financeira avançada baseada em fluxo de caixa por período.</p>
-
-<h2>Fluxo de Caixa</h2>
+<h1>📊 TIR, VPL, Payback e Montante</h1>
+<p>Fluxo de caixa por período (modelo HP12c-like).</p>
 
 <div class="flow-header">
   <div>Data</div>
@@ -102,89 +84,83 @@ canvas{margin-top:24px}
 
 <div id="flows"></div>
 
-<button class="add" onclick="addRow()">+ Adicionar linha</button>
+<button onclick="addRow()">+ Adicionar linha</button>
 
-<h2 style="margin-top:32px">Taxa de desconto (% por período)</h2>
+<h3 style="margin-top:24px">Taxa de desconto (% por período)</h3>
 <input id="rate" placeholder="Ex: 10">
 
 <button style="margin-top:16px" onclick="calculate()">Calcular</button>
 
 <div id="output" class="result" style="display:none"></div>
 
-<canvas id="chart" height="120"></canvas>
-
+<canvas id="chart" height="200"></canvas>
 </div>
 
 <div class="card">
-<h2>📘 Explicação das Variáveis</h2>
+<h2>📘 Como usar</h2>
 <ul>
-<li><strong>CF0:</strong> Investimento inicial (obrigatório, normalmente negativo).</li>
-<li><strong>Entradas:</strong> Receitas ou retornos.</li>
-<li><strong>Saídas:</strong> Custos ou investimentos.</li>
-<li><strong>VPL:</strong> Valor presente do projeto.</li>
-<li><strong>TIR:</strong> Taxa que zera o VPL.</li>
-<li><strong>Payback:</strong> Tempo para recuperar o investimento.</li>
-<li><strong>Payback descontado:</strong> Considera o valor do dinheiro no tempo.</li>
-<li><strong>FV:</strong> Valor acumulado ao final.</li>
-<li><strong>PMT:</strong> Valor médio periódico equivalente.</li>
+<li>Primeira linha é o <strong>CF0</strong> (investimento inicial – Saída).</li>
+<li>Entradas = receitas | Saídas = custos.</li>
+<li>A taxa deve ser por período (ex: mês).</li>
 </ul>
-
-<p><strong>Este cálculo é educativo e não constitui recomendação financeira.</strong></p>
+<p><strong>Esta calculadora é educativa e não constitui recomendação financeira.</strong></p>
 </div>
 
 </div>
 
 <script>
-let flowsDiv=document.getElementById("flows");
+const flows=document.getElementById("flows");
 
-function addRow(date="",value="",type="Saída"){
-  let row=document.createElement("div");
+function addRow(){
+  const row=document.createElement("div");
   row.className="flow-row";
   row.innerHTML=`
-    <input type="date" value="${date}">
-    <input type="number" placeholder="Ex: 1000" value="${value}">
+    <input type="date">
+    <input type="number" placeholder="Ex: 1000">
     <select>
-      <option ${type==="Entrada"?"selected":""}>Entrada</option>
-      <option ${type==="Saída"?"selected":""}>Saída</option>
+      <option>Entrada</option>
+      <option>Saída</option>
     </select>
     <button class="remove" onclick="this.parentElement.remove()">×</button>
   `;
-  flowsDiv.appendChild(row);
+  flows.appendChild(row);
 }
 
-addRow(); // CF0 obrigatório
+addRow(); // CF0
 
 function calculate(){
-  let rows=[...document.querySelectorAll(".flow-row")];
-  if(rows.length<2){alert("Inclua CF0 e pelo menos um fluxo.");return;}
+  const rows=[...document.querySelectorAll(".flow-row")];
+  const rate=Number(document.getElementById("rate").value)/100;
 
-  let rate=Number(document.getElementById("rate").value)/100;
+  if(rows.length<2){alert("Inclua CF0 e ao menos um fluxo.");return;}
   if(rate<=0){alert("Informe a taxa.");return;}
 
-  let cashflows=[];
-  rows.forEach((r,i)=>{
-    let v=Number(r.children[1].value);
-    let t=r.children[2].value;
-    if(i===0 && t!=="Saída"){alert("CF0 deve ser Saída.");throw"";}
-    cashflows.push(t==="Entrada"?v:-v);
-  });
+  let cfs=[];
+  for(let i=0;i<rows.length;i++){
+    const val=Number(rows[i].children[1].value);
+    const type=rows[i].children[2].value;
+    if(!val){alert("Preencha todos os valores.");return;}
+    if(i===0 && type!=="Saída"){alert("CF0 deve ser Saída.");return;}
+    cfs.push(type==="Entrada"?val:-val);
+  }
 
   let vpl=0,acc=0,fv=0,pay=null,payd=null;
-  cashflows.forEach((cf,i)=>{
-    let d=cf/Math.pow(1+rate,i);
-    vpl+=d;
+  cfs.forEach((cf,i)=>{
+    const disc=cf/Math.pow(1+rate,i);
+    vpl+=disc;
     acc+=cf;
-    fv+=cf*Math.pow(1+rate, cashflows.length-1-i);
+    fv+=cf*Math.pow(1+rate,cfs.length-1-i);
     if(pay===null && acc>=0)pay=i;
-    if(payd===null && (vpl)>=0)payd=i;
+    if(payd===null && vpl>=0)payd=i;
   });
 
-  let tir=calcIRR(cashflows)*100;
-  let pmt=(vpl*rate)/(1-Math.pow(1+rate,-cashflows.length));
+  const tir=irr(cfs)*100;
+  const pmt=(vpl*rate)/(1-Math.pow(1+rate,-cfs.length));
 
-  document.getElementById("output").style.display="block";
-  document.getElementById("output").innerHTML=`
-    <strong>Resultados:</strong><br><br>
+  const out=document.getElementById("output");
+  out.style.display="block";
+  out.innerHTML=`
+    <strong>Resultados</strong><br><br>
     VPL: R$ ${vpl.toFixed(2)}<br>
     TIR: ${tir.toFixed(2)}%<br>
     FV: R$ ${fv.toFixed(2)}<br>
@@ -193,12 +169,12 @@ function calculate(){
     Payback descontado: ${payd ?? "Não recupera"} períodos
   `;
 
-  drawChart(cashflows);
+  drawChart(cfs);
 }
 
-function calcIRR(cfs){
+function irr(cfs){
   let r=0.1;
-  for(let i=0;i<1000;i++){
+  for(let i=0;i<500;i++){
     let f=0,df=0;
     cfs.forEach((cf,t)=>{
       f+=cf/Math.pow(1+r,t);
@@ -210,16 +186,20 @@ function calcIRR(cfs){
 }
 
 function drawChart(cfs){
-  let c=document.getElementById("chart");
-  let ctx=c.getContext("2d");
-  ctx.clearRect(0,0,c.width,c.height);
+  const canvas=document.getElementById("chart");
+  const ctx=canvas.getContext("2d");
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  const max=Math.max(...cfs.map(v=>Math.abs(v)))||1;
   let acc=0;
+
   cfs.forEach((v,i)=>{
     acc+=v;
+    const h=(v/max)*80;
     ctx.fillStyle=v>=0?"#22c55e":"#ef4444";
-    ctx.fillRect(i*60+20,60-v/50,30,v/50);
+    ctx.fillRect(i*60+20,100-h,30,h);
     ctx.fillStyle="#000";
-    ctx.fillText(acc.toFixed(0),i*60+20,110);
+    ctx.fillText(acc.toFixed(0),i*60+20,190);
   });
 }
 </script>

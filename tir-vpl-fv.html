@@ -5,7 +5,7 @@
 <title>TIR, VPL e Montante (FV) | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule TIR, VPL e Montante (FV) a partir de fluxos de caixa por data. Simulador financeiro gratuito do SimulaLucro.">
+<meta name="description" content="Calcule TIR, VPL e Montante (FV) a partir de fluxos de caixa por data. Simulador financeiro gratuito.">
 <link rel="canonical" href="https://simulalucro.com.br/tir-vpl-fv.html">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -59,27 +59,68 @@ a{text-decoration:none;color:#2563eb}
 }
 
 /* FLUXO */
-.flow-header, .flow-row{
-  display:grid;
-  grid-template-columns:1.2fr 1fr 1fr 40px;
-  gap:8px;
-}
 .flow-header{
+  display:grid;
+  grid-template-columns:110px 1fr 90px 36px;
+  gap:8px;
   font-size:13px;
   font-weight:700;
   margin-bottom:8px;
 }
-.flow-row input, .flow-row select{
+
+.flow-row{
+  display:grid;
+  grid-template-columns:110px 1fr 90px 36px;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+.flow-row input,
+.flow-row select{
   padding:10px;
   border-radius:8px;
   border:1px solid #d1d5db;
+  width:100%;
 }
+
 .flow-row button{
   background:#ef4444;
   color:#fff;
   border:none;
   border-radius:8px;
   cursor:pointer;
+}
+
+/* MOBILE AJUSTE */
+@media(max-width:768px){
+  .flow-header{
+    display:none;
+  }
+
+  .flow-row{
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:
+      "data tipo"
+      "valor valor"
+      "remove remove";
+  }
+
+  .flow-row input[type="date"]{
+    grid-area:data;
+  }
+
+  .flow-row select{
+    grid-area:tipo;
+  }
+
+  .flow-row input[type="number"]{
+    grid-area:valor;
+  }
+
+  .flow-row button{
+    grid-area:remove;
+    width:100%;
+  }
 }
 
 /* BUTTONS */
@@ -132,12 +173,12 @@ a{text-decoration:none;color:#2563eb}
 
 <div class="card">
   <h1>📊 TIR, VPL e Montante (FV)</h1>
-  <p>Analise investimentos com base em fluxos de caixa por data.</p>
+  <p>Calcule a viabilidade de investimentos com base em fluxos de caixa por data.</p>
 
   <h3>Fluxo de Caixa</h3>
 
   <div class="flow-header">
-    <span>Data do fluxo</span>
+    <span>Data</span>
     <span>Valor (R$)</span>
     <span>Tipo</span>
     <span></span>
@@ -202,12 +243,13 @@ function calcular(){
   if(document.getElementById("tipoTaxa").value==="percent") taxa/=100;
 
   let dados=fluxos.filter(f=>f.data && f.valor!=0);
-  dados.sort((a,b)=>new Date(a.data)-new Date(b.data));
+  if(dados.length<2){alert("Informe pelo menos dois fluxos.");return;}
 
+  dados.sort((a,b)=>new Date(a.data)-new Date(b.data));
   let base=new Date(dados[0].data);
+
   let labels=[];
   let valores=[];
-
   let vpl=0;
   let maxMes=0;
 

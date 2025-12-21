@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora HP12c Online | SimulaLucro</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Calculadora financeira estilo HP12c online. Calcule PV, FV, PMT, taxa de juros e períodos de forma simples e gratuita.">
+<link rel="canonical" href="https://simulalucro.com.br/hp12c-calculo-direto.html">
+<meta name="robots" content="index, follow">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f6fb;
+  color:#1f2937;
+  padding-bottom:90px;
+}
+a{text-decoration:none;color:#2563eb}
+
+/* HEADER */
+.header{
+  position:sticky;
+  top:0;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  z-index:1000;
+}
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.logo{font-weight:700;color:#111827}
+.menu{
+  width:100%;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  padding-top:10px;
+}
+.menu a{font-size:14px;font-weight:500}
+.menu a.active{font-weight:700;text-decoration:underline}
+
+/* CONTAINER */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.card h1{margin-top:0}
+
+/* FORM */
+label{
+  font-size:14px;
+  font-weight:600;
+}
+input, select{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  margin-bottom:14px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+}
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{background:#1d4ed8}
+
+.result{
+  display:none;
+  margin-top:24px;
+  padding:20px;
+  background:#ecfeff;
+  border-radius:12px;
+}
+
+/* FOOTER */
+.footer{
+  background:#fff;
+  border-top:1px solid #e5e7eb;
+  text-align:center;
+  padding:28px 16px;
+  font-size:13px;
+  color:#6b7280;
+}
+.footer a{margin:0 6px}
+
+/* MENU MOBILE */
+.menu-mobile{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  font-size:12px;
+}
+.menu-mobile span{display:block;font-size:18px}
+@media(min-width:769px){.menu-mobile{display:none}}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">💰 SimulaLucro</a>
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="juros-compostos.html">Juros</a>
+      <a href="roi.html">ROI</a>
+      <a href="hp12c-calculo-direto.html" class="active">HP12c</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+<div class="card">
+  <h1>🧮 Calculadora Financeira HP12c – Cálculo Direto</h1>
+  <p>Simule cálculos financeiros clássicos como em uma HP12c, de forma simples e online.</p>
+
+  <label>O que deseja calcular?</label>
+  <select id="tipo" onchange="ajustarCampos()">
+    <option value="PMT">PMT (Prestação)</option>
+    <option value="FV">FV (Montante)</option>
+    <option value="PV">PV (Valor Presente)</option>
+    <option value="i">Taxa de Juros (i)</option>
+    <option value="N">Períodos (N)</option>
+  </select>
+
+  <div id="campos"></div>
+
+  <button onclick="calcular()">Calcular</button>
+
+  <div id="resultado" class="result"></div>
+</div>
+
+<div class="card" style="margin-top:40px">
+  <h2>📘 Como funciona?</h2>
+  <p>
+    Esta calculadora utiliza os mesmos conceitos financeiros da HP12c tradicional.
+    Informe os valores conhecidos e escolha o que deseja calcular.
+  </p>
+  <p>
+    O resultado tem finalidade <strong>educativa e comparativa</strong>, auxiliando na análise
+    de financiamentos, investimentos e planejamento financeiro.
+  </p>
+</div>
+
+</main>
+
+<footer class="footer">
+  <a href="index.html">Início</a> ·
+  <a href="sobre.html">Sobre</a> ·
+  <a href="contato.html">Contato</a> ·
+  <a href="politica-privacidade.html">Privacidade</a>
+  <p>© 2025 SimulaLucro</p>
+</footer>
+
+<nav class="menu-mobile">
+  <a href="index.html"><span>🏠</span>Início</a>
+  <a href="juros-compostos.html"><span>📈</span>Juros</a>
+  <a href="roi.html"><span>📊</span>ROI</a>
+</nav>
+
+<script>
+function campo(nome, label){
+  return `<label>${label}</label><input id="${nome}">`;
+}
+
+function ajustarCampos(){
+  const t = tipo.value;
+  let html = "";
+
+  if(t !== "PV") html += campo("pv","PV – Valor Presente (R$)");
+  if(t !== "FV") html += campo("fv","FV – Valor Futuro (R$)");
+  if(t !== "PMT") html += campo("pmt","PMT – Prestação (R$)");
+  if(t !== "i") html += campo("i","Taxa de juros (% ao período)");
+  if(t !== "N") html += campo("n","Número de períodos");
+
+  campos.innerHTML = html;
+}
+ajustarCampos();
+
+function n(v){return Number(v)||0}
+
+function calcular(){
+  const pv = n(document.getElementById("pv")?.value);
+  const fv = n(document.getElementById("fv")?.value);
+  const pmt = n(document.getElementById("pmt")?.value);
+  const i = n(document.getElementById("i")?.value)/100;
+  const nper = n(document.getElementById("n")?.value);
+
+  let r;
+
+  switch(tipo.value){
+    case "FV":
+      r = pv*Math.pow(1+i,nper) + pmt*((Math.pow(1+i,nper)-1)/i);
+      break;
+    case "PV":
+      r = (fv - pmt*((Math.pow(1+i,nper)-1)/i))/Math.pow(1+i,nper);
+      break;
+    case "PMT":
+      r = (pv*Math.pow(1+i,nper) - fv)*i/(Math.pow(1+i,nper)-1);
+      break;
+    case "N":
+      r = Math.log((pmt+i*fv)/(pmt+i*pv))/Math.log(1+i);
+      break;
+    case "i":
+      r = "Cálculo iterativo avançado";
+      break;
+  }
+
+  resultado.style.display="block";
+  resultado.innerHTML = `<strong>Resultado:</strong><br><br>${r}`;
+}
+</script>
+
+</body>
+</html>

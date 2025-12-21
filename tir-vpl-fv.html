@@ -62,7 +62,7 @@ a{text-decoration:none;color:#2563eb}
 .flow-header,
 .flow-row{
   display:grid;
-  grid-template-columns:90px 1fr 70px 32px;
+  grid-template-columns:110px 1fr 80px 34px;
   gap:6px;
   align-items:center;
 }
@@ -70,6 +70,7 @@ a{text-decoration:none;color:#2563eb}
 .flow-header{
   font-size:12px;
   font-weight:700;
+  color:#374151;
   margin-bottom:6px;
 }
 
@@ -79,15 +80,19 @@ a{text-decoration:none;color:#2563eb}
 
 .flow-row input,
 .flow-row select{
-  padding:8px;
+  padding:6px;
   font-size:13px;
   border-radius:8px;
   border:1px solid #d1d5db;
-  height:36px;
+  height:34px;
+}
+
+.flow-row input[type="date"]{
+  padding:4px 6px;
 }
 
 .flow-row select{
-  padding:6px;
+  padding:4px;
 }
 
 .flow-row button{
@@ -95,8 +100,9 @@ a{text-decoration:none;color:#2563eb}
   color:#fff;
   border:none;
   border-radius:8px;
-  height:36px;
+  height:34px;
   cursor:pointer;
+  font-size:14px;
 }
 
 /* BOTÕES */
@@ -132,7 +138,7 @@ a{text-decoration:none;color:#2563eb}
 
 <header class="header">
   <div class="header-inner">
-    <div class="menu">
+    <nav class="menu">
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
       <a href="comparativo.html">Comparativo</a>
@@ -141,7 +147,7 @@ a{text-decoration:none;color:#2563eb}
       <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="tir-vpl-fv.html" class="active">TIR / VPL</a>
-    </div>
+    </nav>
   </div>
 </header>
 
@@ -149,12 +155,13 @@ a{text-decoration:none;color:#2563eb}
 
 <div class="card">
   <h1>📊 TIR, VPL e Montante (FV)</h1>
-  <p>Calcule a viabilidade de investimentos a partir de fluxos de caixa por período.</p>
+  <p>Calcule a viabilidade de investimentos a partir de fluxos de caixa por período informado.</p>
 
   <h3>Fluxo de Caixa</h3>
 
+  <!-- CABEÇALHO ALINHADO -->
   <div class="flow-header">
-    <span>Período</span>
+    <span>Data</span>
     <span>Valor (R$)</span>
     <span>Tipo</span>
     <span></span>
@@ -187,7 +194,7 @@ let fluxos=[];
 let chart;
 
 function addFluxo(){
-  fluxos.push({periodo:fluxos.length,valor:0,tipo:"saida"});
+  fluxos.push({data:"",valor:0,tipo:"saida"});
   render();
 }
 
@@ -201,7 +208,7 @@ function render(){
   fluxos.forEach((f,i)=>{
     html+=`
       <div class="flow-row">
-        <input type="number" value="${f.periodo}" onchange="fluxos[${i}].periodo=this.value">
+        <input type="date" value="${f.data}" onchange="fluxos[${i}].data=this.value">
         <input type="number" value="${f.valor}" onchange="fluxos[${i}].valor=this.value">
         <select onchange="fluxos[${i}].tipo=this.value">
           <option value="saida" ${f.tipo==="saida"?"selected":""}>Saída</option>
@@ -218,26 +225,26 @@ function calcular(){
   let taxa=Number(document.getElementById("taxa").value);
   if(document.getElementById("tipoTaxa").value==="percent") taxa/=100;
 
-  if(fluxos.length<2){alert("Informe ao menos dois períodos.");return;}
+  if(fluxos.length<2){
+    alert("Informe ao menos dois fluxos de caixa.");
+    return;
+  }
 
   let vpl=0;
-  let maxP=Math.max(...fluxos.map(f=>Number(f.periodo)));
   let labels=[];
   let valores=[];
 
-  fluxos.forEach(f=>{
+  fluxos.forEach((f,i)=>{
     let v=(f.tipo==="entrada"?1:-1)*Number(f.valor);
-    let p=Number(f.periodo);
-    vpl+=v/Math.pow(1+taxa,p);
-    labels.push("P"+p);
+    vpl+=v/Math.pow(1+taxa,i);
+    labels.push(f.data || "P"+i);
     valores.push(v);
   });
 
   let fv=0;
-  fluxos.forEach(f=>{
+  fluxos.forEach((f,i)=>{
     let v=(f.tipo==="entrada"?1:-1)*Number(f.valor);
-    let p=Number(f.periodo);
-    fv+=v*Math.pow(1+taxa,(maxP-p));
+    fv+=v*Math.pow(1+taxa,(fluxos.length-1-i));
   });
 
   document.getElementById("resultado").style.display="block";

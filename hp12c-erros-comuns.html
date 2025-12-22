@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Erros Comuns na HP12c | Evite Resultados Errados</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Veja os erros mais comuns ao usar a HP12c e aprenda como evitar resultados errados em cálculos financeiros.">
+<link rel="canonical" href="https://simulalucro.com.br/hp12c-erros-comuns.html">
+
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#1f2937}
+.container{max-width:900px;margin:auto;padding:32px 16px}
+.card{background:#fff;padding:28px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.08);margin-bottom:24px}
+h1,h2{margin-top:0}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+<div class="card">
+<h1>❌ Erros Comuns na HP12c (e como evitar)</h1>
+<p>
+Muitos resultados incorretos na HP12c não são falhas da fórmula,
+mas erros de configuração ou interpretação.
+</p>
+</div>
+
+<div class="card">
+<h2>1. Misturar taxa mensal com períodos anuais</h2>
+<p>
+Erro clássico: usar <strong>i mensal</strong> com <strong>n em anos</strong>.
+</p>
+<p><strong>Solução:</strong> sempre alinhe taxa e período.</p>
+</div>
+
+<div class="card">
+<h2>2. Sinais invertidos (PV, PMT, FV)</h2>
+<p>
+Entradas devem ser negativas e saídas positivas (ou vice-versa),
+mas nunca todas com o mesmo sinal.
+</p>
+</div>
+
+<div class="card">
+<h2>3. Esquecer o fluxo no período zero</h2>
+<p>
+Sem investimento inicial (data zero), a TIR pode virar infinito ou inexistente.
+</p>
+</div>
+
+<div class="card">
+<h2>4. Interpretar TIR sem comparar com taxa mínima</h2>
+<p>
+TIR sozinha não decide nada. Compare sempre com custo de capital ou taxa mínima.
+</p>
+</div>
+
+<div class="card">
+<h2>5. Confiar apenas no Payback simples</h2>
+<p>
+Payback ignora o valor do dinheiro no tempo.
+Use sempre o <strong>payback descontado</strong>.
+</p>
+</div>
+
+<div class="card">
+<h2>👉 Continue aprendendo</h2>
+<ul>
+<li><a href="hp12c-explicada.html">Guia completo da HP12c</a></li>
+<li><a href="hp12c-calculo-direto.html">HP12c online</a></li>
+<li><a href="tir-vpl-fv.html">Fluxo de caixa avançado</a></li>
+</ul>
+</div>
+
+</main>
+
+</body>
+</html>

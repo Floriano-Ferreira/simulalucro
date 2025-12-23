@@ -2,251 +2,81 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>TIR, VPL, Payback e Montante | SimulaLucro</title>
-
+<title>TIR, VPL e FV | SimulaLucro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadora financeira HP12c-like para TIR, VPL, Payback e Montante com fluxo de caixa.">
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f3f6fb;
-  color:#1f2937;
-}
-header{
-  background:#fff;
-  padding:14px 16px;
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
-}
-.container{
-  max-width:960px;
-  margin:auto;
-  padding:24px 16px;
-}
-.card{
-  background:#fff;
-  padding:24px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-h1,h2{margin-top:0}
-.fluxo-header, .fluxo-linha{
-  display:grid;
-  grid-template-columns:110px 120px 100px 36px;
-  gap:8px;
-  align-items:center;
-}
-.fluxo-header{
-  font-weight:700;
-  margin-bottom:6px;
-}
-.fluxo-linha input, .fluxo-linha select{
-  padding:8px;
-  border-radius:8px;
-  border:1px solid #d1d5db;
-}
-.btn{
-  background:#2563eb;
-  color:#fff;
-  border:none;
-  padding:10px 16px;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
-}
-.btn.small{padding:6px 10px;font-size:13px}
-.btn.danger{background:#ef4444}
-.result{
-  margin-top:24px;
-  background:#ecfeff;
-  padding:20px;
-  border-radius:12px;
-}
-.toggle{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  margin-top:8px;
-}
-canvas{margin-top:30px;width:100%;max-width:100%}
-@media(max-width:600px){
-  .fluxo-header, .fluxo-linha{
-    grid-template-columns:95px 90px 80px 32px;
-  }
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#f3f6fb}
+.container{max-width:900px;margin:auto;padding:24px}
+.card{background:#fff;padding:24px;border-radius:16px}
+input,select{padding:10px;border-radius:8px;border:1px solid #ccc}
+button{padding:12px;border:none;border-radius:10px;background:#2563eb;color:#fff}
+.row{display:grid;grid-template-columns:120px 120px 120px;gap:10px;margin-bottom:10px}
+.result{background:#ecfeff;padding:16px;border-radius:12px;margin-top:20px}
 </style>
 </head>
 
 <body>
-
-<header>
-  <strong>💰 SimulaLucro</strong>
-</header>
-
-<main class="container">
+<div class="container">
 <div class="card">
+<h1>📈 TIR, VPL e Montante (FV)</h1>
 
-<h1>📊 TIR, VPL, Payback e Montante (HP12c-like)</h1>
-<p>Insira o fluxo de caixa com data zero obrigatória.</p>
-
-<h2>Fluxo de Caixa</h2>
-
-<div class="fluxo-header">
-  <div>Data</div>
-  <div>Valor (R$)</div>
-  <div>Tipo</div>
-  <div></div>
+<div id="fluxos">
+  <div class="row">
+    <input type="number" value="0" disabled>
+    <input type="number" placeholder="Valor">
+    <select><option value="-1">Saída</option><option value="1">Entrada</option></select>
+  </div>
 </div>
 
-<div id="fluxos"></div>
+<button onclick="add()">+ Linha</button>
 
-<button class="btn small" onclick="addLinha()">+ Adicionar linha</button>
+<br><br>
+<label>Taxa de desconto (% por período)</label>
+<input id="taxa" value="10">
 
-<h2 style="margin-top:30px">Taxa de desconto</h2>
+<button onclick="calc()">Calcular</button>
 
-<input id="taxa" placeholder="Ex: 10" style="width:120px">
-<div class="toggle">
-  <label><input type="radio" name="modo" value="percentual" checked> %</label>
-  <label><input type="radio" name="modo" value="decimal"> Decimal</label>
+<div id="out" class="result"></div>
 </div>
-
-<button class="btn" style="margin-top:16px" onclick="calcular()">Calcular</button>
-
-<div id="resultado" class="result"></div>
-
-<canvas id="grafico" height="200"></canvas>
-
 </div>
-</main>
 
 <script>
-let fluxosDiv = document.getElementById("fluxos");
-
-function addLinha(data="", valor="", tipo="Saída"){
-  let row = document.createElement("div");
-  row.className = "fluxo-linha";
-  row.innerHTML = `
-    <input type="date" value="${data}">
-    <input type="number" placeholder="0" value="${valor}">
-    <select>
-      <option ${tipo==="Entrada"?"selected":""}>Entrada</option>
-      <option ${tipo==="Saída"?"selected":""}>Saída</option>
-    </select>
-    <button class="btn danger small" onclick="this.parentNode.remove()">×</button>
-  `;
-  fluxosDiv.appendChild(row);
+function add(){
+  let r=document.createElement("div");
+  r.className="row";
+  r.innerHTML=`<input type="number"><input type="number"><select>
+  <option value="-1">Saída</option><option value="1">Entrada</option></select>`;
+  fluxos.appendChild(r);
 }
 
-// linha inicial (Data Zero)
-addLinha("", "", "Saída");
-
-function calcular(){
-  let rows = document.querySelectorAll(".fluxo-linha");
-  if(rows.length < 2){
-    alert("Informe pelo menos Data Zero + um fluxo.");
-    return;
-  }
-
-  let datas = [];
-  let valores = [];
-
+function calc(){
+  let rows=[...document.querySelectorAll(".row")];
+  let cf=[];
   rows.forEach((r,i)=>{
-    let d = new Date(r.children[0].value);
-    let v = Number(r.children[1].value)||0;
-    let t = r.children[2].value;
-    if(i===0 && t!=="Saída"){
-      alert("Data zero deve ser Saída (investimento inicial).");
-      throw "";
-    }
-    if(t==="Saída") v = -Math.abs(v);
-    datas.push(d);
-    valores.push(v);
+    let v=+r.children[1].value||0;
+    let s=+r.children[2].value;
+    cf.push(v*s);
   });
 
-  let taxa = Number(document.getElementById("taxa").value);
-  let modo = document.querySelector("input[name='modo']:checked").value;
-  if(modo==="percentual") taxa/=100;
+  let rate=(+taxa.value)/100;
 
-  // ordena por data
-  let base = datas[0];
-  let fluxos = valores.map((v,i)=>{
-    let dias = (datas[i]-base)/(1000*60*60*24);
-    return {v:v, t:dias/30};
-  });
+  let vpl=cf.reduce((a,v,i)=>a+v/Math.pow(1+rate,i),0);
+  let fv=cf.reduce((a,v,i)=>a+v*Math.pow(1+rate,cf.length-1-i),0);
 
-  // VPL
-  let vpl = fluxos.reduce((s,f)=>s + f.v/Math.pow(1+taxa,f.t),0);
-
-  // FV
-  let maxT = Math.max(...fluxos.map(f=>f.t));
-  let fv = fluxos.reduce((s,f)=>s + f.v*Math.pow(1+taxa,maxT-f.t),0);
-
-  // TIR (Newton-Raphson)
-  function calcTIR(){
-    let i=0.1;
-    for(let k=0;k<1000;k++){
-      let f=0, df=0;
-      fluxos.forEach(fl=>{
-        f+=fl.v/Math.pow(1+i,fl.t);
-        df+=-fl.t*fl.v/Math.pow(1+i,fl.t+1);
-      });
-      let ni = i - f/df;
-      if(Math.abs(ni-i)<1e-7) return ni;
-      i=ni;
-    }
-    return null;
-  }
-  let tir = calcTIR();
-
-  // Payback
-  let acum=0, paySimple="Não recupera";
-  for(let i=0;i<fluxos.length;i++){
-    acum+=fluxos[i].v;
-    if(acum>=0){paySimple=fluxos[i].t.toFixed(1)+" períodos";break;}
+  let irr=0.1;
+  for(let k=0;k<1000;k++){
+    let f=cf.reduce((a,v,i)=>a+v/Math.pow(1+irr,i),0);
+    irr+=f>0?0.0001:-0.0001;
   }
 
-  let acumD=0, payDesc="Não recupera";
-  for(let i=0;i<fluxos.length;i++){
-    acumD+=fluxos[i].v/Math.pow(1+taxa,fluxos[i].t);
-    if(acumD>=0){payDesc=fluxos[i].t.toFixed(1)+" períodos";break;}
-  }
-
-  document.getElementById("resultado").innerHTML = `
-    <strong>Resultados</strong><br><br>
-    VPL: <strong>R$ ${vpl.toFixed(2)}</strong><br>
-    FV: <strong>R$ ${fv.toFixed(2)}</strong><br>
-    TIR: <strong>${tir? (tir*100).toFixed(2)+"%":"Não calculável"}</strong><br>
-    Payback simples: <strong>${paySimple}</strong><br>
-    Payback descontado: <strong>${payDesc}</strong>
+  out.innerHTML=`
+  <strong>VPL:</strong> R$ ${vpl.toFixed(2)}<br>
+  <strong>FV:</strong> R$ ${fv.toFixed(2)}<br>
+  <strong>TIR:</strong> ${(irr*100).toFixed(2)}%
   `;
-
-  desenharGrafico(fluxos);
-}
-
-function desenharGrafico(fluxos){
-  let c = document.getElementById("grafico");
-  let ctx = c.getContext("2d");
-  ctx.clearRect(0,0,c.width,c.height);
-
-  let max = Math.max(...fluxos.map(f=>Math.abs(f.v))) * 1.2;
-  let w = c.width/fluxos.length;
-
-  let acum=0;
-  fluxos.forEach((f,i)=>{
-    let h = (f.v/max)*(c.height/2);
-    ctx.fillStyle = f.v>=0?"#22c55e":"#ef4444";
-    ctx.fillRect(i*w, c.height/2-h, w*0.6, h);
-
-    acum+=f.v;
-    let y = c.height/2 - (acum/max)*(c.height/2);
-    ctx.fillStyle="#2563eb";
-    ctx.beginPath();
-    ctx.arc(i*w+w*0.3,y,4,0,Math.PI*2);
-    ctx.fill();
-  });
 }
 </script>
-
 </body>
 </html>

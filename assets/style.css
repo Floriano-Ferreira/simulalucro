@@ -1,1 +1,149 @@
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family: Arial, system-ui, -apple-system, BlinkMacSystemFont;
+  background:#f6f8fb;
+  color:#1f2937;
+  padding-bottom:90px;
+}
+
+a{
+  color:#2563eb;
+  text-decoration:none;
+}
+a:hover{text-decoration:underline}
+
+/* HEADER */
+.header{
+  position:sticky;
+  top:0;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  z-index:1000;
+}
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  font-weight:700;
+  font-size:18px;
+  color:#111827;
+}
+.menu{
+  width:100%;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  padding-top:10px;
+}
+.menu a{
+  font-size:14px;
+  font-weight:500;
+}
+.menu a.active{
+  font-weight:700;
+  text-decoration:underline;
+}
+
+/* CONTAINER */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.card h1,h2{margin-top:0}
+
+/* FORM */
+label{
+  font-size:14px;
+  font-weight:600;
+}
+input,select{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  margin-bottom:14px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+  font-size:15px;
+}
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{background:#1d4ed8}
+
+/* RESULT */
+.result{
+  margin-top:24px;
+  padding:20px;
+  background:#ecfeff;
+  border-radius:12px;
+  display:none;
+}
+
+/* INTERPRETAÇÃO */
+.interpretacao{
+  margin-top:40px;
+  font-size:15px;
+  color:#374151;
+}
+
+/* DISCLAIMER */
+.disclaimer{
+  margin-top:24px;
+  font-size:13px;
+  color:#6b7280;
+}
+
+/* FOOTER */
+.footer{
+  background:#fff;
+  border-top:1px solid #e5e7eb;
+  text-align:center;
+  padding:28px 16px;
+  font-size:13px;
+  color:#6b7280;
+}
+.footer a{margin:0 6px}
+
+/* MENU MOBILE */
+.menu-mobile{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  font-size:12px;
+}
+.menu-mobile span{display:block;font-size:18px}
+@media(min-width:769px){
+  .menu-mobile{display:none}
+}
 

@@ -3,142 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>SimulaLucro | Calculadoras Financeiras Gratuitas</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadoras financeiras gratuitas para lucro, Airbnb, ROI, juros compostos, ponto de equilíbrio e investimentos. Simples, rápidas e online.">
+<meta name="description" content="Calculadoras financeiras gratuitas para lucro, Airbnb, ROI, juros compostos, HP12c e análise de investimentos.">
 <link rel="canonical" href="https://simulalucro.com.br/">
-<meta name="robots" content="index, follow">
-
-<style>
-/* ===== RESET ===== */
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f3f6fb;
-  color:#1f2937;
-  padding-bottom:90px;
-}
-a{text-decoration:none;color:#2563eb}
-
-/* ===== HEADER ===== */
-.header{
-  position:sticky;
-  top:0;
-  background:#ffffff;
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
-  z-index:1000;
-}
-.header-inner{
-  max-width:1100px;
-  margin:auto;
-  padding:14px 16px;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
-  align-items:center;
-}
-.logo{
-  font-weight:700;
-  color:#111827;
-}
-
-/* ===== MENU TOPO ===== */
-.menu{
-  width:100%;
-  margin-top:10px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
-}
-.menu a{
-  font-size:14px;
-  font-weight:500;
-}
-.menu a.active{
-  font-weight:700;
-  text-decoration:underline;
-}
-
-/* ===== CONTAINER ===== */
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:32px 16px;
-}
-
-/* ===== HERO ===== */
-.hero h1{
-  font-size:32px;
-  margin-top:0;
-}
-.hero p{
-  max-width:800px;
-  font-size:16px;
-  line-height:1.6;
-}
-
-/* ===== GRID ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-  margin-top:32px;
-}
-.card{
-  background:#ffffff;
-  padding:24px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-.card h3{margin-top:0}
-.card p{font-size:14px}
-
-/* ===== FOOTER ===== */
-.footer{
-  background:#ffffff;
-  border-top:1px solid #e5e7eb;
-  text-align:center;
-  padding:28px 16px;
-  font-size:13px;
-  color:#6b7280;
-}
-.footer a{margin:0 6px}
-
-/* ===== MENU MOBILE ===== */
-.menu-mobile{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#ffffff;
-  border-top:1px solid #e5e7eb;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 0;
-  font-size:12px;
-}
-.menu-mobile a{
-  text-align:center;
-  color:#1f2937;
-}
-.menu-mobile span{
-  display:block;
-  font-size:18px;
-}
-@media(min-width:769px){
-  .menu-mobile{display:none}
-}
-</style>
+<link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
-
     <nav class="menu">
       <a href="index.html" class="active">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
@@ -148,103 +23,50 @@ a{text-decoration:none;color:#2563eb}
       <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="roi.html">ROI</a>
-      <a href="fluxo-caixa.html">Fluxo de Caixa</a>
+      <a href="hp12c-explicada.html">HP12c</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
-  <!-- HERO -->
-  <section class="hero">
+  <div class="card">
     <h1>Calculadoras Financeiras Gratuitas</h1>
     <p>
-      O <strong>SimulaLucro</strong> é um portal gratuito de calculadoras financeiras
-      criado para ajudar você a tomar decisões mais inteligentes sobre
-      lucro, investimentos, preços, Airbnb e rentabilidade.
-      Todas as ferramentas são simples, rápidas e sem necessidade de cadastro.
+      O <strong>SimulaLucro</strong> é um portal educacional com calculadoras financeiras
+      para apoiar decisões mais conscientes sobre lucro, investimentos e precificação.
     </p>
-  </section>
+  </div>
 
-  <!-- GRID DE CALCULADORAS -->
-  <section class="grid">
-
-    <div class="card">
-      <h3>🛏️ Lucro Airbnb</h3>
-      <p>Calcule o lucro mensal real do Airbnb considerando custos e ocupação.</p>
-      <a href="lucro-airbnb.html">Acessar →</a>
-    </div>
-
-    <div class="card">
-      <h3>⚖️ Airbnb x Aluguel</h3>
-      <p>Compare Airbnb e aluguel tradicional e descubra qual compensa mais.</p>
-      <a href="comparativo.html">Acessar →</a>
-    </div>
-
-    <div class="card">
-      <h3>📊 Ponto de Equilíbrio</h3>
-      <p>Descubra quanto precisa faturar para não ter prejuízo.</p>
-      <a href="ponto-equilibrio.html">Acessar →</a>
-    </div>
-
-    <div class="card">
-      <h3>💰 Margem de Lucro</h3>
-      <p>Veja se seus preços realmente geram lucro.</p>
-      <a href="margem-lucro.html">Acessar →</a>
-    </div>
-
-    <div class="card">
-      <h3>🧾 Preço de Serviço</h3>
-      <p>Descubra quanto cobrar por hora ou projeto.</p>
-      <a href="preco-servico.html">Acessar →</a>
-    </div>
-
-    <div class="card">
-      <h3>📈 Juros Compostos</h3>
-      <p>Simule investimentos com aportes e juros ao longo do tempo.</p>
-      <a href="juros-compostos.html">Acessar →</a>
-    </div>
-
-    <div class="card">
-      <h3>📉 ROI</h3>
-      <p>Calcule o retorno sobre investimento de forma simples.</p>
-      <a href="roi.html">Acessar →</a>
-    </div>
-
-    <div class="card">
-      <h3>📑 Fluxo de Caixa</h3>
-      <p>Calcule VPL, TIR, montante e períodos de capitalização.</p>
-      <a href="fluxo-caixa.html">Acessar →</a>
-    </div>
-
-  </section>
-
-  <!-- DISCLAIMER -->
-  <section class="card" style="margin-top:40px">
+  <div class="card interpretacao">
+    <h2>Como usar o SimulaLucro</h2>
     <p>
-      ⚠️ <strong>Aviso:</strong> As calculadoras do SimulaLucro possuem
-      finalidade educativa e comparativa, não constituindo
-      recomendação financeira.
+      Escolha uma calculadora no menu acima e insira seus dados.
+      Cada ferramenta apresenta o resultado acompanhado de interpretação
+      para facilitar o entendimento.
     </p>
-  </section>
+  </div>
+
+  <div class="disclaimer">
+    Esta plataforma possui finalidade exclusivamente educativa e comparativa.
+    Os resultados apresentados não constituem recomendação financeira,
+    de investimento ou consultoria profissional.
+  </div>
 
 </main>
 
 <footer class="footer">
-  <a href="index.html">Início</a> ·
   <a href="sobre.html">Sobre</a> ·
   <a href="contato.html">Contato</a> ·
   <a href="politica-privacidade.html">Privacidade</a>
   <p>© 2025 SimulaLucro</p>
 </footer>
 
-<!-- MENU MOBILE -->
 <nav class="menu-mobile">
   <a href="index.html"><span>🏠</span>Início</a>
   <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
-  <a href="comparativo.html"><span>⚖️</span>Comparar</a>
-  <a href="juros-compostos.html"><span>📈</span>Juros</a>
-  <a href="roi.html"><span>📉</span>ROI</a>
+  <a href="roi.html"><span>📊</span>ROI</a>
+  <a href="hp12c-explicada.html"><span>🧮</span>HP12c</a>
 </nav>
 
 </body>

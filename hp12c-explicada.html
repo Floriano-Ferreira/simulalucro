@@ -1,100 +1,153 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>HP12c Explicada | Guia Completo com Exemplos Interativos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Guia completo da HP12c com exemplos interativos de PV, FV, PMT, taxa de juros, TIR, VPL e Payback.">
-<link rel="canonical" href="https://simulalucro.com.br/hp12c-explicada.html">
-
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#1f2937}
-.container{max-width:900px;margin:auto;padding:32px 16px}
-.card{background:#fff;padding:28px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.08);margin-bottom:32px}
-h1,h2{margin-top:0}
-.exemplo{background:#f9fafb;border-left:4px solid #2563eb;padding:16px;margin:16px 0}
-.btn{display:inline-block;margin-top:10px;padding:10px 16px;background:#2563eb;color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
-.footer{text-align:center;font-size:13px;color:#6b7280;padding:24px}
-</style>
+  <meta charset="UTF-8">
+  <title>HP12c Explicada | SimulaLucro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aprenda a usar a HP12c passo a passo. Calculadora financeira explicada com exemplos de FV, PV, PMT, i e n.">
+  <link rel="canonical" href="https://simulalucro.com.br/hp12c-explicada.html">
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
 
+<!-- HEADER PADRÃO -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">💰 SimulaLucro</div>
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="lucro-airbnb.html">Airbnb</a>
+      <a href="comparativo.html">Comparativo</a>
+      <a href="equilibrio.html">Equilíbrio</a>
+      <a href="margem.html">Margem</a>
+      <a href="servico.html">Serviço</a>
+      <a href="juros.html">Juros</a>
+      <a href="roi.html">ROI</a>
+      <a class="active" href="hp12c-explicada.html">HP12c</a>
+      <a href="tir-vpl-fv.html">TIR / VPL</a>
+    </nav>
+  </div>
+</header>
+
 <main class="container">
 
-<div class="card">
-<h1>📟 HP12c Explicada — Guia Interativo</h1>
-<p>
-Aprenda os principais cálculos financeiros usados na HP12c com
-<strong>exemplos práticos que você pode testar na calculadora online</strong>.
-</p>
-</div>
+  <!-- INTRO -->
+  <section class="card">
+    <h1>HP12c Explicada</h1>
+    <p>
+      Esta página explica de forma simples e prática como funcionam
+      os principais cálculos da <strong>HP12c</strong>,
+      usando a mesma lógica financeira da calculadora original.
+    </p>
+  </section>
 
-<div class="card">
-<h2>PV — Valor Presente</h2>
-<p>Quanto um valor futuro vale hoje.</p>
+  <!-- VARIÁVEIS -->
+  <section class="card">
+    <h2>Principais variáveis financeiras</h2>
 
-<div class="exemplo">
-<strong>Exemplo:</strong><br>
-Receber R$ 10.000 em 2 anos a 10% ao ano.<br>
-<strong>PV ≈ R$ 8.264</strong>
-<br>
-<a class="btn" href="hp12c-calculo-direto.html?calc=PV">Testar este exemplo</a>
-</div>
-</div>
+    <ul>
+      <li><strong>n</strong> → número de períodos</li>
+      <li><strong>i</strong> → taxa de juros por período</li>
+      <li><strong>PV</strong> → valor presente (capital inicial)</li>
+      <li><strong>PMT</strong> → pagamento periódico</li>
+      <li><strong>FV</strong> → valor futuro</li>
+    </ul>
+  </section>
 
-<div class="card">
-<h2>FV — Valor Futuro (Montante)</h2>
-<p>Quanto um capital cresce ao longo do tempo.</p>
+  <!-- EXEMPLOS -->
+  <section class="card">
+    <h2>Exemplos práticos</h2>
 
-<div class="exemplo">
-<strong>Exemplo:</strong><br>
-Investir R$ 5.000 a 2% ao mês por 12 meses.<br>
-<strong>FV ≈ R$ 6.341</strong>
-<br>
-<a class="btn" href="hp12c-calculo-direto.html?calc=FV">Testar este exemplo</a>
-</div>
-</div>
+    <div class="exemplo">
+      <h3>📈 Exemplo 1 – Calcular Valor Futuro (FV)</h3>
+      <p>
+        Investimento inicial de R$ 10.000 por 24 meses,
+        a uma taxa de 1% ao mês, sem aportes.
+      </p>
+      <pre>
+n = 24  
+i = 1  
+PV = -10000  
+PMT = 0  
+→ FV = ?
+      </pre>
+      <p><strong>Interpretação:</strong> o FV representa quanto o capital
+      se tornará ao final do período.</p>
+    </div>
 
-<div class="card">
-<h2>PMT — Prestação</h2>
-<p>Valor pago ou recebido periodicamente.</p>
+    <div class="exemplo">
+      <h3>💰 Exemplo 2 – Calcular Prestação (PMT)</h3>
+      <p>
+        Empréstimo de R$ 50.000 em 36 meses,
+        com taxa de 2% ao mês.
+      </p>
+      <pre>
+n = 36  
+i = 2  
+PV = 50000  
+FV = 0  
+→ PMT = ?
+      </pre>
+      <p><strong>Interpretação:</strong> o PMT indica o valor da parcela mensal.</p>
+    </div>
 
-<div class="exemplo">
-<strong>Exemplo:</strong><br>
-Empréstimo de R$ 20.000 em 24 meses a 1,5% ao mês.<br>
-<strong>PMT ≈ R$ 1.000</strong>
-<br>
-<a class="btn" href="hp12c-calculo-direto.html?calc=PMT">Testar este exemplo</a>
-</div>
-</div>
+    <div class="exemplo">
+      <h3>⏳ Exemplo 3 – Calcular Período (n)</h3>
+      <p>
+        Quanto tempo é necessário para dobrar um capital
+        com taxa de 1,2% ao mês?
+      </p>
+      <pre>
+i = 1.2  
+PV = -10000  
+FV = 20000  
+PMT = 0  
+→ n = ?
+      </pre>
+    </div>
+  </section>
 
-<div class="card">
-<h2>TIR — Taxa Interna de Retorno</h2>
-<p>Taxa que zera o VPL de um investimento.</p>
+  <!-- INTERPRETAÇÃO -->
+  <section class="card info">
+    <h2>Interpretação dos resultados</h2>
+    <p>
+      Cada variável calculada representa uma decisão financeira:
+    </p>
+    <ul>
+      <li><strong>FV</strong> → crescimento do capital</li>
+      <li><strong>PMT</strong> → esforço financeiro periódico</li>
+      <li><strong>n</strong> → tempo necessário</li>
+      <li><strong>i</strong> → custo ou retorno do dinheiro</li>
+    </ul>
+  </section>
 
-<div class="exemplo">
-<strong>Exemplo:</strong><br>
-Investimento de R$ 10.000 com retornos de R$ 3.500 por 4 anos.<br>
-<strong>TIR ≈ 18% ao ano</strong>
-<br>
-<a class="btn" href="tir-vpl-fv.html">Calcular TIR real</a>
-</div>
-</div>
+  <!-- CLUSTER SEO -->
+  <section class="card links">
+    <h3>Aprenda também</h3>
+    <ul>
+      <li><a href="juros.html">📈 Juros Compostos</a></li>
+      <li><a href="roi.html">📊 ROI – Retorno sobre Investimento</a></li>
+      <li><a href="tir-vpl-fv.html">📉 TIR, VPL e Payback</a></li>
+    </ul>
+  </section>
 
-<div class="card">
-<h2>📌 Próximos passos</h2>
-<ul>
-<li><a href="hp12c-calculo-direto.html">→ Usar a HP12c online</a></li>
-<li><a href="hp12c-erros-comuns.html">→ Ver erros comuns na HP12c</a></li>
-<li><a href="tir-vpl-fv.html">→ Analisar investimentos avançados</a></li>
-</ul>
-</div>
+  <!-- DISCLAIMER -->
+  <section class="disclaimer">
+    ⚠️ Esta calculadora e os exemplos apresentados possuem finalidade
+    exclusivamente educativa e não constituem recomendação financeira.
+  </section>
 
 </main>
 
+<!-- FOOTER PADRÃO -->
 <footer class="footer">
-© 2025 SimulaLucro · Conteúdo educativo
+  <p>
+    <a href="sobre.html">Sobre</a> ·
+    <a href="contato.html">Contato</a> ·
+    <a href="politica-privacidade.html">Privacidade</a>
+  </p>
+  <p>© 2025 SimulaLucro</p>
 </footer>
 
 </body>

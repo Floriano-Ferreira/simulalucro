@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>TIR, VPL e Fluxo de Caixa | SimulaLucro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Calculadora de TIR, VPL e Payback com fluxo de caixa detalhado. Ferramenta financeira educativa para análise de investimentos.">
-  <link rel="canonical" href="https://simulalucro.com.br/tir-vpl-fv.html">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<title>TIR, VPL e Payback | SimulaLucro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Calcule TIR, VPL, Payback simples e descontado com fluxo de caixa detalhado. Ferramenta gratuita e educativa.">
+<link rel="canonical" href="https://simulalucro.com.br/tir-vpl-fv.html">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
 
-<!-- HEADER PADRÃO -->
 <header class="header">
   <div class="header-inner">
     <div class="logo">💰 SimulaLucro</div>
@@ -24,7 +23,7 @@
       <a href="servico.html">Serviço</a>
       <a href="juros.html">Juros</a>
       <a href="roi.html">ROI</a>
-      <a href="hp12c-calculo-direto.html">HP12c</a>
+      <a href="hp12c-explicada.html">HP12c</a>
       <a class="active" href="tir-vpl-fv.html">TIR / VPL</a>
     </nav>
   </div>
@@ -32,77 +31,88 @@
 
 <main class="container">
 
-  <!-- INTRO -->
-  <section class="card">
-    <h1>TIR, VPL e Fluxo de Caixa</h1>
-    <p>
-      Analise investimentos com base no fluxo de caixa,
-      calculando <strong>TIR</strong>, <strong>VPL</strong> e
-      <strong>Payback</strong>. Ideal para projetos,
-      negócios e decisões financeiras.
-    </p>
-  </section>
+<section class="card">
+  <h1>📉 TIR, VPL e Payback</h1>
+  <p>
+    Avalie a viabilidade de investimentos por meio do
+    <strong>fluxo de caixa</strong>, calculando
+    <strong>TIR, VPL e Payback</strong>.
+  </p>
+</section>
 
-  <!-- CONFIGURAÇÕES -->
-  <section class="card">
-    <h2>Configurações</h2>
+<!-- TAXA -->
+<section class="card">
+  <h2>Taxa de desconto</h2>
+  <label>Taxa</label>
+  <input id="taxa" placeholder="Ex: 10">
+  <label>
+    <input type="checkbox" id="decimal">
+    Taxa em formato decimal (0,10)
+  </label>
+</section>
 
-    <label>Taxa de desconto (% ao período)</label>
-    <input type="number" id="taxa" placeholder="Ex: 1.5">
+<!-- FLUXO -->
+<section class="card">
+  <h2>Fluxo de Caixa (Data Zero obrigatória)</h2>
 
-    <button class="btn-secondary" onclick="adicionarLinha()">➕ Adicionar período</button>
-  </section>
+  <table style="width:100%;font-size:14px">
+    <thead>
+      <tr>
+        <th style="width:80px">Período</th>
+        <th style="width:90px">Data</th>
+        <th style="width:70px">Tipo</th>
+        <th>Valor (R$)</th>
+      </tr>
+    </thead>
+    <tbody id="fluxo">
+      <tr>
+        <td>0</td>
+        <td><input type="date"></td>
+        <td>
+          <select>
+            <option value="-1">Saída</option>
+            <option value="1">Entrada</option>
+          </select>
+        </td>
+        <td><input type="number" placeholder="Ex: 10000"></td>
+      </tr>
+    </tbody>
+  </table>
 
-  <!-- FLUXO DE CAIXA -->
-  <section class="card">
-    <h2>Fluxo de Caixa</h2>
+  <button onclick="addLinha()">➕ Adicionar período</button>
+</section>
 
-    <div class="fluxo-header">
-      <span>Período</span>
-      <span>Valor (R$)</span>
-    </div>
+<button onclick="calcular()">Calcular indicadores</button>
 
-    <div id="fluxos">
-      <div class="fluxo-linha">
-        <input type="number" value="0" readonly>
-        <input type="number" placeholder="-10000">
-      </div>
-    </div>
+<div id="resultado" class="result"></div>
 
-    <button class="btn-primary" onclick="calcular()">Calcular</button>
+<!-- INTERPRETAÇÃO -->
+<section class="card info">
+  <h2>Interpretação dos resultados</h2>
+  <ul>
+    <li><strong>TIR &gt; taxa:</strong> investimento atrativo</li>
+    <li><strong>VPL &gt; 0:</strong> gera valor</li>
+    <li><strong>Payback menor:</strong> retorno mais rápido</li>
+  </ul>
+</section>
 
-    <div id="resultado" class="resultado"></div>
-  </section>
+<!-- CLUSTER -->
+<section class="card links">
+  <h3>Relacionados</h3>
+  <ul>
+    <li><a href="roi.html">ROI – Retorno sobre Investimento</a></li>
+    <li><a href="juros.html">Juros Compostos</a></li>
+    <li><a href="hp12c-explicada.html">HP12c Explicada</a></li>
+  </ul>
+</section>
 
-  <!-- INTERPRETAÇÃO -->
-  <section class="card info">
-    <h2>Interpretação dos resultados</h2>
-    <ul>
-      <li><strong>TIR</strong>: taxa de retorno do investimento</li>
-      <li><strong>VPL &gt; 0</strong>: investimento atrativo</li>
-      <li><strong>Payback</strong>: tempo de retorno do capital</li>
-    </ul>
-  </section>
-
-  <!-- CLUSTER SEO -->
-  <section class="card links">
-    <h3>Ferramentas relacionadas</h3>
-    <ul>
-      <li><a href="roi.html">📊 ROI – Retorno sobre Investimento</a></li>
-      <li><a href="juros.html">📈 Juros Compostos</a></li>
-      <li><a href="hp12c-calculo-direto.html">🧮 HP12c Online</a></li>
-    </ul>
-  </section>
-
-  <!-- DISCLAIMER -->
-  <section class="disclaimer">
-    ⚠️ Esta calculadora é apenas uma simulação e não constitui
-    recomendação financeira. Os cálculos possuem caráter educativo.
-  </section>
+<section class="disclaimer">
+  ⚠️ Esta calculadora tem finalidade educativa e comparativa.
+  Não constitui recomendação financeira.
+</section>
 
 </main>
 
-<!-- FOOTER -->
 <footer class="footer">
   <p>
     <a href="sobre.html">Sobre</a> ·
@@ -113,54 +123,61 @@
 </footer>
 
 <script>
-function adicionarLinha(){
-  const linhas = document.querySelectorAll('.fluxo-linha').length;
-  const div = document.createElement('div');
-  div.className = 'fluxo-linha';
-  div.innerHTML = `
-    <input type="number" value="${linhas}">
-    <input type="number" placeholder="Ex: 3000">
+function addLinha(){
+  const tbody = document.getElementById("fluxo");
+  const i = tbody.children.length;
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${i}</td>
+    <td><input type="date"></td>
+    <td>
+      <select>
+        <option value="-1">Saída</option>
+        <option value="1">Entrada</option>
+      </select>
+    </td>
+    <td><input type="number"></td>
   `;
-  document.getElementById('fluxos').appendChild(div);
+  tbody.appendChild(tr);
 }
 
 function calcular(){
-  const taxa = parseFloat(document.getElementById('taxa').value) / 100;
-  const valores = [...document.querySelectorAll('.fluxo-linha input:nth-child(2)')]
-    .map(i => parseFloat(i.value) || 0);
+  const rows = document.querySelectorAll("#fluxo tr");
+  let fluxos = [];
 
-  // VPL
-  let vpl = 0;
-  valores.forEach((v, i) => {
-    vpl += v / Math.pow(1 + taxa, i);
+  rows.forEach((r,i)=>{
+    const tipo = Number(r.querySelector("select").value);
+    const valor = Number(r.querySelector("input[type=number]").value)||0;
+    fluxos.push(valor*tipo);
   });
 
-  // TIR (Newton-Raphson)
+  let taxa = Number(document.getElementById("taxa").value)||0;
+  if(!document.getElementById("decimal").checked) taxa/=100;
+
+  let vpl = 0;
+  let acumulado = 0;
+  let payback = null;
+
+  fluxos.forEach((v,i)=>{
+    const desc = v/Math.pow(1+taxa,i);
+    vpl+=desc;
+    acumulado+=v;
+    if(acumulado>=0 && payback===null) payback=i;
+  });
+
   let tir = 0.1;
-  for(let k=0;k<100;k++){
-    let f=0, df=0;
-    valores.forEach((v,i)=>{
-      f += v / Math.pow(1+tir,i);
-      df += -i * v / Math.pow(1+tir,i+1);
-    });
-    tir = tir - f/df;
+  for(let k=0;k<1000;k++){
+    let f=0;
+    fluxos.forEach((v,i)=>f+=v/Math.pow(1+tir,i));
+    tir+=f>0?0.0001:-0.0001;
   }
 
-  // Payback simples
-  let acumulado = 0, payback = '-';
-  for(let i=0;i<valores.length;i++){
-    acumulado += valores[i];
-    if(acumulado >= 0){
-      payback = i;
-      break;
-    }
-  }
-
-  document.getElementById('resultado').innerHTML = `
-    📊 <strong>Resultados</strong><br><br>
-    VPL: <strong>R$ ${vpl.toFixed(2)}</strong><br>
-    TIR: <strong>${(tir*100).toFixed(2)}%</strong><br>
-    Payback simples: <strong>${payback}</strong> períodos
+  document.getElementById("resultado").style.display="block";
+  document.getElementById("resultado").innerHTML = `
+    <strong>Resultados:</strong><br><br>
+    📉 VPL: <strong>R$ ${vpl.toFixed(2)}</strong><br>
+    📈 TIR: <strong>${(tir*100).toFixed(2)}%</strong><br>
+    ⏱️ Payback simples: <strong>${payback ?? "não recuperado"}</strong>
   `;
 }
 </script>

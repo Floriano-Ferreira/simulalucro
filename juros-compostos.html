@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <title>Juros Compostos | SimulaLucro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Calcule juros compostos com aporte mensal, taxa e período. Simulador educativo para planejamento financeiro e investimentos.">
+  <meta name="description" content="Calculadora de juros compostos online. Simule crescimento de investimentos com aportes mensais e taxa de juros.">
   <link rel="canonical" href="https://simulalucro.com.br/juros.html">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- HEADER PADRÃO -->
 <header class="header">
   <div class="header-inner">
     <div class="logo">💰 SimulaLucro</div>
@@ -24,90 +24,86 @@
       <a href="servico.html">Serviço</a>
       <a class="active" href="juros.html">Juros</a>
       <a href="roi.html">ROI</a>
-      <a href="hp12c-calculo-direto.html">HP12c</a>
+      <a href="hp12c-explicada.html">HP12c</a>
+      <a href="tir-vpl-fv.html">TIR / VPL</a>
     </nav>
   </div>
 </header>
 
-<!-- CONTEÚDO -->
 <main class="container">
 
   <!-- INTRO -->
   <section class="card">
-    <h1>Calculadora de Juros Compostos</h1>
+    <h1>📈 Calculadora de Juros Compostos</h1>
     <p>
-      Simule o crescimento do seu dinheiro ao longo do tempo com
-      <strong>juros compostos</strong>, considerando aportes mensais,
-      taxa de juros e período.
+      Simule o crescimento do seu dinheiro ao longo do tempo,
+      considerando juros compostos e aportes periódicos.
     </p>
+  </section>
+
+  <!-- TOGGLE -->
+  <section class="card">
+    <label class="toggle">
+      <input type="checkbox" id="modoAvancado">
+      <span>Modo avançado (aportes mensais)</span>
+    </label>
   </section>
 
   <!-- CALCULADORA -->
   <section class="card">
-    <h2>Dados do investimento</h2>
+    <label>Valor inicial (PV)</label>
+    <input type="number" id="pv" placeholder="Ex: 10000">
 
-    <div class="grid-2">
-      <div>
-        <label>Capital inicial (R$)</label>
-        <input type="number" id="capitalInicial" placeholder="Ex: 5.000">
-      </div>
-
-      <div>
-        <label>Aporte mensal (R$)</label>
-        <input type="number" id="aporteMensal" placeholder="Ex: 500">
-      </div>
-
-      <div>
-        <label>Taxa de juros mensal (%)</label>
-        <input type="number" id="taxa" placeholder="Ex: 1" step="0.01">
-      </div>
-
-      <div>
-        <label>Período (meses)</label>
-        <input type="number" id="periodo" placeholder="Ex: 120">
-      </div>
+    <div id="campoPMT" style="display:none">
+      <label>Aporte mensal (PMT)</label>
+      <input type="number" id="pmt" placeholder="Ex: 500">
     </div>
 
-    <button class="btn-primary" onclick="calcularJuros()">Calcular rendimento</button>
+    <label>Taxa de juros (% ao período)</label>
+    <input type="number" id="taxa" placeholder="Ex: 1">
 
-    <div id="resultado" class="resultado"></div>
+    <label>Número de períodos (n)</label>
+    <input type="number" id="n" placeholder="Ex: 24">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="resultado" class="result"></div>
   </section>
 
   <!-- INTERPRETAÇÃO -->
   <section class="card info">
-    <h2>Interpretação do Resultado</h2>
+    <h2>Interpretação do resultado</h2>
     <p>
-      Os juros compostos fazem com que o rendimento incida
-      não apenas sobre o capital inicial,
-      mas também sobre os juros acumulados ao longo do tempo.
+      O valor final representa quanto o capital inicial
+      se torna após a aplicação dos juros compostos.
     </p>
-    <p>
-      Quanto maior o prazo e a taxa, maior tende a ser
-      o crescimento do patrimônio.
-      Aportes regulares aceleram significativamente o resultado.
-    </p>
+    <ul>
+      <li>Quanto maior a taxa ou o tempo, maior o efeito dos juros</li>
+      <li>Aportes aumentam significativamente o resultado final</li>
+      <li>O tempo é o fator mais poderoso do crescimento</li>
+    </ul>
   </section>
 
-  <!-- LINKS INTERNOS (CLUSTER SEO) -->
+  <!-- CLUSTER SEO -->
   <section class="card links">
-    <h3>Calculadoras relacionadas</h3>
+    <h3>Veja também</h3>
     <ul>
-      <li><a href="roi.html">📈 Retorno sobre Investimento (ROI)</a></li>
-      <li><a href="hp12c-calculo-direto.html">🧮 HP12c – Cálculo Direto</a></li>
-      <li><a href="margem.html">💰 Margem de Lucro</a></li>
+      <li><a href="roi.html">📊 ROI – Retorno sobre Investimento</a></li>
+      <li><a href="hp12c-explicada.html">🧮 HP12c Explicada</a></li>
+      <li><a href="tir-vpl-fv.html">📉 TIR, VPL e Payback</a></li>
     </ul>
   </section>
 
   <!-- DISCLAIMER -->
   <section class="disclaimer">
     ⚠️ Esta calculadora é apenas uma simulação e não constitui
-    recomendação financeira. Os resultados servem para fins
-    educativos e comparativos.
+    recomendação financeira. Resultados passados não garantem
+    retornos futuros.
   </section>
 
 </main>
 
-<!-- FOOTER -->
+<!-- FOOTER PADRÃO -->
 <footer class="footer">
   <p>
     <a href="sobre.html">Sobre</a> ·
@@ -118,32 +114,34 @@
 </footer>
 
 <script>
-function calcularJuros() {
-  const capital = parseFloat(document.getElementById('capitalInicial').value) || 0;
-  const aporte = parseFloat(document.getElementById('aporteMensal').value) || 0;
-  const taxa = (parseFloat(document.getElementById('taxa').value) || 0) / 100;
-  const periodo = parseInt(document.getElementById('periodo').value) || 0;
+const toggle = document.getElementById("modoAvancado");
+const campoPMT = document.getElementById("campoPMT");
 
-  if (capital < 0 || aporte < 0 || taxa <= 0 || periodo <= 0) {
-    document.getElementById('resultado').innerHTML =
-      '⚠️ Preencha os valores corretamente.';
+toggle.addEventListener("change", () => {
+  campoPMT.style.display = toggle.checked ? "block" : "none";
+});
+
+function calcular(){
+  const pv = Number(document.getElementById("pv").value) || 0;
+  const pmt = toggle.checked ? Number(document.getElementById("pmt").value) || 0 : 0;
+  const taxa = (Number(document.getElementById("taxa").value) || 0) / 100;
+  const n = Number(document.getElementById("n").value) || 0;
+
+  if(n <= 0 || taxa <= 0){
+    alert("Informe taxa e períodos válidos.");
     return;
   }
 
-  let montante = capital;
-  let investido = capital;
+  let montante = pv * Math.pow(1 + taxa, n);
 
-  for (let i = 1; i <= periodo; i++) {
-    montante = (montante + aporte) * (1 + taxa);
-    investido += aporte;
+  if(pmt > 0){
+    montante += pmt * ((Math.pow(1 + taxa, n) - 1) / taxa);
   }
 
-  const juros = montante - investido;
-
-  document.getElementById('resultado').innerHTML = `
-    💼 Total investido: <strong>R$ ${investido.toFixed(2)}</strong><br>
-    📈 Valor final: <strong>R$ ${montante.toFixed(2)}</strong><br>
-    💰 Juros acumulados: <strong>R$ ${juros.toFixed(2)}</strong>
+  document.getElementById("resultado").style.display = "block";
+  document.getElementById("resultado").innerHTML = `
+    <strong>Valor final:</strong><br><br>
+    💰 <strong>R$ ${montante.toFixed(2)}</strong>
   `;
 }
 </script>

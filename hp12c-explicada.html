@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>HP12c Explicada | SimulaLucro</title>
+  <title>ROI – Retorno sobre Investimento | SimulaLucro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Aprenda a usar a HP12c passo a passo. Calculadora financeira explicada com exemplos de FV, PV, PMT, i e n.">
-  <link rel="canonical" href="https://simulalucro.com.br/hp12c-explicada.html">
+  <meta name="description" content="Calculadora de ROI (Retorno sobre Investimento). Descubra se um investimento foi lucrativo, neutro ou teve prejuízo.">
+  <link rel="canonical" href="https://simulalucro.com.br/roi.html">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 
@@ -23,8 +23,8 @@
       <a href="margem.html">Margem</a>
       <a href="servico.html">Serviço</a>
       <a href="juros.html">Juros</a>
-      <a href="roi.html">ROI</a>
-      <a class="active" href="hp12c-explicada.html">HP12c</a>
+      <a class="active" href="roi.html">ROI</a>
+      <a href="hp12c-explicada.html">HP12c</a>
       <a href="tir-vpl-fv.html">TIR / VPL</a>
     </nav>
   </div>
@@ -34,108 +34,77 @@
 
   <!-- INTRO -->
   <section class="card">
-    <h1>HP12c Explicada</h1>
+    <h1>📊 Calculadora de ROI</h1>
     <p>
-      Esta página explica de forma simples e prática como funcionam
-      os principais cálculos da <strong>HP12c</strong>,
-      usando a mesma lógica financeira da calculadora original.
+      O <strong>ROI (Return on Investment)</strong> indica,
+      em percentual, quanto você ganhou ou perdeu em relação
+      ao valor investido.
     </p>
   </section>
 
-  <!-- VARIÁVEIS -->
+  <!-- TOGGLE -->
   <section class="card">
-    <h2>Principais variáveis financeiras</h2>
-
-    <ul>
-      <li><strong>n</strong> → número de períodos</li>
-      <li><strong>i</strong> → taxa de juros por período</li>
-      <li><strong>PV</strong> → valor presente (capital inicial)</li>
-      <li><strong>PMT</strong> → pagamento periódico</li>
-      <li><strong>FV</strong> → valor futuro</li>
-    </ul>
+    <label class="toggle">
+      <input type="checkbox" id="modoAvancado">
+      <span>Modo avançado (custos adicionais)</span>
+    </label>
   </section>
 
-  <!-- EXEMPLOS -->
+  <!-- CALCULADORA -->
   <section class="card">
-    <h2>Exemplos práticos</h2>
+    <label>Valor investido (R$)</label>
+    <input type="number" id="investimento" placeholder="Ex: 40000">
 
-    <div class="exemplo">
-      <h3>📈 Exemplo 1 – Calcular Valor Futuro (FV)</h3>
-      <p>
-        Investimento inicial de R$ 10.000 por 24 meses,
-        a uma taxa de 1% ao mês, sem aportes.
-      </p>
-      <pre>
-n = 24  
-i = 1  
-PV = -10000  
-PMT = 0  
-→ FV = ?
-      </pre>
-      <p><strong>Interpretação:</strong> o FV representa quanto o capital
-      se tornará ao final do período.</p>
+    <label>Valor final obtido (R$)</label>
+    <input type="number" id="retorno" placeholder="Ex: 100000">
+
+    <div id="custosExtras" style="display:none">
+      <label>Custos adicionais (taxas, impostos, despesas)</label>
+      <input type="number" id="custos" placeholder="Ex: 5000">
     </div>
 
-    <div class="exemplo">
-      <h3>💰 Exemplo 2 – Calcular Prestação (PMT)</h3>
-      <p>
-        Empréstimo de R$ 50.000 em 36 meses,
-        com taxa de 2% ao mês.
-      </p>
-      <pre>
-n = 36  
-i = 2  
-PV = 50000  
-FV = 0  
-→ PMT = ?
-      </pre>
-      <p><strong>Interpretação:</strong> o PMT indica o valor da parcela mensal.</p>
-    </div>
+    <button onclick="calcularROI()">Calcular ROI</button>
 
-    <div class="exemplo">
-      <h3>⏳ Exemplo 3 – Calcular Período (n)</h3>
-      <p>
-        Quanto tempo é necessário para dobrar um capital
-        com taxa de 1,2% ao mês?
-      </p>
-      <pre>
-i = 1.2  
-PV = -10000  
-FV = 20000  
-PMT = 0  
-→ n = ?
-      </pre>
-    </div>
+    <div id="resultado" class="result"></div>
   </section>
 
   <!-- INTERPRETAÇÃO -->
   <section class="card info">
-    <h2>Interpretação dos resultados</h2>
-    <p>
-      Cada variável calculada representa uma decisão financeira:
-    </p>
+    <h2>Como interpretar o ROI?</h2>
     <ul>
-      <li><strong>FV</strong> → crescimento do capital</li>
-      <li><strong>PMT</strong> → esforço financeiro periódico</li>
-      <li><strong>n</strong> → tempo necessário</li>
-      <li><strong>i</strong> → custo ou retorno do dinheiro</li>
+      <li><strong>ROI positivo</strong> → investimento lucrativo</li>
+      <li><strong>ROI zero</strong> → empate (sem lucro ou prejuízo)</li>
+      <li><strong>ROI negativo</strong> → prejuízo</li>
     </ul>
+
+    <p>
+      Exemplo: um ROI de <strong>1,5 (150%)</strong> significa
+      que o retorno foi uma vez e meia o valor aplicado.
+    </p>
+
+    <p>
+      Em aplicações financeiras simples, o custo considerado
+      costuma ser apenas o capital inicial.
+      Em outros casos, podem ser incluídos custos operacionais,
+      taxas ou despesas adicionais.
+    </p>
   </section>
 
   <!-- CLUSTER SEO -->
   <section class="card links">
-    <h3>Aprenda também</h3>
+    <h3>Veja também</h3>
     <ul>
       <li><a href="juros.html">📈 Juros Compostos</a></li>
-      <li><a href="roi.html">📊 ROI – Retorno sobre Investimento</a></li>
       <li><a href="tir-vpl-fv.html">📉 TIR, VPL e Payback</a></li>
+      <li><a href="hp12c-explicada.html">🧮 HP12c Explicada</a></li>
     </ul>
   </section>
 
   <!-- DISCLAIMER -->
   <section class="disclaimer">
-    ⚠️ Esta calculadora e os exemplos apresentados possuem finalidade
-    exclusivamente educativa e não constituem recomendação financeira.
+    ⚠️ Este cálculo tem finalidade educativa e comparativa,
+    auxiliando na análise de resultados passados.
+    Não constitui recomendação financeira.
   </section>
 
 </main>
@@ -149,6 +118,37 @@ PMT = 0
   </p>
   <p>© 2025 SimulaLucro</p>
 </footer>
+
+<script>
+const toggleROI = document.getElementById("modoAvancado");
+const custosBox = document.getElementById("custosExtras");
+
+toggleROI.addEventListener("change", () => {
+  custosBox.style.display = toggleROI.checked ? "block" : "none";
+});
+
+function calcularROI(){
+  const investimento = Number(document.getElementById("investimento").value) || 0;
+  const retorno = Number(document.getElementById("retorno").value) || 0;
+  const custos = toggleROI.checked ? Number(document.getElementById("custos").value) || 0 : 0;
+
+  if(investimento <= 0){
+    alert("Informe um valor investido válido.");
+    return;
+  }
+
+  const custoTotal = investimento + custos;
+  const lucro = retorno - custoTotal;
+  const roi = lucro / custoTotal;
+
+  document.getElementById("resultado").style.display = "block";
+  document.getElementById("resultado").innerHTML = `
+    <strong>Resultado:</strong><br><br>
+    💰 Lucro / Prejuízo: <strong>R$ ${lucro.toFixed(2)}</strong><br>
+    📊 ROI: <strong>${(roi * 100).toFixed(2)}%</strong>
+  `;
+}
+</script>
 
 </body>
 </html>

@@ -1,159 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Calculadora de Juros Compostos | SimulaLucro</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadora de juros compostos gratuita. Simule investimentos com aportes mensais, inflação e impostos.">
-<link rel="canonical" href="https://simulalucro.com.br/juros-compostos.html">
-<meta name="robots" content="index, follow">
-
-<style>
-/* ===== RESET ===== */
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f3f6fb;
-  color:#1f2937;
-  padding-bottom:90px;
-}
-a{color:#2563eb;text-decoration:none}
-
-/* ===== HEADER ===== */
-.header{
-  position:sticky;
-  top:0;
-  background:#ffffff;
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
-  z-index:1000;
-}
-.header-inner{
-  max-width:1100px;
-  margin:auto;
-  padding:14px 16px;
-  display:flex;
-  flex-direction:column;
-}
-.logo{
-  font-weight:700;
-  color:#111827;
-  font-size:18px;
-}
-
-/* MENU SUPERIOR PADRÃO */
-.menu{
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
-  margin-top:10px;
-}
-.menu a{
-  font-size:14px;
-  font-weight:500;
-}
-.menu a.active{
-  font-weight:700;
-  text-decoration:underline;
-}
-
-/* ===== CONTAINER ===== */
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:24px 16px;
-}
-
-/* ===== CARD ===== */
-.card{
-  background:#ffffff;
-  padding:24px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-.card h1{margin-top:0}
-
-/* ===== FORM ===== */
-label{
-  font-size:14px;
-  font-weight:600;
-}
-input{
-  width:100%;
-  padding:12px;
-  margin-top:6px;
-  margin-bottom:14px;
-  border-radius:10px;
-  border:1px solid #d1d5db;
-}
-button{
-  width:100%;
-  padding:16px;
-  border:none;
-  border-radius:12px;
-  background:#2563eb;
-  color:#fff;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
-}
-button:hover{background:#1d4ed8}
-
-/* TOGGLE */
-.toggle{
-  margin:16px 0;
-  font-size:14px;
-}
-.avancado{
-  display:none;
-  padding:16px;
-  background:#f9fafb;
-  border-radius:12px;
-  margin-bottom:16px;
-}
-
-/* RESULT */
-.result{
-  display:none;
-  margin-top:24px;
-  padding:20px;
-  background:#ecfeff;
-  border-radius:12px;
-}
-
-/* FOOTER */
-.footer{
-  background:#ffffff;
-  border-top:1px solid #e5e7eb;
-  text-align:center;
-  padding:28px 16px;
-  font-size:13px;
-  color:#6b7280;
-}
-.footer a{margin:0 6px}
-
-/* MENU MOBILE */
-.menu-mobile{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#ffffff;
-  border-top:1px solid #e5e7eb;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 0;
-  font-size:12px;
-}
-.menu-mobile span{
-  display:block;
-  font-size:18px;
-}
-@media(min-width:769px){
-  .menu-mobile{display:none}
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Juros Compostos | SimulaLucro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Calcule juros compostos com aporte mensal, taxa e período. Simulador educativo para planejamento financeiro e investimentos.">
+  <link rel="canonical" href="https://simulalucro.com.br/juros.html">
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
@@ -161,123 +14,136 @@ button:hover{background:#1d4ed8}
 <!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <a href="index.html" class="logo">💰 SimulaLucro</a>
-
+    <div class="logo">💰 SimulaLucro</div>
     <nav class="menu">
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
       <a href="comparativo.html">Comparativo</a>
-      <a href="ponto-equilibrio.html">Equilíbrio</a>
-      <a href="margem-lucro.html">Margem</a>
-      <a href="preco-servico.html">Serviço</a>
-      <a href="juros-compostos.html" class="active">Juros</a>
+      <a href="equilibrio.html">Equilíbrio</a>
+      <a href="margem.html">Margem</a>
+      <a href="servico.html">Serviço</a>
+      <a class="active" href="juros.html">Juros</a>
       <a href="roi.html">ROI</a>
+      <a href="hp12c-calculo-direto.html">HP12c</a>
     </nav>
   </div>
 </header>
 
+<!-- CONTEÚDO -->
 <main class="container">
 
-<div class="card">
-  <h1>📈 Calculadora de Juros Compostos</h1>
-  <p>Simule o crescimento do seu dinheiro ao longo do tempo.</p>
+  <!-- INTRO -->
+  <section class="card">
+    <h1>Calculadora de Juros Compostos</h1>
+    <p>
+      Simule o crescimento do seu dinheiro ao longo do tempo com
+      <strong>juros compostos</strong>, considerando aportes mensais,
+      taxa de juros e período.
+    </p>
+  </section>
 
-  <label>Capital inicial (R$)</label>
-  <input id="inicial" placeholder="Ex: 1000">
+  <!-- CALCULADORA -->
+  <section class="card">
+    <h2>Dados do investimento</h2>
 
-  <label>Aporte mensal (R$)</label>
-  <input id="aporte" placeholder="Ex: 500">
+    <div class="grid-2">
+      <div>
+        <label>Capital inicial (R$)</label>
+        <input type="number" id="capitalInicial" placeholder="Ex: 5.000">
+      </div>
 
-  <label>Taxa de juros mensal (%)</label>
-  <input id="taxa" placeholder="Ex: 1">
+      <div>
+        <label>Aporte mensal (R$)</label>
+        <input type="number" id="aporteMensal" placeholder="Ex: 500">
+      </div>
 
-  <label>Período (meses)</label>
-  <input id="meses" placeholder="Ex: 120">
+      <div>
+        <label>Taxa de juros mensal (%)</label>
+        <input type="number" id="taxa" placeholder="Ex: 1" step="0.01">
+      </div>
 
-  <div class="toggle">
-    <label>
-      <input type="checkbox" id="modoAvancado" onclick="toggleAvancado()">
-      Considerar inflação e impostos
-    </label>
-  </div>
+      <div>
+        <label>Período (meses)</label>
+        <input type="number" id="periodo" placeholder="Ex: 120">
+      </div>
+    </div>
 
-  <div id="camposAvancados" class="avancado">
-    <label>Inflação anual (%)</label>
-    <input id="inflacao" placeholder="Ex: 4">
+    <button class="btn-primary" onclick="calcularJuros()">Calcular rendimento</button>
 
-    <label>Impostos sobre o lucro (%)</label>
-    <input id="impostos" placeholder="Ex: 15">
-  </div>
+    <div id="resultado" class="resultado"></div>
+  </section>
 
-  <button onclick="calcular()">Calcular</button>
+  <!-- INTERPRETAÇÃO -->
+  <section class="card info">
+    <h2>Interpretação do Resultado</h2>
+    <p>
+      Os juros compostos fazem com que o rendimento incida
+      não apenas sobre o capital inicial,
+      mas também sobre os juros acumulados ao longo do tempo.
+    </p>
+    <p>
+      Quanto maior o prazo e a taxa, maior tende a ser
+      o crescimento do patrimônio.
+      Aportes regulares aceleram significativamente o resultado.
+    </p>
+  </section>
 
-  <div id="resultado" class="result"></div>
-</div>
+  <!-- LINKS INTERNOS (CLUSTER SEO) -->
+  <section class="card links">
+    <h3>Calculadoras relacionadas</h3>
+    <ul>
+      <li><a href="roi.html">📈 Retorno sobre Investimento (ROI)</a></li>
+      <li><a href="hp12c-calculo-direto.html">🧮 HP12c – Cálculo Direto</a></li>
+      <li><a href="margem.html">💰 Margem de Lucro</a></li>
+    </ul>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="disclaimer">
+    ⚠️ Esta calculadora é apenas uma simulação e não constitui
+    recomendação financeira. Os resultados servem para fins
+    educativos e comparativos.
+  </section>
 
 </main>
 
+<!-- FOOTER -->
 <footer class="footer">
-  <a href="sobre.html">Sobre</a> ·
-  <a href="contato.html">Contato</a> ·
-  <a href="politica-privacidade.html">Privacidade</a>
+  <p>
+    <a href="sobre.html">Sobre</a> ·
+    <a href="contato.html">Contato</a> ·
+    <a href="politica-privacidade.html">Privacidade</a>
+  </p>
   <p>© 2025 SimulaLucro</p>
 </footer>
 
-<nav class="menu-mobile">
-  <a href="index.html"><span>🏠</span>Início</a>
-  <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
-  <a href="comparativo.html"><span>⚖️</span>Comparar</a>
-  <a href="juros-compostos.html"><span>📈</span>Juros</a>
-</nav>
-
 <script>
-function n(v){ return Number(v) || 0 }
+function calcularJuros() {
+  const capital = parseFloat(document.getElementById('capitalInicial').value) || 0;
+  const aporte = parseFloat(document.getElementById('aporteMensal').value) || 0;
+  const taxa = (parseFloat(document.getElementById('taxa').value) || 0) / 100;
+  const periodo = parseInt(document.getElementById('periodo').value) || 0;
 
-function toggleAvancado(){
-  const box = document.getElementById("camposAvancados");
-  box.style.display = box.style.display === "block" ? "none" : "block";
-}
-
-function calcular(){
-  const inicial = n(document.getElementById("inicial").value);
-  const aporte = n(document.getElementById("aporte").value);
-  const taxa = n(document.getElementById("taxa").value) / 100;
-  const meses = n(document.getElementById("meses").value);
-
-  if(inicial <= 0 || taxa <= 0 || meses <= 0){
-    alert("Preencha os campos corretamente.");
+  if (capital < 0 || aporte < 0 || taxa <= 0 || periodo <= 0) {
+    document.getElementById('resultado').innerHTML =
+      '⚠️ Preencha os valores corretamente.';
     return;
   }
 
-  let montante = inicial;
-  let investido = inicial;
+  let montante = capital;
+  let investido = capital;
 
-  for(let i=1;i<=meses;i++){
+  for (let i = 1; i <= periodo; i++) {
     montante = (montante + aporte) * (1 + taxa);
     investido += aporte;
   }
 
-  if(document.getElementById("modoAvancado").checked){
-    const inflacaoAnual = n(document.getElementById("inflacao").value)/100;
-    const impostos = n(document.getElementById("impostos").value)/100;
+  const juros = montante - investido;
 
-    if(inflacaoAnual > 0){
-      const inflacaoMensal = Math.pow(1+inflacaoAnual,1/12)-1;
-      montante = montante / Math.pow(1+inflacaoMensal,meses);
-    }
-    if(impostos > 0){
-      montante = montante * (1 - impostos);
-    }
-  }
-
-  const lucro = montante - investido;
-
-  const r = document.getElementById("resultado");
-  r.style.display="block";
-  r.innerHTML = `
-    💵 Total investido: <strong>R$ ${investido.toFixed(2)}</strong><br>
+  document.getElementById('resultado').innerHTML = `
+    💼 Total investido: <strong>R$ ${investido.toFixed(2)}</strong><br>
     📈 Valor final: <strong>R$ ${montante.toFixed(2)}</strong><br>
-    💰 Ganho real: <strong>R$ ${lucro.toFixed(2)}</strong>
+    💰 Juros acumulados: <strong>R$ ${juros.toFixed(2)}</strong>
   `;
 }
 </script>

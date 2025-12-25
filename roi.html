@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>ROI – Retorno sobre Investimento | SimulaLucro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Calcule o ROI (Retorno sobre Investimento) e descubra se um investimento, projeto ou negócio foi lucrativo. Simulador educativo.">
+  <meta name="description" content="Calculadora de ROI (Retorno sobre Investimento). Descubra se um investimento foi lucrativo, neutro ou teve prejuízo.">
   <link rel="canonical" href="https://simulalucro.com.br/roi.html">
   <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -24,44 +24,48 @@
       <a href="servico.html">Serviço</a>
       <a href="juros.html">Juros</a>
       <a class="active" href="roi.html">ROI</a>
-      <a href="hp12c-calculo-direto.html">HP12c</a>
+      <a href="hp12c-explicada.html">HP12c</a>
+      <a href="tir-vpl-fv.html">TIR / VPL</a>
     </nav>
   </div>
 </header>
 
-<!-- CONTEÚDO -->
 <main class="container">
 
   <!-- INTRO -->
   <section class="card">
-    <h1>Calculadora de ROI (Retorno sobre Investimento)</h1>
+    <h1>📊 Calculadora de ROI</h1>
     <p>
-      O <strong>ROI (Return on Investment)</strong> indica, em percentual,
-      quanto você ganhou ou perdeu em relação ao valor investido.
-      É amplamente utilizado para analisar investimentos, projetos,
-      campanhas de marketing e negócios.
+      O <strong>ROI (Return on Investment)</strong> indica,
+      em percentual, quanto você ganhou ou perdeu em relação
+      ao valor investido.
     </p>
+  </section>
+
+  <!-- TOGGLE -->
+  <section class="card">
+    <label class="toggle">
+      <input type="checkbox" id="modoAvancado">
+      <span>Modo avançado (custos adicionais)</span>
+    </label>
   </section>
 
   <!-- CALCULADORA -->
   <section class="card">
-    <h2>Dados do investimento</h2>
+    <label>Valor investido (R$)</label>
+    <input type="number" id="investimento" placeholder="Ex: 40000">
 
-    <div class="grid-2">
-      <div>
-        <label>Valor investido (R$)</label>
-        <input type="number" id="investido" placeholder="Ex: 40.000">
-      </div>
+    <label>Valor final obtido (R$)</label>
+    <input type="number" id="retorno" placeholder="Ex: 100000">
 
-      <div>
-        <label>Valor de retorno (R$)</label>
-        <input type="number" id="retorno" placeholder="Ex: 100.000">
-      </div>
+    <div id="custosExtras" style="display:none">
+      <label>Custos adicionais (taxas, impostos, despesas)</label>
+      <input type="number" id="custos" placeholder="Ex: 5000">
     </div>
 
-    <button class="btn-primary" onclick="calcularROI()">Calcular ROI</button>
+    <button onclick="calcularROI()">Calcular ROI</button>
 
-    <div id="resultado" class="resultado"></div>
+    <div id="resultado" class="result"></div>
   </section>
 
   <!-- INTERPRETAÇÃO -->
@@ -72,33 +76,35 @@
       <li><strong>ROI zero</strong> → empate (sem lucro ou prejuízo)</li>
       <li><strong>ROI negativo</strong> → prejuízo</li>
     </ul>
+
     <p>
-      Por exemplo, um ROI de <strong>150%</strong> significa que
-      o retorno foi uma vez e meia o valor aplicado.
+      Exemplo: um ROI de <strong>1,5 (150%)</strong> significa
+      que o retorno foi uma vez e meia o valor aplicado.
     </p>
+
     <p>
       Em aplicações financeiras simples, o custo considerado
-      costuma ser o capital inicialmente investido.
+      costuma ser apenas o capital inicial.
       Em outros casos, podem ser incluídos custos operacionais,
-      taxas e despesas adicionais.
+      taxas ou despesas adicionais.
     </p>
   </section>
 
-  <!-- LINKS INTERNOS (CLUSTER SEO) -->
+  <!-- CLUSTER SEO -->
   <section class="card links">
-    <h3>Ferramentas relacionadas</h3>
+    <h3>Veja também</h3>
     <ul>
       <li><a href="juros.html">📈 Juros Compostos</a></li>
-      <li><a href="hp12c-calculo-direto.html">🧮 HP12c – Cálculo Direto</a></li>
-      <li><a href="comparativo.html">⚖️ Comparar investimentos</a></li>
+      <li><a href="tir-vpl-fv.html">📉 TIR, VPL e Payback</a></li>
+      <li><a href="hp12c-explicada.html">🧮 HP12c Explicada</a></li>
     </ul>
   </section>
 
   <!-- DISCLAIMER -->
   <section class="disclaimer">
-    ⚠️ Esta calculadora é apenas uma simulação e não constitui
-    recomendação financeira. O cálculo tem finalidade educativa
-    e comparativa, auxiliando na análise de resultados passados.
+    ⚠️ Este cálculo tem finalidade educativa e comparativa,
+    auxiliando na análise de resultados passados.
+    Não constitui recomendação financeira.
   </section>
 
 </main>
@@ -114,30 +120,32 @@
 </footer>
 
 <script>
-function calcularROI() {
-  const investido = parseFloat(document.getElementById('investido').value) || 0;
-  const retorno = parseFloat(document.getElementById('retorno').value) || 0;
+const toggleROI = document.getElementById("modoAvancado");
+const custosBox = document.getElementById("custosExtras");
 
-  if (investido <= 0) {
-    document.getElementById('resultado').innerHTML =
-      '⚠️ Informe corretamente o valor investido.';
+toggleROI.addEventListener("change", () => {
+  custosBox.style.display = toggleROI.checked ? "block" : "none";
+});
+
+function calcularROI(){
+  const investimento = Number(document.getElementById("investimento").value) || 0;
+  const retorno = Number(document.getElementById("retorno").value) || 0;
+  const custos = toggleROI.checked ? Number(document.getElementById("custos").value) || 0 : 0;
+
+  if(investimento <= 0){
+    alert("Informe um valor investido válido.");
     return;
   }
 
-  const lucro = retorno - investido;
-  const roi = (lucro / investido) * 100;
+  const custoTotal = investimento + custos;
+  const lucro = retorno - custoTotal;
+  const roi = lucro / custoTotal;
 
-  let status = '';
-  if (roi > 0) status = '📈 Investimento lucrativo';
-  else if (roi === 0) status = '⚖️ Empate (sem lucro ou prejuízo)';
-  else status = '📉 Investimento com prejuízo';
-
-  document.getElementById('resultado').innerHTML = `
-    💼 Valor investido: <strong>R$ ${investido.toFixed(2)}</strong><br>
-    💰 Valor de retorno: <strong>R$ ${retorno.toFixed(2)}</strong><br>
-    📊 Lucro / Prejuízo: <strong>R$ ${lucro.toFixed(2)}</strong><br><br>
-    📈 <strong>ROI: ${roi.toFixed(2)}%</strong><br>
-    ${status}
+  document.getElementById("resultado").style.display = "block";
+  document.getElementById("resultado").innerHTML = `
+    <strong>Resultado:</strong><br><br>
+    💰 Lucro / Prejuízo: <strong>R$ ${lucro.toFixed(2)}</strong><br>
+    📊 ROI: <strong>${(roi * 100).toFixed(2)}%</strong>
   `;
 }
 </script>

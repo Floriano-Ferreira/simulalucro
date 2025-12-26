@@ -2,21 +2,132 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-
-<title>Calculadora de Ponto de Equilíbrio | SimulaLucro</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o ponto de equilíbrio do seu negócio e descubra quanto precisa faturar para não ter prejuízo.">
+<title>Ponto de Equilíbrio | SimulaLucro</title>
 
+<meta name="description" content="Calcule o ponto de equilíbrio do seu negócio e descubra quanto precisa faturar para cobrir todos os custos sem lucro ou prejuízo.">
 <link rel="canonical" href="https://simulalucro.com.br/ponto-equilibrio.html">
-<link rel="stylesheet" href="style.css">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  background:#f4f6fb;
+  color:#1f2937;
+  padding-bottom:80px;
+}
+a{text-decoration:none;color:#2563eb}
+
+/* HEADER */
+.header{
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
+}
+.logo{
+  font-weight:700;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.menu{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  font-size:14px;
+  margin-top:8px;
+}
+.menu a{font-weight:500}
+.menu a.active{
+  font-weight:700;
+  text-decoration:underline;
+}
+
+/* CONTAINER */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:24px 16px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  margin-bottom:24px;
+}
+.card h1{font-size:26px;margin-bottom:8px}
+.card p{color:#4b5563;margin-bottom:16px}
+
+/* FORM */
+.grid{
+  display:grid;
+  gap:16px;
+}
+@media(min-width:768px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+label{
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:6px;
+  display:block;
+}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+  font-size:15px;
+}
+button{
+  width:100%;
+  margin-top:16px;
+  padding:14px;
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* RESULT */
+.result{
+  background:#f0fdf4;
+  border:1px solid #bbf7d0;
+  border-radius:16px;
+  padding:18px;
+  margin-top:20px;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:32px 16px;
+  font-size:14px;
+  color:#6b7280;
+}
+footer a{margin:0 6px}
+</style>
 </head>
 
 <body>
 
 <header class="header">
   <div class="header-inner">
-    <a href="index.html" class="logo">💰 SimulaLucro</a>
+    <div class="logo">💰 SimulaLucro</div>
     <nav class="menu">
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
@@ -26,67 +137,61 @@
       <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="roi.html">ROI</a>
-      <a href="hp12c-calculo-direto.html">HP12c</a>
+      <a href="hp12c.html">HP12c</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
-  <!-- CARD PRINCIPAL -->
-  <div class="card">
+  <section class="card">
     <h1>📊 Calculadora de Ponto de Equilíbrio</h1>
-
     <p>
-      Descubra quanto seu negócio precisa faturar para cobrir todos os custos,
-      sem gerar lucro ou prejuízo.
+      Descubra quanto precisa faturar para cobrir todos os custos,
+      <strong>sem lucro e sem prejuízo</strong>.
     </p>
 
-    <label>Custos Fixos Mensais (R$)</label>
-    <input type="number" id="custosFixos" placeholder="Ex: 3000">
+    <div class="grid">
+      <div>
+        <label>Custos Fixos Mensais (R$)</label>
+        <input id="fixos" type="number" placeholder="Ex: 3000">
+      </div>
 
-    <label>Preço de Venda Unitário (R$)</label>
-    <input type="number" id="precoVenda" placeholder="Ex: 100">
+      <div>
+        <label>Preço de Venda Unitário (R$)</label>
+        <input id="preco" type="number" placeholder="Ex: 100">
+      </div>
 
-    <label>Custo Variável por Unidade (R$)</label>
-    <input type="number" id="custoVariavel" placeholder="Ex: 40">
+      <div>
+        <label>Custo Variável por Unidade (R$)</label>
+        <input id="variavel" type="number" placeholder="Ex: 40">
+      </div>
+    </div>
 
     <button onclick="calcularEquilibrio()">Calcular ponto de equilíbrio</button>
 
-    <div id="resultado" class="result"></div>
-  </div>
+    <div id="resultado" class="result" style="display:none"></div>
+  </section>
 
-  <!-- INTERPRETAÇÃO -->
-  <div class="card">
-    <h2>📌 Interpretação do resultado</h2>
-
+  <section class="card">
+    <h2>📌 Interpretação do Resultado</h2>
     <p>
-      O ponto de equilíbrio indica o nível mínimo de vendas necessário para que
-      o negócio não tenha prejuízo.
+      O ponto de equilíbrio indica a <strong>quantidade mínima de vendas</strong>
+      necessária para que o faturamento cubra todos os custos do negócio.
     </p>
-
-    <ul>
-      <li>🔴 Vendas abaixo do ponto → prejuízo</li>
-      <li>🟡 Vendas no ponto → empate</li>
-      <li>🟢 Vendas acima do ponto → lucro</li>
+    <ul style="margin-left:18px;color:#374151">
+      <li>Vendas abaixo do ponto → prejuízo</li>
+      <li>Vendas no ponto → empate</li>
+      <li>Vendas acima do ponto → lucro</li>
     </ul>
-
-    <p>
-      Essa análise é essencial para definir metas de faturamento e avaliar a
-      viabilidade do negócio.
+    <p style="margin-top:12px">
+      <strong>Aviso:</strong> Esta calculadora possui finalidade educativa e não constitui recomendação financeira.
     </p>
-  </div>
-
-  <!-- DISCLAIMER -->
-  <div class="disclaimer">
-    ⚠️ Esta calculadora possui finalidade exclusivamente educativa e comparativa.
-    Os resultados apresentados não constituem recomendação financeira,
-    contábil ou empresarial.
-  </div>
+  </section>
 
 </main>
 
-<footer class="footer">
+<footer>
   <a href="index.html">Início</a> ·
   <a href="sobre.html">Sobre</a> ·
   <a href="contato.html">Contato</a> ·
@@ -96,25 +201,24 @@
 
 <script>
 function calcularEquilibrio(){
-  const fixos = Number(document.getElementById("custosFixos").value);
-  const preco = Number(document.getElementById("precoVenda").value);
-  const variavel = Number(document.getElementById("custoVariavel").value);
+  const fixos = +document.getElementById("fixos").value || 0;
+  const preco = +document.getElementById("preco").value || 0;
+  const variavel = +document.getElementById("variavel").value || 0;
 
-  if(fixos <= 0 || preco <= 0 || variavel < 0 || preco <= variavel){
-    alert("Preencha os campos corretamente.");
+  if(preco <= variavel){
+    document.getElementById("resultado").style.display="block";
+    document.getElementById("resultado").innerHTML =
+      "⚠️ O preço de venda deve ser maior que o custo variável.";
     return;
   }
 
-  const quantidade = fixos / (preco - variavel);
-  const faturamento = quantidade * preco;
+  const qtd = fixos / (preco - variavel);
+  const faturamento = qtd * preco;
 
-  const resultado = document.getElementById("resultado");
-  resultado.style.display = "block";
-  resultado.innerHTML = `
-    <strong>Resultado:</strong><br><br>
-    📦 Quantidade mínima: <strong>${quantidade.toFixed(2)} unidades</strong><br>
-    💰 Faturamento mínimo: <strong>R$ ${faturamento.toFixed(2)}</strong>
-  `;
+  document.getElementById("resultado").style.display="block";
+  document.getElementById("resultado").innerHTML =
+    `📦 <strong>Quantidade mínima:</strong> ${qtd.toFixed(1)} unidades<br>
+     💰 <strong>Faturamento mínimo:</strong> R$ ${faturamento.toFixed(2)}`;
 }
 </script>
 

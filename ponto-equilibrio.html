@@ -39,7 +39,7 @@
 
     <p>
       Descubra quanto seu negócio precisa faturar para cobrir todos os custos,
-      sem gerar lucro nem prejuízo.
+      sem gerar lucro ou prejuízo.
     </p>
 
     <label>Custos Fixos Mensais (R$)</label>
@@ -51,18 +51,18 @@
     <label>Custo Variável por Unidade (R$)</label>
     <input type="number" id="custoVariavel" placeholder="Ex: 40">
 
-    <button onclick="calcularEquilibrio()">Calcular</button>
+    <button onclick="calcularEquilibrio()">Calcular ponto de equilíbrio</button>
 
     <div id="resultado" class="result"></div>
   </div>
 
   <!-- INTERPRETAÇÃO -->
   <div class="card">
-    <h2>📌 Interpretação</h2>
+    <h2>📌 Interpretação do resultado</h2>
 
     <p>
-      O ponto de equilíbrio representa o nível mínimo de vendas necessário
-      para que o negócio não tenha prejuízo.
+      O ponto de equilíbrio indica o nível mínimo de vendas necessário para que
+      o negócio não tenha prejuízo.
     </p>
 
     <ul>
@@ -70,12 +70,18 @@
       <li>🟡 Vendas no ponto → empate</li>
       <li>🟢 Vendas acima do ponto → lucro</li>
     </ul>
+
+    <p>
+      Essa análise é essencial para definir metas de faturamento e avaliar a
+      viabilidade do negócio.
+    </p>
   </div>
 
   <!-- DISCLAIMER -->
   <div class="disclaimer">
-    ⚠️ Esta calculadora é apenas uma simulação educativa e não constitui
-    recomendação financeira, contábil ou empresarial.
+    ⚠️ Esta calculadora possui finalidade exclusivamente educativa e comparativa.
+    Os resultados apresentados não constituem recomendação financeira,
+    contábil ou empresarial.
   </div>
 
 </main>
@@ -95,16 +101,16 @@ function calcularEquilibrio(){
   const variavel = Number(document.getElementById("custoVariavel").value);
 
   if(fixos <= 0 || preco <= 0 || variavel < 0 || preco <= variavel){
-    alert("Verifique os valores informados.");
+    alert("Preencha os campos corretamente.");
     return;
   }
 
   const quantidade = fixos / (preco - variavel);
   const faturamento = quantidade * preco;
 
-  const box = document.getElementById("resultado");
-  box.style.display = "block";
-  box.innerHTML = `
+  const resultado = document.getElementById("resultado");
+  resultado.style.display = "block";
+  resultado.innerHTML = `
     <strong>Resultado:</strong><br><br>
     📦 Quantidade mínima: <strong>${quantidade.toFixed(2)} unidades</strong><br>
     💰 Faturamento mínimo: <strong>R$ ${faturamento.toFixed(2)}</strong>

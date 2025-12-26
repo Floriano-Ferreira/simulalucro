@@ -2,9 +2,12 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>HP12c Online | SimulaLucro</title>
+<title>HP12c Online Explicada | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Calculadora HP12c online com PV, FV, PMT, TIR e VPL. Simule investimentos, financiamentos e fluxos de caixa gratuitamente.">
+
+<link rel="canonical" href="https://simulalucro.com.br/hp12c-explicada.html">
 
 <style>
 *{box-sizing:border-box}
@@ -14,18 +17,51 @@ body{
   background:#f3f6fb;
   color:#1f2937;
 }
-.container{
-  max-width:420px;
-  margin:40px auto;
-  padding:20px;
+a{text-decoration:none;color:#2563eb}
+
+/* HEADER */
+.header{
+  position:sticky;
+  top:0;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 16px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+}
+.menu{
+  width:100%;
+  margin-top:10px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.menu a{font-weight:500}
+.menu a.active{font-weight:700;text-decoration:underline}
+
+/* CONTAINER */
+.container{
+  max-width:520px;
+  margin:30px auto;
+  padding:0 16px;
+}
+
+/* CARD */
 .card{
   background:#fff;
-  padding:20px;
+  padding:24px;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.1);
 }
-h1{text-align:center;margin-top:0}
+h1,h2,h3{margin-top:0}
+
+/* FORM */
 label{
   font-size:13px;
   font-weight:600;
@@ -37,8 +73,31 @@ input{
   border-radius:10px;
   border:1px solid #d1d5db;
 }
-button{
-  width:48%;
+.toggle{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
+.toggle button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:#e5e7eb;
+  cursor:pointer;
+  font-weight:600;
+}
+.toggle button.active{
+  background:#2563eb;
+  color:#fff;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.buttons button{
   padding:12px;
   border:none;
   border-radius:10px;
@@ -47,98 +106,180 @@ button{
   font-weight:700;
   cursor:pointer;
 }
-.buttons{
-  display:flex;
-  justify-content:space-between;
-}
+
 .result{
   margin-top:20px;
   padding:16px;
   background:#ecfeff;
   border-radius:12px;
   display:none;
+  font-size:14px;
+}
+
+/* INFO */
+.info{
+  margin-top:30px;
+  background:#fff;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  font-size:14px;
+}
+
+/* FOOTER */
+.footer{
+  margin-top:40px;
+  padding:24px;
+  text-align:center;
+  font-size:13px;
+  color:#6b7280;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <div class="card">
-    <h1>🧮 HP12c Online</h1>
-
-    <label>Valor Presente (PV)</label>
-    <input id="pv" placeholder="Ex: 1000">
-
-    <label>Valor Futuro (FV)</label>
-    <input id="fv" placeholder="Ex: 1500">
-
-    <label>Taxa (% ao período)</label>
-    <input id="i" placeholder="Ex: 1">
-
-    <label>Número de períodos (n)</label>
-    <input id="n" placeholder="Ex: 12">
-
-    <div class="buttons">
-      <button onclick="calcFV()">Calcular FV</button>
-      <button onclick="calcPV()">Calcular PV</button>
-    </div>
-
-    <div id="res" class="result"></div>
+<header class="header">
+  <div class="header-inner">
+    <strong>💰 SimulaLucro</strong>
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="juros-compostos.html">Juros</a>
+      <a href="roi.html">ROI</a>
+      <a href="hp12c-explicada.html" class="active">HP12c</a>
+    </nav>
   </div>
+</header>
+
+<main class="container">
+
+<div class="card">
+<h1>🧮 HP12c Online</h1>
+
+<div class="toggle">
+  <button id="btnPct" class="active" onclick="setMode('pct')">% ao período</button>
+  <button id="btnDec" onclick="setMode('dec')">Decimal</button>
 </div>
 
+<label>Valor Presente (PV)</label>
+<input id="pv" placeholder="Ex: 1000">
+
+<label>Pagamento periódico (PMT)</label>
+<input id="pmt" placeholder="Ex: -200">
+
+<label>Valor Futuro (FV)</label>
+<input id="fv" placeholder="Ex: 5000">
+
+<label>Taxa (i)</label>
+<input id="i" placeholder="Ex: 1">
+
+<label>Número de períodos (n)</label>
+<input id="n" placeholder="Ex: 12">
+
+<div class="buttons">
+  <button onclick="calcFV()">FV</button>
+  <button onclick="calcPV()">PV</button>
+  <button onclick="calcVPL()">VPL</button>
+  <button onclick="calcTIR()">TIR</button>
+</div>
+
+<div id="res" class="result"></div>
+</div>
+
+<div class="info">
+<h2>📘 Como usar a HP12c</h2>
+
+<p>
+Esta calculadora replica os principais cálculos financeiros da HP12c:
+</p>
+
+<ul>
+<li><strong>PV</strong>: valor presente</li>
+<li><strong>FV</strong>: valor futuro</li>
+<li><strong>PMT</strong>: pagamento periódico</li>
+<li><strong>i</strong>: taxa de juros</li>
+<li><strong>n</strong>: número de períodos</li>
+</ul>
+
+<h3>⚠️ Aviso educativo</h3>
+<p>
+Esta ferramenta tem finalidade educativa e comparativa.
+Não constitui recomendação financeira.
+</p>
+
+<h3>🔗 Conteúdos relacionados</h3>
+<ul>
+<li><a href="juros-compostos.html">Calculadora de Juros Compostos</a></li>
+<li><a href="roi.html">Calculadora de ROI</a></li>
+<li><a href="tir-vpl.html">TIR e VPL explicados</a></li>
+</ul>
+</div>
+
+</main>
+
+<footer class="footer">
+© 2025 SimulaLucro · Educação financeira gratuita
+</footer>
+
 <script>
+let mode = "pct";
+
+function setMode(m){
+  mode = m;
+  document.getElementById("btnPct").classList.toggle("active", m==="pct");
+  document.getElementById("btnDec").classList.toggle("active", m==="dec");
+}
+
 function num(v){
   return Number(String(v).replace(",", ".")) || 0;
 }
 
-function show(msg){
-  const r = document.getElementById("res");
-  r.style.display = "block";
-  r.innerHTML = msg;
+function rate(){
+  let r = num(i.value);
+  return mode==="pct" ? r/100 : r;
+}
+
+function show(html){
+  res.style.display="block";
+  res.innerHTML = html;
 }
 
 function calcFV(){
-  const pv = num(document.getElementById("pv").value);
-  const i  = num(document.getElementById("i").value)/100;
-  const n  = num(document.getElementById("n").value);
-
-  if(pv<=0 || i<=0 || n<=0){
-    show("⚠️ Preencha PV, taxa e períodos.");
-    return;
-  }
-
-  const fv = pv * Math.pow(1+i, n);
-
-  show(`
-    <strong>Resultado (FV)</strong><br><br>
-    PV: R$ ${pv.toFixed(2)}<br>
-    Taxa: ${(i*100).toFixed(2)}%<br>
-    n: ${n}<hr>
-    💰 <strong>FV = R$ ${fv.toFixed(2)}</strong>
-  `);
+  const PV=num(pv.value), PMT=num(pmt.value), N=num(n.value), R=rate();
+  let FV = PV*Math.pow(1+R,N) + PMT*((Math.pow(1+R,N)-1)/R);
+  show("💰 <strong>FV:</strong> R$ "+FV.toFixed(2));
 }
 
 function calcPV(){
-  const fv = num(document.getElementById("fv").value);
-  const i  = num(document.getElementById("i").value)/100;
-  const n  = num(document.getElementById("n").value);
+  const FV=num(fv.value), PMT=num(pmt.value), N=num(n.value), R=rate();
+  let PV = (FV - PMT*((Math.pow(1+R,N)-1)/R))/Math.pow(1+R,N);
+  show("💰 <strong>PV:</strong> R$ "+PV.toFixed(2));
+}
 
-  if(fv<=0 || i<=0 || n<=0){
-    show("⚠️ Preencha FV, taxa e períodos.");
-    return;
+function calcVPL(){
+  const PV=num(pv.value), PMT=num(pmt.value), N=num(n.value), R=rate();
+  let vpl = -PV;
+  for(let t=1;t<=N;t++){
+    vpl += PMT/Math.pow(1+R,t);
   }
+  show("📉 <strong>VPL:</strong> R$ "+vpl.toFixed(2));
+}
 
-  const pv = fv / Math.pow(1+i, n);
+function calcTIR(){
+  let flows=[-num(pv.value)];
+  const PMT=num(pmt.value), N=num(n.value);
+  for(let i=1;i<=N;i++) flows.push(PMT);
 
-  show(`
-    <strong>Resultado (PV)</strong><br><br>
-    FV: R$ ${fv.toFixed(2)}<br>
-    Taxa: ${(i*100).toFixed(2)}%<br>
-    n: ${n}<hr>
-    💰 <strong>PV = R$ ${pv.toFixed(2)}</strong>
-  `);
+  let irr=0.1;
+  for(let k=0;k<1000;k++){
+    let npv=0, dnpv=0;
+    for(let t=0;t<flows.length;t++){
+      npv+=flows[t]/Math.pow(1+irr,t);
+      dnpv+=-t*flows[t]/Math.pow(1+irr,t+1);
+    }
+    irr=irr-npv/dnpv;
+  }
+  show("📈 <strong>TIR:</strong> "+(irr*100).toFixed(2)+"%");
 }
 </script>
 

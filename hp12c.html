@@ -1,96 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora Financeira HP12c Online | SimulaLucro</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Calculadora financeira estilo HP12c online. Calcule PV, FV, PMT, taxa de juros e número de períodos de forma simples e educativa.">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f6fb;
+  color:#1f2937;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px;
+}
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+label{font-weight:600;font-size:14px}
+input{
+  width:100%;
+  padding:12px;
+  margin:6px 0 14px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+}
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+.toggle{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+.toggle button{
+  flex:1;
+  background:#e5e7eb;
+  color:#111;
+}
+.toggle button.active{
+  background:#2563eb;
+  color:#fff;
+}
+.result{
+  display:none;
+  margin-top:20px;
+  padding:20px;
+  background:#ecfeff;
+  border-radius:12px;
+  font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+  <div class="card">
+    <h1>🧮 Calculadora HP12c Online</h1>
+    <p>Informe <strong>4 variáveis</strong> e deixe <strong>1 em branco</strong> para calcular.</p>
+
+    <div class="toggle">
+      <button id="btnPct" class="active" onclick="setMode('pct')">%</button>
+      <button id="btnDec" onclick="setMode('dec')">Decimal</button>
+    </div>
+
+    <label>PV – Valor Presente</label>
+    <input id="pv">
+
+    <label>FV – Valor Futuro</label>
+    <input id="fv">
+
+    <label>PMT – Pagamento periódico</label>
+    <input id="pmt">
+
+    <label>i – Taxa por período</label>
+    <input id="i">
+
+    <label>n – Número de períodos</label>
+    <input id="n">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="res" class="result"></div>
+  </div>
+</main>
+
 <script>
 let mode = "pct";
 
 function setMode(m){
   mode = m;
-  btnPct.classList.toggle("active", m==="pct");
-  btnDec.classList.toggle("active", m==="dec");
+  document.getElementById("btnPct").classList.toggle("active", m==="pct");
+  document.getElementById("btnDec").classList.toggle("active", m==="dec");
 }
 
-function num(v){
-  return Number(String(v).replace(",", ".")) || 0;
+function num(id){
+  const el = document.getElementById(id);
+  return el && el.value !== "" ? Number(el.value.replace(",", ".")) : null;
 }
 
-function rate(){
-  let r = num(i.value);
+function rate(r){
+  if(r === null) return null;
   return mode==="pct" ? r/100 : r;
 }
 
-function show(html){
-  res.style.display="block";
-  res.innerHTML = html;
+function show(txt){
+  const r = document.getElementById("res");
+  r.style.display="block";
+  r.innerHTML = txt;
 }
-
-/* ========= SOLVER ========= */
 
 function calcular(){
-  const PV = num(pv.value);
-  const FV = num(fv.value);
-  const PMT = num(pmt.value);
-  let R = rate();
-  let N = num(n.value);
+  try{
+    const PV = num("pv");
+    const FV = num("fv");
+    const PMT = num("pmt");
+    let R = rate(num("i"));
+    let N = num("n");
 
-  const filled = [
-    pv.value !== "",
-    fv.value !== "",
-    pmt.value !== "",
-    i.value !== "",
-    n.value !== ""
-  ].filter(Boolean).length;
+    const vars = [PV,FV,PMT,R,N];
+    const missing = vars.filter(v=>v===null).length;
 
-  if(filled < 4){
-    alert("Informe pelo menos 4 variáveis.");
-    return;
-  }
-
-  /* CALCULAR FV */
-  if(fv.value===""){
-    const fvCalc = PV*Math.pow(1+R,N) + PMT*((Math.pow(1+R,N)-1)/R);
-    show("💰 <strong>FV:</strong> R$ "+fvCalc.toFixed(2));
-    return;
-  }
-
-  /* CALCULAR PV */
-  if(pv.value===""){
-    const pvCalc = (FV - PMT*((Math.pow(1+R,N)-1)/R)) / Math.pow(1+R,N);
-    show("💰 <strong>PV:</strong> R$ "+pvCalc.toFixed(2));
-    return;
-  }
-
-  /* CALCULAR PMT */
-  if(pmt.value===""){
-    const pmtCalc = (FV - PV*Math.pow(1+R,N)) * R / (Math.pow(1+R,N)-1);
-    show("💰 <strong>PMT:</strong> R$ "+pmtCalc.toFixed(2));
-    return;
-  }
-
-  /* CALCULAR N (iterativo) */
-  if(n.value===""){
-    let nCalc = 1;
-    for(let k=0;k<1000;k++){
-      let f = PV*Math.pow(1+R,nCalc) + PMT*((Math.pow(1+R,nCalc)-1)/R) - FV;
-      let df = PV*Math.pow(1+R,nCalc)*Math.log(1+R)
-             + PMT*Math.pow(1+R,nCalc)*Math.log(1+R)/R;
-      nCalc = nCalc - f/df;
+    if(missing !== 1){
+      alert("Preencha exatamente 4 campos.");
+      return;
     }
-    show("📆 <strong>Períodos (n):</strong> "+nCalc.toFixed(2));
-    return;
-  }
 
-  /* CALCULAR i (TAXA – iterativo) */
-  if(i.value===""){
-    let irr = 0.1;
-    for(let k=0;k<2000;k++){
-      let f = PV*Math.pow(1+irr,N) + PMT*((Math.pow(1+irr,N)-1)/irr) - FV;
-      let df = PV*N*Math.pow(1+irr,N-1)
-             + PMT*((irr*Math.pow(1+irr,N)- (Math.pow(1+irr,N)-1))/(irr*irr));
-      irr = irr - f/df;
+    if(FV === null){
+      const v = PV*Math.pow(1+R,N) + PMT*((Math.pow(1+R,N)-1)/R);
+      show("💰 <strong>FV:</strong> R$ "+v.toFixed(2));
+      return;
     }
-    let taxa = mode==="pct" ? irr*100 : irr;
-    show("📈 <strong>Taxa (i):</strong> "+taxa.toFixed(4)+(mode==="pct"?"%":""));
-    return;
-  }
 
-  alert("Deixe uma variável vazia para calcular.");
+    if(PV === null){
+      const v = (FV - PMT*((Math.pow(1+R,N)-1)/R))/Math.pow(1+R,N);
+      show("💰 <strong>PV:</strong> R$ "+v.toFixed(2));
+      return;
+    }
+
+    if(PMT === null){
+      const v = (FV - PV*Math.pow(1+R,N))*R/(Math.pow(1+R,N)-1);
+      show("💰 <strong>PMT:</strong> R$ "+v.toFixed(2));
+      return;
+    }
+
+    if(N === null){
+      let n = 1;
+      for(let k=0;k<1000;k++){
+        n -= (PV*Math.pow(1+R,n)+PMT*((Math.pow(1+R,n)-1)/R)-FV)
+             /(PV*Math.pow(1+R,n)*Math.log(1+R));
+      }
+      show("📆 <strong>n:</strong> "+n.toFixed(2));
+      return;
+    }
+
+    if(R === null){
+      let irr = 0.1;
+      for(let k=0;k<2000;k++){
+        irr -= (PV*Math.pow(1+irr,N)+PMT*((Math.pow(1+irr,N)-1)/irr)-FV)
+               /(PV*N*Math.pow(1+irr,N-1));
+      }
+      let out = mode==="pct" ? irr*100 : irr;
+      show("📈 <strong>i:</strong> "+out.toFixed(4)+(mode==="pct"?"%":""));
+      return;
+    }
+
+  }catch(e){
+    alert("Erro interno. Verifique os valores.");
+  }
 }
 </script>
+
+</body>
+</html>

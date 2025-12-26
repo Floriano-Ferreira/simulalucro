@@ -1,53 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>HP12c Online | SimulaLucro</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f6fb;
+  color:#1f2937;
+}
+.container{
+  max-width:420px;
+  margin:40px auto;
+  padding:20px;
+}
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+h1{text-align:center;margin-top:0}
+label{
+  font-size:13px;
+  font-weight:600;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin:6px 0 14px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+}
+button{
+  width:48%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+.buttons{
+  display:flex;
+  justify-content:space-between;
+}
+.result{
+  margin-top:20px;
+  padding:16px;
+  background:#ecfeff;
+  border-radius:12px;
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+    <h1>🧮 HP12c Online</h1>
+
+    <label>Valor Presente (PV)</label>
+    <input id="pv" placeholder="Ex: 1000">
+
+    <label>Valor Futuro (FV)</label>
+    <input id="fv" placeholder="Ex: 1500">
+
+    <label>Taxa (% ao período)</label>
+    <input id="i" placeholder="Ex: 1">
+
+    <label>Número de períodos (n)</label>
+    <input id="n" placeholder="Ex: 12">
+
+    <div class="buttons">
+      <button onclick="calcFV()">Calcular FV</button>
+      <button onclick="calcPV()">Calcular PV</button>
+    </div>
+
+    <div id="res" class="result"></div>
+  </div>
+</div>
+
 <script>
 function num(v){
-  return Number(v.replace(",", ".")) || 0;
+  return Number(String(v).replace(",", ".")) || 0;
 }
 
-function mostrar(msg){
-  const box = document.getElementById("resultado");
-  box.style.display = "block";
-  box.innerHTML = msg;
+function show(msg){
+  const r = document.getElementById("res");
+  r.style.display = "block";
+  r.innerHTML = msg;
 }
 
-function calcularFV(){
+function calcFV(){
   const pv = num(document.getElementById("pv").value);
-  const taxa = num(document.getElementById("i").value) / 100;
-  const n = num(document.getElementById("n").value);
+  const i  = num(document.getElementById("i").value)/100;
+  const n  = num(document.getElementById("n").value);
 
-  if(pv <= 0 || taxa <= 0 || n <= 0){
-    mostrar("⚠️ Preencha corretamente PV, taxa e períodos.");
+  if(pv<=0 || i<=0 || n<=0){
+    show("⚠️ Preencha PV, taxa e períodos.");
     return;
   }
 
-  const fv = pv * Math.pow(1 + taxa, n);
+  const fv = pv * Math.pow(1+i, n);
 
-  mostrar(`
-    📈 <strong>Resultado (FV):</strong><br><br>
-    Valor Presente (PV): R$ ${pv.toFixed(2)}<br>
-    Taxa: ${(taxa*100).toFixed(2)}%<br>
-    Períodos: ${n}<br><hr>
-    💰 <strong>Valor Futuro: R$ ${fv.toFixed(2)}</strong>
+  show(`
+    <strong>Resultado (FV)</strong><br><br>
+    PV: R$ ${pv.toFixed(2)}<br>
+    Taxa: ${(i*100).toFixed(2)}%<br>
+    n: ${n}<hr>
+    💰 <strong>FV = R$ ${fv.toFixed(2)}</strong>
   `);
 }
 
-function calcularPV(){
+function calcPV(){
   const fv = num(document.getElementById("fv").value);
-  const taxa = num(document.getElementById("i").value) / 100;
-  const n = num(document.getElementById("n").value);
+  const i  = num(document.getElementById("i").value)/100;
+  const n  = num(document.getElementById("n").value);
 
-  if(fv <= 0 || taxa <= 0 || n <= 0){
-    mostrar("⚠️ Preencha corretamente FV, taxa e períodos.");
+  if(fv<=0 || i<=0 || n<=0){
+    show("⚠️ Preencha FV, taxa e períodos.");
     return;
   }
 
-  const pv = fv / Math.pow(1 + taxa, n);
+  const pv = fv / Math.pow(1+i, n);
 
-  mostrar(`
-    📉 <strong>Resultado (PV):</strong><br><br>
-    Valor Futuro (FV): R$ ${fv.toFixed(2)}<br>
-    Taxa: ${(taxa*100).toFixed(2)}%<br>
-    Períodos: ${n}<br><hr>
-    💰 <strong>Valor Presente: R$ ${pv.toFixed(2)}</strong>
+  show(`
+    <strong>Resultado (PV)</strong><br><br>
+    FV: R$ ${fv.toFixed(2)}<br>
+    Taxa: ${(i*100).toFixed(2)}%<br>
+    n: ${n}<hr>
+    💰 <strong>PV = R$ ${pv.toFixed(2)}</strong>
   `);
 }
 </script>
+
+</body>
+</html>

@@ -2,128 +2,27 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-
-<title>Calculadora de Lucro Airbnb | SimulaLucro</title>
+<title>Ponto de Equilíbrio | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o lucro real do Airbnb considerando diária, ocupação e custos mensais. Ferramenta gratuita e educativa.">
-<link rel="canonical" href="https://simulalucro.com.br/lucro-airbnb.html">
+<meta name="description" content="Calcule o ponto de equilíbrio do seu negócio e descubra quanto precisa faturar para não ter prejuízo.">
 
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial, system-ui, sans-serif;
-  background:#f6f8fb;
-  color:#1f2937;
-}
-a{color:#2563eb;text-decoration:none}
-a:hover{text-decoration:underline}
-
-/* HEADER */
-.header{
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-}
-.header-inner{
-  max-width:1100px;
-  margin:auto;
-  padding:14px 16px;
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:16px;
-}
-.logo{
-  font-weight:700;
-  color:#111827;
-}
-.menu{
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
-}
-.menu a.active{
-  font-weight:700;
-  text-decoration:underline;
-}
-
-/* CONTAINER */
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:32px 16px;
-}
-
-/* CARD */
-.card{
-  background:#fff;
-  padding:24px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-  margin-bottom:32px;
-}
-.card h1{margin-top:0}
-
-/* FORM */
-label{
-  font-size:14px;
-  font-weight:600;
-}
-input{
-  width:100%;
-  padding:12px;
-  margin:6px 0 14px;
-  border-radius:10px;
-  border:1px solid #d1d5db;
-}
-button{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:#2563eb;
-  color:#fff;
-  font-weight:700;
-  font-size:16px;
-  cursor:pointer;
-}
-button:hover{background:#1d4ed8}
-
-/* RESULT */
-.result{
-  display:none;
-  margin-top:20px;
-  padding:20px;
-  background:#ecfeff;
-  border-radius:12px;
-}
-
-/* FOOTER */
-.footer{
-  background:#fff;
-  border-top:1px solid #e5e7eb;
-  text-align:center;
-  padding:24px 16px;
-  font-size:13px;
-  color:#6b7280;
-}
-.footer a{margin:0 6px}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- HEADER PADRÃO -->
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
     <nav class="menu">
       <a href="index.html">Início</a>
-      <a href="lucro-airbnb.html" class="active">Airbnb</a>
+      <a href="lucro-airbnb.html">Airbnb</a>
       <a href="comparativo.html">Comparativo</a>
-      <a href="ponto-equilibrio.html">Equilíbrio</a>
+      <a href="ponto-equilibrio.html" class="active">Equilíbrio</a>
       <a href="margem-lucro.html">Margem</a>
+      <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="roi.html">ROI</a>
       <a href="hp12c-calculo-direto.html">HP12c</a>
@@ -133,78 +32,9 @@ button:hover{background:#1d4ed8}
 
 <main class="container">
 
-  <!-- CALCULADORA -->
-  <div class="card">
-    <h1>🛏️ Calculadora de Lucro Airbnb</h1>
-    <p>Descubra o lucro mensal real do seu imóvel considerando ocupação e custos.</p>
-
-    <label>Valor da diária (R$)</label>
-    <input id="diaria" placeholder="Ex: 350">
-
-    <label>Dias ocupados no mês</label>
-    <input id="dias" placeholder="Ex: 18">
-
-    <label>Custos mensais totais (R$)</label>
-    <input id="custos" placeholder="Ex: 1800">
-
-    <button onclick="calcular()">Calcular lucro</button>
-
-    <div id="resultado" class="result"></div>
-  </div>
-
-  <!-- INTERPRETAÇÃO -->
-  <div class="card">
-    <h2>Interpretação do resultado</h2>
+  <!-- CARD PRINCIPAL -->
+  <section class="card">
+    <h1>📊 Calculadora de Ponto de Equilíbrio</h1>
     <p>
-      O lucro apresentado representa o valor líquido estimado após
-      descontar os custos mensais do faturamento bruto do Airbnb.
-    </p>
-    <p>
-      Use esta simulação para comparar cenários de preço, ocupação
-      e viabilidade do aluguel por temporada.
-    </p>
-    <p>
-      👉 Compare com o <a href="comparativo.html">aluguel tradicional</a>  
-      👉 Avalie o <a href="ponto-equilibrio.html">ponto de equilíbrio</a>
-    </p>
-  </div>
-
-  <!-- DISCLAIMER -->
-  <div class="card" style="background:#fff7ed">
-    <strong>⚠️ Aviso educativo</strong>
-    <p style="margin:8px 0 0">
-      Esta calculadora possui finalidade exclusivamente educativa e comparativa.
-      Os resultados não constituem recomendação financeira ou de investimento.
-    </p>
-  </div>
-
-</main>
-
-<footer class="footer">
-  <a href="index.html">Início</a> ·
-  <a href="sobre.html">Sobre</a> ·
-  <a href="contato.html">Contato</a> ·
-  <a href="politica-privacidade.html">Privacidade</a>
-  <p>© 2025 SimulaLucro</p>
-</footer>
-
-<script>
-function n(v){return Number(v)||0}
-
-function calcular(){
-  const faturamento = n(diaria.value) * n(dias.value);
-  const custosTotais = n(custos.value);
-  const lucro = faturamento - custosTotais;
-
-  resultado.style.display = "block";
-  resultado.innerHTML = `
-    <strong>Resultado mensal:</strong><br><br>
-    💰 Faturamento bruto: <strong>R$ ${faturamento.toFixed(2)}</strong><br>
-    📉 Custos totais: <strong>R$ ${custosTotais.toFixed(2)}</strong><hr>
-    📊 <strong>Lucro líquido: R$ ${lucro.toFixed(2)}</strong>
-  `;
-}
-</script>
-
-</body>
-</html>
+      Descubra quanto seu negócio precisa faturar para cobrir todos os custos,
+      sem gerar

@@ -5,11 +5,10 @@
 <title>Ponto de Equilíbrio | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o ponto de equilíbrio do seu negócio. Descubra quanto precisa faturar para cobrir custos fixos e variáveis.">
-<link rel="canonical" href="https://simulalucro.com.br/equilibrio.html">
-<meta name="robots" content="index, follow">
+<meta name="description" content="Calcule o ponto de equilíbrio do seu negócio e descubra quanto precisa faturar para não ter prejuízo.">
 
-<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://simulalucro.com.br/ponto-equilibrio.html">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -22,7 +21,7 @@
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
       <a href="comparativo.html">Comparativo</a>
-      <a href="equilibrio.html" class="active">Equilíbrio</a>
+      <a href="ponto-equilibrio.html" class="active">Equilíbrio</a>
       <a href="margem-lucro.html">Margem</a>
       <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
@@ -34,61 +33,67 @@
 
 <main class="container">
 
-  <!-- CARD PRINCIPAL -->
+  <!-- CALCULADORA -->
   <section class="card">
     <h1>📊 Calculadora de Ponto de Equilíbrio</h1>
     <p>
-      Descubra quanto seu negócio precisa faturar para cobrir todos os custos,
-      sem lucro e sem prejuízo.
+      O ponto de equilíbrio indica o faturamento mínimo necessário para cobrir
+      todos os custos do negócio, sem gerar lucro nem prejuízo.
     </p>
 
-    <!-- FORM -->
-    <label>Custos Fixos Mensais (R$)</label>
-    <input id="fixos" type="number" placeholder="Ex: 3000">
+    <div class="form-grid">
+      <div>
+        <label>Custos Fixos Mensais (R$)</label>
+        <input type="number" id="custosFixos" placeholder="Ex: 3000">
+      </div>
 
-    <label>Preço de Venda Unitário (R$)</label>
-    <input id="preco" type="number" placeholder="Ex: 100">
+      <div>
+        <label>Preço de Venda Unitário (R$)</label>
+        <input type="number" id="precoVenda" placeholder="Ex: 100">
+      </div>
 
-    <label>Custo Variável por Unidade (R$)</label>
-    <input id="variavel" type="number" placeholder="Ex: 40">
+      <div>
+        <label>Custo Variável por Unidade (R$)</label>
+        <input type="number" id="custoVariavel" placeholder="Ex: 40">
+      </div>
+    </div>
 
     <button onclick="calcularEquilibrio()">Calcular ponto de equilíbrio</button>
 
-    <!-- RESULTADO -->
     <div id="resultado" class="result"></div>
   </section>
 
   <!-- INTERPRETAÇÃO -->
   <section class="card">
     <h2>📘 Interpretação do Resultado</h2>
-    <p>
-      O <strong>ponto de equilíbrio</strong> indica a quantidade mínima de vendas
-      ou faturamento necessário para que o negócio não tenha prejuízo.
-    </p>
     <ul>
-      <li>Se vender <strong>menos</strong> que o ponto de equilíbrio → prejuízo</li>
-      <li>Se vender <strong>exatamente</strong> o ponto → empate</li>
-      <li>Se vender <strong>acima</strong> do ponto → lucro</li>
+      <li>🔴 Abaixo do ponto de equilíbrio → prejuízo</li>
+      <li>🟡 No ponto de equilíbrio → empate (zero lucro)</li>
+      <li>🟢 Acima do ponto de equilíbrio → lucro</li>
     </ul>
+    <p>
+      Conhecer o ponto de equilíbrio ajuda na definição de metas de vendas,
+      precificação e controle financeiro.
+    </p>
   </section>
 
-  <!-- LINKS INTERNOS (CLUSTER SEO) -->
+  <!-- LINKS INTERNOS / CLUSTER SEO -->
   <section class="card">
     <h2>🔗 Ferramentas Relacionadas</h2>
-    <ul>
+    <ul class="links">
       <li><a href="margem-lucro.html">Calculadora de Margem de Lucro</a></li>
-      <li><a href="preco-servico.html">Preço Ideal de Serviço</a></li>
+      <li><a href="preco-servico.html">Preço de Serviço</a></li>
       <li><a href="lucro-airbnb.html">Lucro Airbnb</a></li>
       <li><a href="roi.html">Retorno sobre Investimento (ROI)</a></li>
     </ul>
   </section>
 
   <!-- DISCLAIMER -->
-  <section class="disclaimer">
+  <div class="disclaimer">
     ⚠️ Esta calculadora tem finalidade exclusivamente educativa e comparativa.
     Os resultados apresentados não constituem recomendação financeira,
     contábil ou empresarial.
-  </section>
+  </div>
 
 </main>
 
@@ -101,36 +106,28 @@
   <p>© 2025 SimulaLucro</p>
 </footer>
 
-<!-- SCRIPT -->
 <script>
-function n(v){ return Number(v) || 0 }
-
 function calcularEquilibrio(){
-  const fixos = n(fixosInput.value);
-  const preco = n(precoInput.value);
-  const variavel = n(variavelInput.value);
+  const fixos = Number(document.getElementById("custosFixos").value);
+  const preco = Number(document.getElementById("precoVenda").value);
+  const variavel = Number(document.getElementById("custoVariavel").value);
 
-  if(preco <= variavel){
-    resultado.innerHTML = "❌ O preço deve ser maior que o custo variável.";
-    resultado.style.display = "block";
+  if(fixos <= 0 || preco <= 0 || variavel < 0 || preco <= variavel){
+    alert("Verifique os valores informados.");
     return;
   }
 
-  const unidades = fixos / (preco - variavel);
-  const faturamento = unidades * preco;
+  const pontoQtd = fixos / (preco - variavel);
+  const pontoFat = pontoQtd * preco;
 
-  resultado.style.display = "block";
-  resultado.innerHTML = `
+  const res = document.getElementById("resultado");
+  res.style.display = "block";
+  res.innerHTML = `
     <strong>Resultado:</strong><br><br>
-    📦 Quantidade mínima de vendas: <strong>${unidades.toFixed(2)} unidades</strong><br>
-    💰 Faturamento necessário: <strong>R$ ${faturamento.toFixed(2)}</strong>
+    📦 Quantidade mínima de vendas: <strong>${pontoQtd.toFixed(2)} unidades</strong><br>
+    💰 Faturamento mínimo: <strong>R$ ${pontoFat.toFixed(2)}</strong>
   `;
 }
-
-const fixosInput = document.getElementById("fixos");
-const precoInput = document.getElementById("preco");
-const variavelInput = document.getElementById("variavel");
-const resultado = document.getElementById("resultado");
 </script>
 
 </body>

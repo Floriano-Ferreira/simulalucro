@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+
 <title>Calculadora de Ponto de Equilíbrio | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +14,6 @@
 
 <body>
 
-<!-- HEADER PADRÃO -->
 <header class="header">
   <div class="header-inner">
     <a href="index.html" class="logo">💰 SimulaLucro</a>
@@ -34,7 +34,7 @@
 <main class="container">
 
   <!-- CARD PRINCIPAL -->
-  <section class="card">
+  <div class="card">
     <h1>📊 Calculadora de Ponto de Equilíbrio</h1>
 
     <p>
@@ -54,21 +54,23 @@
     <button onclick="calcularEquilibrio()">Calcular</button>
 
     <div id="resultado" class="result"></div>
-  </section>
+  </div>
 
   <!-- INTERPRETAÇÃO -->
-  <section class="card">
+  <div class="card">
     <h2>📌 Interpretação</h2>
+
     <p>
-      O ponto de equilíbrio representa o volume mínimo de vendas necessário
+      O ponto de equilíbrio representa o nível mínimo de vendas necessário
       para que o negócio não tenha prejuízo.
     </p>
+
     <ul>
-      <li>🔴 Abaixo do ponto → prejuízo</li>
-      <li>🟡 No ponto → empate</li>
-      <li>🟢 Acima do ponto → lucro</li>
+      <li>🔴 Vendas abaixo do ponto → prejuízo</li>
+      <li>🟡 Vendas no ponto → empate</li>
+      <li>🟢 Vendas acima do ponto → lucro</li>
     </ul>
-  </section>
+  </div>
 
   <!-- DISCLAIMER -->
   <div class="disclaimer">
@@ -78,7 +80,6 @@
 
 </main>
 
-<!-- FOOTER PADRÃO -->
 <footer class="footer">
   <a href="index.html">Início</a> ·
   <a href="sobre.html">Sobre</a> ·
@@ -98,14 +99,14 @@ function calcularEquilibrio(){
     return;
   }
 
-  const qtd = fixos / (preco - variavel);
-  const faturamento = qtd * preco;
+  const quantidade = fixos / (preco - variavel);
+  const faturamento = quantidade * preco;
 
-  const res = document.getElementById("resultado");
-  res.style.display = "block";
-  res.innerHTML = `
+  const box = document.getElementById("resultado");
+  box.style.display = "block";
+  box.innerHTML = `
     <strong>Resultado:</strong><br><br>
-    📦 Quantidade mínima: <strong>${qtd.toFixed(2)} unidades</strong><br>
+    📦 Quantidade mínima: <strong>${quantidade.toFixed(2)} unidades</strong><br>
     💰 Faturamento mínimo: <strong>R$ ${faturamento.toFixed(2)}</strong>
   `;
 }

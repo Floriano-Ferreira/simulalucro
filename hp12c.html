@@ -2,56 +2,13 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Calculadora HP12c Online | SimulaLucro</title>
+<title>Calculadora de Preço de Serviço | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadora HP12c online gratuita. Calcule PV, FV, PMT, taxa de juros ou número de períodos deixando uma variável em branco.">
-<link rel="canonical" href="https://simulalucro.com.br/hp12c.html">
+<meta name="description" content="Calcule o preço ideal do seu serviço considerando custos, horas trabalhadas e margem de lucro.">
+<link rel="canonical" href="https://simulalucro.com.br/preco-servico.html">
 
 <link rel="stylesheet" href="style.css">
-
-<style>
-/* Apenas complementos, mantendo o padrão visual */
-.toggle{
-  display:flex;
-  gap:8px;
-  margin:10px 0 20px;
-}
-.toggle button{
-  flex:1;
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #d1d5db;
-  background:#f9fafb;
-  font-weight:500;
-  cursor:pointer;
-}
-.toggle button.active{
-  background:#2563eb;
-  color:#fff;
-  border-color:#2563eb;
-}
-
-.examples{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:16px;
-}
-.examples button{
-  padding:8px 12px;
-  font-size:14px;
-  border-radius:8px;
-  border:1px solid #d1d5db;
-  background:#fff;
-  cursor:pointer;
-}
-
-.highlight{
-  border:2px solid #2563eb !important;
-  background:#eef2ff;
-}
-</style>
 </head>
 
 <body>
@@ -65,73 +22,58 @@
       <a href="comparativo.html">Comparativo</a>
       <a href="ponto-equilibrio.html">Equilíbrio</a>
       <a href="margem-lucro.html">Margem</a>
-      <a href="preco-servico.html">Serviço</a>
+      <a href="preco-servico.html" class="active">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="roi.html">ROI</a>
-      <a href="hp12c.html" class="active">HP12c</a>
+      <a href="hp12c.html">HP12c</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
+<!-- CARD PRINCIPAL -->
 <div class="card">
-  <h1>🧮 Calculadora HP12c Online</h1>
+  <h1>📄 Calculadora de Preço de Serviço</h1>
   <p>
-    Preencha <strong>4 campos</strong> e deixe <strong>1 em branco</strong>.
-    A calculadora identifica automaticamente qual variável será calculada.
+    Descubra quanto cobrar pelo seu serviço considerando
+    <strong>custos</strong>, <strong>horas vendáveis</strong> e
+    <strong>margem de lucro</strong>.
   </p>
 
-  <!-- Toggle -->
-  <div class="toggle">
-    <button id="btnPerc" class="active" onclick="setMode('percent')">Taxa em %</button>
-    <button id="btnDec" onclick="setMode('decimal')">Taxa decimal</button>
-  </div>
+  <label>Custos mensais totais (R$)</label>
+  <input id="custos" type="number" placeholder="Ex: 3000">
 
-  <!-- Exemplos -->
-  <div class="examples">
-    <button onclick="exFV()">Exemplo FV</button>
-    <button onclick="exPV()">Exemplo PV</button>
-    <button onclick="exI()">Exemplo Taxa</button>
-  </div>
+  <label>Horas vendáveis no mês</label>
+  <input id="horas" type="number" placeholder="Ex: 120">
 
-  <label>PV – Valor Presente (R$)</label>
-  <input id="pv">
+  <label>Margem de lucro desejada (%)</label>
+  <input id="margem" type="number" placeholder="Ex: 30">
 
-  <label>FV – Valor Futuro (R$)</label>
-  <input id="fv">
-
-  <label>PMT – Pagamento periódico (R$)</label>
-  <input id="pmt">
-
-  <label>Taxa de juros (i)</label>
-  <input id="i">
-
-  <label>Número de períodos (n)</label>
-  <input id="n">
-
-  <button class="btn-primary" onclick="calcular()">Calcular</button>
+  <button class="btn-primary" onclick="calcularPreco()">
+    Calcular preço ideal
+  </button>
 
   <div id="resultado" class="result"></div>
 </div>
 
+<!-- INTERPRETAÇÃO -->
 <div class="card">
-  <h2>📌 Interpretação do resultado</h2>
+  <h2>📌 Interpretação do Resultado</h2>
   <p>
-    Esta calculadora segue a lógica clássica da HP12c:
+    O valor calculado representa o <strong>preço mínimo por hora</strong>
+    necessário para cobrir todos os custos e ainda atingir a margem de lucro definida.
   </p>
   <ul>
-    <li><strong>PV</strong>: valor inicial</li>
-    <li><strong>FV</strong>: montante final</li>
-    <li><strong>PMT</strong>: pagamentos periódicos</li>
-    <li><strong>i</strong>: taxa de juros</li>
-    <li><strong>n</strong>: número de períodos</li>
+    <li>Custos subestimados → prejuízo oculto</li>
+    <li>Poucas horas vendáveis → preço por hora maior</li>
+    <li>Margem bem definida → negócio sustentável</li>
   </ul>
 </div>
 
 <p class="disclaimer">
-⚠️ Esta calculadora tem finalidade exclusivamente educativa e comparativa.
-Não constitui recomendação financeira.
+⚠️ Ferramenta de caráter exclusivamente educativo.
+Os resultados não substituem análise profissional.
 </p>
 
 </main>
@@ -145,70 +87,24 @@ Não constitui recomendação financeira.
 </footer>
 
 <script>
-let mode = "percent";
+function calcularPreco(){
+  const custos = Number(document.getElementById("custos").value);
+  const horas = Number(document.getElementById("horas").value);
+  const margem = Number(document.getElementById("margem").value) / 100;
+  const res = document.getElementById("resultado");
 
-function setMode(m){
-  mode = m;
-  btnPerc.classList.toggle("active", m==="percent");
-  btnDec.classList.toggle("active", m==="decimal");
-}
-
-function clearHighlight(){
-  document.querySelectorAll("input").forEach(el=>el.classList.remove("highlight"));
-}
-
-function calcular(){
-  clearHighlight();
-
-  let PV = pv.value==="" ? null : Number(pv.value);
-  let FV = fv.value==="" ? null : Number(fv.value);
-  let PMT = pmt.value==="" ? null : Number(pmt.value);
-  let I = i.value==="" ? null : Number(i.value);
-  let N = n.value==="" ? null : Number(n.value);
-
-  if(mode==="percent" && I!==null) I/=100;
-
-  if([PV,FV,PMT,I,N].filter(v=>v===null).length!==1){
-    resultado.innerHTML="Preencha exatamente 4 campos e deixe 1 em branco.";
+  if(!custos || !horas || margem < 0){
+    res.innerHTML = "Preencha todos os campos corretamente.";
     return;
   }
 
-  if(FV===null){
-    FV = PV*Math.pow(1+I,N);
-    fv.value = FV.toFixed(2);
-    fv.classList.add("highlight");
-  }
-  else if(PV===null){
-    PV = FV/Math.pow(1+I,N);
-    pv.value = PV.toFixed(2);
-    pv.classList.add("highlight");
-  }
-  else if(I===null){
-    I = Math.pow(FV/PV,1/N)-1;
-    i.value = mode==="percent" ? (I*100).toFixed(4) : I.toFixed(6);
-    i.classList.add("highlight");
-  }
-  else if(N===null){
-    N = Math.log(FV/PV)/Math.log(1+I);
-    n.value = N.toFixed(2);
-    n.classList.add("highlight");
-  }
+  const custoHora = custos / horas;
+  const precoFinal = custoHora * (1 + margem);
 
-  resultado.innerHTML="✔️ Cálculo realizado com sucesso.";
-}
-
-/* Exemplos */
-function exFV(){
-  pv.value=1000; fv.value=""; pmt.value=0; i.value=2; n.value=12;
-  calcular();
-}
-function exPV(){
-  pv.value=""; fv.value=5000; pmt.value=0; i.value=1; n.value=24;
-  calcular();
-}
-function exI(){
-  pv.value=3000; fv.value=4500; pmt.value=0; i.value=""; n.value=36;
-  calcular();
+  res.innerHTML = `
+    <strong>Preço ideal por hora:</strong><br>
+    R$ ${precoFinal.toFixed(2)}
+  `;
 }
 </script>
 

@@ -2,246 +2,148 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Calculadora HP12c Online Explicada | SimulaLucro</title>
+<title>Calculadora Financeira HP12c Online | SimulaLucro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Calculadora financeira estilo HP12c online. Calcule PV, FV, PMT, taxa de juros ou períodos automaticamente.">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadora financeira estilo HP12c online. Calcule PV, FV, PMT, taxa (i) e períodos (n) com exemplos práticos e explicação completa.">
-<link rel="canonical" href="https://simulalucro.com.br/hp12c-explicada.html">
-<meta name="robots" content="index, follow">
-
+<link rel="stylesheet" href="assets/style.css">
 <style>
-/* ===== PADRÃO GLOBAL ===== */
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f3f6fb;
-  color:#1f2937;
-  padding-bottom:90px;
-}
-a{color:#2563eb;text-decoration:none}
-
-/* ===== HEADER ===== */
-.header{
-  position:sticky;
-  top:0;
-  background:#fff;
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
-  z-index:1000;
-}
-.header-inner{
-  max-width:1100px;
-  margin:auto;
-  padding:14px 16px;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
-  align-items:center;
-}
-.logo{
-  font-weight:700;
-  color:#111827;
-}
-.menu{
-  width:100%;
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
-  padding-top:10px;
-}
-.menu a{
-  font-size:14px;
-  font-weight:500;
-}
-.menu a.active{
-  font-weight:700;
-  text-decoration:underline;
-}
-
-/* ===== CONTAINER ===== */
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:24px 16px;
-}
-
-/* ===== CARD ===== */
-.card{
-  background:#fff;
-  padding:24px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-/* ===== FORM ===== */
-label{font-weight:600;font-size:14px}
-input{
-  width:100%;
-  padding:12px;
-  margin:6px 0 14px;
-  border-radius:10px;
-  border:1px solid #d1d5db;
-}
-input.calc{
-  background:#ecfeff;
-  border:2px solid #06b6d4;
-  font-weight:700;
-}
-button{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:#2563eb;
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-}
-button:hover{background:#1d4ed8}
-
-/* ===== TOGGLE / EXEMPLOS ===== */
-.toggle,.examples{
-  display:flex;
-  gap:10px;
-  margin-bottom:16px;
-}
-.toggle button,.examples button{
-  flex:1;
-  background:#e5e7eb;
-  color:#111;
-}
-.toggle button.active{background:#2563eb;color:#fff}
-
-/* ===== RESULT ===== */
-.result{
-  display:none;
-  margin-top:20px;
-  padding:20px;
-  background:#ecfeff;
-  border-radius:12px;
-  font-size:16px;
-}
-
-/* ===== FOOTER ===== */
-.footer{
-  background:#fff;
-  border-top:1px solid #e5e7eb;
-  text-align:center;
-  padding:28px 16px;
-  font-size:13px;
-  color:#6b7280;
-}
-
-/* ===== MENU MOBILE ===== */
-.menu-mobile{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#fff;
-  border-top:1px solid #e5e7eb;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 0;
-  font-size:12px;
-}
-.menu-mobile span{display:block;font-size:18px}
-@media(min-width:769px){.menu-mobile{display:none}}
+.calc-box{max-width:520px;margin:auto}
+.calc-box input{width:100%}
+.highlight{border:2px solid #2563eb;background:#eef2ff}
+.example-btn{margin:.25rem 0;padding:.4rem .6rem;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer}
+.example-btn:hover{background:#f1f5f9}
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <a href="index.html" class="logo">💰 SimulaLucro</a>
-    <nav class="menu">
+    <div class="logo">💰 SimulaLucro</div>
+    <nav>
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
       <a href="comparativo.html">Comparativo</a>
       <a href="ponto-equilibrio.html">Equilíbrio</a>
       <a href="margem-lucro.html">Margem</a>
-      <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="roi.html">ROI</a>
-      <a href="hp12c-explicada.html" class="active">HP12c</a>
+      <a href="hp12c-avancada.html" class="active">HP12c</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
+<div class="card calc-box">
+<h1>Calculadora Financeira HP12c</h1>
+<p>Preencha <strong>4 campos</strong>. A calculadora identifica automaticamente qual variável deve ser calculada.</p>
+
+<label>PV – Valor Presente (R$)</label>
+<input id="pv" type="number">
+
+<label>FV – Valor Futuro (R$)</label>
+<input id="fv" type="number">
+
+<label>PMT – Pagamento por período (R$)</label>
+<input id="pmt" type="number">
+
+<label>Taxa de juros</label>
+<div style="display:flex;gap:.5rem">
+<input id="i" type="number" style="flex:1">
+<select id="iType">
+<option value="percent">%</option>
+<option value="decimal">Decimal</option>
+</select>
+</div>
+
+<label>Número de períodos (n)</label>
+<input id="n" type="number">
+
+<button class="btn-primary" onclick="calcular()">Calcular</button>
+
+<div id="resultado" style="margin-top:1rem;font-weight:bold"></div>
+</div>
+
 <div class="card">
-<h1>🧮 Calculadora HP12c Online Explicada</h1>
-<p>Preencha <strong>4 variáveis</strong> e deixe <strong>1 em branco</strong>. A calculadora identifica automaticamente qual variável será calculada.</p>
-
-<div class="examples">
-  <button onclick="exemploFV()">📈 FV</button>
-  <button onclick="exemploPV()">💰 PV</button>
-  <button onclick="exemploPMT()">🏦 PMT</button>
-  <button onclick="exemploI()">📊 i</button>
-  <button onclick="exemploN()">📆 n</button>
+<h2>📌 Exemplos rápidos</h2>
+<button class="example-btn" onclick="ex1()">Calcular FV (investimento)</button>
+<button class="example-btn" onclick="ex2()">Calcular PMT (parcelas)</button>
+<button class="example-btn" onclick="ex3()">Calcular taxa (i)</button>
 </div>
 
-<div class="toggle">
-  <button id="btnPct" class="active" onclick="setMode('pct')">%</button>
-  <button id="btnDec" onclick="setMode('dec')">Decimal</button>
+<div class="card">
+<h2>📊 Interpretação</h2>
+<p>A calculadora resolve automaticamente a variável ausente com base nos conceitos financeiros clássicos
+utilizados em HP12c, financiamentos e investimentos.</p>
 </div>
 
-<label>PV</label><input id="pv">
-<label>FV</label><input id="fv">
-<label>PMT</label><input id="pmt">
-<label>Taxa (i)</label><input id="i">
-<label>Períodos (n)</label><input id="n">
-
-<button onclick="calcular()">Calcular</button>
-<div id="res" class="result"></div>
-
-<p style="margin-top:16px;font-size:14px">
-<strong>Disclaimer:</strong> Esta calculadora tem finalidade educativa e comparativa e não constitui recomendação financeira.
-</p>
+<div class="card disclaimer">
+⚠️ Esta calculadora tem finalidade exclusivamente educativa e comparativa.
+Os resultados não constituem recomendação financeira.
 </div>
 
 </main>
 
 <footer class="footer">
-  <a href="sobre.html">Sobre</a> ·
-  <a href="contato.html">Contato</a> ·
-  <a href="politica-privacidade.html">Privacidade</a>
+  <a href="index.html">Início</a> •
+  <a href="sobre.html">Sobre</a> •
+  <a href="contato.html">Contato</a> •
+  <a href="privacidade.html">Privacidade</a>
   <p>© 2025 SimulaLucro</p>
 </footer>
 
-<nav class="menu-mobile">
-  <a href="index.html"><span>🏠</span>Início</a>
-  <a href="lucro-airbnb.html"><span>🛏️</span>Airbnb</a>
-  <a href="roi.html"><span>📊</span>ROI</a>
-  <a href="hp12c-explicada.html"><span>🧮</span>HP12c</a>
-</nav>
-
 <script>
-let mode="pct";
-function setMode(m){mode=m;btnPct.classList.toggle("active",m==="pct");btnDec.classList.toggle("active",m==="dec")}
-function clearCalc(){["pv","fv","pmt","i","n"].forEach(id=>document.getElementById(id).classList.remove("calc"))}
-function num(id){let v=document.getElementById(id).value;return v!==""?Number(v):null}
-function rate(r){return r===null?null:(mode==="pct"?r/100:r)}
-function show(id,t,v){document.getElementById(id).classList.add("calc");res.style.display="block";res.innerHTML=`🔎 <strong>${t}:</strong> ${v}`}
-function calcular(){
-clearCalc();
-let PV=num("pv"),FV=num("fv"),PMT=num("pmt"),N=num("n"),R=rate(num("i"));
-let vars=[PV,FV,PMT,R,N];
-if(vars.filter(v=>v===null).length!==1){alert("Preencha exatamente 4 campos.");return;}
-if(FV===null){let v=PV*Math.pow(1+R,N)+PMT*((Math.pow(1+R,N)-1)/R);fv.value=v.toFixed(2);show("fv","FV calculado",`R$ ${v.toFixed(2)}`);}
-else if(PV===null){let v=(FV-PMT*((Math.pow(1+R,N)-1)/R))/Math.pow(1+R,N);pv.value=v.toFixed(2);show("pv","PV calculado",`R$ ${v.toFixed(2)}`);}
-else if(PMT===null){let v=(FV-PV*Math.pow(1+R,N))*R/(Math.pow(1+R,N)-1);pmt.value=v.toFixed(2);show("pmt","PMT calculado",`R$ ${v.toFixed(2)}`);}
-else if(N===null){let n=1;for(let k=0;k<800;k++){n-=(PV*Math.pow(1+R,n)+PMT*((Math.pow(1+R,n)-1)/R)-FV)/(PV*Math.pow(1+R,n)*Math.log(1+R));}document.getElementById("n").value=n.toFixed(2);show("n","n calculado",`${n.toFixed(2)} períodos`);}
-else{let irr=0.1;for(let k=0;k<2000;k++){irr-=(PV*Math.pow(1+irr,N)+PMT*((Math.pow(1+irr,N)-1)/irr)-FV)/(PV*N*Math.pow(1+irr,N-1));}let out=mode==="pct"?irr*100:irr;document.getElementById("i").value=out.toFixed(4);show("i","Taxa calculada",out.toFixed(4)+(mode==="pct"?"%":""));}
+function limparDestaque(){
+  document.querySelectorAll("input").forEach(i=>i.classList.remove("highlight"))
 }
-function exemploFV(){pv.value=10000;pmt.value=0;i.value=1;n.value=24;fv.value="";setMode("pct");calcular();}
-function exemploPV(){fv.value=20000;pmt.value=0;i.value=1;n.value=24;pv.value="";setMode("pct");calcular();}
-function exemploPMT(){pv.value=10000;fv.value=0;i.value=1;n.value=24;pmt.value="";setMode("pct");calcular();}
-function exemploI(){pv.value=10000;fv.value=20000;pmt.value=0;n.value=24;i.value="";setMode("pct");calcular();}
-function exemploN(){pv.value=10000;fv.value=20000;pmt.value=0;i.value=1;n.value="";setMode("pct");calcular();}
+
+function calcular(){
+  limparDestaque()
+
+  let pv = parseFloat(pvEl.value)
+  let fv = parseFloat(fvEl.value)
+  let pmt = parseFloat(pmtEl.value)
+  let i = parseFloat(iEl.value)
+  let n = parseFloat(nEl.value)
+
+  if(iType.value==="percent") i=i/100
+
+  let campos = [
+    {id:"pv",v:pv},{id:"fv",v:fv},{id:"pmt",v:pmt},{id:"i",v:i},{id:"n",v:n}
+  ]
+
+  let vazios = campos.filter(c=>isNaN(c.v))
+  if(vazios.length!==1){
+    resultado.innerText="Preencha exatamente 4 campos."
+    return
+  }
+
+  let alvo=vazios[0].id
+  document.getElementById(alvo).classList.add("highlight")
+
+  if(alvo==="fv") fvEl.value=(pv*(1+i)**n + (pmt*((1+i)**n-1)/i)).toFixed(2)
+  if(alvo==="pv") pvEl.value=(fv/(1+i)**n - (pmt*((1+i)**n-1)/(i*(1+i)**n))).toFixed(2)
+  if(alvo==="pmt") pmtEl.value=((fv-pv*(1+i)**n)*i/((1+i)**n-1)).toFixed(2)
+  if(alvo==="n") nEl.value=(Math.log((fv*i+pmt)/(pv*i+pmt))/Math.log(1+i)).toFixed(2)
+  if(alvo==="i"){
+    let rate=0.1
+    for(let k=0;k<500;k++){
+      let f=pv*(1+rate)**n+pmt*((1+rate)**n-1)/rate-fv
+      rate-=f/10000
+    }
+    iEl.value=(rate*100).toFixed(4)
+  }
+
+  resultado.innerText="Variável calculada: "+alvo.toUpperCase()
+}
+
+const pvEl=pv,fvEl=fv,pmtEl=pmt,iEl=i,nEl=n
+
+function ex1(){pvEl.value=1000;iEl.value=2;nEl.value=12;pmtEl.value=0;fvEl.value=""}
+function ex2(){pvEl.value=0;fvEl.value=10000;iEl.value=1;nEl.value=24;pmtEl.value=""}
+function ex3(){pvEl.value=5000;fvEl.value=8000;nEl.value=36;pmtEl.value=0;iEl.value=""}
 </script>
 
 </body>

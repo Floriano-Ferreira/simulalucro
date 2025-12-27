@@ -2,139 +2,124 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Calculadora HP12c Online | SimulaLucro</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadora HP12c online gratuita. Calcule PV, FV, PMT, taxa de juros e períodos preenchendo 4 variáveis e deixando 1 em branco.">
-<link rel="canonical" href="https://simulalucro.com.br/hp12c.html">
+<title>Preço de Serviço | SimulaLucro</title>
+
+<meta name="description" content="Calcule o preço ideal do seu serviço considerando custos, horas trabalhadas e margem de lucro desejada.">
+<link rel="canonical" href="https://simulalucro.com.br/preco-servico.html">
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  margin:0;
-  font-family:Arial,system-ui,-apple-system,BlinkMacSystemFont;
-  background:#f6f8fb;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  background:#f4f6fb;
   color:#1f2937;
+  padding-bottom:80px;
 }
+a{text-decoration:none;color:#2563eb}
 
 /* HEADER */
 .header{
-  position:sticky;
-  top:0;
   background:#fff;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
+  position:sticky;
+  top:0;
   z-index:1000;
 }
 .header-inner{
   max-width:1100px;
   margin:auto;
   padding:14px 16px;
+}
+.logo{
+  font-weight:700;
+  font-size:18px;
   display:flex;
-  justify-content:space-between;
+  align-items:center;
+  gap:6px;
+}
+.menu{
+  display:flex;
   flex-wrap:wrap;
+  gap:14px;
+  font-size:14px;
+  margin-top:8px;
 }
-.menu a{
-  margin-right:14px;
-  color:#2563eb;
-  text-decoration:none;
-  font-weight:500;
+.menu a{font-weight:500}
+.menu a.active{
+  font-weight:700;
+  text-decoration:underline;
 }
-.menu a.active{font-weight:700;text-decoration:underline}
 
 /* CONTAINER */
 .container{
-  max-width:720px;
+  max-width:1100px;
   margin:auto;
-  padding:32px 16px;
+  padding:24px 16px;
 }
 
 /* CARD */
 .card{
   background:#fff;
-  border-radius:18px;
-  padding:28px;
-  box-shadow:0 12px 28px rgba(0,0,0,.08);
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
   margin-bottom:24px;
 }
-h1{margin-top:0}
+.card h1{font-size:26px;margin-bottom:8px}
+.card p{color:#4b5563;margin-bottom:16px}
 
-/* INPUTS */
+/* FORM */
+.grid{
+  display:grid;
+  gap:16px;
+}
+@media(min-width:768px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
 label{
-  display:block;
-  margin-top:14px;
+  font-size:14px;
   font-weight:600;
+  margin-bottom:6px;
+  display:block;
 }
 input{
   width:100%;
   padding:12px;
   border-radius:10px;
   border:1px solid #d1d5db;
-  margin-top:6px;
+  font-size:15px;
 }
-input.calc{
-  background:#ecfeff;
-  border:2px solid #06b6d4;
-}
-
-/* TOGGLE */
-.toggle{
-  display:flex;
-  background:#e5e7eb;
-  border-radius:10px;
-  overflow:hidden;
-  margin:12px 0;
-}
-.toggle button{
-  flex:1;
-  border:none;
-  padding:10px;
-  cursor:pointer;
-  background:transparent;
-  font-weight:600;
-}
-.toggle button.active{
-  background:#2563eb;
-  color:#fff;
-}
-
-/* BUTTON */
-.btn-primary{
+button{
   width:100%;
+  margin-top:16px;
+  padding:14px;
   background:#2563eb;
   color:#fff;
   border:none;
-  padding:14px;
-  font-size:16px;
-  font-weight:600;
   border-radius:12px;
+  font-size:16px;
+  font-weight:700;
   cursor:pointer;
-  margin-top:20px;
 }
-.btn-primary:hover{background:#1e40af}
 
-/* EXAMPLES */
-.examples button{
-  margin:6px 6px 0 0;
-  padding:8px 14px;
-  border-radius:20px;
-  border:1px solid #2563eb;
-  background:#fff;
-  color:#2563eb;
-  cursor:pointer;
-}
-.examples button:hover{
-  background:#2563eb;
-  color:#fff;
+/* RESULT */
+.result{
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  border-radius:16px;
+  padding:18px;
+  margin-top:20px;
 }
 
 /* FOOTER */
 footer{
   text-align:center;
-  padding:24px;
-  color:#6b7280;
+  padding:32px 16px;
   font-size:14px;
+  color:#6b7280;
 }
-footer a{color:#2563eb;text-decoration:none}
+footer a{margin:0 6px}
 </style>
 </head>
 
@@ -142,59 +127,67 @@ footer a{color:#2563eb;text-decoration:none}
 
 <header class="header">
   <div class="header-inner">
-    <strong>💰 SimulaLucro</strong>
+    <div class="logo">💰 SimulaLucro</div>
     <nav class="menu">
       <a href="index.html">Início</a>
+      <a href="lucro-airbnb.html">Airbnb</a>
+      <a href="comparativo.html">Comparativo</a>
+      <a href="ponto-equilibrio.html">Equilíbrio</a>
+      <a href="margem-lucro.html">Margem</a>
+      <a href="preco-servico.html" class="active">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="roi.html">ROI</a>
-      <a href="hp12c.html" class="active">HP12c</a>
+      <a href="hp12c.html">HP12c</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
-  <div class="card">
-    <h1>🧮 Calculadora HP12c Online</h1>
-    <p>Preencha <strong>4 variáveis</strong> e deixe <strong>1 em branco</strong>. A calculadora identifica automaticamente qual variável será calculada.</p>
+  <section class="card">
+    <h1>🧾 Calculadora de Preço de Serviço</h1>
+    <p>
+      Descubra quanto cobrar pelo seu serviço considerando
+      <strong>custos, horas trabalhadas e margem de lucro</strong>.
+    </p>
 
-    <div class="toggle">
-      <button id="pct" class="active" onclick="modoTaxa('pct')">%</button>
-      <button id="dec" onclick="modoTaxa('dec')">Decimal</button>
+    <div class="grid">
+      <div>
+        <label>Custos mensais totais (R$)</label>
+        <input id="custos" type="number" placeholder="Ex: 3000">
+      </div>
+
+      <div>
+        <label>Horas vendáveis no mês</label>
+        <input id="horas" type="number" placeholder="Ex: 120">
+      </div>
+
+      <div>
+        <label>Margem de lucro desejada (%)</label>
+        <input id="margem" type="number" placeholder="Ex: 30">
+      </div>
     </div>
 
-    <label>PV – Valor Presente (R$)</label>
-    <input id="pv">
+    <button onclick="calcularPreco()">Calcular preço ideal</button>
 
-    <label>FV – Valor Futuro (R$)</label>
-    <input id="fv">
+    <div id="resultado" class="result" style="display:none"></div>
+  </section>
 
-    <label>PMT – Pagamento periódico (R$)</label>
-    <input id="pmt">
-
-    <label>Taxa de juros (i)</label>
-    <input id="i">
-
-    <label>Número de períodos (n)</label>
-    <input id="n">
-
-    <button class="btn-primary" onclick="calcular()">Calcular</button>
-  </div>
-
-  <div class="card">
-    <h2>📌 Exemplos rápidos</h2>
-    <div class="examples">
-      <button onclick="ex1()">Calcular FV</button>
-      <button onclick="ex2()">Calcular PV</button>
-      <button onclick="ex3()">Calcular Taxa</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>📖 Interpretação</h2>
-    <p>Esta calculadora segue o modelo clássico da HP12c, utilizada para análise financeira, investimentos e financiamentos.</p>
-    <p><strong>Uso educativo e comparativo.</strong></p>
-  </div>
+  <section class="card">
+    <h2>📌 Interpretação do Resultado</h2>
+    <p>
+      O valor calculado representa o <strong>preço mínimo por hora</strong>
+      que cobre todos os custos e ainda gera a margem de lucro desejada.
+    </p>
+    <ul style="margin-left:18px;color:#374151">
+      <li>Custos subestimados → prejuízo oculto</li>
+      <li>Poucas horas vendáveis → preço/hora maior</li>
+      <li>Margem bem definida → negócio sustentável</li>
+    </ul>
+    <p style="margin-top:12px">
+      <strong>Aviso:</strong> Ferramenta de caráter educativo, não substitui análise profissional.
+    </p>
+  </section>
 
 </main>
 
@@ -202,67 +195,30 @@ footer a{color:#2563eb;text-decoration:none}
   <a href="index.html">Início</a> ·
   <a href="sobre.html">Sobre</a> ·
   <a href="contato.html">Contato</a> ·
-  <a href="politica-privacidade.html">Privacidade</a><br>
-  © 2025 SimulaLucro
+  <a href="politica-privacidade.html">Privacidade</a>
+  <p>© 2025 SimulaLucro</p>
 </footer>
 
 <script>
-let taxaModo="pct";
+function calcularPreco(){
+  const custos = +document.getElementById("custos").value || 0;
+  const horas = +document.getElementById("horas").value || 0;
+  const margem = +document.getElementById("margem").value || 0;
 
-function modoTaxa(m){
-  taxaModo=m;
-  pct.classList.toggle("active",m==="pct");
-  dec.classList.toggle("active",m==="dec");
-}
-
-function limparCalc(){
-  document.querySelectorAll("input").forEach(i=>i.classList.remove("calc"));
-}
-
-function calcular(){
-  limparCalc();
-
-  let pvV=pv.value, fvV=fv.value, pmtV=pmt.value, iV=i.value, nV=n.value;
-  let vazios=[!pvV,!fvV,!pmtV,!iV,!nV].filter(v=>v).length;
-  if(vazios!==1){alert("Preencha 4 campos e deixe 1 em branco.");return;}
-
-  let rate=Number(iV||0);
-  if(taxaModo==="pct") rate/=100;
-
-  if(!fvV){
-    fv.value=((Number(pvV)*Math.pow(1+rate,nV))+Number(pmtV||0)*((Math.pow(1+rate,nV)-1)/rate)).toFixed(2);
-    fv.classList.add("calc");
+  if(horas <= 0){
+    document.getElementById("resultado").style.display="block";
+    document.getElementById("resultado").innerHTML =
+      "⚠️ Informe corretamente as horas vendáveis.";
+    return;
   }
-  else if(!pvV){
-    pv.value=(Number(fvV)/Math.pow(1+rate,nV)).toFixed(2);
-    pv.classList.add("calc");
-  }
-  else if(!nV){
-    n.value=(Math.log(fvV/pvV)/Math.log(1+rate)).toFixed(2);
-    n.classList.add("calc");
-  }
-  else if(!iV){
-    let r=0.01;
-    for(let k=0;k<1000;k++){
-      let f=pvV*Math.pow(1+r,nV)-fvV;
-      r=r-f/10000;
-    }
-    i.value=(taxaModo==="pct"?r*100:r).toFixed(4);
-    i.classList.add("calc");
-  }
-}
 
-function ex1(){
-  pv.value=1000; fv.value=""; pmt.value=0; i.value=2; n.value=12;
-  calcular();
-}
-function ex2(){
-  pv.value=""; fv.value=5000; pmt.value=0; i.value=1; n.value=24;
-  calcular();
-}
-function ex3(){
-  pv.value=2000; fv.value=4000; pmt.value=0; i.value=""; n.value=36;
-  calcular();
+  const custoHora = custos / horas;
+  const precoHora = custoHora * (1 + margem / 100);
+
+  document.getElementById("resultado").style.display="block";
+  document.getElementById("resultado").innerHTML =
+    `⏱ <strong>Custo por hora:</strong> R$ ${custoHora.toFixed(2)}<br>
+     💰 <strong>Preço ideal por hora:</strong> R$ ${precoHora.toFixed(2)}`;
 }
 </script>
 

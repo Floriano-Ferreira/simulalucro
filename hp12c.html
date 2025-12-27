@@ -5,13 +5,13 @@
 <title>Calculadora HP12c Online | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadora HP12c online explicada. Calcule PV, FV, PMT, taxa de juros (i) ou períodos (n) deixando uma variável em branco.">
+<meta name="description" content="Calculadora HP12c online gratuita. Calcule PV, FV, PMT, taxa de juros ou número de períodos deixando uma variável em branco.">
 <link rel="canonical" href="https://simulalucro.com.br/hp12c.html">
 
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* === ESPECÍFICO HP12C === */
+/* Apenas complementos, mantendo o padrão visual */
 .toggle{
   display:flex;
   gap:8px;
@@ -22,9 +22,9 @@
   padding:10px;
   border-radius:8px;
   border:1px solid #d1d5db;
-  background:#f3f4f6;
-  cursor:pointer;
+  background:#f9fafb;
   font-weight:500;
+  cursor:pointer;
 }
 .toggle button.active{
   background:#2563eb;
@@ -32,14 +32,15 @@
   border-color:#2563eb;
 }
 
-.example-buttons{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+.examples{
+  display:flex;
   gap:10px;
+  flex-wrap:wrap;
   margin-bottom:16px;
 }
-.example-buttons button{
-  padding:10px;
+.examples button{
+  padding:8px 12px;
+  font-size:14px;
   border-radius:8px;
   border:1px solid #d1d5db;
   background:#fff;
@@ -57,7 +58,7 @@
 
 <header class="header">
   <div class="header-inner">
-    <div class="logo">💰 SimulaLucro</div>
+    <strong>💰 SimulaLucro</strong>
     <nav class="menu">
       <a href="index.html">Início</a>
       <a href="lucro-airbnb.html">Airbnb</a>
@@ -77,37 +78,36 @@
 <div class="card">
   <h1>🧮 Calculadora HP12c Online</h1>
   <p>
-    Preencha <strong>4 variáveis</strong> e deixe <strong>1 em branco</strong>.
-    A calculadora identifica automaticamente qual variável deve ser calculada.
+    Preencha <strong>4 campos</strong> e deixe <strong>1 em branco</strong>.
+    A calculadora identifica automaticamente qual variável será calculada.
   </p>
 
-  <!-- TOGGLE -->
+  <!-- Toggle -->
   <div class="toggle">
-    <button id="btnPercent" class="active" onclick="setMode('percent')">%</button>
-    <button id="btnDecimal" onclick="setMode('decimal')">Decimal</button>
+    <button id="btnPerc" class="active" onclick="setMode('percent')">Taxa em %</button>
+    <button id="btnDec" onclick="setMode('decimal')">Taxa decimal</button>
   </div>
 
-  <!-- EXEMPLOS -->
-  <div class="example-buttons">
-    <button onclick="ex1()">Exemplo FV</button>
-    <button onclick="ex2()">Exemplo PV</button>
-    <button onclick="ex3()">Exemplo Taxa (i)</button>
+  <!-- Exemplos -->
+  <div class="examples">
+    <button onclick="exFV()">Exemplo FV</button>
+    <button onclick="exPV()">Exemplo PV</button>
+    <button onclick="exI()">Exemplo Taxa</button>
   </div>
 
-  <!-- CAMPOS -->
   <label>PV – Valor Presente (R$)</label>
   <input id="pv">
 
   <label>FV – Valor Futuro (R$)</label>
   <input id="fv">
 
-  <label>PMT – Pagamento (R$)</label>
+  <label>PMT – Pagamento periódico (R$)</label>
   <input id="pmt">
 
-  <label>Taxa de Juros (i)</label>
+  <label>Taxa de juros (i)</label>
   <input id="i">
 
-  <label>Número de Períodos (n)</label>
+  <label>Número de períodos (n)</label>
   <input id="n">
 
   <button class="btn-primary" onclick="calcular()">Calcular</button>
@@ -116,15 +116,14 @@
 </div>
 
 <div class="card">
-  <h2>📌 Interpretação do Resultado</h2>
+  <h2>📌 Interpretação do resultado</h2>
   <p>
-    A calculadora HP12c utiliza a matemática financeira clássica para identificar
-    automaticamente a variável desconhecida com base nas demais.
+    Esta calculadora segue a lógica clássica da HP12c:
   </p>
   <ul>
-    <li><strong>PV</strong>: valor inicial do investimento</li>
-    <li><strong>FV</strong>: montante ao final do período</li>
-    <li><strong>PMT</strong>: pagamento periódico</li>
+    <li><strong>PV</strong>: valor inicial</li>
+    <li><strong>FV</strong>: montante final</li>
+    <li><strong>PMT</strong>: pagamentos periódicos</li>
     <li><strong>i</strong>: taxa de juros</li>
     <li><strong>n</strong>: número de períodos</li>
   </ul>
@@ -132,7 +131,7 @@
 
 <p class="disclaimer">
 ⚠️ Esta calculadora tem finalidade exclusivamente educativa e comparativa.
-Não constitui recomendação financeira ou de investimento.
+Não constitui recomendação financeira.
 </p>
 
 </main>
@@ -150,16 +149,16 @@ let mode = "percent";
 
 function setMode(m){
   mode = m;
-  btnPercent.classList.toggle("active", m==="percent");
-  btnDecimal.classList.toggle("active", m==="decimal");
+  btnPerc.classList.toggle("active", m==="percent");
+  btnDec.classList.toggle("active", m==="decimal");
 }
 
-function limparHighlight(){
-  document.querySelectorAll("input").forEach(i=>i.classList.remove("highlight"));
+function clearHighlight(){
+  document.querySelectorAll("input").forEach(el=>el.classList.remove("highlight"));
 }
 
 function calcular(){
-  limparHighlight();
+  clearHighlight();
 
   let PV = pv.value==="" ? null : Number(pv.value);
   let FV = fv.value==="" ? null : Number(fv.value);
@@ -169,8 +168,7 @@ function calcular(){
 
   if(mode==="percent" && I!==null) I/=100;
 
-  let vazio = [PV,FV,PMT,I,N].filter(v=>v===null).length;
-  if(vazio!==1){
+  if([PV,FV,PMT,I,N].filter(v=>v===null).length!==1){
     resultado.innerHTML="Preencha exatamente 4 campos e deixe 1 em branco.";
     return;
   }
@@ -199,17 +197,17 @@ function calcular(){
   resultado.innerHTML="✔️ Cálculo realizado com sucesso.";
 }
 
-/* EXEMPLOS */
-function ex1(){
+/* Exemplos */
+function exFV(){
   pv.value=1000; fv.value=""; pmt.value=0; i.value=2; n.value=12;
   calcular();
 }
-function ex2(){
-  pv.value=""; fv.value=10000; pmt.value=0; i.value=1; n.value=24;
+function exPV(){
+  pv.value=""; fv.value=5000; pmt.value=0; i.value=1; n.value=24;
   calcular();
 }
-function ex3(){
-  pv.value=5000; fv.value=8000; pmt.value=0; i.value=""; n.value=36;
+function exI(){
+  pv.value=3000; fv.value=4500; pmt.value=0; i.value=""; n.value=36;
   calcular();
 }
 </script>

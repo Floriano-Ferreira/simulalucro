@@ -4,14 +4,42 @@
 <meta charset="UTF-8">
 <title>Calculadora Financeira HP12c Online | SimulaLucro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Calculadora financeira estilo HP12c online. Calcule PV, FV, PMT, taxa de juros ou períodos automaticamente.">
+<meta name="description" content="Calculadora financeira online para calcular PV, FV, PMT, taxa de juros ou número de períodos de forma simples.">
 
 <link rel="stylesheet" href="assets/style.css">
+
 <style>
 .calc-box{max-width:520px;margin:auto}
 .calc-box input{width:100%}
-.highlight{border:2px solid #2563eb;background:#eef2ff}
-.example-btn{margin:.25rem 0;padding:.4rem .6rem;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer}
+.highlight{
+  border:2px solid #2563eb;
+  background:#eef2ff;
+}
+.toggle{
+  display:flex;
+  gap:.5rem;
+  margin-bottom:1rem;
+}
+.toggle button{
+  flex:1;
+  padding:.5rem;
+  border-radius:6px;
+  border:1px solid #ddd;
+  background:#f8fafc;
+  cursor:pointer;
+}
+.toggle button.active{
+  background:#2563eb;
+  color:#fff;
+}
+.example-btn{
+  margin:.3rem 0;
+  padding:.4rem .6rem;
+  border:1px solid #ddd;
+  border-radius:6px;
+  background:#fff;
+  cursor:pointer;
+}
 .example-btn:hover{background:#f1f5f9}
 </style>
 </head>
@@ -29,7 +57,7 @@
       <a href="margem-lucro.html">Margem</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="roi.html">ROI</a>
-      <a href="hp12c-avancada.html" class="active">HP12c</a>
+      <a href="hp12c.html" class="active">HP12c</a>
     </nav>
   </div>
 </header>
@@ -38,7 +66,11 @@
 
 <div class="card calc-box">
 <h1>Calculadora Financeira HP12c</h1>
-<p>Preencha <strong>4 campos</strong>. A calculadora identifica automaticamente qual variável deve ser calculada.</p>
+
+<p>
+Preencha <strong>4 campos</strong> e deixe <strong>1 em branco</strong>.
+A calculadora identifica automaticamente qual variável deve ser calculada.
+</p>
 
 <label>PV – Valor Presente (R$)</label>
 <input id="pv" type="number">
@@ -49,14 +81,12 @@
 <label>PMT – Pagamento por período (R$)</label>
 <input id="pmt" type="number">
 
-<label>Taxa de juros</label>
-<div style="display:flex;gap:.5rem">
-<input id="i" type="number" style="flex:1">
-<select id="iType">
-<option value="percent">%</option>
-<option value="decimal">Decimal</option>
-</select>
+<label>Taxa de juros (i)</label>
+<div class="toggle">
+  <button id="btnPercent" class="active" onclick="setTipo('percent')">%</button>
+  <button id="btnDecimal" onclick="setTipo('decimal')">Decimal</button>
 </div>
+<input id="i" type="number">
 
 <label>Número de períodos (n)</label>
 <input id="n" type="number">
@@ -68,19 +98,21 @@
 
 <div class="card">
 <h2>📌 Exemplos rápidos</h2>
-<button class="example-btn" onclick="ex1()">Calcular FV (investimento)</button>
-<button class="example-btn" onclick="ex2()">Calcular PMT (parcelas)</button>
-<button class="example-btn" onclick="ex3()">Calcular taxa (i)</button>
+<button class="example-btn" onclick="ex1()">Exemplo: calcular FV</button>
+<button class="example-btn" onclick="ex2()">Exemplo: calcular PMT</button>
+<button class="example-btn" onclick="ex3()">Exemplo: calcular taxa</button>
 </div>
 
 <div class="card">
-<h2>📊 Interpretação</h2>
-<p>A calculadora resolve automaticamente a variável ausente com base nos conceitos financeiros clássicos
-utilizados em HP12c, financiamentos e investimentos.</p>
+<h2>📊 Interpretação do resultado</h2>
+<p>
+A variável destacada foi calculada automaticamente com base nos conceitos
+financeiros clássicos utilizados em investimentos, financiamentos e análise de retorno.
+</p>
 </div>
 
 <div class="card disclaimer">
-⚠️ Esta calculadora tem finalidade exclusivamente educativa e comparativa.
+⚠️ Esta calculadora possui finalidade exclusivamente educativa e comparativa.
 Os resultados não constituem recomendação financeira.
 </div>
 
@@ -95,6 +127,16 @@ Os resultados não constituem recomendação financeira.
 </footer>
 
 <script>
+let tipoTaxa="percent"
+
+function setTipo(tipo){
+  tipoTaxa=tipo
+  btnPercent.classList.remove("active")
+  btnDecimal.classList.remove("active")
+  if(tipo==="percent") btnPercent.classList.add("active")
+  else btnDecimal.classList.add("active")
+}
+
 function limparDestaque(){
   document.querySelectorAll("input").forEach(i=>i.classList.remove("highlight"))
 }
@@ -102,19 +144,23 @@ function limparDestaque(){
 function calcular(){
   limparDestaque()
 
-  let pv = parseFloat(pvEl.value)
-  let fv = parseFloat(fvEl.value)
-  let pmt = parseFloat(pmtEl.value)
-  let i = parseFloat(iEl.value)
-  let n = parseFloat(nEl.value)
+  let pvV=parseFloat(pv.value)
+  let fvV=parseFloat(fv.value)
+  let pmtV=parseFloat(pmt.value)
+  let iV=parseFloat(i.value)
+  let nV=parseFloat(n.value)
 
-  if(iType.value==="percent") i=i/100
+  if(tipoTaxa==="percent" && !isNaN(iV)) iV=iV/100
 
-  let campos = [
-    {id:"pv",v:pv},{id:"fv",v:fv},{id:"pmt",v:pmt},{id:"i",v:i},{id:"n",v:n}
+  let vars=[
+    {id:"pv",v:pvV},
+    {id:"fv",v:fvV},
+    {id:"pmt",v:pmtV},
+    {id:"i",v:iV},
+    {id:"n",v:nV}
   ]
 
-  let vazios = campos.filter(c=>isNaN(c.v))
+  let vazios=vars.filter(x=>isNaN(x.v))
   if(vazios.length!==1){
     resultado.innerText="Preencha exatamente 4 campos."
     return
@@ -123,27 +169,25 @@ function calcular(){
   let alvo=vazios[0].id
   document.getElementById(alvo).classList.add("highlight")
 
-  if(alvo==="fv") fvEl.value=(pv*(1+i)**n + (pmt*((1+i)**n-1)/i)).toFixed(2)
-  if(alvo==="pv") pvEl.value=(fv/(1+i)**n - (pmt*((1+i)**n-1)/(i*(1+i)**n))).toFixed(2)
-  if(alvo==="pmt") pmtEl.value=((fv-pv*(1+i)**n)*i/((1+i)**n-1)).toFixed(2)
-  if(alvo==="n") nEl.value=(Math.log((fv*i+pmt)/(pv*i+pmt))/Math.log(1+i)).toFixed(2)
+  if(alvo==="fv") fv.value=(pvV*(1+iV)**nV + (pmtV*((1+iV)**nV-1)/iV)).toFixed(2)
+  if(alvo==="pv") pv.value=(fvV/(1+iV)**nV - (pmtV*((1+iV)**nV-1)/(iV*(1+iV)**nV))).toFixed(2)
+  if(alvo==="pmt") pmt.value=((fvV-pvV*(1+iV)**nV)*iV/((1+iV)**nV-1)).toFixed(2)
+  if(alvo==="n") n.value=(Math.log((fvV*iV+pmtV)/(pvV*iV+pmtV))/Math.log(1+iV)).toFixed(2)
   if(alvo==="i"){
     let rate=0.1
-    for(let k=0;k<500;k++){
-      let f=pv*(1+rate)**n+pmt*((1+rate)**n-1)/rate-fv
-      rate-=f/10000
+    for(let k=0;k<600;k++){
+      let f=pvV*(1+rate)**nV+pmtV*((1+rate)**nV-1)/rate-fvV
+      rate-=f/12000
     }
-    iEl.value=(rate*100).toFixed(4)
+    i.value=(rate*100).toFixed(4)
   }
 
   resultado.innerText="Variável calculada: "+alvo.toUpperCase()
 }
 
-const pvEl=pv,fvEl=fv,pmtEl=pmt,iEl=i,nEl=n
-
-function ex1(){pvEl.value=1000;iEl.value=2;nEl.value=12;pmtEl.value=0;fvEl.value=""}
-function ex2(){pvEl.value=0;fvEl.value=10000;iEl.value=1;nEl.value=24;pmtEl.value=""}
-function ex3(){pvEl.value=5000;fvEl.value=8000;nEl.value=36;pmtEl.value=0;iEl.value=""}
+function ex1(){pv.value=1000;i.value=2;n.value=12;pmt.value=0;fv.value=""}
+function ex2(){pv.value=0;fv.value=10000;i.value=1;n.value=24;pmt.value=""}
+function ex3(){pv.value=5000;fv.value=8000;n.value=36;pmt.value=0;i.value=""}
 </script>
 
 </body>

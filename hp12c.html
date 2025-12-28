@@ -2,11 +2,11 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Calculadora de Preço de Serviço | SimulaLucro</title>
+<title>Calculadora HP12c Online | SimulaLucro</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calcule o preço ideal do seu serviço considerando custos, horas trabalhadas e margem de lucro.">
-<link rel="canonical" href="https://simulalucro.com.br/preco-servico.html">
+<meta name="description" content="Calculadora financeira estilo HP12c para calcular PV, FV, PMT, taxa de juros ou períodos de forma simples e online.">
+<link rel="canonical" href="https://simulalucro.com.br/hp12c.html">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -22,10 +22,10 @@
       <a href="comparativo.html">Comparativo</a>
       <a href="ponto-equilibrio.html">Equilíbrio</a>
       <a href="margem-lucro.html">Margem</a>
-      <a href="preco-servico.html" class="active">Serviço</a>
+      <a href="preco-servico.html">Serviço</a>
       <a href="juros-compostos.html">Juros</a>
       <a href="roi.html">ROI</a>
-      <a href="hp12c.html">HP12c</a>
+      <a href="hp12c.html" class="active">HP12c</a>
     </nav>
   </div>
 </header>
@@ -34,24 +34,29 @@
 
 <!-- CARD PRINCIPAL -->
 <div class="card">
-  <h1>📄 Calculadora de Preço de Serviço</h1>
+  <h1>🧮 Calculadora Financeira HP12c</h1>
   <p>
-    Descubra quanto cobrar pelo seu serviço considerando
-    <strong>custos</strong>, <strong>horas vendáveis</strong> e
-    <strong>margem de lucro</strong>.
+    Preencha <strong>4 variáveis</strong> e deixe <strong>1 em branco</strong>.
+    A calculadora identifica automaticamente qual valor deve ser calculado.
   </p>
 
-  <label>Custos mensais totais (R$)</label>
-  <input id="custos" type="number" placeholder="Ex: 3000">
+  <label>Valor Presente (PV)</label>
+  <input id="pv" type="number">
 
-  <label>Horas vendáveis no mês</label>
-  <input id="horas" type="number" placeholder="Ex: 120">
+  <label>Valor Futuro (FV)</label>
+  <input id="fv" type="number">
 
-  <label>Margem de lucro desejada (%)</label>
-  <input id="margem" type="number" placeholder="Ex: 30">
+  <label>Prestação (PMT)</label>
+  <input id="pmt" type="number">
 
-  <button class="btn-primary" onclick="calcularPreco()">
-    Calcular preço ideal
+  <label>Taxa de juros (% por período)</label>
+  <input id="i" type="number">
+
+  <label>Número de períodos (n)</label>
+  <input id="n" type="number">
+
+  <button class="btn-primary" onclick="calcularHP12c()">
+    Calcular
   </button>
 
   <div id="resultado" class="result"></div>
@@ -61,19 +66,21 @@
 <div class="card">
   <h2>📌 Interpretação do Resultado</h2>
   <p>
-    O valor calculado representa o <strong>preço mínimo por hora</strong>
-    necessário para cobrir todos os custos e ainda atingir a margem de lucro definida.
+    A calculadora HP12c resolve problemas clássicos de matemática financeira,
+    permitindo calcular valores de financiamentos, investimentos e aplicações.
   </p>
   <ul>
-    <li>Custos subestimados → prejuízo oculto</li>
-    <li>Poucas horas vendáveis → preço por hora maior</li>
-    <li>Margem bem definida → negócio sustentável</li>
+    <li>PV → valor atual do dinheiro</li>
+    <li>FV → valor futuro do investimento</li>
+    <li>PMT → pagamentos periódicos</li>
+    <li>i → taxa de juros por período</li>
+    <li>n → quantidade de períodos</li>
   </ul>
 </div>
 
 <p class="disclaimer">
 ⚠️ Ferramenta de caráter exclusivamente educativo.
-Os resultados não substituem análise profissional.
+Os resultados não constituem recomendação financeira.
 </p>
 
 </main>
@@ -87,24 +94,46 @@ Os resultados não substituem análise profissional.
 </footer>
 
 <script>
-function calcularPreco(){
-  const custos = Number(document.getElementById("custos").value);
-  const horas = Number(document.getElementById("horas").value);
-  const margem = Number(document.getElementById("margem").value) / 100;
+function calcularHP12c(){
+  const pv = document.getElementById("pv").value;
+  const fv = document.getElementById("fv").value;
+  const pmt = document.getElementById("pmt").value;
+  const i = document.getElementById("i").value;
+  const n = document.getElementById("n").value;
+
+  const filled = [pv, fv, pmt, i, n].filter(v => v !== "").length;
   const res = document.getElementById("resultado");
 
-  if(!custos || !horas || margem < 0){
-    res.innerHTML = "Preencha todos os campos corretamente.";
+  if(filled !== 4){
+    res.innerHTML = "Preencha exatamente 4 campos e deixe 1 em branco.";
     return;
   }
 
-  const custoHora = custos / horas;
-  const precoFinal = custoHora * (1 + margem);
+  const rate = Number(i) / 100;
 
-  res.innerHTML = `
-    <strong>Preço ideal por hora:</strong><br>
-    R$ ${precoFinal.toFixed(2)}
-  `;
+  if(fv === ""){
+    const result = Number(pv) * Math.pow(1 + rate, n);
+    res.innerHTML = `<strong>Valor Futuro (FV):</strong><br>R$ ${result.toFixed(2)}`;
+  }
+  else if(pv === ""){
+    const result = Number(fv) / Math.pow(1 + rate, n);
+    res.innerHTML = `<strong>Valor Presente (PV):</strong><br>R$ ${result.toFixed(2)}`;
+  }
+  else if(n === ""){
+    const result = Math.log(Number(fv) / Number(pv)) / Math.log(1 + rate);
+    res.innerHTML = `<strong>Períodos (n):</strong><br>${result.toFixed(2)}`;
+  }
+  else if(i === ""){
+    let guess = 0.01;
+    for(let k = 0; k < 1000; k++){
+      guess = guess - ((Number(pv)*Math.pow(1+guess,n)-Number(fv)) /
+              (Number(pv)*n*Math.pow(1+guess,n-1)));
+    }
+    res.innerHTML = `<strong>Taxa de juros (i):</strong><br>${(guess*100).toFixed(2)}%`;
+  }
+  else{
+    res.innerHTML = "Cálculo de PMT não aplicado neste modo simplificado.";
+  }
 }
 </script>
 

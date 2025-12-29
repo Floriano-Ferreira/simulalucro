@@ -2,9 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Calculadora HP12c Online | SimulaLucro</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
+<title>Calculadora Financeira HP12c | SimulaLucro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Calculadora financeira estilo HP12c online. Calcule PV, FV, PMT, taxa de juros ou períodos de forma simples e educativa.">
+<link rel="stylesheet" href="/ativos/style.css">
 </head>
 
 <body>
@@ -13,46 +14,47 @@
   <div class="header-inner">
     <div class="logo">💰 <strong>SimulaLucro</strong></div>
     <nav class="menu">
-      <a href="index.html">Início</a>
-      <a href="lucro-airbnb.html">Airbnb</a>
-      <a href="comparativo.html">Comparativo</a>
-      <a href="equilibrio.html">Equilíbrio</a>
-      <a href="margem-lucro.html">Margem</a>
-      <a href="preco-servico.html">Serviço</a>
-      <a href="juros-compostos.html">Juros</a>
-      <a href="roi.html">ROI</a>
-      <a href="hp12c.html" class="active">HP12c</a>
+      <a href="/index.html">Início</a>
+      <a href="/lucro-airbnb.html">Airbnb</a>
+      <a href="/comparativo.html">Comparativo</a>
+      <a href="/ponto-equilibrio.html">Equilíbrio</a>
+      <a href="/margem-lucro.html">Margem</a>
+      <a href="/preco-servico.html">Serviço</a>
+      <a href="/juros-compostos.html">Juros</a>
+      <a href="/roi.html">ROI</a>
+      <a href="/hp12c.html" class="active">HP12c</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
+  <!-- CARD PRINCIPAL -->
   <section class="card">
-    <h1>🧮 Calculadora HP12c Online</h1>
+    <h1>🧮 Calculadora Financeira HP12c</h1>
     <p class="subtitle">
-      Preencha <strong>4 campos</strong> e deixe <strong>1 em branco</strong>.  
-      A calculadora identifica automaticamente qual variável será calculada.
+      Preencha <strong>4 variáveis</strong> e deixe <strong>1 em branco</strong>.
+      A calculadora identifica automaticamente qual valor deve ser calculado.
     </p>
 
     <div class="grid-2">
       <div class="field">
-        <label>PV – Valor Presente (R$)</label>
+        <label>Valor Presente (PV)</label>
         <input type="number" id="pv">
       </div>
 
       <div class="field">
-        <label>FV – Valor Futuro (R$)</label>
+        <label>Valor Futuro (FV)</label>
         <input type="number" id="fv">
       </div>
 
       <div class="field">
-        <label>PMT – Pagamento periódico (R$)</label>
+        <label>Pagamento por período (PMT)</label>
         <input type="number" id="pmt">
       </div>
 
       <div class="field">
-        <label>Taxa de juros (% por período)</label>
+        <label>Taxa de juros (% ao período)</label>
         <input type="number" id="i">
       </div>
 
@@ -67,28 +69,32 @@
     <div id="resultado" class="resultado"></div>
   </section>
 
+  <!-- INTERPRETAÇÃO -->
   <section class="card">
     <h2>📌 Interpretação do Resultado</h2>
+    <p>
+      Esta calculadora utiliza os mesmos princípios da HP12c tradicional.
+      O valor calculado depende da variável deixada em branco.
+    </p>
     <ul>
-      <li><strong>PV</strong>: valor investido ou financiado hoje</li>
+      <li><strong>PV</strong>: valor atual de um fluxo futuro</li>
       <li><strong>FV</strong>: valor acumulado ao final do período</li>
-      <li><strong>PMT</strong>: pagamento ou aporte periódico</li>
+      <li><strong>PMT</strong>: pagamento periódico</li>
       <li><strong>i</strong>: taxa de juros por período</li>
       <li><strong>n</strong>: quantidade de períodos</li>
     </ul>
-    <p class="alert">
-      Esta ferramenta possui caráter educativo e comparativo.  
-      Não constitui recomendação financeira.
+    <p class="disclaimer">
+      Aviso: Ferramenta de caráter educativo. Não constitui recomendação financeira.
     </p>
   </section>
 
 </main>
 
 <footer class="footer">
-  <a href="index.html">Início</a> ·
-  <a href="sobre.html">Sobre</a> ·
-  <a href="contato.html">Contato</a> ·
-  <a href="privacidade.html">Privacidade</a>
+  <a href="/index.html">Início</a> ·
+  <a href="/sobre.html">Sobre</a> ·
+  <a href="/contato.html">Contato</a> ·
+  <a href="/privacidade.html">Privacidade</a>
   <p>© 2025 SimulaLucro</p>
 </footer>
 
@@ -100,37 +106,38 @@ function calcularHP12C() {
   const i = parseFloat(document.getElementById("i").value) / 100;
   const n = parseFloat(document.getElementById("n").value);
 
-  const campos = [pv, fv, pmt, i, n].filter(v => !isNaN(v)).length;
-
-  if (campos !== 4) {
-    document.getElementById("resultado").innerHTML =
-      "⚠️ Preencha exatamente 4 campos e deixe 1 em branco.";
+  let preenchidos = [pv, fv, pmt, i, n].filter(v => !isNaN(v)).length;
+  if (preenchidos !== 4) {
+    alert("Preencha exatamente 4 campos e deixe 1 em branco.");
     return;
   }
 
-  let resultadoTexto = "";
+  let resultado = "";
 
   if (isNaN(fv)) {
-    const r = pv * Math.pow(1 + i, n) + pmt * ((Math.pow(1 + i, n) - 1) / i);
-    resultadoTexto = `<strong>FV calculado:</strong> R$ ${r.toFixed(2)}`;
-  } 
+    const r = Math.pow(1 + i, n);
+    const valor = pv * r + (pmt * (r - 1)) / i;
+    resultado = `Valor Futuro (FV): R$ ${valor.toFixed(2)}`;
+  }
   else if (isNaN(pv)) {
-    const r = (fv - pmt * ((Math.pow(1 + i, n) - 1) / i)) / Math.pow(1 + i, n);
-    resultadoTexto = `<strong>PV calculado:</strong> R$ ${r.toFixed(2)}`;
-  } 
+    const r = Math.pow(1 + i, n);
+    const valor = (fv - (pmt * (r - 1)) / i) / r;
+    resultado = `Valor Presente (PV): R$ ${valor.toFixed(2)}`;
+  }
   else if (isNaN(pmt)) {
-    const r = (fv - pv * Math.pow(1 + i, n)) * i / (Math.pow(1 + i, n) - 1);
-    resultadoTexto = `<strong>PMT calculado:</strong> R$ ${r.toFixed(2)}`;
-  } 
+    const r = Math.pow(1 + i, n);
+    const valor = (fv - pv * r) * i / (r - 1);
+    resultado = `PMT: R$ ${valor.toFixed(2)}`;
+  }
   else if (isNaN(n)) {
-    const r = Math.log((fv * i + pmt) / (pv * i + pmt)) / Math.log(1 + i);
-    resultadoTexto = `<strong>n calculado:</strong> ${r.toFixed(2)} períodos`;
-  } 
+    const valor = Math.log((fv * i + pmt) / (pv * i + pmt)) / Math.log(1 + i);
+    resultado = `Número de períodos (n): ${valor.toFixed(2)}`;
+  }
   else if (isNaN(i)) {
-    resultadoTexto = "⚠️ O cálculo automático da taxa (i) requer método iterativo e será incluído na próxima versão.";
+    resultado = "Cálculo da taxa (i) requer método iterativo. Será adicionado em breve.";
   }
 
-  document.getElementById("resultado").innerHTML = resultadoTexto;
+  document.getElementById("resultado").innerHTML = `<strong>${resultado}</strong>`;
 }
 </script>
 
